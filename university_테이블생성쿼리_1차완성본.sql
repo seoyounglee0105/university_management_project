@@ -20,7 +20,7 @@ ALTER TABLE department_tb AUTO_INCREMENT = 101;
 -- 사용자
 CREATE TABLE user_tb (
 	id INT PRIMARY KEY,
-    password VARCHAR(20) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     user_role VARCHAR(10) NOT NULL
 );
 
@@ -33,8 +33,8 @@ CREATE TABLE student_tb (
     address VARCHAR(100) NOT NULL,
     tel VARCHAR(13) NOT NULL,
     dept_id INT NOT NULL COMMENT '학과',
-    grade VARCHAR(3) NOT NULL COMMENT '학년-학기 ex) 3-2',
-    foreigner CHAR(1) COMMENT '외국인 여부 (Y, null)',
+    grade INT NOT NULL COMMENT '학년',
+    semester INT NOT NULL COMMENT '학기',
     entrance_date DATE NOT NULL,
     graduation_date DATE,
     FOREIGN KEY(dept_id) REFERENCES department_tb (id)
@@ -46,7 +46,7 @@ ALTER TABLE student_tb AUTO_INCREMENT = 2023000001;
 CREATE TABLE staff_tb (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
-    hire_date TIMESTAMP DEFAULT now()
+    hire_date DATE DEFAULT (current_date)
 );
 
 ALTER TABLE staff_tb AUTO_INCREMENT = 230001;
@@ -56,7 +56,7 @@ CREATE TABLE professor_tb (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
     dept_id INT NOT NULL,
-    hire_date TIMESTAMP DEFAULT now(),
+    hire_date DATE DEFAULT (current_date),
     FOREIGN KEY (dept_id) REFERENCES department_tb (id)
 );
 
@@ -77,7 +77,8 @@ CREATE TABLE subject_tb (
     room_id VARCHAR(5),
     dept_id INT NOT NULL,
     type VARCHAR(2) NOT NULL COMMENT '강의 구분 (전공, 교양)',
-    semester VARCHAR(6) NOT NULL COMMENT '연도-학기 ex) 2023-1',
+    year INT NOT NULL COMMENT '년도',
+    semester INT NOT NULL COMMENT '학기',
     time VARCHAR(35) NOT NULL COMMENT '요일 및 시간',
     grades INT NOT NULL COMMENT '이수 학점',
     capacity INT NOT NULL COMMENT '수강 정원',
@@ -156,7 +157,7 @@ CREATE TABLE notice_tb (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
-    created_date TIMESTAMP DEFAULT now(),
+    created_time TIMESTAMP DEFAULT now(),
     views INT NOT NULL DEFAULT 0 COMMENT '조회수'
 );
 

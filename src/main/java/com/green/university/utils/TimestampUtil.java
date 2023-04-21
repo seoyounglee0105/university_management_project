@@ -16,14 +16,4 @@ public class TimestampUtil {
 		return sdf.format(timestamp);
 	}
 	
-	/**
-	 * @author 서영
-	 * Timestamp 타입을 날짜로 변환함
-	 */
-	public static String dateToString(Timestamp timestamp) {
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		return sdf.format(timestamp);
-	}
-	
 }
