@@ -10,6 +10,15 @@
 			<div style="background-color: #FFF7CD; width: 250px; height: 900px; min-width: 250px">
 				세부 메뉴 자리
 				<!-- 메뉴 -->
+				<ul class="">
+					<li class="nav-item"><a class="nav-link" href="/admin/college">단과대학</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/department">학과</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/room">강의실</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/subject">강의</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/tuition">등록금</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/notice">공지사항</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#">My Info</a></li>
+				</ul>
 				<div>
 					
 				</div>

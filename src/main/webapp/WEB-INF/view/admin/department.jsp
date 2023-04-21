@@ -11,7 +11,7 @@
 		학과명 <input type="text" name="name" value="사회학과">
 		단과대학
 			<select>
-				<option value="">건축과</option>
+				<option value="건축과">건축과</option>
 				<option value="">전기과</option>
 				<option value="">전자과</option>
 				<option value="">사학과</option>
