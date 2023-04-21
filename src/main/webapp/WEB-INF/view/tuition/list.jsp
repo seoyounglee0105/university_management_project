@@ -4,6 +4,8 @@
 
 		<%@ include file="/WEB-INF/view/layout/header.jsp"%>
 		
+		<!-- 등록금 내역 조회 -->
+		
 		<!-- 세부 메뉴 + 메인 -->
 		<div class="d-flex" style="justify-content: center; align-items: flex-start; min-width: 100em;">
 			<!-- 세부 메뉴 div-->
@@ -18,8 +20,9 @@
 			
 			<!-- 메인 div -->
 			<div style="border: 2px solid black; width: 1200px; height: 900px; min-width: 1200px; padding: 20px;">
-				메인 자리
+				<h3>등록금 내역 조회</h3>
 				
+			
 				
 			</div>
 		</div>

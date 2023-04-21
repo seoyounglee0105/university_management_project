@@ -42,6 +42,17 @@ CREATE TABLE student_tb (
 
 ALTER TABLE student_tb AUTO_INCREMENT = 2023000001;
 
+
+INSERT INTO college_tb (name)
+VALUES ('공과대학');
+
+INSERT INTO department_tb (name, college_id)
+VALUES ('산업공학과', 1);
+
+INSERT INTO student_tb (name, '2000/01/05', 'F', '부산광역시 수영구', '010-1111-1111', 101, 1, 1, '2018-03-02');
+
+
+
 -- 교직원
 CREATE TABLE staff_tb (
 	id INT PRIMARY KEY AUTO_INCREMENT,

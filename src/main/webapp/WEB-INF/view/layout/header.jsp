@@ -43,7 +43,7 @@ li {
 		<header class="d-flex flex-column">
 			<!-- 대학교 로고 + ...가 들어갈 부분  -->
 			<div>
-				<img class="logo" alt="" src="images/logo.png">
+				<img class="logo" alt="" src="/images/logo.png">
 			</div>
 			
 			<!-- 메뉴가 들어갈 부분 -->
