@@ -23,4 +23,8 @@ public class TestController {
 		return "layout/main";
 	}
 	
+	@GetMapping("/page")
+	public String pageTest() {
+		return "admin/department";
+	}
 }
