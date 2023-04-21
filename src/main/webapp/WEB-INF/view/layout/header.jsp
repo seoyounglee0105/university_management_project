@@ -29,19 +29,25 @@ li {
 	list-style: none;
 }
 
+.logo {
+	width: 320px;
+	height: 100px;
+	margin: 5px;
+}
+
 </style>
 </head>
 <body>
 
 	<div class="d-flex flex-column">
-		<header class="d-flex flex-column" style="width: 100%">
+		<header class="d-flex flex-column">
 			<!-- 대학교 로고 + ...가 들어갈 부분  -->
-			<div style="height: 80px; background-color: #D6E4FF;">
-				로고 자리
+			<div>
+				<img class="logo" alt="" src="images/logo.png">
 			</div>
 			
 			<!-- 메뉴가 들어갈 부분 -->
-			<nav style="height: 50px; background-color: #E9FBD3;">
+			<nav style="height: 50px; background-color: #ccc; min-width: 100em;">
 				상단 메뉴 자리
 			</nav>
 		</header>

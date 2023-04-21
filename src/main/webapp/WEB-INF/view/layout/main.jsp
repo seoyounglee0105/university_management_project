@@ -5,23 +5,23 @@
 		<%@ include file="/WEB-INF/view/layout/header.jsp"%>
 		
 		<!-- 세부 메뉴 + 메인 -->
-		<div class="d-flex justify-content-center" style="height: 900px;">
-		
+		<div class="d-flex" style="justify-content: center; align-items: flex-start; min-width: 100em;">
 			<!-- 세부 메뉴 div-->
-			<div>
-				
+			<div style="background-color: #FFF7CD; width: 250px; height: 900px; min-width: 250px">
+				세부 메뉴 자리
 				<!-- 메뉴 -->
 				<div>
+					
 				</div>
 				
 			</div>
 			
 			<!-- 메인 div -->
-			<main>
-			
+			<div style="background-color: #D7F3FE; width: 1200px; height: 900px; min-width: 1200px">
+				메인 자리
 				
-			
-			</main>
+				
+			</div>
 		</div>
 		
 		<footer>
