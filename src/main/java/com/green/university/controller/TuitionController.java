@@ -39,9 +39,10 @@ public class TuitionController {
 	public String tuitionList(Model model) {
 		
 		// todo 로그인 기능 추가 시 이걸로 수정
-		// User principal = (User) session.getAttribute(Define.PRINCIPAL);
+//		 User principal = (User) session.getAttribute(Define.PRINCIPAL);
 		
-		List<Tuition> tuitionList = tuitionService.readTuitionList(2023000001);
+		List<Tuition> tuitionList = tuitionService.readTuitionList(2018000001);
+		System.out.println(tuitionList);
 		
 		// 담긴 값이 없다면 null
 		model.addAttribute("tuitionList", tuitionList);

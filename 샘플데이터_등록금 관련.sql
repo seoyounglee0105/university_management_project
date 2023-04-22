@@ -14,3 +14,17 @@ INSERT INTO scholarship_tb VALUES (1, 2500000);
 -- 장학금액은 등록금이랑 비교해서 등록금보다 클 경우 등록금만큼만
 INSERT INTO tuition_tb (student_id, tui_year, semester, sch_type, tui_amount, sch_amount)
 VALUES (2018000001, 2018, 1, 1, 2173500, 2173500);
+
+-- 해당 학생의 등록금 (단과대에서 가져옴)
+SELECT amount FROM coll_tuit AS ct
+WHERE college_id = (SELECT d.college_id FROM student_tb AS s
+					JOIN department_tb AS d
+					ON s.dept_id = d.id);
+                    
+-- 해당 학생의 장학금액
+SELECT amount FROM coll_tuit AS ct
+WHERE college_id = (SELECT d.college_id FROM student_tb AS s
+					JOIN department_tb AS d
+					ON s.dept_id = d.id);
+                    
+SELECT * FROM tuition_tb;
