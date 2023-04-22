@@ -42,17 +42,6 @@ CREATE TABLE student_tb (
 
 ALTER TABLE student_tb AUTO_INCREMENT = 2023000001;
 
-
-INSERT INTO college_tb (name)
-VALUES ('공과대학');
-
-INSERT INTO department_tb (name, college_id)
-VALUES ('산업공학과', 1);
-
-INSERT INTO student_tb (name, '2000/01/05', 'F', '부산광역시 수영구', '010-1111-1111', 101, 1, 1, '2018-03-02');
-
-
-
 -- 교직원
 CREATE TABLE staff_tb (
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -88,8 +77,8 @@ CREATE TABLE subject_tb (
     room_id VARCHAR(5),
     dept_id INT NOT NULL,
     type VARCHAR(2) NOT NULL COMMENT '강의 구분 (전공, 교양)',
-    year INT NOT NULL COMMENT '년도',
-    semester INT NOT NULL COMMENT '학기',
+    sub_year INT NOT NULL COMMENT '개설 연도',
+    semester INT NOT NULL COMMENT '개설 학기',
     time VARCHAR(35) NOT NULL COMMENT '요일 및 시간',
     grades INT NOT NULL COMMENT '이수 학점',
     capacity INT NOT NULL COMMENT '수강 정원',
@@ -136,22 +125,24 @@ CREATE TABLE coll_tuit (
     FOREIGN KEY (college_id) REFERENCES college_tb (id)
 );
 
+-- 장학금
+CREATE TABLE scholarship_tb (
+    type INT PRIMARY KEY COMMENT '장학금 유형',
+    max_amount INT NOT NULL COMMENT '최대 지원 금액'
+);
+
 -- 등록금
 CREATE TABLE tuition_tb (
 	student_id INT,
-    semester VARCHAR(6),
+    tui_year INT NOT NULL COMMENT '등록 연도',
+    semester INT NOT NULL COMMENT '등록 학기',
+    sch_type INT,
+    tui_amount INT NOT NULL COMMENT '등록금',
+    sch_amount INT COMMENT '장학금',
     status BOOLEAN DEFAULT false COMMENT '납부 여부',
     PRIMARY KEY (student_id, semester),
-    FOREIGN KEY (student_id) REFERENCES student_tb (id)
-);
-
--- 장학금
-CREATE TABLE scholarship_tb (
-	student_id INT NOT NULL,
-    semester VARCHAR(6) NOT NULL COMMENT '연도-학기',
-    type VARCHAR(3) NOT NULL COMMENT '장학금 유형',
-    PRIMARY KEY (student_id, semester),
-    FOREIGN KEY (student_id) REFERENCES student_tb (id)
+    FOREIGN KEY (student_id) REFERENCES student_tb (id),
+    FOREIGN KEY (sch_type) REFERENCES scholarship_tb (type)
 );
 
 -- 학적 상태

@@ -10,7 +10,7 @@ public class Subject {
 	private String roomId;
 	private Integer deptId;
 	private String type;
-	private Integer year;
+	private Integer sub_year;
 	private Integer semeter;
 	private String time;
 	private Integer grades;

@@ -31,7 +31,7 @@ li {
 
 .logo {
 	width: 320px;
-	height: 100px;
+	height: 90px;
 	margin: 5px;
 }
 
