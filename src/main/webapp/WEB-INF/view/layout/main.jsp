@@ -12,6 +12,7 @@
 					<h2>MY</h2>
 				</div>
 				<!-- 메뉴 -->
+				<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 				<div class="sub--menu--mid">
 					<table class="sub--menu--table" border="1">
 						<tr>

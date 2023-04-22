@@ -52,7 +52,7 @@
 							<td><a href="#">등록금 내역 조회</a></td>
 						</tr>
 						<tr>
-							<td><a href="#">등록금 납부 고지서</a></td>
+							<td><a href="#" class="selected--menu">등록금 납부 고지서</a></td>
 						</tr>
 						<tr>
 							<td><a href="#">세부 메뉴 5</a></td>

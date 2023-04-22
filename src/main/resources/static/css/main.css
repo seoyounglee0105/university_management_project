@@ -160,3 +160,9 @@ main h1:first-of-type {
 	background-color: gray;
 	margin: 20px 0 40px;
 }
+
+.selected--menu,
+.sub--menu--table td a:hover {
+	color: #075AA4;
+	font-weight: 600;
+}
