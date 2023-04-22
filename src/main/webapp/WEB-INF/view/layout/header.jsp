@@ -7,33 +7,12 @@
 <meta charset="UTF-8">
 <title>학사 관리 시스템</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
-
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: 'Noto Sans KR', sans-serif;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-li {
-	list-style: none;
-}
-
-.logo {
-	width: 320px;
-	height: 90px;
-	margin: 5px;
-}
 
 </style>
 </head>
@@ -41,14 +20,27 @@ li {
 
 	<div class="d-flex flex-column">
 		<header class="d-flex flex-column">
-			<!-- 대학교 로고 + ...가 들어갈 부분  -->
-			<div>
-				<img class="logo" alt="" src="/images/logo.png">
+			<div class="header--top">
+				<ul>
+					<li class="material--li"><span class="material-symbols-outlined">account_circle</span>
+					<li>홍길동 님
+					<li style="margin: 0 15px;">ㅣ
+					<li class="material--li"><span style="color:#9BD2EC;" class="material-symbols-outlined">logout</span>
+					<li><a href="#">로그아웃</a>
+				</ul>
 			</div>
 			
-			<!-- 메뉴가 들어갈 부분 -->
-			<nav style="height: 50px; background-color: #ccc; min-width: 100em;">
-				상단 메뉴 자리
+			<nav class="main--menu">
+				<a href="#"><img class="logo" alt="" src="/images/logo.png"></a>
+				<!-- userRole에 따라 메뉴 다르게 표시 -->
+				<ul>
+					<li><a href="#">홈</a>
+					<li><a href="#">메뉴1</a>
+					<li><a href="#">메뉴2</a>
+					<li><a href="#">메뉴3</a>
+					<li><a href="#">메뉴4</a>
+					<li><a href="#">메뉴5</a>
+				</ul>
 			</nav>
 		</header>
 		

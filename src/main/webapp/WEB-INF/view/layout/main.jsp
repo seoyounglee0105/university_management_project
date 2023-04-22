@@ -5,23 +5,41 @@
 		<%@ include file="/WEB-INF/view/layout/header.jsp"%>
 		
 		<!-- 세부 메뉴 + 메인 -->
-		<div class="d-flex" style="justify-content: center; align-items: flex-start; min-width: 100em;">
+		<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 			<!-- 세부 메뉴 div-->
-			<div style="border: 2px solid black; width: 250px; height: 900px; min-width: 250px; padding: 20px;">
-				세부 메뉴 자리
-				<!-- 메뉴 -->
-				<div>
-					
+			<div class="sub--menu">
+				<div class="sub--menu--top">
+					<h2>MY</h2>
 				</div>
-				
+				<!-- 메뉴 -->
+				<div class="sub--menu--mid">
+					<table class="sub--menu--table" border="1">
+						<tr>
+							<td><a href="#">내 정보 조회</a></td>
+						</tr>
+						<tr>
+							<td><a href="#">비밀번호 변경</a></td>
+						</tr>
+						<tr>
+							<td><a href="#">등록금 내역 조회</a></td>
+						</tr>
+						<tr>
+							<td><a href="#">등록금 납부 고지서</a></td>
+						</tr>
+						<tr>
+							<td><a href="#">세부 메뉴 5</a></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			
 			<!-- 메인 div -->
-			<div style="border: 2px solid black; width: 1200px; height: 900px; min-width: 1200px; padding: 20px;">
-				메인 자리
+			<main>
+				<h1>현재 메뉴 이름</h1>
+				<div class="split--div"></div>
 				
 				
-			</div>
+			</main>
 		</div>
 		
 		<footer>

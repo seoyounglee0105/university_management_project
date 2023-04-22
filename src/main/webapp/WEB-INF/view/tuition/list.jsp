@@ -3,14 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
-
 	.tuition--table th {
-		padding: 2px 12px;
+		padding: 3px 12px;
+		width: 150px;
 		
 	}
 	
 	.tuition--table td {
-		padding: 1px 20px;
+		padding: 1px 5px;
 	}
 
 	.tuition--table thead tr th,
@@ -24,8 +24,8 @@
 	.tuition--table tbody tr td:nth-of-type(5),
 	.tuition--table tbody tr td:nth-of-type(6) {
 		text-align: right;
-		padding: 1px 5px 1px 20px !important;
 	}
+	
 </style>
 
 		<%@ include file="/WEB-INF/view/layout/header.jsp"%>
@@ -33,22 +33,39 @@
 		<!-- 등록금 내역 조회 -->
 		
 		<!-- 세부 메뉴 + 메인 -->
-		<div class="d-flex" style="justify-content: center; align-items: flex-start; min-width: 100em;">
+		<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 			<!-- 세부 메뉴 div-->
-			<div style="border: 2px solid black; width: 250px; height: 900px; min-width: 250px; padding: 20px;">
-				세부 메뉴 자리
-				<!-- 메뉴 -->
-				<div>
-					
+			<div class="sub--menu">
+				<div class="sub--menu--top">
+					<h2>MY</h2>
 				</div>
-				
+				<!-- 메뉴 -->
+				<div class="sub--menu--mid">
+					<table class="sub--menu--table" border="1">
+						<tr>
+							<td><a href="#">내 정보 조회</a></td>
+						</tr>
+						<tr>
+							<td><a href="#">비밀번호 변경</a></td>
+						</tr>
+						<tr>
+							<td><a href="#">등록금 내역 조회</a></td>
+						</tr>
+						<tr>
+							<td><a href="#">등록금 납부 고지서</a></td>
+						</tr>
+						<tr>
+							<td><a href="#">세부 메뉴 5</a></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			
 			<!-- 메인 div -->
-			<main style="border: 2px solid black; width: 1200px; height: 900px; min-width: 1200px; padding: 20px;">
-				<h3>등록금 내역 조회</h3>
-				<p>등록금 납부가 완료된 것들만 여기로 올라옴</p>
-				<br>
+			<main>
+				<h1>등록금 내역 조회</h1>
+				<div class="split--div"></div>
+				<p>(todo 삭제) 등록금 납부가 완료된 것들만 여기로 올라옴</p>
 				<table border="1" class="tuition--table">
 					<thead>
 						<tr>
