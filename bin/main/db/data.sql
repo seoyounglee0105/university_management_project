@@ -11,6 +11,8 @@ INSERT INTO coll_tuit VALUES (1, 2173500);
 
 INSERT INTO scholarship_tb VALUES (1, 2500000);
 
--- 장학금액은 등록금이랑 비교해서 등록금보다 클 경우 등록금만큼만
-INSERT INTO tuition_tb (student_id, tui_year, semester, sch_type, tui_amount, sch_amount)
-VALUES (2018000001, 2018, 1, 1, 2173500, 2173500);
+INSERT INTO stu_sch_tb VALUES (2018000001, 2018, 1, 1);
+INSERT INTO stu_sch_tb VALUES (2018000001, 2023, 1, 1);
+
+INSERT INTO tuition_tb (student_id, tui_year, semester, tui_amount, sch_type, sch_amount, status)
+VALUES (2018000001, 2018, 1, 2173500, 1, 2173500, 1);

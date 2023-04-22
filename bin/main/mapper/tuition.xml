@@ -8,4 +8,22 @@
 	SELECT * FROM tuition_tb WHERE student_id = #{studentId}
 </select>
 
+<select id="findTuiAmount" resultType="com.green.university.repository.model.CollTuit">
+	SELECT amount FROM coll_tuit
+	WHERE college_id = (SELECT d.college_id FROM student_tb AS s
+						JOIN department_tb AS d
+						ON s.dept_id = d.id
+						WHERE s.id = #{studentId});
+</select>
+
+<insert id="insert">
+	INSERT INTO tuition_tb (student_id, tui_year, semester, tui_amount, sch_type, sch_amount)
+	VALUES (#{studentId}, #{tuiYear}, #{semester}, #{tuiAmount}, #{schType}, #{schAmount})
+</insert>
+
+<select id="findByStudentIdAndSemester" resultType="com.green.university.repository.model.Tuition">
+	SELECT * FROM tuition_tb
+	WHERE student_id = #{studentId} AND tui_year = #{tuiYear} AND semester = #{semester}
+</select>
+
 </mapper>
