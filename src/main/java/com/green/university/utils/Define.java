@@ -4,7 +4,9 @@ public class Define {
 
 	public final static String PRINCIPAL = "principal";
 	
-	// 인증된 사용자가 아닐 때 출력하는 문자열 선언하기
+	public final static Integer CURRENT_YEAR = 2023;
+	
+	public final static Integer CURRENT_SEMESTER = 1;
 	
 	
 	
