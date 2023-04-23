@@ -115,7 +115,7 @@ CREATE TABLE stu_sub_tb (
 );
 
 -- 단과대별 등록금
-CREATE TABLE coll_tuit (
+CREATE TABLE coll_tuit_tb (
 	college_id INT PRIMARY KEY,
     amount INT NOT NULL,
     FOREIGN KEY (college_id) REFERENCES college_tb (id)
@@ -127,16 +127,26 @@ CREATE TABLE scholarship_tb (
     max_amount INT NOT NULL COMMENT '최대 지원 금액'
 );
 
+-- 학생별 장학금 유형
+CREATE TABLE stu_sch_tb (
+	student_id INT NOT NULL,
+    sch_year INT NOT NULL COMMENT '지원 연도',
+    semester INT NOT NULL COMMENT '지원 학기',
+    sch_type INT NOT NULL COMMENT '장학금 유형',
+    PRIMARY KEY (student_id, sch_year, sch_type),
+    FOREIGN KEY (sch_type) REFERENCES scholarship_tb (type)
+);
+
 -- 등록금
 CREATE TABLE tuition_tb (
 	student_id INT,
     tui_year INT NOT NULL COMMENT '등록 연도',
     semester INT NOT NULL COMMENT '등록 학기',
-    sch_type INT,
     tui_amount INT NOT NULL COMMENT '등록금',
+    sch_type INT NOT NULL COMMENT '장학금 유형',
     sch_amount INT COMMENT '장학금',
     status BOOLEAN DEFAULT false COMMENT '납부 여부',
-    PRIMARY KEY (student_id, semester),
+    PRIMARY KEY (student_id, tui_year, semester),
     FOREIGN KEY (student_id) REFERENCES student_tb (id),
     FOREIGN KEY (sch_type) REFERENCES scholarship_tb (type)
 );
@@ -144,7 +154,7 @@ CREATE TABLE tuition_tb (
 -- 학적 상태
 CREATE TABLE stu_stat_tb (
 	student_id INT NOT NULL,
-	status VARCHAR(3) NOT NULL,
+	status VARCHAR(3) NOT NULL DEFAULT '재학',
     from_date DATE,
     to_date DATE, -- 현재 속한 상태인 경우 '9999-01-01'
     FOREIGN KEY (student_id) REFERENCES student_tb (id)

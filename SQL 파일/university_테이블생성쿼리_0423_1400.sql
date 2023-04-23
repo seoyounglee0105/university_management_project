@@ -1,3 +1,9 @@
+CREATE DATABASE university_management_sys;
+USE university_management_sys;
+
+
+
+
 -- 단과대
 CREATE TABLE college_tb (
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -175,4 +181,16 @@ CREATE TABLE notice_file_tb (
     origin_filename VARCHAR(100) COMMENT '기존 파일명' NOT NULL,
     uuid_filename VARCHAR(255) COMMENT '랜덤 문자열 포함 파일명' NOT NULL,
     FOREIGN KEY (notice_id) REFERENCES notice_tb (id)
+);
+
+
+
+-- 스태프 생성 예시
+INSERT INTO staff_tb (name) VALUES ('김지현');
+
+INSERT INTO user_tb VALUES
+(
+	(SELECT id FROM staff_tb ORDER BY id DESC LIMIT 1),
+	(SELECT id FROM staff_tb ORDER BY id DESC LIMIT 1),
+	'staff'
 );

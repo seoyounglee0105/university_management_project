@@ -1,71 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
-	.tuition--table th {
-		padding: 3px 12px;
-		width: 150px;
-		
-	}
-	
-	.tuition--table td {
-		padding: 1px 5px;
-	}
+.tuition--table th {
+	padding: 3px 12px;
+	width: 150px;
+}
 
-	.tuition--table thead tr th,
-	.tuition--table tbody tr td:nth-of-type(1),
-	.tuition--table tbody tr td:nth-of-type(2),
-	.tuition--table tbody tr td:nth-of-type(3) {
-		text-align: center;
-	}
+.tuition--table td {
+	padding: 1px 5px;
+}
 
-	.tuition--table tbody tr td:nth-of-type(4), 
-	.tuition--table tbody tr td:nth-of-type(5),
+.tuition--table thead tr th, .tuition--table tbody tr td:nth-of-type(1),
+	.tuition--table tbody tr td:nth-of-type(2), .tuition--table tbody tr td:nth-of-type(3)
+	{
+	text-align: center;
+}
+
+.tuition--table tbody tr td:nth-of-type(4), .tuition--table tbody tr td:nth-of-type(5),
 	.tuition--table tbody tr td:nth-of-type(6) {
-		text-align: right;
-	}
-	
+	text-align: right;
+}
 </style>
 
-		<%@ include file="/WEB-INF/view/layout/header.jsp"%>
-		
-		<!-- 등록금 내역 조회 -->
-		
-		<!-- 세부 메뉴 + 메인 -->
-		<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
-			<!-- 세부 메뉴 div-->
-			<div class="sub--menu">
-				<div class="sub--menu--top">
-					<h2>MY</h2>
-				</div>
-				<!-- 메뉴 -->
-				<div class="sub--menu--mid">
-					<table class="sub--menu--table" border="1">
-						<tr>
-							<td><a href="#">내 정보 조회</a></td>
-						</tr>
-						<tr>
-							<td><a href="#">비밀번호 변경</a></td>
-						</tr>
-						<tr>
-							<td><a href="#">등록금 내역 조회</a></td>
-						</tr>
-						<tr>
-							<td><a href="#" class="selected--menu">등록금 납부 고지서</a></td>
-						</tr>
-						<tr>
-							<td><a href="#">세부 메뉴 5</a></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-			
-			<!-- 메인 div -->
-			<main>
-				<h1>등록금 내역 조회</h1>
-				<div class="split--div"></div>
-				<p>(todo 삭제) 등록금 납부가 완료된 것들만 여기로 올라옴</p>
+<%@ include file="/WEB-INF/view/layout/header.jsp"%>
+
+<!-- 등록금 내역 조회 -->
+
+<!-- 세부 메뉴 + 메인 -->
+<div class="d-flex justify-content-center align-items-start"
+	style="min-width: 100em;">
+	<!-- 세부 메뉴 div-->
+	<div class="sub--menu">
+		<div class="sub--menu--top">
+			<h2>MY</h2>
+		</div>
+		<!-- 메뉴 -->
+		<div class="sub--menu--mid">
+			<table class="sub--menu--table" border="1">
+				<tr>
+					<td><a href="#">내 정보 조회</a></td>
+				</tr>
+				<tr>
+					<td><a href="#">비밀번호 변경</a></td>
+				</tr>
+				<tr>
+					<td><a href="/tuition/list" class="selected--menu">등록금 내역 조회</a></td>
+				</tr>
+				<tr>
+					<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
+				</tr>
+				<tr>
+					<td><a href="/tuition/test">테스트 (고지서 생성)</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<!-- 메인 div -->
+	<main>
+		<h1>등록금 내역 조회</h1>
+		<div class="split--div"></div>
+		<c:choose>
+			<c:when test="${tuitionList != null}">
+
 				<table border="1" class="tuition--table">
 					<thead>
 						<tr>
@@ -77,7 +76,7 @@
 							<th>납입금</th>
 						</tr>
 					</thead>
-					
+
 					<tbody>
 						<c:forEach var="tuition" items="${tuitionList}">
 							<tr>
@@ -89,7 +88,7 @@
 										<td>해당 없음</td>
 									</c:when>
 									<c:otherwise>
-										<td>${tuition.schType}유형</td>								
+										<td>${tuition.schType}유형</td>
 									</c:otherwise>
 								</c:choose>
 								<td>${tuition.tuiFormat()}</td>
@@ -99,25 +98,30 @@
 										<td>0</td>
 									</c:when>
 									<c:otherwise>
-										<td>${tuition.schFormat()}</td>							
+										<td>${tuition.schFormat()}</td>
 									</c:otherwise>
 								</c:choose>
 								<td>${tuition.paymentFormat()}</td>
 							</tr>
 						</c:forEach>
 
+
+
 					</tbody>
 				</table>
-			
-				
-			</main>
-		</div>
-		
-		<footer>
-			<!-- 필요 시 -->
-		</footer>
-	
-	</div>
+			</c:when>
+
+			<c:otherwise>
+				<p>등록금 납부 내역이 없습니다.</p>
+			</c:otherwise>
+		</c:choose>
+
+	</main>
+</div>
+
+<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+
+</div>
 
 </body>
 </html>

@@ -1,3 +1,6 @@
+CREATE DATABASE university_management_sys;
+USE university_management_sys;
+
 -- 단과대
 CREATE TABLE college_tb (
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -74,11 +77,12 @@ CREATE TABLE subject_tb (
     room_id VARCHAR(5),
     dept_id INT NOT NULL,
     type VARCHAR(2) NOT NULL COMMENT '강의 구분 (전공, 교양)',
-    sub_year INT NOT NULL COMMENT '연도',
-    semester INT NOT NULL COMMENT '학기',
+    sub_year INT NOT NULL COMMENT '개설 연도',
+    semester INT NOT NULL COMMENT '개설 학기',
     time VARCHAR(35) NOT NULL COMMENT '요일 및 시간',
     grades INT NOT NULL COMMENT '이수 학점',
     capacity INT NOT NULL COMMENT '수강 정원',
+    -- 실제 신청한 학생 수
     num_of_student INT NOT NULL DEFAULT 0 COMMENT '현재 신청 인원',
     FOREIGN KEY (professor_id) REFERENCES professor_tb (id),
     FOREIGN KEY (room_id) REFERENCES room_tb (id),
@@ -127,26 +131,16 @@ CREATE TABLE scholarship_tb (
     max_amount INT NOT NULL COMMENT '최대 지원 금액'
 );
 
--- 학생별 장학금 유형
-CREATE TABLE stu_sch_tb (
-	student_id INT NOT NULL,
-    sch_year INT NOT NULL COMMENT '지원 연도',
-    semester INT NOT NULL COMMENT '지원 학기',
-    sch_type INT NOT NULL COMMENT '장학금 유형',
-    PRIMARY KEY (student_id, sch_year, sch_type),
-    FOREIGN KEY (sch_type) REFERENCES scholarship_tb (type)
-);
-
 -- 등록금
 CREATE TABLE tuition_tb (
 	student_id INT,
     tui_year INT NOT NULL COMMENT '등록 연도',
     semester INT NOT NULL COMMENT '등록 학기',
+    sch_type INT,
     tui_amount INT NOT NULL COMMENT '등록금',
-    sch_type INT NOT NULL COMMENT '장학금 유형',
     sch_amount INT COMMENT '장학금',
     status BOOLEAN DEFAULT false COMMENT '납부 여부',
-    PRIMARY KEY (student_id, tui_year, semester),
+    PRIMARY KEY (student_id, semester),
     FOREIGN KEY (student_id) REFERENCES student_tb (id),
     FOREIGN KEY (sch_type) REFERENCES scholarship_tb (type)
 );
@@ -154,7 +148,7 @@ CREATE TABLE tuition_tb (
 -- 학적 상태
 CREATE TABLE stu_stat_tb (
 	student_id INT NOT NULL,
-	status VARCHAR(3) NOT NULL DEFAULT '재학',
+	status VARCHAR(3) NOT NULL,
     from_date DATE,
     to_date DATE, -- 현재 속한 상태인 경우 '9999-01-01'
     FOREIGN KEY (student_id) REFERENCES student_tb (id)
@@ -176,3 +170,22 @@ CREATE TABLE notice_file_tb (
     uuid_filename VARCHAR(255) COMMENT '랜덤 문자열 포함 파일명' NOT NULL,
     FOREIGN KEY (notice_id) REFERENCES notice_tb (id)
 );
+
+
+
+-- 스태프 생성 예시
+INSERT INTO staff_tb (name) VALUES ('김지현');
+
+INSERT INTO user_tb VALUES
+(
+	(SELECT id FROM staff_tb ORDER BY id DESC LIMIT 1),
+	(SELECT id FROM staff_tb ORDER BY id DESC LIMIT 1),
+	'staff'
+);
+
+
+
+
+
+
+

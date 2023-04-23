@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class Scholarship {
 
-	private String type;
+	private Integer type;
 	private Integer maxAmount;
 }
