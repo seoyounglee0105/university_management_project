@@ -6,7 +6,6 @@ import javax.validation.constraints.NotNull;
 
 import com.green.university.repository.model.College;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 /**
  * 
@@ -14,14 +13,12 @@ import lombok.Data;
  *
  */
 @Data
-@AllArgsConstructor
-public class DepartmentFormDto {
+public class CollTuitFormDto {
 	@NotNull
 	@NotBlank
 	@NotEmpty
-	private String name;
+	private College collegeId;
 	@NotNull
-	private Integer collegeId;
-	private String collegeName;
-	
+	@NotEmpty
+	private Integer amount;
 }

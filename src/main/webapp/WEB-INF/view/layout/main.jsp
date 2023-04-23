@@ -15,7 +15,7 @@
 					<li class="nav-item"><a class="nav-link" href="/admin/department">학과</a></li>
 					<li class="nav-item"><a class="nav-link" href="/admin/room">강의실</a></li>
 					<li class="nav-item"><a class="nav-link" href="/admin/subject">강의</a></li>
-					<li class="nav-item"><a class="nav-link" href="/admin/tuition">등록금</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/collTuit">단과대 등록금</a></li>
 					<li class="nav-item"><a class="nav-link" href="/admin/notice">공지사항</a></li>
 					<li class="nav-item"><a class="nav-link disabled" href="#">My Info</a></li>
 				</ul>

@@ -37,7 +37,7 @@ public class SubjectFormDto {
 	@NotEmpty
 	@Min(4)
 	@Max(4)
-	private Integer year;
+	private Integer subYear;
 	@NotNull
 	@NotEmpty
 	@Min(1)

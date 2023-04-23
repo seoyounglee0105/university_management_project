@@ -19,4 +19,10 @@ public class NoticeFormDto {
 	@NotNull
 	@NotEmpty
 	private String content;
+	@NotNull
+	@NotEmpty
+	private String originFileName;
+	@NotNull
+	@NotEmpty
+	private String uuidFileName;
 }
