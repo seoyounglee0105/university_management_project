@@ -115,7 +115,6 @@ header {
 .sub--menu--mid {
 	display: flex;
 	justify-content: center;
-	border-radius: 0 0 30px 30px;
 }
 
 .sub--menu--table {
@@ -127,7 +126,7 @@ header {
 	border-left: hidden;
 	border-right: hidden;
 	width: 200px;
-	height: 70px;
+	height: 71px;
 	padding: 20px 0;
 	font-size: 20px;
 }
@@ -138,6 +137,7 @@ header {
 
 .sub--menu--table tr:nth-last-of-type(1) td {
 	border-bottom: hidden;
+	height: 72px !important;
 }
 
 .sub--menu--table tr:nth-of-type(1) td {
@@ -159,7 +159,7 @@ main h1:first-of-type {
 	min-width: 1100px;
 	height: 2px;
 	background-color: gray;
-	margin: 20px 0 40px;
+	margin: 20px 0 50px;
 }
 
 .selected--menu,
