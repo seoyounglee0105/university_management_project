@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.green.university.repository.interfaces.StaffRepository">
+	<insert id="insertToStaff">
+		INSERT INTO staff_tb (name, birth_date, gender, address, tel)
+		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel})
+	</insert>
+	
+	<select id="selectIdByCreateStaffDto" resultType="integer">
+		SELECT id FROM staff_tb 
+		WHERE name = #{name}
+		AND birth_date = #{birthDate}
+		AND gender = #{gender}
+		AND address =#{address}
+		AND #{tel}
+		
+	</select>
+	
+	<insert id="insertToUser">
+		INSERT INTO user_tb 
+		VALUES (#{id}, #{password}, #{userRole})
+	</insert>
+</mapper>

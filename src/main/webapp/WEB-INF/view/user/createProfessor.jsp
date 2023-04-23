@@ -6,8 +6,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>직원 입력창</h1>
-	<form action="/user/staff" method="post">
+	<h1>교수 입력창</h1>
+	<form action="/user/professor" method="post">
 		<div>
 			<label for="name">이름</label><input type="text" name="name" id="name">
 		</div>
@@ -23,7 +23,9 @@
 		<div>
 			<label for="tel">전화번호</label><input type="text" name="tel" id="tel">
 		</div>
-
+		<div>
+			<label for="deptId">과 ID</label><input type="text" name="deptId" id="deptId">
+		</div>
 		<div>
 			<button type="submit">입력</button>
 		</div>

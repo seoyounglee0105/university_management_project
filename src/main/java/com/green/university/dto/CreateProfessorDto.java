@@ -2,6 +2,8 @@ package com.green.university.dto;
 
 import java.sql.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -10,12 +12,12 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 
 /**
- * staff_tb insert용
+ * professor_tb insert용
  * @author 김지현
  *
  */
 @Data
-public class CreateStaffDto {
+public class CreateProfessorDto {
 
 	@NotEmpty
 	@NotNull
@@ -30,5 +32,8 @@ public class CreateStaffDto {
 	@NotEmpty
 	@NotBlank
 	private String tel;
+	@Min(100)
+	@Max(999)
+	private Integer deptId;
 	
 }
