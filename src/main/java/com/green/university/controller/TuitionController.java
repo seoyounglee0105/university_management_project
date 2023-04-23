@@ -51,7 +51,7 @@ public class TuitionController {
 		// 담긴 값이 없다면 null
 		model.addAttribute("tuitionList", tuitionList);
 		
-		return "tuition/list";	
+		return "tuition/tuiList";	
 	}
 	
 	/**

@@ -3,21 +3,31 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
-.tuition--payment--table {
-	border: 2px solid #4c4b4b;
-	margin-bottom: 30px;
-	background-color: #f6f6f6;
-}
 
-.tuition--payment--table th,
-.tuition--payment--table thead td {
+.document--layout {
+	border: 1px solid #4c4b4b;
+	padding: 50px 30px 30px 30px;
 	text-align: center;
-	padding: 3px 0px;
+	margin-bottom: 30px;
 }
 
-.tuition--payment--table tbody td {
+.document--layout h3 {
+	font-weight: 600;
+}
+
+.document--layout > p {
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+
+.document--layout th {
+	text-align: center;
+	padding: 2px 20px;
+}
+
+.document--layout td {
 	text-align: right;
-	padding: 10px 5px;
+	padding: 2px 8px 2px 50px;
 }
 
 </style>
@@ -29,18 +39,12 @@
 			<!-- 세부 메뉴 div-->
 			<div class="sub--menu">
 				<div class="sub--menu--top">
-					<h2>MY</h2>
+					<h2>등록</h2>
 				</div>
 				<!-- 메뉴 -->
 				<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 				<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
-				<tr>
-					<td><a href="#">내 정보 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="#">비밀번호 변경</a></td>
-				</tr>
 				<tr>
 					<td><a href="/tuition/list">등록금 내역 조회</a></td>
 				</tr>
@@ -48,7 +52,10 @@
 					<td><a href="/tuition/payment" class="selected--menu">등록금 납부 고지서</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">휴·복학 신청</a></td>
+					<td><a href="/stuStat/application">휴·복학 신청</a></td>
+				</tr>
+				<tr>
+					<td><a href="/stuStat/list">휴·복학 내역 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/tuition/test">테스트 (고지서 생성)</a></td>
@@ -63,20 +70,16 @@
 				<div class="split--div"></div>
 				
 				<div class="d-flex flex-column align-items-center" style="width: 100%">
+					<div class="document--layout">
+						<h3>등록금 고지서</h3>
+						<p>${tuition.tuiYear}년도 ${tuition.semester}학기</p>
 					<table class="tuition--payment--table" border="1">
 						<thead>
 							<tr>
-								<th colspan="4" style="padding: 30px;">
-									<span style="font-size: 30px;">등록금 고지서</span>
-									<br>
-									<span style="font-size: 15px;">${tuition.tuiYear}년도 ${tuition.semester}학기</span>
-								</th>
-							</tr>
-							<tr>
-								<th style="width: 80px;">단 과 대</th>
-								<td style="width: 170px;">공과대학</td> <!-- 여기 고쳐야 함 !  -->
-								<th style="width: 80px;">학 과</th>
-								<td style="width: 170px;">산업공학과</td> <!-- 여기 고쳐야 함 !  -->
+								<th>단 과 대</th>
+								<td>공과대학</td> <!-- 여기 고쳐야 함 !  -->
+								<th>학 과</th>
+								<td>산업공학과</td> <!-- 여기 고쳐야 함 !  -->
 							</tr>
 							<tr>
 								<th style="">학 번</th>
@@ -113,6 +116,7 @@
 							
 						</tbody>
 					</table>
+					</div>
 					
 					<c:choose>
 						<c:when test="${tuition.status == true}">
