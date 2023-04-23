@@ -52,6 +52,9 @@
 					<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
 				</tr>
 				<tr>
+					<td><a href="#">휴·복학 신청</a></td>
+				</tr>
+				<tr>
 					<td><a href="/tuition/test">테스트 (고지서 생성)</a></td>
 				</tr>
 			</table>
@@ -62,60 +65,61 @@
 	<main>
 		<h1>등록금 내역 조회</h1>
 		<div class="split--div"></div>
-		<c:choose>
-			<c:when test="${tuitionList != null}">
-
-				<table border="1" class="tuition--table">
-					<thead>
-						<tr>
-							<th>연도</th>
-							<th>학기</th>
-							<th>장학금 유형</th>
-							<th>등록금</th>
-							<th>장학금</th>
-							<th>납입금</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<c:forEach var="tuition" items="${tuitionList}">
+		<div class="d-flex flex-column align-items-center" style="width: 100%">
+			<c:choose>
+				<c:when test="${tuitionList != null}">
+	
+					<table border="1" class="tuition--table">
+						<thead>
 							<tr>
-								<td>${tuition.tuiYear}년</td>
-								<td>${tuition.semester}학기</td>
-								<c:choose>
-									<%-- 장학금 지원 대상이 아니라면 --%>
-									<c:when test="${tuition.schType == null}">
-										<td>해당 없음</td>
-									</c:when>
-									<c:otherwise>
-										<td>${tuition.schType}유형</td>
-									</c:otherwise>
-								</c:choose>
-								<td>${tuition.tuiFormat()}</td>
-								<c:choose>
-									<%-- 장학금 지원 대상이 아니라면 --%>
-									<c:when test="${tuition.schType == null}">
-										<td>0</td>
-									</c:when>
-									<c:otherwise>
-										<td>${tuition.schFormat()}</td>
-									</c:otherwise>
-								</c:choose>
-								<td>${tuition.paymentFormat()}</td>
+								<th>연도</th>
+								<th>학기</th>
+								<th>장학금 유형</th>
+								<th>등록금</th>
+								<th>장학금</th>
+								<th>납입금</th>
 							</tr>
-						</c:forEach>
-
-
-
-					</tbody>
-				</table>
-			</c:when>
-
-			<c:otherwise>
-				<p>등록금 납부 내역이 없습니다.</p>
-			</c:otherwise>
-		</c:choose>
-
+						</thead>
+	
+						<tbody>
+							<c:forEach var="tuition" items="${tuitionList}">
+								<tr>
+									<td>${tuition.tuiYear}년</td>
+									<td>${tuition.semester}학기</td>
+									<c:choose>
+										<%-- 장학금 지원 대상이 아니라면 --%>
+										<c:when test="${tuition.schType == null}">
+											<td>해당 없음</td>
+										</c:when>
+										<c:otherwise>
+											<td>${tuition.schType}유형</td>
+										</c:otherwise>
+									</c:choose>
+									<td>${tuition.tuiFormat()}</td>
+									<c:choose>
+										<%-- 장학금 지원 대상이 아니라면 --%>
+										<c:when test="${tuition.schType == null}">
+											<td>0</td>
+										</c:when>
+										<c:otherwise>
+											<td>${tuition.schFormat()}</td>
+										</c:otherwise>
+									</c:choose>
+									<td>${tuition.paymentFormat()}</td>
+								</tr>
+							</c:forEach>
+	
+	
+	
+						</tbody>
+					</table>
+				</c:when>
+	
+				<c:otherwise>
+					<p>등록금 납부 내역이 없습니다.</p>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</main>
 </div>
 

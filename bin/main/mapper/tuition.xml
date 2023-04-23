@@ -8,6 +8,10 @@
 	SELECT * FROM tuition_tb WHERE student_id = #{studentId}
 </select>
 
+<select id="findByStudentIdAndStatus" resultType="com.green.university.repository.model.Tuition">
+	SELECT * FROM tuition_tb WHERE student_id = #{studentId} AND status = #{status}
+</select>
+
 <select id="findTuiAmount" resultType="com.green.university.repository.model.CollTuit">
 	SELECT amount FROM coll_tuit_tb
 	WHERE college_id = (SELECT d.college_id FROM student_tb AS s
@@ -25,5 +29,10 @@
 	SELECT * FROM tuition_tb
 	WHERE student_id = #{studentId} AND tui_year = #{tuiYear} AND semester = #{semester}
 </select>
+
+<update id="updateStatus">
+	UPDATE tuition_tb SET status = true
+	WHERE student_id = #{studentId} AND tui_year = #{tuiYear} AND semester = #{semester}
+</update>
 
 </mapper>

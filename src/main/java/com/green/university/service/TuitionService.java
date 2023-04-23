@@ -29,7 +29,7 @@ public class TuitionService {
 	
 	/**
 	 * @param studentId (principal의 id와 동일)
-	 * @return 해당 학생의 등록금 납부 내역
+	 * @return 해당 학생의 모든 등록금 납부 내역
 	 */
 	@Transactional
 	public List<Tuition> readTuitionList(Integer studentId) {
@@ -37,6 +37,29 @@ public class TuitionService {
 		List<Tuition> tuitionEntityList = tuitionRepository.findByStudentId(studentId);
 		
 		return tuitionEntityList;
+	}
+	
+	/**
+	 * @param studentId (principal의 id와 동일)
+	 * @return 해당 학생의 납부 여부에 따른 등록금 납부 내역
+	 */
+	@Transactional
+	public List<Tuition> readTuitionListByStatus(Integer studentId, Boolean status) {
+		
+		List<Tuition> tuitionEntityList = tuitionRepository.findByStudentIdAndStatus(studentId, status);
+		
+		return tuitionEntityList;
+	}
+	
+	/**
+	 * @return 해당 학생의 현재 학기 등록금 고지서
+	 */
+	@Transactional
+	public Tuition readByStudentIdAndSemester(Integer studentId, Integer tuiYear, Integer semester) {
+		
+		Tuition tuitionEntity = tuitionRepository.findByStudentIdAndSemester(studentId, tuiYear, semester);
+		
+		return tuitionEntity;
 	}
 	
 	/**
@@ -53,7 +76,7 @@ public class TuitionService {
 		
 		
 		// 이미 해당 학기의 등록금 고지서가 존재한다면 생성하지 않음
-		if (tuitionRepository.findByStudentIdAndSemester(studentId, Define.CURRENT_YEAR, Define.CURRENT_SEMESTER) != null) {
+		if (readByStudentIdAndSemester(studentId, Define.CURRENT_YEAR, Define.CURRENT_SEMESTER) != null) {
 			throw new CustomRestfullException("이미 이번 학기의 등록금 고지서가 존재합니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
@@ -87,5 +110,14 @@ public class TuitionService {
 		}
 	}
 	
+	@Transactional
+	public void updateStatus(Integer studentId) {
+		
+		int resultRowCount = tuitionRepository.updateStatus(studentId, Define.CURRENT_YEAR, Define.CURRENT_SEMESTER);
+		
+		if (resultRowCount != 1) {
+			throw new CustomRestfullException("납부 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 	
 }
