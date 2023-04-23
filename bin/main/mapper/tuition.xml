@@ -9,7 +9,7 @@
 </select>
 
 <select id="findTuiAmount" resultType="com.green.university.repository.model.CollTuit">
-	SELECT amount FROM coll_tuit
+	SELECT amount FROM coll_tuit_tb
 	WHERE college_id = (SELECT d.college_id FROM student_tb AS s
 						JOIN department_tb AS d
 						ON s.dept_id = d.id

@@ -115,7 +115,7 @@ CREATE TABLE stu_sub_tb (
 );
 
 -- 단과대별 등록금
-CREATE TABLE coll_tuit (
+CREATE TABLE coll_tuit_tb (
 	college_id INT PRIMARY KEY,
     amount INT NOT NULL,
     FOREIGN KEY (college_id) REFERENCES college_tb (id)

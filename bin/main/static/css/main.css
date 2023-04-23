@@ -127,12 +127,13 @@ header {
 	border-left: hidden;
 	border-right: hidden;
 	width: 200px;
+	height: 70px;
 	padding: 20px 0;
 	font-size: 20px;
 }
 
 .sub--menu--table td a{
-	padding: 30px 10px;
+	padding: 20px 10px;
 }
 
 .sub--menu--table tr:nth-last-of-type(1) td {
