@@ -12,6 +12,8 @@ CREATE TABLE department_tb (
     FOREIGN KEY (college_id) REFERENCES college_tb (id)
 );
 
+
+
 ALTER TABLE department_tb AUTO_INCREMENT = 101;
 
 -- 사용자
