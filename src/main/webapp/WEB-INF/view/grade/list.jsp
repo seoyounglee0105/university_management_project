@@ -66,6 +66,7 @@
 								<td>${grade.type}</td>
 								<td>${grade.grade}</td>
 								<td>${grade.gradeValue}</td>
+								<td></td>
 							</tr>
 						</c:forEach>
 					</tbody>
