@@ -14,8 +14,8 @@
 		AND birth_date = #{birthDate}
 		AND gender = #{gender}
 		AND address =#{address}
-		AND #{tel}
-		AND #{deptId}
+		AND tel = #{tel}
+		AND dept_id = #{deptId}
 		
 	</select>
 	

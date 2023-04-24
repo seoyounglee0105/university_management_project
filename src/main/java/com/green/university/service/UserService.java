@@ -118,7 +118,7 @@ public class UserService {
 	
 	@Transactional
 	public User login(LoginDto loginDto) {
-		User userEntity = userRepository.selectById(loginDto.getUserId());
+		User userEntity = userRepository.selectById(loginDto.getId());
 		
 		if(userEntity == null) {
 			// 던지기 아이디 찾을 수 없습니다.

@@ -100,10 +100,10 @@ public class UserController {
 	 * 로그인 폼, 메인페이지
 	 * @return login.jsp
 	 */
-	@GetMapping("/")
+	@GetMapping("")
 	public String login() {
 
-		return "user/login";
+		return "/user/login";
 	}
 	
 	/*
@@ -116,6 +116,8 @@ public class UserController {
 		
 		User principal = userService.login(loginDto);
 		session.setAttribute(Define.PRINCIPAL, principal);
+		User user = (User)session.getAttribute(Define.PRINCIPAL);
+		System.out.println(user.getUserRole());
 		
 		return "redirect:/test";
 	}
