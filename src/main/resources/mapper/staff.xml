@@ -4,8 +4,8 @@
 
 <mapper namespace="com.green.university.repository.interfaces.StaffRepository">
 	<insert id="insertToStaff">
-		INSERT INTO staff_tb (name, birth_date, gender, address, tel)
-		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel})
+		INSERT INTO staff_tb (name, birth_date, gender, address, tel, email)
+		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel}, #{email})
 	</insert>
 	
 	<select id="selectIdByCreateStaffDto" resultType="integer">
@@ -15,6 +15,7 @@
 		AND gender = #{gender}
 		AND address =#{address}
 		AND tel = #{tel}
+		AND email = #{email}
 		
 	</select>
 	

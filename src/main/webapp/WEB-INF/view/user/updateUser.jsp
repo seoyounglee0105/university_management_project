@@ -35,29 +35,17 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>교수 입력창</h1>
+		<h1>개인 정보 수정</h1>
 		<div class="split--div"></div>
-		<form action="/user/professor" method="post">
+		<form action="/user/update" method="post">
 			<div>
-				<label for="name">이름</label><input type="text" name="name" id="name" value="가가가">
+				<label for="address">주소</label><input type="text" name="address" id="address">
 			</div>
 			<div>
-				<label for="birthDate">생년월일</label><input type="date" name="birthDate" id="birthDate" value="1990-07-26">
+				<label for="tel">전화번호</label><input type="text" name="tel" id="tel">
 			</div>
 			<div>
-				<label for="male">남성</label> <input type="radio" value="M" name="gender" id="male" checked="checked"> <label for="female">여성</label> <input type="radio" value="F" name="gender" id="female">
-			</div>
-			<div>
-				<label for="address">주소</label><input type="text" name="address" id="address" value="부산시">
-			</div>
-			<div>
-				<label for="tel">전화번호</label><input type="text" name="tel" id="tel" value="010-4545-4545">
-			</div>
-			<div>
-				<label for="email">이메일</label><input type="text" name="email" id="email" value="abc@test.com">
-			</div>
-			<div>
-				<label for="deptId">과 ID</label><input type="text" name="deptId" id="deptId" value="101">
+				<label for="email">이메일</label><input type="text" name="email" id="email">
 			</div>
 			<div>
 				<button type="submit">입력</button>

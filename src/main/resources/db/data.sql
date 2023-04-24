@@ -4,8 +4,8 @@ VALUES ('공과대학');
 INSERT INTO department_tb (name, college_id)
 VALUES ('토목과', 1);
 
-INSERT INTO student_tb (id, name, birth_date, gender, address, tel, dept_id, grade, semester, entrance_date)
-VALUES (2018000001, '이서영', '2000-01-05', 'F', '부산광역시 수영구', '010-1111-1111', 101, 1, 1, '2018-03-02');
+INSERT INTO student_tb (id, name, birth_date, gender, address, tel, email, dept_id, grade, semester, entrance_date)
+VALUES (2018000001, '이서영', '2000-01-05', 'F', '부산광역시 수영구', '010-1111-1111', 'b@test.com', 101, 1, 1, '2018-03-02');
 
 INSERT INTO coll_tuit_tb VALUES (1, 2173500);
 
@@ -19,17 +19,17 @@ VALUES (2018000001, 2018, 1, 2173500, 1, 2173500, 1);
 
 
 -- 성적조회 샘플 데이터
-INSERT INTO student_tb (id, name, birth_date, gender, address, tel, dept_id, grade, semester, entrance_date)
-VALUES (2018000002,'편용림','2000-08-05','M','부산광역시 수영구 광안동','010-4444-2221',101,1,1,'2023-04-01');
+INSERT INTO student_tb (id, name, birth_date, gender, address, tel, email, dept_id, grade, semester, entrance_date)
+VALUES (2018000002,'편용림','2000-08-05','M','부산광역시 수영구 광안동','010-4444-2221', 'a@test.com', 101, 1, 1,'2023-04-01');
 
 INSERT INTO room_tb(id,college_id)
 VALUES 
 ('c201',1),
 ('c202',1);
-INSERT INTO professor_tb(name,dept_id)
+INSERT INTO professor_tb(name, birth_date, gender, address, tel, email, dept_id)
 VALUES
-	('홍길동','101'),
-	('장길산','101');
+	('홍길동', '1999-01-01', 'M', '서울특별시 북한산', '010-1234-5678', 'a@test.com', '101'),
+	('장길산', '1990-01-01', 'M', '제주도 한라산', '010-9999-9999', 'a@test.com', '101');
     
 INSERT INTO grade_tb(grade,grade_value)
 VALUES

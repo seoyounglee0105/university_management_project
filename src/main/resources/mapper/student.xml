@@ -4,8 +4,8 @@
 
 <mapper namespace="com.green.university.repository.interfaces.StudentRepository">
 	<insert id="insertToStudent">
-		INSERT INTO student_tb (name, birth_date, gender, address, tel, dept_id, entrance_date)
-		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel}, #{deptId}, #{entranceDate})
+		INSERT INTO student_tb (name, birth_date, gender, address, tel, dept_id, entrance_date, email)
+		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel}, #{deptId}, #{entranceDate}, #{email})
 	</insert>
 	
 	<select id="selectIdByCreateStudentDto" resultType="integer">
@@ -17,6 +17,7 @@
 		AND tel = #{tel}
 		AND dept_id = #{deptId}
 		AND entrance_date = #{entranceDate}
+		AND email = #{email}
 		
 	</select>
 	

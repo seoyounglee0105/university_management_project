@@ -4,8 +4,8 @@
 
 <mapper namespace="com.green.university.repository.interfaces.ProfessorRepository">
 	<insert id="insertToProfessor">
-		INSERT INTO professor_tb (name, birth_date, gender, address, tel, dept_id)
-		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel}, #{deptId})
+		INSERT INTO professor_tb (name, birth_date, gender, address, tel, dept_id, email)
+		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel}, #{deptId}, #{email})
 	</insert>
 	
 	<select id="selectIdByCreateProfessorDto" resultType="integer">
@@ -16,6 +16,7 @@
 		AND address =#{address}
 		AND tel = #{tel}
 		AND dept_id = #{deptId}
+		AND email = #{email}
 		
 	</select>
 	

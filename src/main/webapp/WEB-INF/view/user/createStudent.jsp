@@ -15,19 +15,19 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="#">내 정보 조회</a></td>
+					<td><a href="/user/student">학생 ID 생성</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">비밀번호 변경</a></td>
+					<td><a href="/user/professor">교수 ID 생성</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">등록금 내역 조회</a></td>
+					<td><a href="/user/staff">직원 ID 생성</a></td>
 				</tr>
 				<tr>
-					<td><a href="#" class="selected--menu">등록금 납부 고지서</a></td>
+					<td><a href="#" class="selected--menu">개인 정보 수정</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">세부 메뉴 5</a></td>
+					<td><a href="#">패스워드 변경</a></td>
 				</tr>
 			</table>
 		</div>
@@ -39,22 +39,25 @@
 		<div class="split--div"></div>
 		<form action="/user/student" method="post">
 			<div>
-				<label for="name">이름</label><input type="text" name="name" id="name" value="홍길동">
+				<label for="name">이름</label><input type="text" name="name" id="name" value="다다다">
 			</div>
 			<div>
-				<label for="birthDate">생년월일</label><input type="date" name="birthDate" id="birthDate">
+				<label for="birthDate">생년월일</label><input type="date" name="birthDate" id="birthDate" value="2004-01-01">
 			</div>
 			<div>
-				<label for="male">남성</label> <input type="radio" value="M" name="gender" id="male"> <label for="female">여성</label> <input type="radio" value="F" name="gender" id="female">
+				<label for="male">남성</label> <input type="radio" value="M" name="gender" id="male" checked="checked"> <label for="female">여성</label> <input type="radio" value="F" name="gender" id="female">
 			</div>
 			<div>
-				<label for="address">주소</label><input type="text" name="address" id="address">
+				<label for="address">주소</label><input type="text" name="address" id="address" value="부산시">
 			</div>
 			<div>
-				<label for="tel">전화번호</label><input type="text" name="tel" id="tel">
+				<label for="tel">전화번호</label><input type="text" name="tel" id="tel" value="010-1212-4545">
 			</div>
 			<div>
-				<label for="deptId">과 ID</label><input type="text" name="deptId" id="deptId">
+				<label for="email">이메일</label><input type="text" name="email" id="email" value="qwe@test.com">
+			</div>
+			<div>
+				<label for="deptId">과 ID</label><input type="text" name="deptId" id="deptId" value="101">
 			</div>
 			<div>
 				<label for="entranceDate">입학일</label><input type="date" name="entranceDate" id="entranceDate" value="2023-03-01">

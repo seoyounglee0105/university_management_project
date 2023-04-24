@@ -31,9 +31,10 @@ CREATE TABLE student_tb (
     gender CHAR(1) NOT NULL COMMENT '남자: M, 여자: F',
     address VARCHAR(100) NOT NULL,
     tel VARCHAR(13) NOT NULL,
+    email VARCHAR(20) NOT NULL,
     dept_id INT NOT NULL COMMENT '학과',
-    grade INT NOT NULL COMMENT '학년',
-    semester INT NOT NULL COMMENT '학기',
+    grade INT NOT NULL DEFAULT 1 COMMENT '학년' ,
+    semester INT NOT NULL DEFAULT 1 COMMENT '학기' ,
     entrance_date DATE NOT NULL,
     graduation_date DATE,
     FOREIGN KEY(dept_id) REFERENCES department_tb (id)
@@ -45,6 +46,11 @@ ALTER TABLE student_tb AUTO_INCREMENT = 2023000001;
 CREATE TABLE staff_tb (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
+    birth_date DATE NOT NULL,
+    gender CHAR(1) NOT NULL COMMENT '남자: M, 여자: F',
+    address VARCHAR(100) NOT NULL,
+    tel VARCHAR(13) NOT NULL,
+    email VARCHAR(20) NOT NULL,
     hire_date DATE DEFAULT (current_date)
 );
 
@@ -54,6 +60,11 @@ ALTER TABLE staff_tb AUTO_INCREMENT = 230001;
 CREATE TABLE professor_tb (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
+    birth_date DATE NOT NULL,
+    gender CHAR(1) NOT NULL COMMENT '남자: M, 여자: F',
+    address VARCHAR(100) NOT NULL,
+    tel VARCHAR(13) NOT NULL,
+    email VARCHAR(20) NOT NULL,
     dept_id INT NOT NULL,
     hire_date DATE DEFAULT (current_date),
     FOREIGN KEY (dept_id) REFERENCES department_tb (id)
