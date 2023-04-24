@@ -7,5 +7,7 @@
 		insert into subject_tb (name, professor_id, room_id, dept_id, type, sub_year, semester, time, grades, capacity )
 		values(#{name}, #{professorId}, #{roomId}, #{deptId}, #{type}, #{subYear}, #{semester}, #{time}, #{grades}, #{capacity} )
 	</insert>
-
+	<select id="findAll" resultType="com.green.university.repository.model.Subject">
+		select * from subject_tb
+	</select>
 </mapper>

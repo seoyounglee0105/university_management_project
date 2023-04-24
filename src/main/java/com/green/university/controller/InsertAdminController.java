@@ -24,11 +24,11 @@ import com.green.university.service.AdminService;
 
 /**
  * 
- * @author 박성희 Admin 수업 관련 Controller
+ * @author 박성희 Admin 입력 관련 Controller
  */
 @Controller
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/insertAdmin")
+public class InsertAdminController {
 	@Autowired
 	private AdminService adminService;
 
@@ -37,14 +37,18 @@ public class AdminController {
 	 * @return 단과대 페이지
 	 */
 	@GetMapping("/college")
-	public String college(Model model) {
-		List<College> collegeList = adminService.findCollege();
-		if (collegeList.isEmpty()) {
-			model.addAttribute("collegeList", null);
-		} else {
-			model.addAttribute("collegeList", collegeList);
-		}
-		return "/admin/college";
+	public String college() {
+		return "/insertAdmin/college";
+	}
+
+	/**
+	 * 
+	 * @return 단과대학 입력 기능
+	 */
+	@PostMapping("/college-proc")
+	public String insertCollege(CollegeFormDto collegeFormDto) {
+		adminService.insertCollege(collegeFormDto);
+		return "redirect:/test";
 	}
 
 	/**
@@ -59,7 +63,17 @@ public class AdminController {
 		} else {
 			model.addAttribute("departmentList", departmentList);
 		}
-		return "/admin/department";
+		return "/insertAdmin/department";
+	}
+
+	/**
+	 * 
+	 * @return 학과 입력 기능
+	 */
+	@GetMapping("/department-proc")
+	public String insertDepartment(DepartmentFormDto departmentFormDto) {
+		adminService.insertDepartment(departmentFormDto);
+		return "redirect:/test";
 	}
 
 	/**
@@ -67,14 +81,18 @@ public class AdminController {
 	 * @return 강의실 페이지
 	 */
 	@GetMapping("/room")
-	public String room(Model model) {
-		List<Room> roomList = adminService.findRoom();
-		if (roomList.isEmpty()) {
-			model.addAttribute("roomList", null);
-		} else {
-			model.addAttribute("roomList", roomList);
-		}
-		return "/admin/room";
+	public String room() {
+		return "/insertAdmin/room";
+	}
+
+	/**
+	 * 
+	 * @return 강의실 입력 기능
+	 */
+	@PostMapping("/room-proc")
+	public String insertRoom(RoomFormDto roomFormDto) {
+		adminService.insertRoom(roomFormDto);
+		return "redirect:/test";
 	}
 
 	/**
@@ -82,14 +100,18 @@ public class AdminController {
 	 * @return 강의 페이지
 	 */
 	@GetMapping("/subject")
-	public String subject(Model model) {
-		List<Subject> subjectList = adminService.findSubject();
-		if (subjectList.isEmpty()) {
-			model.addAttribute("subjectList", null);
-		} else {
-			model.addAttribute("subjectList", subjectList);
-		}
-		return "/admin/subject";
+	public String subject() {
+		return "/insertAdmin/subject";
+	}
+
+	/**
+	 * 
+	 * @return 강의 입력 기능
+	 */
+	@PostMapping("/subject-proc")
+	public String insertSubject(SubjectFormDto subjectFormDto) {
+		adminService.insertSubject(subjectFormDto);
+		return "redirect:/test";
 	}
 
 	/**
@@ -98,21 +120,24 @@ public class AdminController {
 	 */
 	@GetMapping("/collTuit")
 	public String collTuit(Model model) {
-		List<CollTuit> collTuitList = adminService.findCollTuit();
 		List<College> collegeList = adminService.findCollege();
 		if (collegeList.isEmpty()) {
 			model.addAttribute("collegeList", null);
 		} else {
 			model.addAttribute("collegeList", collegeList);
 		}
-		if (collTuitList.isEmpty()) {
-			model.addAttribute("collTuitList", null);
-		} else {
-			model.addAttribute("collTuitList", collTuitList);
-		}
-		return "/admin/collTuit";
+		return "/insertAdmin/collTuit";
 	}
 
+	/**
+	 * 
+	 * @return 단과대별 등록금 입력 기능
+	 */
+	@PostMapping("/collTuit-proc")
+	public String insertcollTuit(CollTuitFormDto collTuitFormDto) {
+		adminService.insertCollTuit(collTuitFormDto);
+		return "redirect:/test";
+	}
 
 	/**
 	 * 

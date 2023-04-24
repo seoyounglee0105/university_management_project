@@ -7,5 +7,7 @@
 		insert into room_tb (id, college_id)
 		values(#{id}, #{collegeId})
 	</insert>
-
+	<select id="findAll" resultType="com.green.university.repository.model.Room">
+		select * from room_tb
+	</select>
 </mapper>

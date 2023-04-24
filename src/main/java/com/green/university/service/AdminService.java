@@ -17,8 +17,12 @@ import com.green.university.repository.interfaces.DepartmentRepository;
 import com.green.university.repository.interfaces.NoticeRepository;
 import com.green.university.repository.interfaces.RoomRepository;
 import com.green.university.repository.interfaces.SubjectRepository;
+import com.green.university.repository.model.CollTuit;
 import com.green.university.repository.model.College;
+import com.green.university.repository.model.Department;
 import com.green.university.repository.model.Notice;
+import com.green.university.repository.model.Room;
+import com.green.university.repository.model.Subject;
 
 /**
  * 
@@ -68,6 +72,14 @@ public class AdminService {
 			System.out.println("학과 입력 서비스 오류");
 		}
 	}
+	
+	/**
+	 * 학과 조회 서비스
+	 */
+	public List<Department> findDepartment() {
+		List<Department> departmentList = departmentRepository.findAll();
+		return departmentList;
+	}
 
 	/**
 	 * 단과대별 등록금 입력 서비스
@@ -77,6 +89,14 @@ public class AdminService {
 		if (resultRowCount != 1) {
 			System.out.println("단과대 등록금 입력 서비스 오류");
 		}
+	}
+	
+	/**
+	 * 단과대 등록금 조회 서비스
+	 */
+	public List<CollTuit> findCollTuit() {
+		List<CollTuit> collTuitList = collTuitRepository.findAll();
+		return collTuitList;
 	}
 
 	/**
@@ -88,6 +108,14 @@ public class AdminService {
 			System.out.println("강의실 입력 서비스 오류");
 		}
 	}
+	
+	/**
+	 * 강의실 조회 서비스
+	 */
+	public List<Room> findRoom() {
+		List<Room> roomList = roomRepository.findAll();
+		return roomList;
+	}
 
 	/**
 	 * 강의 입력 서비스
@@ -97,6 +125,14 @@ public class AdminService {
 		if (resultRowCount != 1) {
 			System.out.println("강의 입력 서비스 오류");
 		}
+	}
+	
+	/**
+	 * 강의 조회 서비스
+	 */
+	public List<Subject> findSubject() {
+		List<Subject> subjectList = subjectRepository.findAll();
+		return subjectList;
 	}
 
 	/**

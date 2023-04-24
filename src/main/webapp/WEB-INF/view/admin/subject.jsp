@@ -15,13 +15,13 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/InsertAdmin/college" class="selected--menu">단과대학</a></td>
+					<td><a href="/InsertAdmin/college">단과대학</a></td>
 				</tr>
 				<tr>
 					<td><a href="/InsertAdmin/department">학과</a></td>
 				</tr>
 				<tr>
-					<td><a href="/InsertAdmin/subject">강의</a></td>
+					<td><a href="/InsertAdmin/subject" class="selected--menu">강의</a></td>
 				</tr>
 				<tr>
 					<td><a href="/InsertAdmin/room" >강의실</a></td>
@@ -38,19 +38,45 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>단과대학</h1>
+		<h1>강의</h1>
 		<div class="split--div"></div>
-		<!-- 여기에 내용 넣기 -->
-		<form action="/admin/college-proc" method="post">
-			<h2>단과대학 이름을 입력해주세요</h2>
-			이름 <input type="text" name="name" value="인문대학"> <input type="submit" value="입력">
-		</form>
+		<table>
+			<tr>
+				<td> ID </td>
+				<td> 강의명 </td>
+				<td> 교수 </td>
+				<td> 강의실 </td>
+				<td> 학과ID </td>
+				<td> 구분 </td>
+				<td> 연도 </td>
+				<td> 학기 </td>
+				<td> 시간 </td>
+				<td> 이수학점 </td>
+				<td> 정원 </td>
+				<td> 신청인원 </td>
+			</tr>
+			<c:forEach var="subject" items="${subjectList}">
+				<tr>
+					<td>${subject.id}</td>
+					<td>${subject.name}</td>
+					<td>${subject.professorId}</td>
+					<td>${subject.roomId}</td>
+					<td>${subject.deptId}</td>
+					<td>${subject.type}</td>
+					<td>${subject.subYear}</td>
+					<td>${subject.semester}</td>
+					<td>${subject.grades}</td>
+					<td>${subject.capacity}</td>
+					<td>${subject.numOfStudent}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</main>
 </div>
+
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
 </div>
 
 </body>
 </html>
-
-

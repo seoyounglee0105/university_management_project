@@ -9,26 +9,26 @@
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>수업</h2>
+			<h2>입력</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/admin/college" >단과대학</a></td>
+					<td><a href="/InsertAdmin/college">단과대학</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/department" class="selected--menu">학과</a></td>
+					<td><a href="/InsertAdmin/department"  class="selected--menu">학과</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/subject">강의</a></td>
+					<td><a href="/InsertAdmin/subject">강의</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/room" >강의실</a></td>
+					<td><a href="/InsertAdmin/room" >강의실</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/collTuit">단대별 등록금</a></td>
+					<td><a href="/InsertAdmin/collTuit">단대별 등록금</a></td>
 				</tr>
 				<tr>
 					<td><a href="/admin/notice">공지사항</a></td>

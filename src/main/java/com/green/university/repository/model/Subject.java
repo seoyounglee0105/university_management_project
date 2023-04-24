@@ -11,7 +11,7 @@ public class Subject {
 	private Integer deptId;
 	private String type;
 	private Integer subYear;
-	private Integer semeter;
+	private Integer semester;
 	private String time;
 	private Integer grades;
 	private Integer capacity;
