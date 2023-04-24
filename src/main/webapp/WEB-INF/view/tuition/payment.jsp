@@ -58,7 +58,10 @@
 					<td><a href="/break/appList">휴학 내역 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/test">테스트 (고지서 생성)</a></td>
+					<td><a href="/break/appListStaff">휴학 신청 처리(staff)</a></td>
+				</tr>
+				<tr>
+					<td><a href="/tuition/test">고지서 생성(staff)</a></td>
 				</tr>
 			</table>
 				</div>

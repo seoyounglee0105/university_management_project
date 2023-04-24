@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +39,7 @@ public class BreakAppController {
 	 * @return 휴복학 신청 페이지
 	 */
 	@GetMapping("/application")
-	public String stuStatApplication() {
+	public String breakApplication() {
 		
 		return "break/application";
 	}
@@ -48,7 +49,7 @@ public class BreakAppController {
 	 * @return 휴복학 신청 내역 페이지
 	 */
 	@PostMapping("/application")
-	public String stuStatApplicationProc(BreakAppFormDto breakAppFormDto) {
+	public String breakApplicationProc(BreakAppFormDto breakAppFormDto) {
 		
 		// 선택한 종료 연도-학기가 시작 연도-학기보다 이전이라면 신청 불가능
 		// ex) 시작 연도-학기 : 2023-2 / 종료 연도-학기 2023-1
@@ -66,24 +67,38 @@ public class BreakAppController {
 	}
 	
 	/**
-	 * @return 휴복학 신청 내역 페이지
+	 * @return 휴복학 신청 내역 페이지 (학생용)
 	 */
 	@GetMapping("/appList")
-	public String stuStatList(Model model) {
+	public String breakAppListByStudentId(Model model) {
 		
 		// principal로 고치기
 		List<BreakApp> breakAppList = breakAppService.readByStudentId(2018000001);
 		
 		model.addAttribute("breakAppList", breakAppList);
 		
-		return "break/appList";
+		return "break/appListStudent";
+	}
+	
+	/**
+	 * @return 처리되지 않은 휴복학 신청 내역 페이지 (교직원용)
+	 */
+	@GetMapping("/appListStaff")
+	public String breakAppListByState(Model model) {
+		
+		List<BreakApp> breakAppList = breakAppService.readByStatus("처리중");
+		
+		model.addAttribute("breakAppList", breakAppList);
+		
+		return "break/appListStaff";
 	}
 	
 	/**
 	 * @return 휴복학 신청서 확인
+	 * 학생 / 교직원에 따라 옆에 카테고리랑 밑에 버튼 바뀌어야 함
 	 */
 	@GetMapping("/detail/{id}")
-	public String stuStatDetail(@PathVariable Integer id, Model model) {
+	public String breakDetail(@PathVariable Integer id, Model model) {
 		
 		BreakApp breakApp = breakAppService.readById(id);
 		
@@ -91,5 +106,28 @@ public class BreakAppController {
 		
 		return "break/appDetail";
 	}
+	
+	/**
+	 * 휴학 신청 취소 (학생)
+	 */
+	@GetMapping("/delete/{id}")
+	public String deleteBreakApp(@PathVariable Integer id) {
+		
+		breakAppService.deleteById(id);
+		
+		return "redirect:/break/appList";
+	}
+	
+	/**
+	 * 
+	 */
+	@GetMapping("/update/{id}")
+	public String updateBreakApp(@PathVariable Integer id) {
+		
+		// 현재 로그인된 아이디가 교직원인지 확인
+		
+		return "redirect:/break/appListStaff";
+	}
+	
 	
 }

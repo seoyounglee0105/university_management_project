@@ -39,10 +39,13 @@
 					<td><a href="/break/application">휴학 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/break/appList" class="selected--menu">휴학 내역 조회</a></td>
+					<td><a href="/break/appList">휴학 내역 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/test">테스트 (고지서 생성)</a></td>
+					<td><a href="/break/appListStaff">휴학 신청 처리(staff)</a></td>
+				</tr>
+				<tr>
+					<td><a href="/tuition/test">고지서 생성(staff)</a></td>
 				</tr>
 			</table>
 				</div>
@@ -50,7 +53,7 @@
 			
 			<!-- 메인 div -->
 			<main>
-				<h1>휴학 내역 조회</h1>
+				<h1>휴학 신청 처리</h1>
 				<div class="split--div"></div>
 				
 				<div class="d-flex flex-column align-items-center" style="width: 100%">
@@ -61,11 +64,11 @@
 								<thead>
 									<tr>
 										<th>신청일자</th>
+										<th>신청자 학번</th>
 										<th>구분</th>
 										<th>시작학기</th>
 										<th>종료학기</th>
 										<th>신청서 확인</th>
-										<th>상태</th>
 									</tr>
 								</thead>
 			
@@ -73,24 +76,11 @@
 									<c:forEach var="breakApp" items="${breakAppList}">
 										<tr>
 											<td>${breakApp.appDate}</td>
+											<td>${breakApp.studentId}</td>
 											<td>${breakApp.type}휴학</td>
 											<td>${breakApp.fromYear}년도 ${breakApp.fromSemester}학기</td>
 											<td>${breakApp.toYear}년도 ${breakApp.toSemester}학기</td>
 											<td><a href="/break/detail/${breakApp.id}">Click</a></td>
-											<td>
-												<c:choose>
-													<c:when test="${breakApp.status.equals(\"처리중\")}">
-														<span style="color: #767676; font-weight: 600">처리중</span>
-													</c:when>
-													<c:when test="${breakApp.status.equals(\"승인\")}">
-														<span style="color: blue; font-weight: 600">승인</span>
-													</c:when>
-													<c:otherwise>
-														<span style="color: red; font-weight: 600">반려</span>
-													</c:otherwise>
-												</c:choose>
-												
-											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
