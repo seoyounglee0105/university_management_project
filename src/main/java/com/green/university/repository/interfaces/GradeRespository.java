@@ -17,6 +17,6 @@ import com.green.university.repository.model.StuSub;
 @Mapper
 public interface GradeRespository {
 	// 성적 조회
-	public List<GradeDto> findByStudentId(Integer studentId);
+	public List<GradeDto> findByStudentId(@Param("studentId") Integer studentId,@Param("semester") Integer semester);	
 	
 }

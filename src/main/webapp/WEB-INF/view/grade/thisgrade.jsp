@@ -53,7 +53,6 @@
 							<th>과목명</th>
 							<th>강의구분</th>
 							<th>학점</th>
-							<th>평점</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -65,7 +64,6 @@
 								<td>${grade.name}</td>
 								<td>${grade.type}</td>
 								<td>${grade.grade}</td>
-								<td>${grade.gradeValue}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

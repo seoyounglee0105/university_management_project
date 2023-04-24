@@ -20,7 +20,7 @@ public class GradeService {
 	
 	@Transactional
 	public List<GradeDto> readStuSubList(Integer studentId){
-		List<GradeDto> gradeEntityList = gradeRespository.findByStudentId(studentId);
+		List<GradeDto> gradeEntityList = gradeRespository.findByStudentId(studentId,CURRENT_SEMESTER);
 		return gradeEntityList;
 	}
 }
