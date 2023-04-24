@@ -28,8 +28,21 @@ VALUES
 ('c202',1);
 INSERT INTO professor_tb(name, birth_date, gender, address, tel, email, dept_id)
 VALUES
-	('홍길동', '1999-01-01', 'M', '서울특별시 북한산', '010-1234-5678', 'a@test.com', '101'),
-	('장길산', '1990-01-01', 'M', '제주도 한라산', '010-9999-9999', 'a@test.com', '101');
+	('홍길동', '1999-01-01', 'M', '서울특별시 북한산', '010-1234-5678', 'b@test.com', '101'),
+	('장길산', '1990-01-01', 'M', '제주도 한라산', '010-9999-9999', 'c@test.com', '101');
+	
+INSERT INTO staff_tb(name, birth_date, gender, address, tel, email)
+VALUES
+	('신사임당', '1988-01-01', 'F', '경기도 도산서원', '010-1233-5673', 'd@test.com'),
+	('장영실', '1989-01-01', 'M', '서울특별시 왕십리', '010-9999-9939', 'e@test.com');
+
+INSERT INTO user_tb VALUES
+	(2018000001, '2018000001', 'student'),
+	(2018000002, '2018000002', 'student'),
+	(230001, '230001', 'staff'),
+	(230002, '230002', 'staff'),
+	(23000001, '23000001', 'professor'),
+	(23000002, '23000002', 'professor');
     
 INSERT INTO grade_tb(grade,grade_value)
 VALUES

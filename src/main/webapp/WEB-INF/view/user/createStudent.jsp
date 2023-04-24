@@ -24,7 +24,7 @@
 					<td><a href="/user/staff">직원 ID 생성</a></td>
 				</tr>
 				<tr>
-					<td><a href="#" class="selected--menu">개인 정보 수정</a></td>
+					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
 				</tr>
 				<tr>
 					<td><a href="#">패스워드 변경</a></td>

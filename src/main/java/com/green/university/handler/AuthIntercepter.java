@@ -19,9 +19,9 @@ public class AuthIntercepter implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		if (principal == null) {
-			throw new UnAuthorizedException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
+		
+		if (session.getAttribute(Define.PRINCIPAL) == null) {
+			throw new UnAuthorizedException("접근 권한이 없습니다. 로그인이 필요합니다.", HttpStatus.UNAUTHORIZED);
 			// return false;
 		}
 		return true;

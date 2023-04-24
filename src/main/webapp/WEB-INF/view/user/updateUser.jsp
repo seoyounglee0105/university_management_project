@@ -24,7 +24,7 @@
 					<td><a href="/user/staff">직원 ID 생성</a></td>
 				</tr>
 				<tr>
-					<td><a href="#" class="selected--menu">개인 정보 수정</a></td>
+					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
 				</tr>
 				<tr>
 					<td><a href="#">패스워드 변경</a></td>
@@ -37,15 +37,15 @@
 	<main>
 		<h1>개인 정보 수정</h1>
 		<div class="split--div"></div>
-		<form action="/user/update" method="post">
+		<form action="/update" method="post">
 			<div>
-				<label for="address">주소</label><input type="text" name="address" id="address">
+				<label for="address">주소</label><input type="text" name="address" id="address" value="${userInfo.address}">
 			</div>
 			<div>
-				<label for="tel">전화번호</label><input type="text" name="tel" id="tel">
+				<label for="tel">전화번호</label><input type="text" name="tel" id="tel" value="${userInfo.tel}">
 			</div>
 			<div>
-				<label for="email">이메일</label><input type="text" name="email" id="email">
+				<label for="email">이메일</label><input type="text" name="email" id="email" value="${userInfo.email}">
 			</div>
 			<div>
 				<button type="submit">입력</button>
