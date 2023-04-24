@@ -32,8 +32,8 @@ CREATE TABLE student_tb (
     address VARCHAR(100) NOT NULL,
     tel VARCHAR(13) NOT NULL,
     dept_id INT NOT NULL COMMENT '학과',
-    grade INT NOT NULL COMMENT '학년',
-    semester INT NOT NULL COMMENT '학기',
+    grade INT NOT NULL DEFAULT 1 COMMENT '학년',
+    semester INT NOT NULL DEFAULT 1 COMMENT '학기',
     entrance_date DATE NOT NULL,
     graduation_date DATE,
     FOREIGN KEY(dept_id) REFERENCES department_tb (id)
@@ -45,6 +45,10 @@ ALTER TABLE student_tb AUTO_INCREMENT = 2023000001;
 CREATE TABLE staff_tb (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
+    birth_date DATE NOT NULL,
+    gender CHAR(1) NOT NULL COMMENT '남자: M, 여자: F',
+    address VARCHAR(100) NOT NULL,
+    tel VARCHAR(13) NOT NULL,
     hire_date DATE DEFAULT (current_date)
 );
 
@@ -54,6 +58,10 @@ ALTER TABLE staff_tb AUTO_INCREMENT = 230001;
 CREATE TABLE professor_tb (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
+    birth_date DATE NOT NULL,
+    gender CHAR(1) NOT NULL COMMENT '남자: M, 여자: F',
+    address VARCHAR(100) NOT NULL,
+    tel VARCHAR(13) NOT NULL,
     dept_id INT NOT NULL,
     hire_date DATE DEFAULT (current_date),
     FOREIGN KEY (dept_id) REFERENCES department_tb (id)
@@ -179,3 +187,16 @@ CREATE TABLE notice_file_tb (
     FOREIGN KEY (notice_id) REFERENCES notice_tb (id)
 );
 
+-- 휴학 신청 내역
+CREATE TABLE break_app_tb (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT NOT NULL,
+    from_year INT NOT NULL,
+    from_semester INT NOT NULL,
+    to_year INT NOT NULL,
+    to_semester INT NOT NULL,
+    type VARCHAR(10) NOT NULL COMMENT '일반, 임신·출산·육아, 질병, 창업, 군입대',
+    app_date DATE DEFAULT (current_date) NOT NULL COMMENT '신청 일자',
+    status VARCHAR(3) NOT NULL DEFAULT '처리중' COMMENT '처리중, 승인, 거부',
+    FOREIGN KEY (student_id) REFERENCES student_tb (id)
+);

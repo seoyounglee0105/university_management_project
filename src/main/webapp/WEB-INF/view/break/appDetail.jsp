@@ -1,3 +1,4 @@
+<%@page import="com.green.university.utils.DateUtil"%>
 <%@page import="com.green.university.utils.Define"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -54,10 +55,10 @@
 					<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuStat/application">휴·복학 신청</a></td>
+					<td><a href="/break/application">휴학 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuStat/list" class="selected--menu">휴·복학 내역 조회</a></td>
+					<td><a href="/break/appList" class="selected--menu">휴학 내역 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/tuition/test">테스트 (고지서 생성)</a></td>
@@ -68,7 +69,7 @@
 			
 			<!-- 메인 div -->
 			<main>
-				<h1>휴·복학 신청</h1>
+				<h1>휴학 내역 조회</h1>
 				<div class="split--div"></div>
 				
 				<div class="d-flex flex-column align-items-center" style="width: 100%">
@@ -101,22 +102,22 @@
 								<th>기 간</th>
 								<td colspan="3">
 									<!-- 신청 내역의 fromYear, fromSemester로 변경 예정 -->
-									fromYear년도 fromSemester학기부터
+									${breakApp.fromYear}년도 ${breakApp.fromSemester}학기부터
 									&nbsp;
-									toYear년도 toSemester학기까지
+									${breakApp.toYear}년도 ${breakApp.toSemester}학기까지
 								</td>
 							</tr>
 							<tr>
 								<th>휴 학 구 분</th>
 								<td colspan="3">
-									type휴학
+									${breakApp.type}휴학
 								</td>
 							</tr>
 							<tr>
 								<td colspan="4">
 									<p>위와 같이 휴학하고자 하오니 허가하여 주시기 바랍니다.</p>									
 									<br>
-									<p>yyyy년 mm월 dd일</p>
+									<p>${breakApp.appDateFormat()}</p>
 								</td>
 							</tr>
 						</table>

@@ -38,7 +38,7 @@
 					<li><a href="/tuition/list">서영</a>
 					<li><a href="/user/student">지현</a>
 					<li><a href="/admin/college">성희</a>
-					<li><a href="#">용림</a>
+					<li><a href="/grade/thisgrade">용림</a>
 					<li><a href="#">메뉴5</a>
 				</ul>
 			</nav>

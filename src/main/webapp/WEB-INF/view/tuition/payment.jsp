@@ -52,10 +52,10 @@
 					<td><a href="/tuition/payment" class="selected--menu">등록금 납부 고지서</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuStat/application">휴·복학 신청</a></td>
+					<td><a href="/break/application">휴학 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuStat/list">휴·복학 내역 조회</a></td>
+					<td><a href="/break/appList">휴학 내역 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/tuition/test">테스트 (고지서 생성)</a></td>

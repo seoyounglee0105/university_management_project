@@ -53,10 +53,10 @@
 					<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuStat/application" class="selected--menu">휴·복학 신청</a></td>
+					<td><a href="/break/application" class="selected--menu">휴학 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuStat/list">휴·복학 내역 조회</a></td>
+					<td><a href="/break/appList">휴학 내역 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/tuition/test">테스트 (고지서 생성)</a></td>
@@ -67,11 +67,11 @@
 			
 			<!-- 메인 div -->
 			<main>
-				<h1>휴·복학 신청</h1>
+				<h1>휴학 신청</h1>
 				<div class="split--div"></div>
 				
 				<div class="d-flex flex-column align-items-center" style="width: 100%">
-					<form action="/stuStat/application" method="post" class="d-flex flex-column align-items-center">
+					<form action="/break/application" method="post" class="d-flex flex-column align-items-center">
 						<div class="document--layout">
 							<h3>휴학 신청서</h3>
 							<table border="1">
@@ -102,12 +102,12 @@
 									<td colspan="3">
 										<%=Define.CURRENT_YEAR %>년도 <%=Define.CURRENT_SEMESTER %>학기부터
 										&nbsp;
-										<select name="periodYear">
-											<option value="" selected><%=Define.CURRENT_YEAR %>
-											<option value=""><%=Define.CURRENT_YEAR + 1 %>
-											<option value=""><%=Define.CURRENT_YEAR + 2 %>
+										<select name="toYear">
+											<option value="<%=Define.CURRENT_YEAR %>" selected><%=Define.CURRENT_YEAR %>
+											<option value="<%=Define.CURRENT_YEAR %>"><%=Define.CURRENT_YEAR + 1 %>
+											<option value="<%=Define.CURRENT_YEAR %>"><%=Define.CURRENT_YEAR + 2 %>
 										</select>년도
-										<select name="periodSemester">
+										<select name="toSemester">
 											<option value="1">1
 											<option value="2" selected>2
 										</select>학기까지
