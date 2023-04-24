@@ -107,19 +107,17 @@ public class UserController {
 	}
 	
 	/*
-	 * 로그인 처리
-	 * @param signInFormDto
+	 * 로그인 post 처리
+	 * @param loginDto
 	 * @return 메인 페이지 이동(수정 예정)
-	 * Get 방식 처리는 브라우저 히스토리에 남겨지기 때문에
-	 * 예외적으로 로그인은 POST 방식으로 처리한다.
 	 */
-	@PostMapping("/sign-in")
+	@PostMapping("/login")
 	public String signInProc(LoginDto loginDto) {
 		
 		User principal = userService.login(loginDto);
 		session.setAttribute(Define.PRINCIPAL, principal);
 		
-		return "redirect:/account/list";
+		return "redirect:/test";
 	}
 
 }

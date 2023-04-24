@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>로그인</h1>
-	<form action="/user/staff" method="post">
+	<form action="/user/login" method="post">
 		<div>
 			<label for="userId">아이디</label><input type="text" name="userId" id="userId">
 		</div>
