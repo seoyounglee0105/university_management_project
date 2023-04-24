@@ -1,5 +1,7 @@
 package com.green.university.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.green.university.dto.CreateProfessorDto;
 import com.green.university.dto.CreateStaffDto;
 import com.green.university.dto.CreateStudentDto;
+import com.green.university.dto.LoginDto;
+import com.green.university.repository.model.User;
 import com.green.university.service.UserService;
+import com.green.university.utils.Define;
 
 /**
  * 유저 페이지
@@ -21,6 +26,8 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private HttpSession session;
 	
 	/**
 	 * @return staff 입력 페이지
@@ -89,5 +96,30 @@ public class UserController {
 		return "redirect:/user/student";
 	}
 	
+	/**
+	 * 로그인 폼, 메인페이지
+	 * @return login.jsp
+	 */
+	@GetMapping("/")
+	public String login() {
+
+		return "user/login";
+	}
+	
+	/*
+	 * 로그인 처리
+	 * @param signInFormDto
+	 * @return 메인 페이지 이동(수정 예정)
+	 * Get 방식 처리는 브라우저 히스토리에 남겨지기 때문에
+	 * 예외적으로 로그인은 POST 방식으로 처리한다.
+	 */
+	@PostMapping("/sign-in")
+	public String signInProc(LoginDto loginDto) {
+		
+		User principal = userService.login(loginDto);
+		session.setAttribute(Define.PRINCIPAL, principal);
+		
+		return "redirect:/account/list";
+	}
 
 }

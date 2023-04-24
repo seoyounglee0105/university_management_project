@@ -1,6 +1,7 @@
 package com.green.university.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.green.university.dto.CreateProfessorDto;
 import com.green.university.dto.CreateStaffDto;
 import com.green.university.dto.CreateStudentDto;
+import com.green.university.dto.LoginDto;
 import com.green.university.repository.interfaces.ProfessorRepository;
 import com.green.university.repository.interfaces.StaffRepository;
 import com.green.university.repository.interfaces.StudentRepository;
+import com.green.university.repository.interfaces.UserRepository;
 import com.green.university.repository.model.User;
 
 /**
@@ -26,6 +29,8 @@ public class UserService {
 	private ProfessorRepository professorRepository;
 	@Autowired
 	private StudentRepository studentRepository;
+	@Autowired
+	private UserRepository userRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
@@ -109,6 +114,21 @@ public class UserService {
 			//던지기
 		}
 		
+	}
+	
+	@Transactional
+	public User login(LoginDto loginDto) {
+		User userEntity = userRepository.selectById(loginDto.getUserId());
+		
+		if(userEntity == null) {
+			// 던지기 아이디 찾을 수 없습니다.
+		}
+		
+		if(!passwordEncoder.matches(loginDto.getPassword(), userEntity.getPassword())) {
+			// 던지기 비밀번호가 틀렸습니다.
+		}
+		
+		return userEntity;
 	}
 
 	
