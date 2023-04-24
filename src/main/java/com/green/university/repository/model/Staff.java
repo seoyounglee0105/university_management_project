@@ -9,6 +9,10 @@ public class Staff {
 
 	private Integer id;
 	private String name;
+	private Date birthDate;
+	private String gender;
+	private String address;
+	private String tel;
 	private Date hireDate;
 	
 }

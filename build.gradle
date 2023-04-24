@@ -24,6 +24,7 @@ dependencies {
 	implementation 'javax.servlet:jstl' 
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'  
 	runtimeOnly 'com.h2database:h2'
+	implementation 'org.springframework.security:spring-security-crypto'
 	
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
