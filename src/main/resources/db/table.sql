@@ -176,3 +176,6 @@ CREATE TABLE notice_file_tb (
     uuid_filename VARCHAR(255) COMMENT '랜덤 문자열 포함 파일명' NOT NULL,
     FOREIGN KEY (notice_id) REFERENCES notice_tb (id)
 );
+
+-- 휴학 신청 내역
+CREATE TABLE 

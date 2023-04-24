@@ -51,7 +51,7 @@ public class TuitionController {
 		// 담긴 값이 없다면 null
 		model.addAttribute("tuitionList", tuitionList);
 		
-		return "tuition/list";	
+		return "tuition/tuiList";	
 	}
 	
 	/**
@@ -95,7 +95,6 @@ public class TuitionController {
 		
 		return "redirect:/tuition/payment";
 	}
-
 	
 	/**
 	 * 등록금 납부 고지서 생성 테스트용
