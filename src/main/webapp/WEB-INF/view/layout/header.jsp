@@ -35,10 +35,10 @@
 				<!-- userRole에 따라 메뉴 다르게 표시 -->
 				<ul>
 					<li><a href="#">홈</a>
-					<li><a href="#">메뉴1</a>
-					<li><a href="#">메뉴2</a>
-					<li><a href="#">메뉴3</a>
-					<li><a href="#">메뉴4</a>
+					<li><a href="/tuition/list">서영</a>
+					<li><a href="/user/student">지현</a>
+					<li><a href="/admin/college">성희</a>
+					<li><a href="#">용림</a>
 					<li><a href="#">메뉴5</a>
 				</ul>
 			</nav>

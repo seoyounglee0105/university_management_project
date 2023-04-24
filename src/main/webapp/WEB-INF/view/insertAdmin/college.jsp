@@ -1,44 +1,53 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <!-- 세부 메뉴 + 메인 -->
-<div class="d-flex"
-	style="justify-content: center; align-items: flex-start; min-width: 100em;">
+<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<!-- 세부 메뉴 div-->
-	<div
-		style="background-color: #FFF7CD; width: 250px; height: 900px; min-width: 250px">
+	<div class="sub--menu">
+		<div class="sub--menu--top">
+			<h2>MY</h2>
+		</div>
 		<!-- 메뉴 -->
-		<ul class="">
-			<li class="nav-item"><a class="nav-link" href="/admin/college">단과대학</a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="/admin/department">학과</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/room">강의실</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/subject">강의</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/collTuit">단과대
-					등록금</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/notice">공지사항</a></li>
-			<li class="nav-item"><a class="nav-link disabled" href="#">My
-					Info</a></li>
-		</ul>
-		<div></div>
-
+		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
+		<div class="sub--menu--mid">
+			<table class="sub--menu--table" border="1">
+				<tr>
+					<td><a href="#">내 정보 조회</a></td>
+				</tr>
+				<tr>
+					<td><a href="#">비밀번호 변경</a></td>
+				</tr>
+				<tr>
+					<td><a href="#">등록금 내역 조회</a></td>
+				</tr>
+				<tr>
+					<td><a href="#" class="selected--menu">등록금 납부 고지서</a></td>
+				</tr>
+				<tr>
+					<td><a href="#">세부 메뉴 5</a></td>
+				</tr>
+			</table>
+		</div>
 	</div>
 
 	<!-- 메인 div -->
-	<div style="background-color: #D7F3FE; width: 1200px; height: 900px; min-width: 1200px">
+	<main>
+		<h1>현재 메뉴 이름</h1>
+		<div class="split--div"></div>
+		<!-- 여기에 내용 넣기 -->
 		<form action="/admin/college-proc" method="post">
 			<h2>단과대학 이름을 입력해주세요</h2>
-			이름 <input type="text" name="name" value="인문대학"> 
-				<input type="submit" value="입력">
+			이름 <input type="text" name="name" value="인문대학"> <input type="submit" value="입력">
 		</form>
-	</div>
+</div>
+<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+
 </div>
 
-<footer>
-	<!-- 필요 시 -->
-</footer>
+</body>
+</html>
 
 
