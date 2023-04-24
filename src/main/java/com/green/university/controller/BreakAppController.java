@@ -119,7 +119,7 @@ public class BreakAppController {
 	}
 	
 	/**
-	 * 
+	 * 휴학 신청 처리 (교직원
 	 */
 	@GetMapping("/update/{id}")
 	public String updateBreakApp(@PathVariable Integer id) {
