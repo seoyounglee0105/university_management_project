@@ -116,15 +116,15 @@
 								<tr>
 									<th>휴 학 구 분</th>
 									<td colspan="3">
-										<input type="radio" name="type" value="일반" checked> 일반휴학
+										<input type="radio" name="type" value="일반" id="일반" checked> <label for="일반">일반휴학</label>
 										&nbsp;
-										<input type="radio" name="type" value="임신·출산·육아"> 임신·출산·육아휴학
+										<input type="radio" name="type" value="임신·출산·육아" id="임신"> <label for="임신">임신·출산·육아휴학</label>
 										&nbsp;
-										<input type="radio" name="type" value="질병"> 질병휴학
+										<input type="radio" name="type" value="질병" id="질병"> <label for="질병">질병휴학</label>
 										&nbsp;
-										<input type="radio" name="type" value="창업"> 창업휴학
+										<input type="radio" name="type" value="창업" id="창업"> <label for="창업">창업휴학</label>
 										&nbsp;
-										<input type="radio" name="type" value="군입대"> 군입대휴학
+										<input type="radio" name="type" value="군입대" id="군입대"> <label for="군입대">군입대휴학</label>
 									</td>
 								</tr>
 								<tr>

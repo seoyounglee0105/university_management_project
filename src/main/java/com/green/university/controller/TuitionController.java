@@ -95,7 +95,6 @@ public class TuitionController {
 		
 		return "redirect:/tuition/payment";
 	}
-
 	
 	/**
 	 * 등록금 납부 고지서 생성 테스트용

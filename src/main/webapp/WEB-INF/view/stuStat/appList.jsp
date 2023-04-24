@@ -80,7 +80,7 @@
 									</tr>
 								</tbody>
 							</table>
-<%-- 						</c:when>
+<%-- 					</c:when>
 			
  						<c:otherwise>
 							<p>휴·복학 신청 내역이 없습니다.</p>

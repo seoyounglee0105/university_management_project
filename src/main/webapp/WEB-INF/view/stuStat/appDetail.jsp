@@ -116,11 +116,16 @@
 								<td colspan="4">
 									<p>위와 같이 휴학하고자 하오니 허가하여 주시기 바랍니다.</p>									
 									<br>
-									<p>신청일자</p>
+									<p>yyyy년 mm월 dd일</p>
 								</td>
 							</tr>
 						</table>
 					</div>
+					<!-- todo : '처리중'이고 학생으로 로그인되어 있으면 취소할 수 있게 취소 버튼 -->
+					<!-- todo : '처리중'이고 교직원으로 로그인되어 있으면 해당 신청서에 대해 처리하는 승인/거부 버튼  -->
+					<form action="" method="post" class="d-flex flex-column align-items-center">
+						<button type="submit" class="btn btn-dark" onclick="return confirm('신청을 취소하시겠습니까?')">취소하기</button>
+					</form>
 				</div>
 			</main>
 		</div>
