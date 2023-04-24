@@ -3,23 +3,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
-.tuition--table th {
+.list--table th {
 	padding: 3px 12px;
 	width: 150px;
 }
 
-.tuition--table td {
+.list--table td {
 	padding: 1px 5px;
 }
 
-.tuition--table thead tr th, .tuition--table tbody tr td:nth-of-type(1),
-	.tuition--table tbody tr td:nth-of-type(2), .tuition--table tbody tr td:nth-of-type(3)
+.list--table thead tr th, 
+.list--table tbody tr td:nth-of-type(1),
+.list--table tbody tr td:nth-of-type(2), 
+.list--table tbody tr td:nth-of-type(3)
 	{
 	text-align: center;
 }
 
-.tuition--table tbody tr td:nth-of-type(4), .tuition--table tbody tr td:nth-of-type(5),
-	.tuition--table tbody tr td:nth-of-type(6) {
+.list--table tbody tr td:nth-of-type(4), 
+.list--table tbody tr td:nth-of-type(5),
+.list--table tbody tr td:nth-of-type(6) {
 	text-align: right;
 }
 </style>
@@ -34,17 +37,11 @@
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>MY</h2>
+			<h2>등록</h2>
 		</div>
 		<!-- 메뉴 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
-				<tr>
-					<td><a href="#">내 정보 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="#">비밀번호 변경</a></td>
-				</tr>
 				<tr>
 					<td><a href="/tuition/list" class="selected--menu">등록금 내역 조회</a></td>
 				</tr>
@@ -52,7 +49,10 @@
 					<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">휴·복학 신청</a></td>
+					<td><a href="/stuStat/application">휴·복학 신청</a></td>
+				</tr>
+				<tr>
+					<td><a href="/stuStat/list">휴·복학 내역 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/tuition/test">테스트 (고지서 생성)</a></td>
@@ -69,7 +69,7 @@
 			<c:choose>
 				<c:when test="${tuitionList != null}">
 	
-					<table border="1" class="tuition--table">
+					<table border="1" class="list--table">
 						<thead>
 							<tr>
 								<th>연도</th>
@@ -108,9 +108,6 @@
 									<td>${tuition.paymentFormat()}</td>
 								</tr>
 							</c:forEach>
-	
-	
-	
 						</tbody>
 					</table>
 				</c:when>

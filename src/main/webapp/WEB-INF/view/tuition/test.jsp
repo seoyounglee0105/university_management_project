@@ -9,18 +9,12 @@
 			<!-- 세부 메뉴 div-->
 			<div class="sub--menu">
 				<div class="sub--menu--top">
-					<h2>MY</h2>
+					<h2>등록</h2>
 				</div>
 				<!-- 메뉴 -->
 				<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 				<div class="sub--menu--mid">
 					<table class="sub--menu--table" border="1">
-						<tr>
-							<td><a href="#">내 정보 조회</a></td>
-						</tr>
-						<tr>
-							<td><a href="#"> 비밀번호 변경</a></td>
-						</tr>
 						<tr>
 							<td><a href="/tuition/list">등록금 내역 조회</a></td>
 						</tr>
@@ -28,10 +22,13 @@
 							<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
 						</tr>
 						<tr>
-							<td><a href="#">휴·복학 신청</a></td>
+							<td><a href="/stuStat/application">휴·복학 신청</a></td>
 						</tr>
 						<tr>
-							<td><a href="/tuition/test">테스트 (고지서 생성)</a></td>
+							<td><a href="/stuStat/list">휴·복학 내역 조회</a></td>
+						</tr>
+						<tr>
+							<td><a href="/tuition/test" class="selected--menu">테스트 (고지서 생성)</a></td>
 						</tr>
 					</table>
 				</div>

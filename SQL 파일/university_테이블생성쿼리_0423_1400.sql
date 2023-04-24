@@ -183,6 +183,19 @@ CREATE TABLE notice_file_tb (
     FOREIGN KEY (notice_id) REFERENCES notice_tb (id)
 );
 
+-- 휴학 신청 내역
+CREATE TABLE break_app_tb (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT NOT NULL,
+    from_year INT NOT NULL,
+    from_semester INT NOT NULL,
+    to_year INT NOT NULL,
+    to_semester INT NOT NULL,
+    type VARCHAR(10) NOT NULL,
+    app_date DATE DEFAULT (current_date()) NOT NULL,
+    status VARCHAR(3) DEFAULT '처리중'
+);
+
 
 
 -- 스태프 생성 예시

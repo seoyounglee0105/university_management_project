@@ -1,6 +1,5 @@
 package com.green.university.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.Tuition;
-import com.green.university.repository.model.User;
 import com.green.university.service.TuitionService;
 import com.green.university.utils.Define;
 
@@ -51,7 +49,7 @@ public class TuitionController {
 		// 담긴 값이 없다면 null
 		model.addAttribute("tuitionList", tuitionList);
 		
-		return "tuition/list";	
+		return "tuition/tuiList";	
 	}
 	
 	/**
@@ -95,7 +93,6 @@ public class TuitionController {
 		
 		return "redirect:/tuition/payment";
 	}
-
 	
 	/**
 	 * 등록금 납부 고지서 생성 테스트용
