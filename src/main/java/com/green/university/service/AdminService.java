@@ -63,9 +63,6 @@ public class AdminService {
 	 * 학과 입력 서비스
 	 */
 	public void insertDepartment(DepartmentFormDto departmentFormDto) {
-		System.out.println(departmentFormDto);
-		int collegeId = collegeRepository.findByName(departmentFormDto.getCollegeName());
-		departmentFormDto.setCollegeId(collegeId);
 		int resultRowCount = departmentRepository.insert(departmentFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("학과 입력 서비스 오류");

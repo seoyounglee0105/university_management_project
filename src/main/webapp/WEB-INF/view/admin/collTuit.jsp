@@ -15,7 +15,7 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/admin/college" class="selected--menu">단과대학</a></td>
+					<td><a href="/admin/college">단과대학</a></td>
 				</tr>
 				<tr>
 					<td><a href="/admin/department">학과</a></td>
@@ -27,7 +27,7 @@
 					<td><a href="/admin/room" >강의실</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/collTuit">단대별 등록금</a></td>
+					<td><a href="/admin/collTuit" class="selected--menu">단대별 등록금</a></td>
 				</tr>
 				<tr>
 					<td><a href="/admin/notice">공지사항</a></td>
@@ -38,17 +38,19 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>단과대학</h1>
+		<h1>단대별 등록금</h1>
 		<div class="split--div"></div>
 		<table>
 			<tr>
 				<td> ID </td>
-				<td> 이름 </td>
+				<td> 단과대 </td>
+				<td> 금액 </td>
 			</tr>
 			<tr>
-				<c:forEach var="college" items="${collegeList}">
-					<td>${college.id}</td>
-					<td>${college.name}</td>
+				<c:forEach var="collTuit" items="${collTuitList}">
+					<td>${collTuit.id}</td>
+					<td>${collTuit.name}</td>
+					<td>${collTuit.amount}</td>
 				</c:forEach>
 			</tr>
 		</table>

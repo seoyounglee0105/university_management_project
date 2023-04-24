@@ -8,26 +8,29 @@
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>MY</h2>
+			<h2>수업</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="#">내 정보 조회</a></td>
+					<td><a href="/admin/college" class="selected--menu">단과대학</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">비밀번호 변경</a></td>
+					<td><a href="/admin/department">학과</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">등록금 내역 조회</a></td>
+					<td><a href="/admin/subject">강의</a></td>
 				</tr>
 				<tr>
-					<td><a href="#" class="selected--menu">등록금 납부 고지서</a></td>
+					<td><a href="/admin/room" >강의실</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">세부 메뉴 5</a></td>
+					<td><a href="/admin/collTuit">단대별 등록금</a></td>
+				</tr>
+				<tr>
+					<td><a href="/admin/notice">공지사항</a></td>
 				</tr>
 			</table>
 		</div>
@@ -35,7 +38,7 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>현재 메뉴 이름</h1>
+		<h1>단과대학</h1>
 		<div class="split--div"></div>
 		<!-- 여기에 내용 넣기 -->
 		<form action="/admin/college-proc" method="post">

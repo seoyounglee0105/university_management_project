@@ -7,5 +7,7 @@
 		insert into coll_tuit_tb (college_id, amount)
 		values(#{collegeId}, #{amount})
 	</insert>
-
+	<select id="findAll" resultType="com.green.university.repository.model.CollTuit">
+		select * from collTuit_tb
+	</select>
 </mapper>

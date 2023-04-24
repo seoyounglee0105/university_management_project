@@ -5,42 +5,56 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <!-- 세부 메뉴 + 메인 -->
-<div class="d-flex"
-	style="justify-content: center; align-items: flex-start; min-width: 100em;">
+<div class="d-flex justify-content-center align-items-start"
+	style="min-width: 100em;">
 	<!-- 세부 메뉴 div-->
-	<div
-		style="background-color: #FFF7CD; width: 250px; height: 900px; min-width: 250px">
+	<div class="sub--menu">
+		<div class="sub--menu--top">
+			<h2>수업</h2>
+		</div>
 		<!-- 메뉴 -->
-		<ul class="">
-			<li class="nav-item"><a class="nav-link" href="/admin/college">단과대학</a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="/admin/department">학과</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/room">강의실</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/subject">강의</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/collTuit">단과대
-					등록금</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/notice">공지사항</a></li>
-			<li class="nav-item"><a class="nav-link disabled" href="#">My
-					Info</a></li>
-		</ul>
-		<div></div>
-
+		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
+		<div class="sub--menu--mid">
+			<table class="sub--menu--table" border="1">
+				<tr>
+					<td><a href="/admin/college">단과대학</a></td>
+				</tr>
+				<tr>
+					<td><a href="/admin/department">학과</a></td>
+				</tr>
+				<tr>
+					<td><a href="/admin/subject">강의</a></td>
+				</tr>
+				<tr>
+					<td><a href="/admin/room">강의실</a></td>
+				</tr>
+				<tr>
+					<td><a href="/admin/collTuit" class="selected--menu">단대별
+							등록금</a></td>
+				</tr>
+				<tr>
+					<td><a href="/admin/notice">공지사항</a></td>
+				</tr>
+			</table>
+		</div>
 	</div>
-
-	<!-- 메인 div -->
-	<div style="background-color: #D7F3FE; width: 1200px; height: 900px; min-width: 1200px">
+	<main>
+		<h1>단대별 등록금</h1>
+		<div class="split--div"></div>
 		<form action="/admin/collTuit-proc" method="post">
 			<h2>단과대학을 선택 후 등록금을 입력해주세요</h2>
-			단과대학 <select>
-				<option value="인문대학">인문대학</option>
-				<option value="의과대학">의과대학</option>
-				<option value="공과대학">공과대학</option>
-				<option value="예술대학">예술대학</option>
-			</select> 등록금 <input type="text"> <input type="submit" value="입력">
+			단과대학 
+				<select name="collegeId">
+					<c:forEach var="college" items="${collegeList}">
+						<option value="${college.id},${college.name}">${college.name}</option>
+					</c:forEach>
+				</select>
+			등록금 <input type="text" name="amount" value="2500000"> <input type="submit" value="입력">
 		</form>
-	</div>
+</div>
+<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+
 </div>
 
-<footer>
-	<!-- 필요 시 -->
-</footer>
+</body>
+</html>

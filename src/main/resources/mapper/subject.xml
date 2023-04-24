@@ -4,8 +4,8 @@
 <mapper
 	namespace="com.green.university.repository.interfaces.SubjectRepository">
 	<insert id="insert">
-		insert into subject_tb (name, professor_id, room_id, dept_id, type, sub_year, semester, time, grades, capacity, num_of_student)
-		values(#{name}, #{professorId}, #{roomId}, #{deptId}, #{type}, #{subYear}, #{semester}, #{time}, #{grades}, #{capacity}, #{numOfStudent})
+		insert into subject_tb (name, professor_id, room_id, dept_id, type, sub_year, semester, time, grades, capacity )
+		values(#{name}, #{professorId}, #{roomId}, #{deptId}, #{type}, #{subYear}, #{semester}, #{time}, #{grades}, #{capacity} )
 	</insert>
 
 </mapper>

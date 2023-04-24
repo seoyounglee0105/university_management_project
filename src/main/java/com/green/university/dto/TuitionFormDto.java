@@ -13,12 +13,10 @@ import lombok.Data;
  */
 @Data
 public class TuitionFormDto {
-	@NotNull
 	@NotEmpty
 	@Size(min = 10000000)
 	@Size(max = 99999999)
 	private String studentId;
-	@NotNull
 	@NotEmpty
 	@Size(max = 6)
 	private String semester;

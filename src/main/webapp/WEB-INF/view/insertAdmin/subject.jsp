@@ -5,37 +5,52 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <!-- 세부 메뉴 + 메인 -->
-<div class="d-flex"
-	style="justify-content: center; align-items: flex-start; min-width: 100em;">
+<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<!-- 세부 메뉴 div-->
-	<div
-		style="background-color: #FFF7CD; width: 250px; height: 900px; min-width: 250px">
+	<div class="sub--menu">
+		<div class="sub--menu--top">
+			<h2>수업</h2>
+		</div>
 		<!-- 메뉴 -->
-		<ul class="">
-			<li class="nav-item"><a class="nav-link" href="/admin/college">단과대학</a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="/admin/department">학과</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/room">강의실</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/subject">강의</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/collTuit">단과대
-					등록금</a></li>
-			<li class="nav-item"><a class="nav-link" href="/admin/notice">공지사항</a></li>
-			<li class="nav-item"><a class="nav-link disabled" href="#">My
-					Info</a></li>
-		</ul>
-		<div></div>
-
+		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
+		<div class="sub--menu--mid">
+			<table class="sub--menu--table" border="1">
+				<tr>
+					<td><a href="/admin/college" >단과대학</a></td>
+				</tr>
+				<tr>
+					<td><a href="/admin/department" >학과</a></td>
+				</tr>
+				<tr>
+					<td><a href="/admin/subject" class="selected--menu">강의</a></td>
+				</tr>
+				<tr>
+					<td><a href="/admin/room" >강의실</a></td>
+				</tr>
+				<tr>
+					<td><a href="/admin/collTuit">단대별 등록금</a></td>
+				</tr>
+				<tr>
+					<td><a href="/admin/notice">공지사항</a></td>
+				</tr>
+			</table>
+		</div>
 	</div>
-
-	<!-- 메인 div -->
-	<div style="background-color: #D7F3FE; width: 1200px; height: 900px; min-width: 1200px">
+		<main>
+		<h1>강의</h1>
+		<div class="split--div"></div>
 		<form action="/admin/subject-proc" method="post">
 		<h2>등록할 강의를 입력해주세요</h2>
-		강의명 <input type="text" name="name" value="스프링부트 뽀개기"><br>
+		<label for="name">강의명</label>
+		 <input type="text" id="name" name="name" value="스프링부트 뽀개기"><br>
 		교수ID <input type="text" name="professorId" value="20231512"><br>
 		강의실 <input type="text" name="roomId" value="C250"><br>
 		학과ID <input type="text" name="deptId" value="1234"><br>
-		구분 <input type="text" name="type" value="전공"><br>
+		구분 
+			<label for="major">전공</label>
+				<input type="radio" id="major" name="type" value="전공">
+			<label for="culture">교양</label>
+				 <input type="radio" id="culture" name="type" value="교양"><br>
 		연도 <input type="text" name="subYear" value="2023"><br>
 		학기 <input type="text" name="semester" value="1"><br>
 		시간 <input type="text" name="time" value="수요일 10-12"><br>
@@ -44,9 +59,10 @@
 		
 		<input type="submit" value="입력">
 	</form>
-	</div>
+</div>
+<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+
 </div>
 
-<footer>
-	<!-- 필요 시 -->
-</footer>
+</body>
+</html>

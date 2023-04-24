@@ -34,8 +34,14 @@ public class AdminController {
 	 * @return 단과대 페이지
 	 */
 	@GetMapping("/college")
-	public String college() {
-		return "/insertAdmin/college";
+	public String college(Model model) {
+		List<College> collegeList = adminService.findCollege();
+		if(collegeList.isEmpty()) {
+			model.addAttribute("collegeList", null);
+		} else {
+			model.addAttribute("collegeList", collegeList);
+		}
+		return "/admin/college";
 	}
 	
 
@@ -71,7 +77,6 @@ public class AdminController {
 	 */
 	@GetMapping("/department-proc")
 	public String insertDepartment(DepartmentFormDto departmentFormDto) {
-		
 		adminService.insertDepartment(departmentFormDto);
 		return "redirect:/test";
 	}
@@ -117,9 +122,16 @@ public class AdminController {
 	/**
 	 * 
 	 * @return 단과대별 등록금 페이지
+	 * 페이지 이동 시, 단과대학 조회 후 이동
 	 */
 	@GetMapping("/collTuit")
-	public String collTuit() {
+	public String collTuit(Model model) {
+		List<College> collegeList = adminService.findCollege();
+		if(collegeList.isEmpty()) {
+			model.addAttribute("collegeList", null);
+		} else {
+			model.addAttribute("collegeList", collegeList);
+		}
 		return "/insertAdmin/collTuit";
 	}
 
