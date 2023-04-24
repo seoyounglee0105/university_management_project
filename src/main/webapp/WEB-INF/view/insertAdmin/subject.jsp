@@ -29,16 +29,21 @@
 
 	<!-- 메인 div -->
 	<div style="background-color: #D7F3FE; width: 1200px; height: 900px; min-width: 1200px">
-			<form action="/admin/notice-proc" method="post">
-			<h2>공지사항 쓰기</h2>
-			제목 <input type="text" name="name" value="등록금 납부기한 연장안내">
-			내용
-			<input type="text" name="name" value="테스트용 글입니다">
-			<input type="submit" value="입력">
-			파일첨부
-		</form>
+		<form action="/admin/subject-proc" method="post">
+		<h2>등록할 강의를 입력해주세요</h2>
+		강의명 <input type="text" name="name" value="스프링부트 뽀개기"><br>
+		교수ID <input type="text" name="professorId" value="20231512"><br>
+		강의실 <input type="text" name="roomId" value="C250"><br>
+		학과ID <input type="text" name="deptId" value="1234"><br>
+		구분 <input type="text" name="type" value="전공"><br>
+		연도 <input type="text" name="subYear" value="2023"><br>
+		학기 <input type="text" name="semester" value="1"><br>
+		시간 <input type="text" name="time" value="수요일 10-12"><br>
+		학점 <input type="text" name="grades" value="3"><br>
+		정원 <input type="text" name="capacity" value="15"><br>
 		
 		<input type="submit" value="입력">
+	</form>
 	</div>
 </div>
 

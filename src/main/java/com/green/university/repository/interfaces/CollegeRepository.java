@@ -18,4 +18,5 @@ import lombok.AllArgsConstructor;
 public interface CollegeRepository {
 	public int insert(CollegeFormDto CollegeFormDto);
 	public List<College> findAll();
+	public int findByName(String name);
 }

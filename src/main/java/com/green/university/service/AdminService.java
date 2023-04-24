@@ -40,68 +40,74 @@ public class AdminService {
 	private SubjectRepository subjectRepository;
 	@Autowired
 	private NoticeRepository noticeRepository;
-	
-	
+
 	/**
-	 *  단과대 입력 서비스
+	 * 단과대 입력 서비스
 	 */
 	public void insertCollege(CollegeFormDto collegeFormDto) {
 		int resultRowCount = collegeRepository.insert(collegeFormDto);
-		if(resultRowCount != 1) {
+		if (resultRowCount != 1) {
 			System.out.println("단과대 입력 서비스 오류");
 		}
 	}
-	
+
 	/**
-	 *  학과 입력 서비스
+	 * 단과대 조회 서비스
+	 */
+	public List<College> findCollege() {
+		List<College> collegeList = collegeRepository.findAll();
+		return collegeList;
+	}
+
+	/**
+	 * 학과 입력 서비스
 	 */
 	public void insertDepartment(DepartmentFormDto departmentFormDto) {
-		List<College> collegeList = collegeRepository.findAll();
-		for (int i = 0; i < collegeList.size(); i++) {
-			System.out.println(collegeList);
-		}
+		System.out.println(departmentFormDto);
+		int collegeId = collegeRepository.findByName(departmentFormDto.getCollegeName());
+		departmentFormDto.setCollegeId(collegeId);
 		int resultRowCount = departmentRepository.insert(departmentFormDto);
-		if(resultRowCount != 1) {
+		if (resultRowCount != 1) {
 			System.out.println("학과 입력 서비스 오류");
 		}
 	}
-	
+
 	/**
-	 *  단과대별 등록금 입력 서비스
+	 * 단과대별 등록금 입력 서비스
 	 */
 	public void insertCollTuit(CollTuitFormDto collTuitFormDto) {
 		int resultRowCount = collTuitRepository.insert(collTuitFormDto);
-		if(resultRowCount != 1) {
+		if (resultRowCount != 1) {
 			System.out.println("단과대 등록금 입력 서비스 오류");
 		}
 	}
-	
+
 	/**
-	 *  강의실 입력 서비스
+	 * 강의실 입력 서비스
 	 */
 	public void insertRoom(RoomFormDto roomFormDto) {
 		int resultRowCount = roomRepository.insert(roomFormDto);
-		if(resultRowCount != 1) {
+		if (resultRowCount != 1) {
 			System.out.println("강의실 입력 서비스 오류");
 		}
 	}
-	
+
 	/**
-	 *  강의 입력 서비스
+	 * 강의 입력 서비스
 	 */
 	public void insertSubject(SubjectFormDto subjectFormDto) {
 		int resultRowCount = subjectRepository.insert(subjectFormDto);
-		if(resultRowCount != 1) {
+		if (resultRowCount != 1) {
 			System.out.println("강의 입력 서비스 오류");
 		}
 	}
-	
+
 	/**
-	 *  공지 입력 서비스
+	 * 공지 입력 서비스
 	 */
 	public void insertNotice(NoticeFormDto noticeFormDto) {
 		int resultRowCount = noticeRepository.insert(noticeFormDto);
-		if(resultRowCount != 1) {
+		if (resultRowCount != 1) {
 			System.out.println("공지 입력 서비스 오류");
 		}
 	}

@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <!-- 
     	박성희
-    	단과대학 page
+    	단과대학  page
      -->
 <!DOCTYPE html>
 <html>

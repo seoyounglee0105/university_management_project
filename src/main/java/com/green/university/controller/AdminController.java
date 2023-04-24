@@ -1,10 +1,14 @@
 package com.green.university.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.university.dto.CollTuitFormDto;
 import com.green.university.dto.CollegeFormDto;
@@ -12,6 +16,7 @@ import com.green.university.dto.DepartmentFormDto;
 import com.green.university.dto.NoticeFormDto;
 import com.green.university.dto.RoomFormDto;
 import com.green.university.dto.SubjectFormDto;
+import com.green.university.repository.model.College;
 import com.green.university.service.AdminService;
 
 /**
@@ -30,8 +35,9 @@ public class AdminController {
 	 */
 	@GetMapping("/college")
 	public String college() {
-		return "/admin/college";
+		return "/insertAdmin/college";
 	}
+	
 
 	/**
 	 * 
@@ -46,10 +52,17 @@ public class AdminController {
 	/**
 	 * 
 	 * @return 학과 페이지
+	 * 페이지 이동 시, 단과대학 조회 후 이동
 	 */
 	@GetMapping("/department")
-	public String department() {
-		return "/admin/department";
+	public String department(Model model) {
+		List<College> collegeList = adminService.findCollege();
+		if(collegeList.isEmpty()) {
+			model.addAttribute("collegeList", null);
+		} else {
+			model.addAttribute("collegeList", collegeList);
+		}
+		return "/insertAdmin/department";
 	}
 
 	/**
@@ -58,6 +71,7 @@ public class AdminController {
 	 */
 	@GetMapping("/department-proc")
 	public String insertDepartment(DepartmentFormDto departmentFormDto) {
+		
 		adminService.insertDepartment(departmentFormDto);
 		return "redirect:/test";
 	}
@@ -68,7 +82,7 @@ public class AdminController {
 	 */
 	@GetMapping("/room")
 	public String room() {
-		return "/admin/room";
+		return "/insertAdmin/room";
 	}
 
 	/**
@@ -87,7 +101,7 @@ public class AdminController {
 	 */
 	@GetMapping("/subject")
 	public String subject() {
-		return "/admin/subject";
+		return "/insertAdmin/subject";
 	}
 
 	/**
@@ -106,7 +120,7 @@ public class AdminController {
 	 */
 	@GetMapping("/collTuit")
 	public String collTuit() {
-		return "/admin/collTuit";
+		return "/insertAdmin/collTuit";
 	}
 
 	/**
@@ -125,7 +139,7 @@ public class AdminController {
 	 */
 	@GetMapping("/notice")
 	public String notice() {
-		return "/notice/notice";
+		return "/insertNotice/notice";
 	}
 
 	/**

@@ -14,7 +14,6 @@ import lombok.Data;
  *
  */
 @Data
-@AllArgsConstructor
 public class DepartmentFormDto {
 	@NotNull
 	@NotBlank

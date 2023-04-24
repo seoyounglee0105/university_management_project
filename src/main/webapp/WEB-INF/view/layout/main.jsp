@@ -28,8 +28,15 @@
 			<!-- 메인 div -->
 			<div style="background-color: #D7F3FE; width: 1200px; height: 900px; min-width: 1200px">
 				메인 자리
-				
-				
+				<ul class="">
+					<li class="nav-item"><a class="nav-link" href="/admin/college">단과대학</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/department">학과</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/room">강의실</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/subject">강의</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/collTuit">단과대 등록금</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/notice">공지사항</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#">My Info</a></li>
+				</ul>	
 			</div>
 		</div>
 		

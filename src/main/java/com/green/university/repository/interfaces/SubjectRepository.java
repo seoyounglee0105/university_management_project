@@ -11,5 +11,5 @@ import com.green.university.dto.SubjectFormDto;
 
 @Mapper
 public interface SubjectRepository {
-	public int insert(SubjectFormDto subjectFormDto);
+	public Integer insert(SubjectFormDto subjectFormDto);
 }
