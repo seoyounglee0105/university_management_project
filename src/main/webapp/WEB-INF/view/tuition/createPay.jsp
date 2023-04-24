@@ -31,7 +31,7 @@
 							<td><a href="/break/appListStaff">휴학 신청 처리(staff)</a></td>
 						</tr>
 						<tr>
-							<td><a href="/tuition/test">고지서 생성(staff)</a></td>
+							<td><a href="/tuition/create">고지서 생성(staff)</a></td>
 						</tr>
 					</table>
 				</div>
@@ -39,10 +39,18 @@
 			
 			<!-- 메인 div -->
 			<main>
-				<h1>현재 메뉴 이름</h1>
+				<h1>등록금 고지서 생성</h1>
 				<div class="split--div"></div>
 				
-				
+				<a href="#"><button type="button" class="btn btn-primary create--sch">장학금 유형 결정</button></a>
+				<p class="create--sch--p">등록금 고지서 결정에 합치는 게 나을듯</p>
+				<br><br>
+				<a href="/tuition/createTui"><button type="button" class="btn btn-primary create--tui">등록금 납부 고지서 생성</button></a>
+				<script>
+					$(".create--tui").on("click", function() {
+						alert("등록금 고지서 생성이 완료되었습니다.");
+					});
+				</script>
 			</main>
 		</div>
 		

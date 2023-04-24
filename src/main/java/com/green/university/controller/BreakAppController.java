@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.green.university.dto.BreakAppFormDto;
+import com.green.university.handler.exception.CustomPathException;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.BreakApp;
 import com.green.university.service.BreakAppService;
+import com.green.university.service.StuStatService;
 import com.green.university.utils.Define;
 
 /**
@@ -34,12 +37,20 @@ public class BreakAppController {
 	@Autowired
 	private BreakAppService breakAppService;
 	
+	@Autowired
+	private StuStatService stuStatService;
 	
 	/**
 	 * @return 휴복학 신청 페이지
 	 */
 	@GetMapping("/application")
 	public String breakApplication() {
+		
+		// principal로 바꾸기
+		// 학생이 재학 상태가 아니라면 신청 불가능
+		if (stuStatService.readCurrentStatus(2018000001).getStatus().equals("재학") == false) {
+			throw new CustomRestfullException("휴학 신청 대상이 아닙니다.", HttpStatus.BAD_REQUEST);
+		}
 		
 		return "break/application";
 	}
@@ -49,7 +60,7 @@ public class BreakAppController {
 	 * @return 휴복학 신청 내역 페이지
 	 */
 	@PostMapping("/application")
-	public String breakApplicationProc(BreakAppFormDto breakAppFormDto) {
+	public String breakApplicationProc(@Validated BreakAppFormDto breakAppFormDto) {
 		
 		// 선택한 종료 연도-학기가 시작 연도-학기보다 이전이라면 신청 불가능
 		// ex) 시작 연도-학기 : 2023-2 / 종료 연도-학기 2023-1
@@ -110,7 +121,7 @@ public class BreakAppController {
 	/**
 	 * 휴학 신청 취소 (학생)
 	 */
-	@GetMapping("/delete/{id}")
+	@PostMapping("/delete/{id}")
 	public String deleteBreakApp(@PathVariable Integer id) {
 		
 		breakAppService.deleteById(id);
@@ -119,12 +130,12 @@ public class BreakAppController {
 	}
 	
 	/**
-	 * 휴학 신청 처리 (교직원
+	 * 휴학 신청 처리 (교직원)
 	 */
-	@GetMapping("/update/{id}")
-	public String updateBreakApp(@PathVariable Integer id) {
+	@PostMapping("/update/{id}")
+	public String updateBreakApp(@PathVariable Integer id, String status) {		
 		
-		// 현재 로그인된 아이디가 교직원인지 확인
+		breakAppService.updateById(id, status);
 		
 		return "redirect:/break/appListStaff";
 	}

@@ -62,7 +62,7 @@
 					<td><a href="/break/appListStaff">휴학 신청 처리(staff)</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/test">고지서 생성(staff)</a></td>
+					<td><a href="/tuition/create">고지서 생성(staff)</a></td>
 				</tr>
 			</table>
 				</div>
@@ -107,8 +107,8 @@
 										&nbsp;
 										<select name="toYear">
 											<option value="<%=Define.CURRENT_YEAR %>" selected><%=Define.CURRENT_YEAR %>
-											<option value="<%=Define.CURRENT_YEAR %>"><%=Define.CURRENT_YEAR + 1 %>
-											<option value="<%=Define.CURRENT_YEAR %>"><%=Define.CURRENT_YEAR + 2 %>
+											<option value="<%=Define.CURRENT_YEAR + 1 %>"><%=Define.CURRENT_YEAR + 1 %>
+											<option value="<%=Define.CURRENT_YEAR + 2 %>"><%=Define.CURRENT_YEAR + 2 %>
 										</select>년도
 										<select name="toSemester">
 											<option value="1">1

@@ -63,7 +63,7 @@
 					<td><a href="/break/appListStaff">휴학 신청 처리(staff)</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/test">고지서 생성(staff)</a></td>
+					<td><a href="/tuition/create">고지서 생성(staff)</a></td>
 				</tr>
 			</table>
 		</div>
@@ -103,7 +103,7 @@
 					<tr>
 						<th>기 간</th>
 						<td colspan="3">
-							<!-- 신청 내역의 fromYear, fromSemester로 변경 예정 --> ${breakApp.fromYear}년도 ${breakApp.fromSemester}학기부터 &nbsp; ${breakApp.toYear}년도 ${breakApp.toSemester}학기까지
+							${breakApp.fromYear}년도 ${breakApp.fromSemester}학기부터 &nbsp; ${breakApp.toYear}년도 ${breakApp.toSemester}학기까지
 						</td>
 					</tr>
 					<tr>
@@ -125,12 +125,12 @@
 					<p> 학생이면 (나중에 수정)</p>
 						<a href="/break/delete/${breakApp.id}"><button type="submit" class="btn btn-dark" onclick="return confirm('신청을 취소하시겠습니까?')">취소하기</button></a>
 					<p> 교직원이면 </p>
-					<form action="" method="post" class="d-flex flex-column align-items-center">
+					<form action="/break/update/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
 						<input type="hidden" name="status" value="승인">
 						<button type="submit" class="btn btn-dark" onclick="return confirm('해당 신청을 승인하시겠습니까?')">승인하기</button>
 					</form>
 					&nbsp;
-					<form action="" method="post" class="d-flex flex-column align-items-center">
+					<form action="/break/update/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
 						<input type="hidden" name="status" value="반려">
 						<button type="submit" class="btn btn-dark" onclick="return confirm('해당 신청을 반려하시겠습니까?')">반려하기</button>
 					</form>					

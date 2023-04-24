@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.Tuition;
+import com.green.university.service.StuStatService;
 import com.green.university.service.TuitionService;
 import com.green.university.utils.Define;
 
@@ -34,6 +35,9 @@ public class TuitionController {
 	@Autowired
 	private TuitionService tuitionService;
 	
+	@Autowired
+	private StuStatService stuStatService;
+	
 	/**
 	 * @return 납부된 등록금 내역 조회 페이지
 	 */
@@ -46,7 +50,6 @@ public class TuitionController {
 		// principal.getId()를 매개변수로
 		List<Tuition> tuitionList = tuitionService.readTuitionListByStatus(2018000001, true);
 		
-		// 담긴 값이 없다면 null
 		model.addAttribute("tuitionList", tuitionList);
 		
 		return "tuition/tuiList";	
@@ -95,13 +98,29 @@ public class TuitionController {
 	}
 	
 	/**
-	 * 등록금 납부 고지서 생성 테스트용
+	 * 장학금 유형 설정 + 등록금 납부 고지서 생성 페이지
 	 */
-	@GetMapping("/test")
-	public String tuitionTest(Model model) {
-		 tuitionService.createTuition(2018000001);
+	@GetMapping("/create")
+	public String CreatePayment(Model model) {
 		
-		return "tuition/test";
+		return "tuition/createPay";
+	}
+	
+	/**
+	 * 등록금 납부 고지서 생성
+	 */
+	@GetMapping("/createTui")
+	public String CreateTuiProc(Model model) {
+		
+		List<Integer> studentIdList = stuStatService.readIdList();
+		
+		// 일괄 생성 (고지서 생성 대상인지는 서비스에서 확인)
+		for (Integer studentId : studentIdList) {
+			System.out.println(studentId);
+			tuitionService.createTuition(studentId);
+		}
+		
+		return "redirect:/tuition/create";
 	}
 	
 	

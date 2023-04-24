@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.ScholarshipRepository;
 import com.green.university.repository.interfaces.TuitionRepository;
+import com.green.university.repository.model.BreakApp;
 import com.green.university.repository.model.Scholarship;
+import com.green.university.repository.model.StuStat;
 import com.green.university.repository.model.Tuition;
 import com.green.university.utils.Define;
 
@@ -26,6 +28,12 @@ public class TuitionService {
 	
 	@Autowired
 	private ScholarshipRepository scholarshipRepository;
+
+	@Autowired
+	private StuStatService stuStatService;
+	
+	@Autowired
+	private BreakAppService breakAppService;
 	
 	/**
 	 * @param studentId (principal의 id와 동일)
@@ -72,12 +80,36 @@ public class TuitionService {
 	@Transactional
 	public void createTuition(Integer studentId) {
 		
-		// 해당 학생의 학적 상태가 '재학'이 아니라면 생성하지 않음
+		// 해당 학생의 학적 상태가 '졸업' 또는 '자퇴'라면 생성하지 않음
+		StuStat stuStatEntity = stuStatService.readCurrentStatus(studentId);
+		if (stuStatEntity.getStatus().equals("졸업") || stuStatEntity.getStatus().equals("자퇴")) {
+			return;
+		}
 		
+		// 해당 학생이 현재 학기 휴학을 승인받은 상태라면 생성하지 않음
+		List<BreakApp> breakAppList = breakAppService.readByStudentId(studentId); // 최근 순으로 정렬되어 있음
+		for (BreakApp b : breakAppList) {
+			// 휴학 신청이 승인된 상태일 때
+			if (b.getStatus().equals("승인")) {
+				// 휴학 종료 연도가 현재 연도보다 이후라면 생성하지 않음
+				if (b.getToYear() > Define.CURRENT_YEAR) {
+					return;
+				// 휴학 종료 연도가 현재 연도와 같을 경우
+				} else if (b.getToYear() == Define.CURRENT_YEAR) {
+					// 현재 학기 == 1 && 종료 학기 == 1이면 생성하지 않음
+					// 현재 학기 == 1 && 종료 학기 == 2이면 생성하지 않음
+					// 현재 학기 == 2 && 종료 학기 == 1이면 생성함
+					// 현재 학기 == 2 && 종료 학기 == 2이면 생성하지 않음
+					if (b.getToSemester() >= Define.CURRENT_SEMESTER) {
+						return;
+					}
+				}
+			}
+		}
 		
 		// 이미 해당 학기의 등록금 고지서가 존재한다면 생성하지 않음
 		if (readByStudentIdAndSemester(studentId, Define.CURRENT_YEAR, Define.CURRENT_SEMESTER) != null) {
-			throw new CustomRestfullException("이미 이번 학기의 등록금 고지서가 존재합니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+			return;
 		}
 		
 		// 등록금액
@@ -88,7 +120,7 @@ public class TuitionService {
 
 		// 학생의 해당 학기 장학금 유형이 정해져 있지 않으면 생성하지 않음
 		if (scholarshipEntity == null) {
-			throw new CustomRestfullException("해당 학생의 장학금 유형이 확정되지 않았습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+			return;
 		}
 		
 		// 장학금액
@@ -105,9 +137,6 @@ public class TuitionService {
 		
 		int resultRowCount = tuitionRepository.insert(tuition);
 		
-		if (resultRowCount != 1) {
-			throw new CustomRestfullException("등록금 고지서 생성 실패", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 	}
 	
 	@Transactional

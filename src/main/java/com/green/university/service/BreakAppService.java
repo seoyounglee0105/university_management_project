@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.green.university.dto.BreakAppFormDto;
+import com.green.university.handler.exception.CustomPathException;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.BreakAppRepository;
 import com.green.university.repository.model.BreakApp;
@@ -23,6 +24,9 @@ public class BreakAppService {
 	@Autowired
 	private BreakAppRepository breakAppRepository;
 	
+	@Autowired
+	private StuStatService stuStatService;
+	
 	/**
 	 * @param breakAppFormDto
 	 * 휴학 신청
@@ -30,12 +34,13 @@ public class BreakAppService {
 	@Transactional
 	public void createBreakApp(BreakAppFormDto breakAppFormDto) {
 		
-		// 학생이 재학 상태가 아니라면 신청 불가능
-		
-		
-		
-		// 이미 신청 내역이 있다면 신청 불가능
-		
+		// 이미 처리중인 휴학 신청 내역이 있다면 신청 불가능
+		List<BreakApp> breakAppEntityList = readByStudentId(breakAppFormDto.getStudentId());
+		for (BreakApp b : breakAppEntityList) {
+			if (b.getStatus().equals("처리중")) {
+				throw new CustomPathException("이미 처리중인 신청 내역이 존재합니다.", HttpStatus.BAD_REQUEST, "/break/appList");
+			}
+		}
 		
 		int resultRowCount = breakAppRepository.insert(breakAppFormDto);
 		
@@ -89,7 +94,12 @@ public class BreakAppService {
 		
 		// 신청서의 학번과 현재 로그인된 아이디가 일치하는지 확인
 		
+		
 		// 처리중 상태인지 확인
+		BreakApp breakAppEntity = readById(id);
+		if (breakAppEntity.getStatus().equals("처리중") == false) {
+			throw new CustomRestfullException("이미 처리가 완료되어, 신청이 취소되지 않았습니다.", HttpStatus.BAD_REQUEST);
+		}
 		
 		int resultRowCount = breakAppRepository.deleteById(id);
 		
@@ -103,6 +113,9 @@ public class BreakAppService {
 	 */
 	@Transactional
 	public void updateById(Integer id, String status) {
+		
+		// 승인 시 학적 상태를 휴학으로 변경하기
+		
 		
 		int resultRowCount = breakAppRepository.updateById(id, status);
 		

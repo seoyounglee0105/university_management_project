@@ -18,7 +18,7 @@ public interface BreakAppRepository {
 	// 휴학 신청하기
 	public int insert(BreakAppFormDto breakAppFormDto);
 	
-	// 자신의 휴학 신청 조회하기
+	// 학생의 휴학 신청 조회하기
 	public List<BreakApp> findByStudentId(Integer studentId);
 	
 	// 처리되지 않은 휴학 신청 조회하기 (교직원용)
@@ -27,7 +27,7 @@ public interface BreakAppRepository {
 	// 특정 휴학 신청서 조회하기
 	public BreakApp findById(Integer id);
 	
-	// 자신의 휴학 신청 취소하기 (학생용)
+	// 휴학 신청 취소하기 (학생용)
 	public int deleteById(Integer id);
 	
 	// 휴학 신청 처리하기 (교직원용)
