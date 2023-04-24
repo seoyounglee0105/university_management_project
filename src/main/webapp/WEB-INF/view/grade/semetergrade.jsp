@@ -31,10 +31,10 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/grade/list" class="selected--menu">금학기 성적조회</a></td>
+					<td><a href="/grade/thisgrade" >금학기 성적조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/grade/thisgrade">학기별 성적조회</a></td>
+					<td><a href="/grade/semetergrade" class="selected--menu">학기별 성적조회</a></td>
 				</tr>
 			</table>
 		</div>
@@ -66,7 +66,6 @@
 								<td>${grade.type}</td>
 								<td>${grade.grade}</td>
 								<td>${grade.gradeValue}</td>
-								<td></td>
 							</tr>
 						</c:forEach>
 					</tbody>

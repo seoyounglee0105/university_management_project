@@ -17,4 +17,18 @@ INNER JOIN student_tb AS stud
 on st.student_id = stud.id
 WHERE st.student_id = #{studentId};
 </select>
+
+<select id="findByStudent" resultType="com.green.university.dto.response.GradeDto">
+SELECT su.sub_year,su.semester,st.subject_id,su.name,pr.name,su.type,gr.grade,gr.grade_value
+FROM stu_sub_tb AS st
+INNER JOIN subject_tb AS su
+ON st.subject_id = su.id
+INNER JOIN professor_tb AS pr
+ON su.professor_id = pr.id
+INNER JOIN grade_tb AS gr
+ON st.grade = gr.grade
+INNER JOIN student_tb AS stud
+on st.student_id = stud.id
+WHERE st.student_id = #{studentId} AND su.semeter = {semeter};
+</select>
 </mapper>

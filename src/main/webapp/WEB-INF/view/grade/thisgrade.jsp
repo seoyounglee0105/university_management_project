@@ -31,10 +31,10 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/grade/list">금학기 성적조회</a></td>
+					<td><a href="/grade/thisgrade" class="selected--menu">금학기 성적조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/grade/thisgrade" class="selected--menu">학기별 성적조회</a></td>
+					<td><a href="/grade/semetergrade">학기별 성적조회</a></td>
 				</tr>
 			</table>
 		</div>

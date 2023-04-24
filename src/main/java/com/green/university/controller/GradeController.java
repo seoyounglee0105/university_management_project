@@ -32,7 +32,7 @@ public class GradeController {
 	 * 
 	 * @return 성적조회
 	 */
-	@GetMapping("/list")
+	@GetMapping("/thisgrade")
 	public String grade(Model model) {
 		
 		//User principal = (User)session.getAttribute(Define.PRINCIPAL);
@@ -40,16 +40,16 @@ public class GradeController {
 		//System.out.println(gradeDtoList);
 		model.addAttribute("gradeList",gradeList);
 		
-		return "grade/list";
+		return "grade/thisgrade";
 	}
 	
-	@GetMapping("/thisgrade")
+	@GetMapping("/semetergrade")
 	public String thisgrade(Model model) {
 		//User principal = (User)session.getAttribute(Define.PRINCIPAL);
 		List<GradeDto> gradeList = gradeService.readStuSubList(2018000002);
 		//System.out.println(gradeDtoList);
 		model.addAttribute("gradeList",gradeList);
 				
-		return "grade/thisgrade";
+		return "grade/semetergrade";
 	}
 }
