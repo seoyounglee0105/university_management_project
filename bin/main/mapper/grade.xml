@@ -4,7 +4,7 @@
 
 <mapper namespace="com.green.university.repository.interfaces.GradeRespository">
 
-<select id="findByStudentId" resultType="com.green.university.dto.response.GradeDto">
+<select id="findByStudentIdAndsemester" resultType="com.green.university.dto.response.GradeDto">
 SELECT su.sub_year,su.semester,st.subject_id,su.name,pr.name,su.type,gr.grade
 FROM stu_sub_tb AS st
 INNER JOIN subject_tb AS su
@@ -15,7 +15,7 @@ INNER JOIN grade_tb AS gr
 ON st.grade = gr.grade
 INNER JOIN student_tb AS stud
 on st.student_id = stud.id
-WHERE st.student_id = #{studentId} AND 	su.semester = #{semester};
+WHERE st.student_id = #{studentId} AND 	su.semester = #{semester} AND su.sub_year = #{subYear};
 </select>
 
 <select id="findBySemeter" resultType="com.green.university.dto.response.GradeDto">
@@ -47,9 +47,69 @@ WHERE st.student_id = #{studentId} AND su.sub_year = {subYear};
 </select>
 
 
+<select id="findBysemester" resultType="com.green.university.dto.response.GradeDto">
+SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type,gr.grade
+FROM stu_sub_tb AS st
+INNER JOIN subject_tb AS su
+ON st.subject_id = su.id
+INNER JOIN professor_tb AS pr
+ON su.professor_id = pr.id
+INNER JOIN grade_tb AS gr
+ON st.grade = gr.grade
+INNER JOIN student_tb AS stud
+on st.student_id = stud.id
+WHERE st.student_id = #{studentId} AND 	su.semester = #{semester};
+</select>
 
+<select id="findBytype" resultType="com.green.university.dto.response.GradeDto">
+SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade
+FROM stu_sub_tb AS st
+INNER JOIN subject_tb AS su
+ON st.subject_id = su.id
+INNER JOIN professor_tb AS pr
+ON su.professor_id = pr.id
+INNER JOIN grade_tb AS gr
+ON st.grade = gr.grade
+INNER JOIN student_tb AS stud
+on st.student_id = stud.id
+WHERE st.student_id = #{studentId} AND 	su.type = #{type};
+</select>
 
+<select id="findByyear" resultType="com.green.university.dto.response.GradeDto">
+select su.sub_year
+FROM stu_sub_tb AS st
+INNER JOIN subject_tb AS su
+ON st.subject_id = su.id
+WHERE st.student_id = #{studentId}
+group by su.sub_year
+ORDER BY su.sub_year DESC;
+</select>
 
+<select id="findByAll" resultType="com.green.university.dto.response.GradeDto">
+SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade
+FROM stu_sub_tb AS st
+INNER JOIN subject_tb AS su
+ON st.subject_id = su.id
+INNER JOIN professor_tb AS pr
+ON su.professor_id = pr.id
+INNER JOIN grade_tb AS gr
+ON st.grade = gr.grade
+INNER JOIN student_tb AS stud
+on st.student_id = stud.id
+WHERE st.student_id = #{studentId};
+</select>
 
-
+<select id="chioceByGrade" resultType="com.green.university.dto.response.GradeDto">
+SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade
+FROM stu_sub_tb AS st
+INNER JOIN subject_tb AS su
+ON st.subject_id = su.id
+INNER JOIN professor_tb AS pr
+ON su.professor_id = pr.id
+INNER JOIN grade_tb AS gr
+ON st.grade = gr.grade
+INNER JOIN student_tb AS stud
+on st.student_id = stud.id
+WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND gr.grade = #{grade} AND su.type = #{type};
+</select>
 </mapper>
