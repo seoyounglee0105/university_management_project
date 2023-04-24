@@ -16,7 +16,7 @@ spring:
     username: sa 
     password: 
   sql: 
-    init: # 초기 sql 파일 읽기 
+    init: # 초기 sql 파일 읽기 222222222222222222
       schema-locations: # 스키마 (테이블 생성 등)
       - classpath:db/table.sql 
       data-locations: # 샘플 데이터
