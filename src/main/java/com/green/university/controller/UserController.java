@@ -98,5 +98,7 @@ public class UserController {
 
 		return "redirect:/user/student";
 	}
+	
+	
 
 }
