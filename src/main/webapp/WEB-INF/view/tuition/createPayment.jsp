@@ -28,7 +28,10 @@
 							<td><a href="/break/appList">휴학 내역 조회</a></td>
 						</tr>
 						<tr>
-							<td><a href="/tuition/test" class="selected--menu">테스트 (고지서 생성)</a></td>
+							<td><a href="/break/appListStaff">휴학 신청 처리(staff)</a></td>
+						</tr>
+						<tr>
+							<td><a href="/tuition/create">고지서 생성(staff)</a></td>
 						</tr>
 					</table>
 				</div>
@@ -36,10 +39,13 @@
 			
 			<!-- 메인 div -->
 			<main>
-				<h1>현재 메뉴 이름</h1>
+				<h1>등록금 고지서 생성</h1>
 				<div class="split--div"></div>
-				
-				
+				<p>디자인 나중에 고칠거임</p>
+				<a href="/tuition/createTui"><button type="submit" class="btn btn-primary create--tui">등록금 납부 고지서 생성</button></a>
+				<c:if test="${insertCount != null}">
+					<% out.println("<script>alert('" + request.getAttribute("insertCount") + "개의 등록금 고지서가 생성되었습니다.'); history.back(); </script>"); %>
+				</c:if>
 			</main>
 		</div>
 		

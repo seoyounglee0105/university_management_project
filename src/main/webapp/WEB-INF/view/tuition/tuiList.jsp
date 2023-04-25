@@ -55,7 +55,10 @@
 					<td><a href="/break/appList">휴학 내역 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/test">테스트 (고지서 생성)</a></td>
+					<td><a href="/break/appListStaff">휴학 신청 처리(staff)</a></td>
+				</tr>
+				<tr>
+					<td><a href="/tuition/create">고지서 생성(staff)</a></td>
 				</tr>
 			</table>
 		</div>
@@ -67,7 +70,7 @@
 		<div class="split--div"></div>
 		<div class="d-flex flex-column align-items-center" style="width: 100%">
 			<c:choose>
-				<c:when test="${tuitionList != null}">
+				<c:when test="${tuitionLis.size() > 0}">
 	
 					<table border="1" class="list--table">
 						<thead>

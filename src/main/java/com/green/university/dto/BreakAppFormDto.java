@@ -1,4 +1,6 @@
 package com.green.university.dto;
+import javax.validation.constraints.NotNull;
+
 import lombok.Data;
 
 /**
@@ -12,8 +14,11 @@ public class BreakAppFormDto {
 	private Integer studentId;
 	private Integer fromYear;
 	private Integer fromSemester;
+	@NotNull
 	private Integer toYear;
+	@NotNull
 	private Integer toSemester;
+	@NotNull
 	private String type;
 	
 }

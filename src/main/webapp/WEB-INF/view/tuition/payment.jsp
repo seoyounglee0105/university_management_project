@@ -58,7 +58,10 @@
 					<td><a href="/break/appList">휴학 내역 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/test">테스트 (고지서 생성)</a></td>
+					<td><a href="/break/appListStaff">휴학 신청 처리(staff)</a></td>
+				</tr>
+				<tr>
+					<td><a href="/tuition/create">고지서 생성(staff)</a></td>
 				</tr>
 			</table>
 				</div>
@@ -82,7 +85,7 @@
 								<td>산업공학과</td> <!-- 여기 고쳐야 함 !  -->
 							</tr>
 							<tr>
-								<th style="">학 번</th>
+								<th>학 번</th>
 								<td>${tuition.studentId}</td>
 								<th>성 명</th>
 								<td>홍길동</td> <!-- 여기 고쳐야 함 !  -->

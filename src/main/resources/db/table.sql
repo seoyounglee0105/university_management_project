@@ -143,7 +143,7 @@ CREATE TABLE stu_sch_tb (
     sch_year INT NOT NULL COMMENT '지원 연도',
     semester INT NOT NULL COMMENT '지원 학기',
     sch_type INT NOT NULL COMMENT '장학금 유형',
-    PRIMARY KEY (student_id, sch_year, sch_type),
+    PRIMARY KEY (student_id, sch_year, semester),
     FOREIGN KEY (sch_type) REFERENCES scholarship_tb (type)
 );
 
@@ -164,7 +164,7 @@ CREATE TABLE tuition_tb (
 -- 학적 상태
 CREATE TABLE stu_stat_tb (
 	student_id INT NOT NULL,
-	status VARCHAR(3) NOT NULL DEFAULT '재학',
+	status VARCHAR(3) NOT NULL DEFAULT '재학', -- 재학, 휴학, 졸업, 자퇴
     from_date DATE,
     to_date DATE, -- 현재 속한 상태인 경우 '9999-01-01'
     FOREIGN KEY (student_id) REFERENCES student_tb (id)

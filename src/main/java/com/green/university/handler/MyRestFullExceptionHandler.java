@@ -3,6 +3,7 @@ package com.green.university.handler;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.green.university.handler.exception.CustomPathException;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.handler.exception.UnAuthorizedException;
 
@@ -32,6 +33,20 @@ public class MyRestFullExceptionHandler {
 		sb.append("<script>");
 		sb.append("alert('"+ e.getMessage() +"');");
 		sb.append("location.href='/user/sign-in';");
+		sb.append("</script>");
+		return sb.toString();
+	}
+	
+	/**
+	 * @author 서영
+	 * 경로를 지정해서 던지는 예외 클래스 활용
+	 */
+	@ExceptionHandler(CustomPathException.class)
+	public String unAuthorizedException(CustomPathException e) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<script>");
+		sb.append("alert('"+ e.getMessage() +"');");
+		sb.append("location.href='" + e.getPath() + "';");
 		sb.append("</script>");
 		return sb.toString();
 	}

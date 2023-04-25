@@ -24,4 +24,8 @@
 		INSERT INTO user_tb 
 		VALUES (#{id}, #{password}, #{userRole})
 	</insert>
+	
+	<select id="selectIdList" resultType="integer">
+		SELECT id FROM student_tb;
+	</select>
 </mapper>
