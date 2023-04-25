@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.green.university.dto.CollTuitFormDto;
 import com.green.university.dto.CollegeFormDto;
@@ -18,7 +19,6 @@ import com.green.university.repository.interfaces.NoticeRepository;
 import com.green.university.repository.interfaces.RoomRepository;
 import com.green.university.repository.interfaces.SubjectRepository;
 import com.green.university.repository.model.College;
-import com.green.university.repository.model.Notice;
 
 /**
  * 
@@ -44,6 +44,7 @@ public class AdminService {
 	/**
 	 * 단과대 입력 서비스
 	 */
+	@Transactional
 	public void insertCollege(CollegeFormDto collegeFormDto) {
 		int resultRowCount = collegeRepository.insert(collegeFormDto);
 		if (resultRowCount != 1) {
@@ -54,6 +55,7 @@ public class AdminService {
 	/**
 	 * 단과대 조회 서비스
 	 */
+	@Transactional
 	public List<College> findCollege() {
 		List<College> collegeList = collegeRepository.findAll();
 		return collegeList;
@@ -62,6 +64,7 @@ public class AdminService {
 	/**
 	 * 학과 입력 서비스
 	 */
+	@Transactional
 	public void insertDepartment(DepartmentFormDto departmentFormDto) {
 		System.out.println(departmentFormDto);
 		int collegeId = collegeRepository.findByName(departmentFormDto.getCollegeName());
@@ -75,6 +78,7 @@ public class AdminService {
 	/**
 	 * 단과대별 등록금 입력 서비스
 	 */
+	@Transactional
 	public void insertCollTuit(CollTuitFormDto collTuitFormDto) {
 		int resultRowCount = collTuitRepository.insert(collTuitFormDto);
 		if (resultRowCount != 1) {
@@ -85,6 +89,7 @@ public class AdminService {
 	/**
 	 * 강의실 입력 서비스
 	 */
+	@Transactional
 	public void insertRoom(RoomFormDto roomFormDto) {
 		int resultRowCount = roomRepository.insert(roomFormDto);
 		if (resultRowCount != 1) {
@@ -95,6 +100,7 @@ public class AdminService {
 	/**
 	 * 강의 입력 서비스
 	 */
+	@Transactional
 	public void insertSubject(SubjectFormDto subjectFormDto) {
 		int resultRowCount = subjectRepository.insert(subjectFormDto);
 		if (resultRowCount != 1) {
@@ -105,6 +111,7 @@ public class AdminService {
 	/**
 	 * 공지 입력 서비스
 	 */
+	@Transactional
 	public void insertNotice(NoticeFormDto noticeFormDto) {
 		int resultRowCount = noticeRepository.insert(noticeFormDto);
 		if (resultRowCount != 1) {

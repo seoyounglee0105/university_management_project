@@ -4,25 +4,23 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <style>
-
-form{
+form {
 	margin-left: 30px;
-	
 }
 
-.input--table td {
+.input--table th, td {
 	padding: 5px 10px;
 }
 
-button{
+/* button {
 	padding: 8px 20px;
 	border: none;
 	border-radius: 5px;
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 	margin-top: 20px;
-} 
+} */
 
-.button-td{
+.button-td {
 	text-align: center;
 }
 </style>
@@ -53,41 +51,41 @@ button{
 				<tr>
 					<td><a href="#">패스워드 변경</a></td>
 				</tr>
-				<tr>
-					<td><a href="/professor/subject">교수 자기 강의 조회</a></td>
-				</tr>
 			</table>
 		</div>
 	</div>
 
 	<!-- 메인 div -->
 	<main>
-		<h1>비밀번호 변경</h1>
+		<h1>과목 조회</h1>
 		<div class="split--div"></div>
-		<form action="/password" method="post">
-			
-			<table class="input--table">
-				
-				<tr>
-					<td><label for="beforePassword">현재 비밀번호 입력</label></td>
-					<td><input type="password" name="beforePassword" id="beforePassword"></td>
-				</tr>
-				<tr><td></td></tr>
-				<tr>
-					<td><label for="afterPassword">변경할 비밀번호</label></td>
-					<td><input type="password" name="afterPassword" id="afterPassword"></td>
-				</tr>
-				<tr>
-					<td><label for="passwordCheck">비밀번호 확인</label></td>
-					<td><input type="password" name="passwordCheck" id="passwordCheck"></td>
-				</tr>
-				<tr>
-					<td colspan="2" class="button-td">
-						<button type="submit">입력</button>
-					</td>
-				</tr>
-			</table>
+		<form action="/professor/subject" method="post">
+			<select name="period">
+				<c:forEach items="${semesterList}" var="yearSemester">
+					<option value="${yearSemester.subYear}year${yearSemester.semester}">${yearSemester.subYear}년도${yearSemester.semester}학기</option>
+				</c:forEach>
+			</select>
+			<button type="submit">조회</button>
 		</form>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>과목id</th>
+					<th>과목명</th>
+					<th>강의시간</th>
+				</tr>
+			</thead>
+			<c:forEach items="${subjectList}" var="subject">
+			<tbody>
+				<tr>
+					<td>${subject.id }</td>
+					<td>${subject.name }</td>
+					<td>${subject.time }</td>
+				</tr>
+			</tbody>
+			</c:forEach>
+		</table>
+
 	</main>
 </div>
 

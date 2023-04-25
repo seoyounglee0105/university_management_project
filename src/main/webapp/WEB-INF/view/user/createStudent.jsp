@@ -52,6 +52,9 @@ button{
 				<tr>
 					<td><a href="/password">비밀번호 변경</a></td>
 				</tr>
+				<tr>
+					<td><a href="/professor/subject">교수 자기 강의 조회</a></td>
+				</tr>
 			</table>
 		</div>
 	</div>
