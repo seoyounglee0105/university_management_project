@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.green.university.dto.ChangePasswordDto;
 import com.green.university.dto.CreateProfessorDto;
 import com.green.university.dto.CreateStaffDto;
 import com.green.university.dto.CreateStudentDto;
@@ -216,6 +217,14 @@ public class UserService {
 			throw new CustomRestfullException(Define.UPDATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
+	}
+	
+	@Transactional
+	public void updatePassword(ChangePasswordDto changePasswordDto) {
+		int resultCountRaw = userRepository.updatePassword(changePasswordDto);
+		if(resultCountRaw != 1) {
+			throw new CustomRestfullException(Define.UPDATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	

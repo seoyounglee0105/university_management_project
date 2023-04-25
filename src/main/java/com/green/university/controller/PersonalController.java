@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.green.university.dto.ChangePasswordDto;
 import com.green.university.dto.LoginDto;
 import com.green.university.dto.UserUpdateDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
@@ -99,17 +100,13 @@ public class PersonalController {
 	@PostMapping("/update")
 	public String updateUserProc(@Valid UserInfoForUpdateDto userInfoForUpdateDto, @RequestParam String password) {
 		
-		passwordEncoder = new BCryptPasswordEncoder();
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		System.out.println(principal.getPassword());
-		System.out.println(password);
 		// 패스워드 인코더 적용 후
 //		if(!passwordEncoder.matches(password, principal.getPassword())) {
 //			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 //		}
 		// 패스워드 인코더 적용 전
 		if(!password.equals(principal.getPassword())) {
-			System.out.println("비밀번호 틀림");
 			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
 		
@@ -132,69 +129,54 @@ public class PersonalController {
 	}
 
 	/**
-	 * 개인정보 수정 페이지
+	 * 비밀번호 수정 페이지
 	 * 
 	 * @param model
-	 * @return updateUser.jsp
+	 * @return updatePasword.jsp
 	 */
 	@GetMapping("/password")
-	public String updatePassword(Model model) {
+	public String updatePassword() {
 
-		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		UserInfoForUpdateDto userInfoForUpdateDto = null;
-		if ("staff".equals(principal.getUserRole())) {
-			userInfoForUpdateDto = userService.readStaffInfo(principal.getId());
-		}
-		if ("student".equals(principal.getUserRole())) {
-			userInfoForUpdateDto = userService.readStudentInfo(principal.getId());
-		}
-		if ("professor".equals(principal.getUserRole())) {
-			userInfoForUpdateDto = userService.readProfessorInfo(principal.getId());
-		}
-		model.addAttribute("userInfo", userInfoForUpdateDto);
 
 		return "/user/updatePassword";
 	}
 
 	/**
-	 * 개인정보 수정 페이지
+	 * 비밀번호 수정 post 페이지
 	 * 
 	 * @param userInfoForUpdateDto, password
 	 * @return updateUser.jsp
 	 */
 	@PostMapping("/password")
-	public String updatePasswordProc(@Valid UserInfoForUpdateDto userInfoForUpdateDto, @RequestParam String password) {
+	public String updatePasswordProc(@Valid ChangePasswordDto changePasswordDto) {
 
-		passwordEncoder = new BCryptPasswordEncoder();
 		User principal = (User) session.getAttribute(Define.PRINCIPAL);
-		System.out.println(principal.getPassword());
-		System.out.println(password);
 		// 패스워드 인코더 적용 후
 //		if(!passwordEncoder.matches(password, principal.getPassword())) {
 //			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 //		}
 		// 패스워드 인코더 적용 전
-		if (!password.equals(principal.getPassword())) {
-			System.out.println("비밀번호 틀림");
+		if (!changePasswordDto.getBeforePassword().equals(principal.getPassword())) {
 			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
+		if(!changePasswordDto.getAfterPassword().equals(changePasswordDto.getPasswordCheck())) {
+			throw new UnAuthorizedException("변경할 비밀번호와 비밀번호 확인은 같아야합니다.", HttpStatus.BAD_REQUEST);
+		}
+		changePasswordDto.setId(principal.getId());
+		userService.updatePassword(changePasswordDto);
 
-		UserUpdateDto updateDto = new UserUpdateDto();
-		updateDto.setUserId(principal.getId());
-		updateDto.setAddress(userInfoForUpdateDto.getAddress());
-		updateDto.setEmail(userInfoForUpdateDto.getEmail());
-		updateDto.setTel(userInfoForUpdateDto.getTel());
-		if ("staff".equals(principal.getUserRole())) {
-			userService.updateStaff(updateDto);
-		}
-		if ("student".equals(principal.getUserRole())) {
-			userService.updateStudent(updateDto);
-		}
-		if ("professor".equals(principal.getUserRole())) {
-			userService.updateProfessor(updateDto);
-		}
-
-		return "redirect:/update";
+		return "redirect:/password";
+	}
+	
+	/**
+	 * 로그아웃
+	 * @return 로그인 페이지
+	 */
+	@GetMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		
+		return "redirect:/";
 	}
 
 }

@@ -51,7 +51,7 @@ button{
 					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
 				</tr>
 				<tr>
-					<td><a href="/password">패스워드 변경</a></td>
+					<td><a href="/password">비밀번호 변경</a></td>
 				</tr>
 			</table>
 		</div>

@@ -7,5 +7,10 @@
 		SELECT * FROM user_tb
 		WHERE id = #{id}
 	</select>
-	
+
+	<update id="updatePassword">
+		UPDATE user_tb SET password = #{afterPassword}
+		WHERE id = #{id};
+	</update>
+
 </mapper>
