@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.green.university.dto.ChangePasswordDto;
 import com.green.university.dto.LoginDto;
 import com.green.university.dto.UserUpdateDto;
+import com.green.university.dto.response.PrincipalDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
 import com.green.university.handler.exception.UnAuthorizedException;
 import com.green.university.repository.model.User;
@@ -58,10 +59,8 @@ public class PersonalController {
 	@PostMapping("/login")
 	public String signInProc(@Valid LoginDto loginDto) {
 
-		User principal = userService.login(loginDto);
+		PrincipalDto principal = userService.login(loginDto);
 		session.setAttribute(Define.PRINCIPAL, principal);
-		User user = (User) session.getAttribute(Define.PRINCIPAL);
-		System.out.println(user.getUserRole());
 
 		return "redirect:/test";
 	}
@@ -75,7 +74,7 @@ public class PersonalController {
 	@GetMapping("/update")
 	public String updateUser(Model model) {
 
-		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		UserInfoForUpdateDto userInfoForUpdateDto = null;
 		if ("staff".equals(principal.getUserRole())) {
 			userInfoForUpdateDto = userService.readStaffInfo(principal.getId());
@@ -100,7 +99,7 @@ public class PersonalController {
 	@PostMapping("/update")
 	public String updateUserProc(@Valid UserInfoForUpdateDto userInfoForUpdateDto, @RequestParam String password) {
 		
-		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		// 패스워드 인코더 적용 후
 //		if(!passwordEncoder.matches(password, principal.getPassword())) {
 //			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
@@ -150,7 +149,7 @@ public class PersonalController {
 	@PostMapping("/password")
 	public String updatePasswordProc(@Valid ChangePasswordDto changePasswordDto) {
 
-		User principal = (User) session.getAttribute(Define.PRINCIPAL);
+		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		// 패스워드 인코더 적용 후
 //		if(!passwordEncoder.matches(password, principal.getPassword())) {
 //			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);

@@ -1,10 +1,8 @@
+<%@page import="com.green.university.dto.response.PrincipalDto"%>
 <%@page import="com.green.university.utils.Define"%>
-<%@page import="com.green.university.repository.model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%
-User user = (User) session.getAttribute(Define.PRINCIPAL);
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +26,7 @@ User user = (User) session.getAttribute(Define.PRINCIPAL);
 					<!-- todo 삭제 -->
 					<li style="margin-right: 20px;"><a href="/">임시 로그인</a>
 					<li class="material--li"><span class="material-symbols-outlined">account_circle</span>
-					<li><%=user.getId()%> 님
+					<li> ${principal.name} 님 (${principal.id})
 					<li style="margin: 0 15px;">ㅣ
 					<li class="material--li"><span style="color: #9BD2EC;" class="material-symbols-outlined">logout</span>
 					<li><a href="/logout">로그아웃</a>

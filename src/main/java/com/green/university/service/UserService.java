@@ -12,6 +12,7 @@ import com.green.university.dto.CreateStaffDto;
 import com.green.university.dto.CreateStudentDto;
 import com.green.university.dto.LoginDto;
 import com.green.university.dto.UserUpdateDto;
+import com.green.university.dto.response.PrincipalDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.ProfessorRepository;
@@ -125,8 +126,8 @@ public class UserService {
 	}
 	
 	@Transactional
-	public User login(LoginDto loginDto) {
-		User userEntity = userRepository.selectById(loginDto.getId());
+	public PrincipalDto login(LoginDto loginDto) {
+		PrincipalDto userEntity = userRepository.selectById(loginDto.getId());
 		
 		if(userEntity == null) {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID , HttpStatus.INTERNAL_SERVER_ERROR);
