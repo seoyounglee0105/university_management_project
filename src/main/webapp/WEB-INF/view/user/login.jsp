@@ -7,12 +7,12 @@
 </head>
 <body>
 	<h1>로그인</h1>
-	<form action="/user/login" method="post">
+	<form action="/login" method="post">
 		<div>
-			<label for="userId">아이디</label><input type="text" name="id" id="userId">
+			<label for="userId">아이디</label><input type="text" name="id" id="userId" value="2018000001">
 		</div>
 		<div>
-			<label for="password">비밀번호</label><input type="password" name="password" id="password">
+			<label for="password">비밀번호</label><input type="password" name="password" id="password" value="2018000001">
 		</div>
 		<div>
 			<button type="submit">로그인</button>

@@ -123,7 +123,9 @@
 			<c:choose>
 				<c:when test="${breakApp.status.equals(\"처리중\")}">
 					<p> 학생이면 (나중에 수정)</p>
-						<a href="/break/delete/${breakApp.id}"><button type="submit" class="btn btn-dark" onclick="return confirm('신청을 취소하시겠습니까?')">취소하기</button></a>
+					<form action="/break/delete/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
+						<button type="submit" class="btn btn-dark" onclick="return confirm('신청을 취소하시겠습니까?')">취소하기</button>
+					</form>
 					<p> 교직원이면 </p>
 					<form action="/break/update/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
 						<input type="hidden" name="status" value="승인">

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- student_tb용 쿼리 -->
 
 <mapper namespace="com.green.university.repository.interfaces.StudentRepository">
 	<insert id="insertToStudent">
-		INSERT INTO student_tb (name, birth_date, gender, address, tel, dept_id, entrance_date)
-		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel}, #{deptId}, #{entranceDate})
+		INSERT INTO student_tb (name, birth_date, gender, address, tel, dept_id, entrance_date, email)
+		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel}, #{deptId},
+		#{entranceDate}, #{email})
 	</insert>
-	
+
 	<select id="selectIdByCreateStudentDto" resultType="integer">
-		SELECT id FROM student_tb 
+		SELECT id FROM student_tb
 		WHERE name = #{name}
 		AND birth_date = #{birthDate}
 		AND gender = #{gender}
@@ -17,15 +19,29 @@
 		AND tel = #{tel}
 		AND dept_id = #{deptId}
 		AND entrance_date = #{entranceDate}
-		
+		AND email = #{email}
+
 	</select>
-	
+
 	<insert id="insertToUser">
-		INSERT INTO user_tb 
+		INSERT INTO user_tb
 		VALUES (#{id}, #{password}, #{userRole})
 	</insert>
-	
+
 	<select id="selectIdList" resultType="integer">
 		SELECT id FROM student_tb;
 	</select>
+
+	<select id="selectByUserId" resultType="com.green.university.dto.response.UserInfoForUpdateDto">
+		SELECT address, tel, email
+		FROM student_tb
+		WHERE id = #{userId}
+	</select>
+
+	<update id="updateStudent">
+		UPDATE student_tb SET
+		address = #{address}, tel = #{tel}, email = #{email}
+		WHERE id = #{userId}
+	</update>
+
 </mapper>

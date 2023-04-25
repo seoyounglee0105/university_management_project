@@ -2,6 +2,7 @@ package com.green.university.dto;
 
 import java.sql.Date;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -35,5 +36,7 @@ public class CreateProfessorDto {
 	@Min(100)
 	@Max(999)
 	private Integer deptId;
+	@Email
+	private String email;
 	
 }

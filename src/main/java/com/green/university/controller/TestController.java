@@ -25,6 +25,6 @@ public class TestController {
 	
 	@GetMapping("/page")
 	public String pageTest() {
-		return "admin/department";
+		return "/admin/department";
 	}
 }

@@ -4,22 +4,35 @@
 
 <mapper namespace="com.green.university.repository.interfaces.StaffRepository">
 	<insert id="insertToStaff">
-		INSERT INTO staff_tb (name, birth_date, gender, address, tel)
-		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel})
+		INSERT INTO staff_tb (name, birth_date, gender, address, tel, email)
+		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel}, #{email})
 	</insert>
-	
+
 	<select id="selectIdByCreateStaffDto" resultType="integer">
-		SELECT id FROM staff_tb 
+		SELECT id FROM staff_tb
 		WHERE name = #{name}
 		AND birth_date = #{birthDate}
 		AND gender = #{gender}
 		AND address =#{address}
 		AND tel = #{tel}
-		
+		AND email = #{email}
+
 	</select>
-	
+
 	<insert id="insertToUser">
-		INSERT INTO user_tb 
+		INSERT INTO user_tb
 		VALUES (#{id}, #{password}, #{userRole})
 	</insert>
+
+	<select id="selectByUserId" resultType="com.green.university.dto.response.UserInfoForUpdateDto">
+		SELECT address, tel, email
+		FROM staff_tb
+		WHERE id = #{userId}
+	</select>
+
+	<update id="updateStaff">
+		UPDATE staff_tb SET
+		address = #{address}, tel = #{tel}, email = #{email}
+		WHERE id = #{userId}
+	</update>
 </mapper>

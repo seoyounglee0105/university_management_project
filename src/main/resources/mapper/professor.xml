@@ -4,8 +4,8 @@
 
 <mapper namespace="com.green.university.repository.interfaces.ProfessorRepository">
 	<insert id="insertToProfessor">
-		INSERT INTO professor_tb (name, birth_date, gender, address, tel, dept_id)
-		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel}, #{deptId})
+		INSERT INTO professor_tb (name, birth_date, gender, address, tel, dept_id, email)
+		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel}, #{deptId}, #{email})
 	</insert>
 	
 	<select id="selectIdByCreateProfessorDto" resultType="integer">
@@ -16,6 +16,7 @@
 		AND address =#{address}
 		AND tel = #{tel}
 		AND dept_id = #{deptId}
+		AND email = #{email}
 		
 	</select>
 	
@@ -23,4 +24,16 @@
 		INSERT INTO user_tb 
 		VALUES (#{id}, #{password}, #{userRole})
 	</insert>
+	
+	<select id="selectByUserId" resultType="com.green.university.dto.response.UserInfoForUpdateDto">
+		SELECT address, tel, email
+		FROM professor_tb
+		WHERE id = #{userId}
+	</select>
+	
+	<update id="updateProfessor">
+		UPDATE professor_tb SET
+		address = #{address}, tel = #{tel}, email = #{email}
+		WHERE id = #{userId}
+	</update>
 </mapper>

@@ -4,11 +4,11 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <style>
+
 form{
 	margin-left: 30px;
 	
 }
-
 
 .input--table td {
 	padding: 5px 10px;
@@ -51,7 +51,7 @@ button{
 					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
 				</tr>
 				<tr>
-					<td><a href="/password">비밀번호 변경</a></td>
+					<td><a href="/password">패스워드 변경</a></td>
 				</tr>
 			</table>
 		</div>
@@ -59,34 +59,26 @@ button{
 
 	<!-- 메인 div -->
 	<main>
-		<h1>직원 입력창</h1>
+		<h1>개인 정보 수정</h1>
 		<div class="split--div"></div>
-		<!-- 여기에 내용 넣기 -->
-		<form action="/user/staff" method="post">
+		<form action="/update" method="post">
+			
 			<table class="input--table">
 				<tr>
-					<td><label for="name">이름</label></td>
-					<td><input type="text" name="name" id="name" value="나나나"></td>
-				</tr>
-				<tr>
-					<td><label for="birthDate">생년월일</label></td>
-					<td><input type="date" name="birthDate" id="birthDate" value="1999-09-09"></td>
-				</tr>
-				<tr>
-					<td style="padding-top: 7px"><label>성별</label></td>
-					<td style="padding-top: 7px"><label for="male">남성</label> <input type="radio" value="M" name="gender" id="male" checked="checked"> &nbsp;<label for="female">여성</label> <input type="radio" value="F" name="gender" id="female"></td>
-				</tr>
-				<tr>
 					<td><label for="address">주소</label></td>
-					<td><input type="text" name="address" id="address" value="부산시"></td>
+					<td><input type="text" name="address" id="address" value="${userInfo.address}"></td>
 				</tr>
 				<tr>
 					<td><label for="tel">전화번호</label></td>
-					<td><input type="text" name="tel" id="tel" value="010-4525-4545"></td>
+					<td><input type="text" name="tel" id="tel" value="${userInfo.tel}"></td>
 				</tr>
 				<tr>
 					<td><label for="email">이메일</label></td>
-					<td><input type="text" name="email" id="email" value="zxc@test.com"></td>
+					<td><input type="text" name="email" id="email" value="${userInfo.email}"></td>
+				</tr>
+				<tr>
+					<td><label for="password">비밀번호 입력</label></td>
+					<td><input type="password" name="password" id="password"></td>
 				</tr>
 				<tr>
 					<td colspan="2" class="button-td">
