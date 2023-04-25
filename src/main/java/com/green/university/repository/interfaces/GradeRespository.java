@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.hibernate.validator.constraints.ParameterScriptAssert;
 
 import com.green.university.dto.response.GradeDto;
+import com.green.university.dto.response.MyGradeDto;
 import com.green.university.repository.model.StuSub;
 
 /**
@@ -13,10 +15,29 @@ import com.green.university.repository.model.StuSub;
  * @author 편용림
  *
  */
-
 @Mapper
 public interface GradeRespository {
-	// 성적 조회
-	public List<GradeDto> findByStudentId(@Param("studentId") Integer studentId,@Param("semester") Integer semester);	
 	
+	// 성적 조회
+	public List<GradeDto> findByStudentIdAndsemester(@Param("studentId") Integer studentId, @Param("semester") Integer semester, @Param("subYear") Integer subYear);	
+	public List<GradeDto> findBysubYear(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear);
+	public List<GradeDto> findBysemester(@Param("studentId") Integer studentId, @Param("semester") Integer semester);
+	public List<GradeDto> findByType(@Param("studentId") Integer studentId, @Param("type") String type);
+	
+	// 내가 신청한 학기 나오는거
+	public List<GradeDto> findsemester(Integer studentId);
+	// 내가 신청한 연도 나오는거
+	public List<GradeDto> findByyear(Integer studentId);
+	// 학기별 성적조회 할때 전체 나오는거
+	public List<GradeDto> findByAll(Integer studentId);
+	
+	// 누계성적 조회
+	public MyGradeDto SumAndAverageBymyGrade(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear, @Param("semester") Integer semester);
+	
+	// 전공,교양 각자 찾는거
+	public List<GradeDto> chioceByGrade(@Param("studentId") Integer studentId,@Param("subYear") Integer subYear,@Param("semester") Integer semester,@Param("type") String type);
+	// 전체 찾는거
+	public List<GradeDto> chioceByGradeAlltype(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear, @Param("semester") Integer semester);
+
+
 }

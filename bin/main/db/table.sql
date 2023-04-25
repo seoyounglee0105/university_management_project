@@ -196,6 +196,7 @@ CREATE TABLE notice_tb
    views INT NOT NULL DEFAULT 0 COMMENT '조회수'
 );
 -- 공지사항 첨부 파일
+
 CREATE TABLE notice_file_tb
 (
    notice_id INT NOT NULL,

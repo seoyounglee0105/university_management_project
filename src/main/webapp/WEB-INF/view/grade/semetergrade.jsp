@@ -12,7 +12,14 @@
 	padding: 1px 5px;
 }
 
+.select_box {
+	display: flex;
+}
 
+.select_box select {
+	margin-top: 50px;
+	margin-left: 20px;
+}
 </style>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
@@ -31,19 +38,41 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/grade/thisgrade" >금학기 성적조회</a></td>
+					<td><a href="/grade/thisgrade">금학기 성적조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/grade/semetergrade" class="selected--menu">학기별 성적조회</a></td>
+					<td><a href="/grade/semetergrade" class="selected--menu">학기별
+							성적조회</a></td>
 				</tr>
 			</table>
 		</div>
 	</div>
-
+	<!-- type: 연도 학기 전공 -->
 	<!-- 메인 div -->
 	<main>
-		<h1>성적 조회</h1>
+		<h1>학기 별 조회</h1>
 		<div class="split--div"></div>
+		<c:choose>
+			<%-- 내가 수강신청 했는정보 연도있는지 비교 --%>
+			<c:when test="${yearList.size() != 0}">
+				<div class="select_box">
+					<form action="/grade/check" method="post">
+						<select name="subYear">
+							<c:forEach var="grade" items="${yearList}">
+								<option value="${grade.subYear}">${grade.subYear}년</option>
+							</c:forEach>
+						</select> <select name="sesmeter">
+							<c:forEach var="grade" items="${semesterList}">
+							<option value="${grade.semester}">${grade.semester}학기</option>
+							</c:forEach>
+						</select> <select name="type">
+							<option value="전체">전체</option>
+							<option value="전공">전공</option>
+							<option value="교양">교양</option>
+						</select> <input type="submit" value="조회">
+					</form>
+				</div>
+				<div class="split--div"></div>
 				<table border="1" class="tuition--table">
 					<thead>
 						<tr>
@@ -68,6 +97,12 @@
 						</c:forEach>
 					</tbody>
 				</table>
+			</c:when>
+			<c:otherwise>
+				<h1>조회할 과목이 없습니다.</h1>
+			</c:otherwise>
+		</c:choose>
+
 
 	</main>
 </div>
