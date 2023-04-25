@@ -1,6 +1,7 @@
 package com.green.university.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +45,7 @@ public class UserController {
 	 * @return "redirect:/user/staff"
 	 */
 	@PostMapping("/staff")
-	public String createStaffProc(CreateStaffDto createStaffDto) {
+	public String createStaffProc(@Valid CreateStaffDto createStaffDto) {
 
 		System.out.println(createStaffDto.toString());
 		userService.createStaffToStaffAndUser(createStaffDto);
@@ -68,7 +69,7 @@ public class UserController {
 	 * @return "redirect:/user/professor"
 	 */
 	@PostMapping("/professor")
-	public String createProfessorProc(CreateProfessorDto createProfessorDto) {
+	public String createProfessorProc(@Valid CreateProfessorDto createProfessorDto) {
 
 		userService.createProfessorToProfessorAndUser(createProfessorDto);
 
@@ -91,7 +92,7 @@ public class UserController {
 	 * @return "redirect:/user/student"
 	 */
 	@PostMapping("/student")
-	public String createStudentProc(CreateStudentDto createStudentDto) {
+	public String createStudentProc(@Valid CreateStudentDto createStudentDto) {
 
 		userService.createStudentToStudentAndUser(createStudentDto);
 
