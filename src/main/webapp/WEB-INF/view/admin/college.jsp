@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
@@ -35,8 +34,7 @@
 }
 </style>
 <!-- 세부 메뉴 + 메인 -->
-<div class="d-flex justify-content-center align-items-start"
-	style="min-width: 100em;">
+<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
@@ -72,60 +70,63 @@
 	<main>
 		<h1>단과대학</h1>
 		<div class="split--div">
-		<div>
-				<a href="/admin/college?crud=insert">등록</a> 
-				<a href="/admin/college?crud=delete">삭제</a>
+			<div>
+				<a href="/admin/college?crud=insert">등록</a> <a href="/admin/college?crud=delete">삭제</a>
 			</div>
-		<c:if test="${crud.equals(\"select\")}">	
+
+			<!-- 단과대학 조회 -->
+			<c:if test="${crud.equals(\"select\")}">
 				<table class="college--table" border="1">
-				<tr class="first--tr">
-					<td>ID</td>
-					<td>이름</td>
-				</tr>
-				<c:forEach var="college" items="${collegeList}">
-					<tr>
-						<td>${college.id}</td>
-						<td>${college.name}</td>
+					<tr class="first--tr">
+						<td>ID</td>
+						<td>이름</td>
 					</tr>
-				</c:forEach>
-			</table>
-			</c:if>
-			
-			<c:if test="${crud.equals(\"insert\")}">
-				<form action="/admin/college-proc" method="post" id="insert--form">
-						<h5>단과대학을 등록해주세요</h5>
-						이름 <input type="text" name="name" value="인문대학"> 
-						<input type="submit" value="입력">
-					</form>
-					
-				<table class="college--table" border="1">
-				<tr class="first--tr">
-					<td>ID</td>
-					<td>이름</td>
-				</tr>
-				<c:forEach var="college" items="${collegeList}">
-					<tr>
-						<td>${college.id}</td>
-						<td>${college.name}</td>
-					</tr>
-				</c:forEach>
-			</table>
-			</c:if>
-			
-			<c:if test="${crud.equals(\"delete\")}">
-					<table class="college--table" border="1">
-						<tr class="first--tr">
-							<td>ID</td>
-							<td>이름</td>
-						</tr>
 					<c:forEach var="college" items="${collegeList}">
 						<tr>
 							<td>${college.id}</td>
-							<td>${college.name}<a href="/updAdmin/deCollege?name=${college.name}">삭제</a></td>
+							<td>${college.name}</td>
 						</tr>
 					</c:forEach>
 				</table>
-			</c:if>	
+			</c:if>
+
+			<!-- 단과대학 입력 -->
+			<c:if test="${crud.equals(\"insert\")}">
+				<form action="/admin/college-proc" method="post" id="insert--form">
+					<h5>단과대학을 등록해주세요</h5>
+					이름 <input type="text" name="name" value="인문대학"> <input type="submit" value="입력">
+				</form>
+
+				<table class="college--table" border="1">
+					<tr class="first--tr">
+						<td>ID</td>
+						<td>이름</td>
+					</tr>
+					<c:forEach var="college" items="${collegeList}">
+						<tr>
+							<td>${college.id}</td>
+							<td>${college.name}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
+
+			<!-- 단과대학 삭제 -->
+			<c:if test="${crud.equals(\"delete\")}">
+				<h5>삭제할 단과대학 이름을 클릭해주세요</h5>
+				<table class="college--table" border="1">
+					<tr class="first--tr">
+						<td>ID</td>
+						<td>이름</td>
+					</tr>
+					<c:forEach var="college" items="${collegeList}">
+						<tr>
+							<td>${college.id}</td>
+							<td><a href="/updAdmin/deCollege?id=${college.id}">${college.name}</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
 		</div>
 	</main>
 </div>

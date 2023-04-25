@@ -78,6 +78,9 @@
 					href="/admin/collTuit?crud=update">수정</a> <a
 					href="/admin/collTuit?crud=delete">삭제</a>
 			</div>
+			
+			
+			<!-- 등록금 입력 -->
 			<c:if test="${crud.equals(\"insert\")}">
 				<form action="/admin/collTuit-proc" method="post" id="insert--form">
 					<h5>단과대학을 선택 후 등록금을 입력해주세요</h5>
@@ -89,11 +92,25 @@
 					<input type="submit" value="입력">
 				</form>
 			</c:if>
-
+			
+			
+			<!-- 등록금 수정 -->
 			<c:if test="${crud.equals(\"update\")}">
-
+				<form action="/updAdmin/upCollTuit" method="post" id="insert--form">
+					<h5>등록금을 수정해주세요</h5>
+					단과대학 <select name="collegeId">
+						<c:forEach var="college" items="${collegeList}">
+							<option value="${college.id}">${college.name}</option>
+						</c:forEach>
+					</select> 등록금 <input type="text" name="amount" value="2500000"> 
+					<input type="submit" value="수정">
+				</form>
 			</c:if>
+			
+			
+			<!-- 등록금 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
+				<h5>등록금을 삭제할 단과대학을 클릭해주세요</h5>
 				<table class="collTuit--table">
 					<tr class="first--tr">
 						<td>ID</td>
@@ -103,13 +120,15 @@
 					<c:forEach var="collTuit" items="${collTuitList}">
 						<tr>
 							<td>${collTuit.collegeId}</td>
-							<td>${collTuit.name}</td>
-							<td>${collTuit.amount} <a href="/updAdmin/deCollTuit?collegeId=${collTuit.collegeId}">삭제</a></td>
+							<td><a href="/updAdmin/deCollTuit?collegeId=${collTuit.collegeId}">${collTuit.name}</a></td>
+							<td>${collTuit.amount}</td>
 						</tr>
 					</c:forEach>
 				</table>
 			</c:if>
-
+			
+			
+			<!-- 등록금 조회 -->
 			<c:if test="${crud.equals(\"select\")}">
 				<table class="collTuit--table">
 					<tr class="first--tr">

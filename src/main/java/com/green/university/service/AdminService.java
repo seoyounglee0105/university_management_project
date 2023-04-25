@@ -74,9 +74,6 @@ public class AdminService {
 		return resultRowCount;
 	}
 
-	
-	
-	
 	/**
 	 * 학과 입력 서비스
 	 */
@@ -94,15 +91,25 @@ public class AdminService {
 		List<Department> departmentList = departmentRepository.findAll();
 		return departmentList;
 	}
-	
+
 	/**
-	 * 단과대 삭제 서비스
+	 * 학과 삭제 서비스
 	 */
 	public int deleteDepartment(Integer collegeId) {
 		int resultRowCount = departmentRepository.delete(collegeId);
 		return resultRowCount;
 	}
-	
+
+	/**
+	 * 학과 수정 서비스
+	 */
+	public int updateDepartment(DepartmentFormDto departmentFormDto) {
+		int resultRowCount = departmentRepository.update(departmentFormDto);  
+		if (resultRowCount != 1) {
+			System.out.println("학과 수정 서비스 오류");
+		}
+		return resultRowCount;
+	}
 
 	/**
 	 * 단과대별 등록금 입력 서비스
@@ -121,12 +128,23 @@ public class AdminService {
 		List<CollTuit> collTuitList = collTuitRepository.findAll();
 		return collTuitList;
 	}
-	
+
 	/**
 	 * 단과대 등록금 삭제 서비스
 	 */
 	public int deleteCollTuit(Integer collegeId) {
 		int resultRowCount = collTuitRepository.delete(collegeId);
+		return resultRowCount;
+	}
+	
+	/**
+	 * 단과대 등록금 수정 서비스
+	 */
+	public int updateCollTuit(CollTuitFormDto collTuitFormDto) {
+		int resultRowCount = collTuitRepository.update(collTuitFormDto);  
+		if (resultRowCount != 1) {
+			System.out.println("단과대 등록금 수정 서비스 오류");
+		}
 		return resultRowCount;
 	}
 
@@ -147,7 +165,7 @@ public class AdminService {
 		List<Room> roomList = roomRepository.findAll();
 		return roomList;
 	}
-	
+
 	/**
 	 * 강의실 삭제 서비스
 	 */
@@ -173,7 +191,7 @@ public class AdminService {
 		List<Subject> subjectList = subjectRepository.findAll();
 		return subjectList;
 	}
-	
+
 	/**
 	 * 강의 삭제 서비스
 	 */

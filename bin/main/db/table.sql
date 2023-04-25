@@ -9,7 +9,7 @@ CREATE TABLE department_tb (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(10) NOT NULL UNIQUE,
     college_id INT NOT NULL COMMENT '단과대 id',
-    FOREIGN KEY (college_id) REFERENCES college_tb (id)
+    FOREIGN KEY (college_id) REFERENCES college_tb (id) ON DELETE CASCADE
 );
 
 

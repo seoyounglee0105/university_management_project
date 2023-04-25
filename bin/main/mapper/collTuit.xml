@@ -16,4 +16,9 @@
 	<delete id="delete">
 		delete from coll_tuit_tb where college_id = #{collegeId}
 	</delete>
+	<update id="update">
+		UPDATE coll_tuit_tb
+		SET amount = #{amount}
+		WHERE college_id = #{collegeId};
+	</update>
 </mapper>

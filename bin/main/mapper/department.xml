@@ -13,4 +13,9 @@
 	<delete id="delete">
 		delete from department_tb where college_id = #{collegeId}
 	</delete>
+	<update id="update">
+		UPDATE department_tb
+		SET name = #{name}
+		WHERE id = #{id};
+	</update>
 </mapper>

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.green.university.dto.CollTuitFormDto;
 import com.green.university.dto.CollegeFormDto;
+import com.green.university.dto.DepartmentFormDto;
 import com.green.university.dto.NoticeFormDto;
 import com.green.university.service.AdminService;
 
@@ -27,9 +29,9 @@ public class UpDeAdminController {
 	 * @return 단과대학 삭제 기능
 	 */
 	@GetMapping("/deCollege")
-	public String deleteCollege(Model model, @RequestParam Integer collegeId) {
-		model.addAttribute("collegeId", collegeId);
-		adminService.deleteCollege(collegeId);
+	public String deleteCollege(Model model, @RequestParam Integer id) {
+		model.addAttribute("id", id);
+		adminService.deleteCollege(id);
 		return "redirect:/admin/college";
 	}
 	
@@ -42,6 +44,22 @@ public class UpDeAdminController {
 		model.addAttribute("collegeId", collegeId);
 		adminService.deleteDepartment(collegeId);
 		return "redirect:/admin/department";
+	}
+	
+	/**
+	 * 
+	 * @return 학과 수정 기능
+	 */
+	@PostMapping("/upDepartment")
+	public String updateDepartment(DepartmentFormDto departmentFormDto) {
+		adminService.updateDepartment(departmentFormDto);
+		return "redirect:/admin/department";
+	}
+	
+	@GetMapping("/updateTest")
+	public String update(Model model, @RequestParam String name) {
+		model.addAttribute("name", name);
+		return "redirect:admin/department?crud=updateById";
 	}
 	
 	/**
@@ -68,12 +86,22 @@ public class UpDeAdminController {
 	
 	/**
 	 * 
-	 * @return 단대별 등록금 삭제 기능
+	 * @return 단과대 등록금 삭제 기능
 	 */
 	@GetMapping("/deCollTuit")
 	public String deleteCollTuit(Model model, @RequestParam Integer collegeId) {
 		model.addAttribute("collegeId", collegeId);
 		adminService.deleteCollTuit(collegeId);
+		return "redirect:/admin/collTuit";
+	}
+	
+	/**
+	 * 
+	 * @return 단과대 등록금 수정 기능
+	 */
+	@PostMapping("/upCollTuit")
+	public String updateCollTuit(CollTuitFormDto collTuitFormDto) {
+		adminService.updateCollTuit(collTuitFormDto);
 		return "redirect:/admin/collTuit";
 	}
 }

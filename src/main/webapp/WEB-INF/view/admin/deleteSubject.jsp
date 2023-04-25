@@ -94,7 +94,88 @@
 					<input type="submit" value="입력">
 				</form>
 			</c:if>
-			
+
+			<c:if test="${crud.equals(\"update\")}">
+				<form action="/updAdmin/upSubject" method="post" id="insert--form">
+					<h5>강의를 수정해주세요</h5>
+					ID 
+					<select name="id">
+						<c:forEach var="subject" items="${subjectList}">
+							<option>${subject.id}</option>
+						</c:forEach>
+					</select> 
+					강의명 변경 <input type="text" name="name" value="전자과">
+					강의실 변경 <input type="text" name="name" value="전자과">
+					시간 변경 <input type="text" name="name" value="전자과">
+					정원 변경 <input type="text" name="name" value="전자과">
+				<table class="subject--table">
+					<tr class="first--tr">
+						<td>ID</td>
+						<td>강의명</td>
+						<td>교수</td>
+						<td>강의실</td>
+						<td>학과ID</td>
+						<td>구분</td>
+						<td>연도</td>
+						<td>학기</td>
+						<td>시간</td>
+						<td>이수학점</td>
+						<td>정원</td>
+						<td>신청인원</td>
+					</tr>
+					<c:forEach var="subject" items="${subjectList}">
+						<tr>
+							<td>${subject.id}</td>
+							<td>${subject.name}</td>
+							<td>${subject.professorId}</td>
+							<td>${subject.roomId}</td>
+							<td>${subject.deptId}</td>
+							<td>${subject.type}</td>
+							<td>${subject.subYear}</td>
+							<td>${subject.semester}</td>
+							<td>${subject.grades}</td>
+							<td>${subject.capacity}</td>
+							<td>${subject.numOfStudent}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
+
+
+			<c:if test="${crud.equals(\"delete\")}">
+				<h5> 삭제할 강의명을 클릭해주세요 </h5>
+				<table class="subject--table">
+					<tr class="first--tr">
+						<td>ID</td>
+						<td>강의명</td>
+						<td>교수</td>
+						<td>강의실</td>
+						<td>학과ID</td>
+						<td>구분</td>
+						<td>연도</td>
+						<td>학기</td>
+						<td>시간</td>
+						<td>이수학점</td>
+						<td>정원</td>
+						<td>신청인원</td>
+					</tr>
+					<c:forEach var="subject" items="${subjectList}">
+						<tr>
+							<td>${subject.id}</td>
+							<td><a href="/admin/subject?crud=deleteById">${subject.name}</a></td>
+							<td>${subject.professorId}</td>
+							<td>${subject.roomId}</td>
+							<td>${subject.deptId}</td>
+							<td>${subject.type}</td>
+							<td>${subject.subYear}</td>
+							<td>${subject.semester}</td>
+							<td>${subject.grades}</td>
+							<td>${subject.capacity}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
+
 			<c:if test="${crud.equals(\"select\")}">
 				<table class="subject--table">
 					<tr class="first--tr">

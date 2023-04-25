@@ -69,11 +69,13 @@
 		<h1>강의실</h1>
 		<div class="split--div">
 		
-		<div>
+			<div>
 				<a href="/admin/room?crud=insert">등록</a> 
-				<a href="/admin/room?crud=update">수정</a> 
 				<a href="/admin/room?crud=delete">삭제</a>
 			</div>
+			
+			
+		<!-- 강의 입력 -->
 		<c:if test="${crud.equals(\"insert\")}">
 				<form action="/admin/room-proc" method="post" id="insert--form">
 					<h5>등록할 강의실을 입력해주세요</h5>
@@ -82,24 +84,26 @@
 					<input type="submit" value="입력">
 				</form>
 			</c:if>
-			<c:if test="${crud.equals(\"update\")}">
-				
-			</c:if>
+		
+		<!-- 강의 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
+				<h5>삭제할 강의실을 클릭해주세요</h5>
 				<table class="room--table">
-			<tr class="first--tr">
-				<td> 강의실 </td>
-				<td> 단과대ID </td>
-			</tr>
-			<c:forEach var="room" items="${roomList}">
-				<tr>
-					<td>${room.id}</td>
-					<td>${room.collegeId} <a href="/updAdmin/deRoom?id=${room.id}">삭제</a></td>
-				</tr>
-			</c:forEach>
-		</table>
+					<tr class="first--tr">
+						<td> 강의실 </td>
+						<td> 단과대ID </td>
+					</tr>
+				<c:forEach var="room" items="${roomList}">
+					<tr>
+						<td><a href="/updAdmin/deRoom?id=${room.id}">${room.id}</a></td>
+						<td>${room.collegeId}</td>
+					</tr>
+				</c:forEach>
+			</table>
 			</c:if>
 			
+			
+			<!-- 강의 조회 -->
 			<c:if test="${crud.equals(\"select\")}">
 			<table class="room--table">
 			<tr class="first--tr">

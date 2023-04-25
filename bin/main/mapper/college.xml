@@ -11,6 +11,6 @@
 		select * from college_tb order by id
 	</select>
 	<delete id="delete">
-		delete from college_tb where name = #{name}
+		delete from college_tb where id = #{id}
 	</delete>
 </mapper>
