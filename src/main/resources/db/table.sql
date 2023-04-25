@@ -208,6 +208,7 @@ CREATE TABLE break_app_tb
 (
    id INT PRIMARY KEY AUTO_INCREMENT,
    student_id INT NOT NULL,
+   student_grade INT NOT NULL,
    from_year INT NOT NULL,
    from_semester INT NOT NULL,
    to_year INT NOT NULL,

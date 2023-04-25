@@ -149,7 +149,7 @@ public class PersonalController {
 	@PostMapping("/password")
 	public String updatePasswordProc(@Valid ChangePasswordDto changePasswordDto) {
 
-		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		// 패스워드 인코더 적용 후
 //		if(!passwordEncoder.matches(password, principal.getPassword())) {
 //			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);

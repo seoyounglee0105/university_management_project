@@ -80,31 +80,29 @@
 				<table border="1">
 					<tr>
 						<th>단 과 대</th>
-						<td>공과대학</td>
+						<td>${collName}</td>
 						<th>학 과</th>
-						<td>산업공학과</td>
+						<td>${deptName}</td>
 					</tr>
 					<tr>
 						<th>학 번</th>
-						<td>2018000001</td>
+						<td>${student.id}</td>
 						<th>학 년</th>
-						<td>4학년</td>
+						<td>${breakApp.studentGrade}학년</td>
 					</tr>
 					<tr>
 						<th>전 화 번 호</th>
-						<td>010-1111-1111</td>
+						<td>${student.tel}</td>
 						<th>성 명</th>
-						<td>홍길동</td>
+						<td>${student.name}</td>
 					</tr>
 					<tr>
 						<th>주 소</th>
-						<td colspan="3">부산광역시 수영구</td>
+						<td colspan="3">${student.address}</td>
 					</tr>
 					<tr>
 						<th>기 간</th>
-						<td colspan="3">
-							${breakApp.fromYear}년도 ${breakApp.fromSemester}학기부터 &nbsp; ${breakApp.toYear}년도 ${breakApp.toSemester}학기까지
-						</td>
+						<td colspan="3">${breakApp.fromYear}년도 ${breakApp.fromSemester}학기부터&nbsp; ${breakApp.toYear}년도 ${breakApp.toSemester}학기까지</td>
 					</tr>
 					<tr>
 						<th>휴 학 구 분</th>
@@ -118,27 +116,32 @@
 					</tr>
 				</table>
 			</div>
+
 			<!-- todo : '처리중'이고 학생으로 로그인되어 있으면 취소할 수 있게 취소 버튼 -->
 			<!-- todo : '처리중'이고 교직원으로 로그인되어 있으면 해당 신청서에 대해 처리하는 승인/거부 버튼  -->
-			<c:choose>
-				<c:when test="${breakApp.status.equals(\"처리중\")}">
-					<p> 학생이면 (나중에 수정)</p>
-					<form action="/break/delete/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
-						<button type="submit" class="btn btn-dark" onclick="return confirm('신청을 취소하시겠습니까?')">취소하기</button>
-					</form>
-					<p> 교직원이면 </p>
-					<form action="/break/update/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
-						<input type="hidden" name="status" value="승인">
-						<button type="submit" class="btn btn-dark" onclick="return confirm('해당 신청을 승인하시겠습니까?')">승인하기</button>
-					</form>
-					&nbsp;
-					<form action="/break/update/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
-						<input type="hidden" name="status" value="반려">
-						<button type="submit" class="btn btn-dark" onclick="return confirm('해당 신청을 반려하시겠습니까?')">반려하기</button>
-					</form>					
-				</c:when>
-			
-			</c:choose>
+			<c:if test="${breakApp.status.equals(\"처리중\")}">
+				<c:choose>
+					<c:when test="${principal.userRole.equals(\"student\")}">
+						<form action="/break/delete/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
+							<button type="submit" class="btn btn-dark" onclick="return confirm('신청을 취소하시겠습니까?')">취소하기</button>
+						</form>
+					</c:when>
+					<c:when test="${principal.userRole.equals(\"staff\")}">
+						<div class="d-flex jusitify-contents-center">
+							<form action="/break/update/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
+								<input type="hidden" name="status" value="승인">
+								<button type="submit" class="btn btn-dark" onclick="return confirm('해당 신청을 승인하시겠습니까?')">승인하기</button>
+							</form>
+							&nbsp; &nbsp; &nbsp;
+							<form action="/break/update/${breakApp.id}" method="post" class="d-flex flex-column align-items-center">
+								<input type="hidden" name="status" value="반려">
+								<button type="submit" class="btn btn-dark" onclick="return confirm('해당 신청을 반려하시겠습니까?')">반려하기</button>
+							</form>
+						</div>
+					</c:when>
+				</c:choose>
+			</c:if>
+
 		</div>
 	</main>
 </div>

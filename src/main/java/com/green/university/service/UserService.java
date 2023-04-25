@@ -19,6 +19,7 @@ import com.green.university.repository.interfaces.ProfessorRepository;
 import com.green.university.repository.interfaces.StaffRepository;
 import com.green.university.repository.interfaces.StudentRepository;
 import com.green.university.repository.interfaces.UserRepository;
+import com.green.university.repository.model.Student;
 import com.green.university.repository.model.User;
 import com.green.university.utils.Define;
 
@@ -224,13 +225,25 @@ public class UserService {
 		}
 		
 	}
-	
+	/**
+	 * 비밀번호 변경
+	 * @param changePasswordDto
+	 */
 	@Transactional
 	public void updatePassword(ChangePasswordDto changePasswordDto) {
 		int resultCountRaw = userRepository.updatePassword(changePasswordDto);
 		if(resultCountRaw != 1) {
 			throw new CustomRestfullException(Define.UPDATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	/**
+	 * 특정 학생 정보 조회
+	 */
+	@Transactional
+	public Student readStudent(Integer studentId) {
+		Student studentEntity = studentRepository.selectByStudentId(studentId);
+		return studentEntity;
 	}
 
 	
