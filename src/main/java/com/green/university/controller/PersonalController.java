@@ -167,5 +167,16 @@ public class PersonalController {
 
 		return "redirect:/password";
 	}
+	
+	/**
+	 * 로그아웃
+	 * @return 로그인 페이지
+	 */
+	@GetMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		
+		return "redirect:/";
+	}
 
 }
