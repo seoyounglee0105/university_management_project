@@ -2,7 +2,35 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<style>
+.split--div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#insert--form {
+	padding: 50px;
+}
+.department--table {
+	border: 1px solid gray;
+	text-align: center;
+	width: 500px;
+	margin-top: 20px;
+	margin: 10px;
+}
 
+.department--table tr {
+	border: 1px solid black;
+}
+
+.department--table td {
+	border: 1px solid black;
+}
+
+.first--tr {
+	font-weight: bold;
+}
+</style>
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<!-- 세부 메뉴 div-->
@@ -39,9 +67,22 @@
 	<!-- 메인 div -->
 	<main>
 		<h1>학과</h1>
-		<div class="split--div"></div>
-		<table>
-			<tr>
+		<div class="split--div">
+		
+		<form action="/admin/department-proc" method="get" id="insert--form">
+			<h5>등록할 학과명을 입력해주세요</h5>
+			학과명 <input type="text" name="name" value="전자과"> 
+			단과대학
+				<select name="collegeId">
+					<c:forEach var="college" items="${collegeList}">
+						<option value="${college.id}">${college.name}</option>
+					</c:forEach>
+				</select>
+			<input type="submit" value="입력">
+	</form>
+	
+		<table class="department--table">
+			<tr class="first--tr">
 				<td> ID </td>
 				<td> 학과명 </td>
 				<td> 단과대ID </td>
@@ -54,6 +95,11 @@
 				</c:forEach>
 			</tr>
 		</table>
+		<div>
+		<input type="submit" value="수정">
+		<input type="submit" value="삭제">
+		</div>
+		</div>
 	</main>
 </div>
 

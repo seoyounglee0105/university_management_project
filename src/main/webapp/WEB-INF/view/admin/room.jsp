@@ -2,7 +2,35 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<style>
+.split--div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#insert--form {
+	padding: 50px;
+}
+.room--table {
+	border: 1px solid gray;
+	text-align: center;
+	width: 500px;
+	margin-top: 20px;
+	margin: 10px;
+}
 
+.room--table tr {
+	border: 1px solid black;
+}
+
+.room--table td {
+	border: 1px solid black;
+}
+
+.first--tr {
+	font-weight: bold;
+}
+</style>
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<!-- 세부 메뉴 div-->
@@ -39,9 +67,17 @@
 	<!-- 메인 div -->
 	<main>
 		<h1>강의실</h1>
-		<div class="split--div"></div>
-		<table>
-			<tr>
+		<div class="split--div">
+		
+		<form action="/admin/room-proc" method="post" id="insert--form">
+			<h5>등록할 강의실을 입력해주세요</h5>
+			강의실 <input type="text" name="id" value="C250"> 
+			단과대ID <input type="text" name="collegeId" value="1"> 
+			<input type="submit" value="입력">
+		</form>
+		
+		<table class="room--table">
+			<tr class="first--tr">
 				<td> 강의실 </td>
 				<td> 단과대ID </td>
 			</tr>
@@ -52,6 +88,11 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<div>
+		<input type="submit" value="수정">
+		<input type="submit" value="삭제">
+		</div>
+		</div>
 	</main>
 </div>
 
