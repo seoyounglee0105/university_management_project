@@ -21,9 +21,6 @@ public interface StaffRepository {
 	// staff_tb에서 자동 생성된 id 받아오기
 	public Integer selectIdByCreateStaffDto(CreateStaffDto createStaffDto);
 
-	// id 이용해서 user_tb에 insert
-	public int insertToUser(User user);
-
 	// 업데이트용 정보 읽기
 	public UserInfoForUpdateDto selectByUserId(Integer userId);
 

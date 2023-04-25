@@ -11,6 +11,10 @@ public interface UserRepository {
 	// 로그인용
 	public User selectById(Integer userId);
 	
+	// 패스워드 변경
 	public int updatePassword(ChangePasswordDto changePasswordDto);
+	
+	// id 이용해서 user_tb에 insert
+		public int insertToUser(User user);
 
 }

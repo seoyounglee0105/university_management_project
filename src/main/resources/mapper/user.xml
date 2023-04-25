@@ -12,5 +12,10 @@
 		UPDATE user_tb SET password = #{afterPassword}
 		WHERE id = #{id};
 	</update>
+	
+	<insert id="insertToUser">
+		INSERT INTO user_tb 
+		VALUES (#{id}, #{password}, #{userRole})
+	</insert>
 
 </mapper>

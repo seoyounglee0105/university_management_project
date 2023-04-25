@@ -1,6 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="com.green.university.utils.Define"%>
+<%@page import="com.green.university.repository.model.User"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+User user = (User) session.getAttribute(Define.PRINCIPAL);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +17,6 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
-
 </style>
 </head>
 <body>
@@ -25,13 +28,13 @@
 					<!-- todo 삭제 -->
 					<li style="margin-right: 20px;"><a href="/">임시 로그인</a>
 					<li class="material--li"><span class="material-symbols-outlined">account_circle</span>
-					<li>홍길동 님
+					<li><%=user.getId()%> 님
 					<li style="margin: 0 15px;">ㅣ
-					<li class="material--li"><span style="color:#9BD2EC;" class="material-symbols-outlined">logout</span>
-					<li><a href="#">로그아웃</a>
+					<li class="material--li"><span style="color: #9BD2EC;" class="material-symbols-outlined">logout</span>
+					<li><a href="/logout">로그아웃</a>
 				</ul>
 			</div>
-			
+
 			<nav class="main--menu">
 				<a href="#"><img class="logo" alt="" src="/images/logo.png"></a>
 				<!-- userRole에 따라 메뉴 다르게 표시 -->
@@ -45,5 +48,3 @@
 				</ul>
 			</nav>
 		</header>
-		
-		

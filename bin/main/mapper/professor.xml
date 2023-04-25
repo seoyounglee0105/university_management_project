@@ -20,10 +20,7 @@
 		
 	</select>
 	
-	<insert id="insertToUser">
-		INSERT INTO user_tb 
-		VALUES (#{id}, #{password}, #{userRole})
-	</insert>
+	
 	
 	<select id="selectByUserId" resultType="com.green.university.dto.response.UserInfoForUpdateDto">
 		SELECT address, tel, email

@@ -60,7 +60,7 @@ public class UserService {
 		user.setPassword(staffId + ""); // 삭제 예정
 		user.setUserRole("staff");
 		
-		resultCountRow = staffRepository.insertToUser(user);
+		resultCountRow = userRepository.insertToUser(user);
 		if(resultCountRow != 1) {
 			throw new CustomRestfullException(Define.CREATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -89,7 +89,7 @@ public class UserService {
 		user.setPassword(professorId + ""); // 삭제 예정
 		user.setUserRole("professor");
 		
-		resultCountRow = professorRepository.insertToUser(user);
+		resultCountRow = userRepository.insertToUser(user);
 		if(resultCountRow != 1) {
 			throw new CustomRestfullException(Define.CREATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -117,7 +117,7 @@ public class UserService {
 		user.setPassword(studentId + ""); // 삭제 예정
 		user.setUserRole("student");
 		
-		resultCountRow = studentRepository.insertToUser(user);
+		resultCountRow = userRepository.insertToUser(user);
 		if(resultCountRow != 1) {
 			throw new CustomRestfullException(Define.CREATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

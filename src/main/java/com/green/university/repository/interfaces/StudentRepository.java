@@ -22,9 +22,6 @@ public interface StudentRepository {
 
 	// staff_tb에서 자동 생성된 id 받아오기
 	public Integer selectIdByCreateStudentDto(CreateStudentDto createStudentDto);
-
-	// id 이용해서 user_tb에 insert
-	public int insertToUser(User user);
 	
 	/**
 	 * @author 서영
