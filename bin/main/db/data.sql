@@ -10,10 +10,11 @@ VALUES (2018000001, '이서영', '2000-01-05', 'F', '부산광역시 수영구',
 INSERT INTO coll_tuit_tb VALUES (1, 2173500);
 
 INSERT INTO scholarship_tb VALUES (1, 2500000);
+INSERT INTO scholarship_tb VALUES (2, 1500000);
 
 INSERT INTO stu_sch_tb VALUES (2018000001, 2018, 1, 1);
 INSERT INTO stu_sch_tb VALUES (2018000001, 2023, 1, 1);
-INSERT INTO stu_sch_tb VALUES (2018000001, 2023, 2, 1);
+INSERT INTO stu_sch_tb VALUES (2018000002, 2023, 1, 2);
 
 INSERT INTO tuition_tb (student_id, tui_year, semester, tui_amount, sch_type, sch_amount, status)
 VALUES (2018000001, 2018, 1, 2173500, 1, 2173500, 1);
@@ -86,7 +87,5 @@ VALUES
 INSERT INTO stu_stat_tb 
 VALUES (2018000001, '재학', current_date, '9999-01-01');
 INSERT INTO stu_stat_tb 
-VALUES (2018000002, '졸업', current_date, '9999-01-01');
+VALUES (2018000002, '재학', current_date, '9999-01-01');
 
-INSERT INTO break_app_tb
-VALUES (1, 2018000001, 2022, 1, 2023, 1, '일반', '2022-04-04', '승인')

@@ -41,16 +41,11 @@
 			<main>
 				<h1>등록금 고지서 생성</h1>
 				<div class="split--div"></div>
-				
-				<a href="#"><button type="button" class="btn btn-primary create--sch">장학금 유형 결정</button></a>
-				<p class="create--sch--p">등록금 고지서 결정에 합치는 게 나을듯</p>
-				<br><br>
-				<a href="/tuition/createTui"><button type="button" class="btn btn-primary create--tui">등록금 납부 고지서 생성</button></a>
-				<script>
-					$(".create--tui").on("click", function() {
-						alert("등록금 고지서 생성이 완료되었습니다.");
-					});
-				</script>
+				<p>디자인 나중에 고칠거임</p>
+				<a href="/tuition/createTui"><button type="submit" class="btn btn-primary create--tui">등록금 납부 고지서 생성</button></a>
+				<c:if test="${insertCount != null}">
+					<% out.println("<script>alert('" + request.getAttribute("insertCount") + "개의 등록금 고지서가 생성되었습니다.'); history.back(); </script>"); %>
+				</c:if>
 			</main>
 		</div>
 		

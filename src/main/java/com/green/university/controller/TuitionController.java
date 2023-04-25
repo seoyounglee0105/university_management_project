@@ -103,7 +103,7 @@ public class TuitionController {
 	@GetMapping("/create")
 	public String CreatePayment(Model model) {
 		
-		return "tuition/createPay";
+		return "tuition/createPayment";
 	}
 	
 	/**
@@ -114,13 +114,21 @@ public class TuitionController {
 		
 		List<Integer> studentIdList = stuStatService.readIdList();
 		
+		// 고지서 생성 개수 반환
+		int insertCount = 0;
+		
 		// 일괄 생성 (고지서 생성 대상인지는 서비스에서 확인)
 		for (Integer studentId : studentIdList) {
 			System.out.println(studentId);
-			tuitionService.createTuition(studentId);
+			// 생성될 때마다 +1됨
+			insertCount += tuitionService.createTuition(studentId);
 		}
 		
-		return "redirect:/tuition/create";
+		// jsp로 값 보내기
+		model.addAttribute("insertCount", insertCount);
+		System.out.println(insertCount);
+		
+		return "tuition/createPayment";
 	}
 	
 	
