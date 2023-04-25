@@ -38,7 +38,7 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/grade/thisgrade" class="selected--menu">금학기 성적조회</a></td>
+					<td><a href="/grade/thisgrade" >금학기 성적조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/grade/semetergrade" class="selected--menu">학기별
@@ -64,7 +64,7 @@
 					<option value="2">2학기</option>
 				</select> 
 				<select name="type">
-					<option value="전체">전체</option>
+					<option>전체</option>
 					<option value="전공">전공</option>
 					<option value="교양">교양</option>
 				</select> 

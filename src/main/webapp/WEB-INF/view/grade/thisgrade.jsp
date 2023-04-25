@@ -42,8 +42,9 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>성적 조회</h1>
+		<h1>금학기 성적 조회</h1>
 		<div class="split--div"></div>
+		<div>
 				<table border="1" class="tuition--table">
 					<thead>
 						<tr>
@@ -52,7 +53,8 @@
 							<th>과목번호</th>
 							<th>과목명</th>
 							<th>강의구분</th>
-							<th>학점</th>
+							<th>이수학점</th>
+							<th>학점<th>
 						</tr>
 					</thead>
 					<tbody>
@@ -63,11 +65,39 @@
 								<td>${grade.subjectId}</td>
 								<td>${grade.name}</td>
 								<td>${grade.type}</td>
+								<td>${grade.grades}</td>
 								<td>${grade.grade}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				</div>
+				
+				<div>
+				<br>
+				<h1>누계 성적</h1>
+				<div class="split--div"></div>
+				<table border="1" class="tuition--table">
+				<thead>
+				<tr>
+				<th>연도</th>
+				<th>학기</th>
+				<th>신청학점</th>
+				<th>취득학점</th>
+				<th>평점평균</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td>${mygrade.subYear}년</td>
+				<td>${mygrade.semester}학기</td>
+				<td>${mygrade.sumGrades}</td>
+				<td>${mygrade.myGrades}</td>
+				<td>${mygrade.average}</td>
+				</tr>
+				</tbody>
+				</table>
+				</div>
 
 	</main>
 </div>

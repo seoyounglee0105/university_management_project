@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.hibernate.validator.constraints.ParameterScriptAssert;
 
 import com.green.university.dto.response.GradeDto;
+import com.green.university.dto.response.MyGradeDto;
 import com.green.university.repository.model.StuSub;
 
 /**
@@ -16,6 +17,7 @@ import com.green.university.repository.model.StuSub;
  */
 @Mapper
 public interface GradeRespository {
+	
 	// 성적 조회
 	public List<GradeDto> findByStudentIdAndsemester(@Param("studentId") Integer studentId, @Param("semester") Integer semester, @Param("subYear") Integer subYear);	
 	public List<GradeDto> findBysubYear(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear);
@@ -23,5 +25,12 @@ public interface GradeRespository {
 	public List<GradeDto> findByType(@Param("studentId") Integer studentId, @Param("type") String type);
 	public List<GradeDto> findByyear(Integer studentId);
 	public List<GradeDto> findByAll(Integer studentId);
-	public List<GradeDto> chioceByGrade(@Param("studentId") Integer studentId,@Param("subYear") Integer subYear,@Param("grade") Integer grade,@Param("type") String type);
+	
+	// 누계성적 조회
+	public MyGradeDto SumAndAverageBymyGrade(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear, @Param("semester") Integer semester);
+	
+	// 전공,교양 각자 찾는거
+	public List<GradeDto> chioceByGrade(@Param("studentId") Integer studentId,@Param("subYear") Integer subYear,@Param("semester") Integer semester,@Param("type") String type);
+	// 전체 찾는거
+	public List<GradeDto> chioceByGradeAlltype(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear, @Param("semester") Integer semester);
 }

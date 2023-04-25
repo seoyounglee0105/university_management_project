@@ -38,7 +38,7 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/grade/thisgrade" class="selected--menu">금학기 성적조회</a></td>
+					<td><a href="/grade/thisgrade">금학기 성적조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/grade/semetergrade" class="selected--menu">학기별
@@ -85,6 +85,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			<c:when test="${gradeList != null}">
 				<c:forEach var="grade" items="${gradeList}">
 					<tr>
 						<td>${grade.subYear}년</td>
@@ -95,6 +96,7 @@
 						<td>${grade.grade}</td>
 					</tr>
 				</c:forEach>
+				</c:when>
 			</tbody>
 		</table>
 

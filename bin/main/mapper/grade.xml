@@ -5,7 +5,7 @@
 <mapper namespace="com.green.university.repository.interfaces.GradeRespository">
 
 <select id="findByStudentIdAndsemester" resultType="com.green.university.dto.response.GradeDto">
-SELECT su.sub_year,su.semester,st.subject_id,su.name,pr.name,su.type,gr.grade
+SELECT su.sub_year, su.semester, st.subject_id, su.name,pr.name, su.type,gr.grade, su.grades, RANK() OVER(ORDER BY gr.grade_value DESC) 석차
 FROM stu_sub_tb AS st
 INNER JOIN subject_tb AS su
 ON st.subject_id = su.id
@@ -19,7 +19,7 @@ WHERE st.student_id = #{studentId} AND 	su.semester = #{semester} AND su.sub_yea
 </select>
 
 <select id="findBySemeter" resultType="com.green.university.dto.response.GradeDto">
-SELECT su.sub_year,su.semester,st.subject_id,su.name,pr.name,su.type,gr.grade
+SELECT su.sub_year,su.semester,st.subject_id,su.name,pr.name,su.type,gr.grade,su.grades
 FROM stu_sub_tb AS st
 INNER JOIN subject_tb AS su
 ON st.subject_id = su.id
@@ -86,7 +86,7 @@ ORDER BY su.sub_year DESC;
 </select>
 
 <select id="findByAll" resultType="com.green.university.dto.response.GradeDto">
-SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade
+SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade,su.grades
 FROM stu_sub_tb AS st
 INNER JOIN subject_tb AS su
 ON st.subject_id = su.id
@@ -99,8 +99,9 @@ on st.student_id = stud.id
 WHERE st.student_id = #{studentId};
 </select>
 
+<!-- 성적조회할때 내가 다닌 연도만 나오게 하는 쿼리 -->
 <select id="chioceByGrade" resultType="com.green.university.dto.response.GradeDto">
-SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade
+SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade, su.grades
 FROM stu_sub_tb AS st
 INNER JOIN subject_tb AS su
 ON st.subject_id = su.id
@@ -110,6 +111,44 @@ INNER JOIN grade_tb AS gr
 ON st.grade = gr.grade
 INNER JOIN student_tb AS stud
 on st.student_id = stud.id
-WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND gr.grade = #{grade} AND su.type = #{type};
+WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND su.semester = #{semester} AND su.type = #{type};
 </select>
+
+<select id="chioceByGradeAlltype" resultType="com.green.university.dto.response.GradeDto">
+SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade, su.grades
+FROM stu_sub_tb AS st
+INNER JOIN subject_tb AS su
+ON st.subject_id = su.id
+INNER JOIN professor_tb AS pr
+ON su.professor_id = pr.id
+INNER JOIN grade_tb AS gr
+ON st.grade = gr.grade
+INNER JOIN student_tb AS stud
+on st.student_id = stud.id
+WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND su.semester = #{semester};
+</select>
+
+
+
+<!-- 누계성적 구하는 쿼리 -->
+<select id="SumAndAverageBymyGrade" resultType="com.green.university.dto.response.MyGradeDto">
+SELECT  st.student_id, su.sub_year, su.semester, SUM(su.grades) AS sum_grades, mg.my_grades, SUM(gr.grade_value)/COUNT(su.name) AS average
+FROM stu_sub_tb AS st
+INNER JOIN subject_tb AS su
+ON st.subject_id = su.id
+INNER JOIN grade_tb AS gr
+ON st.grade = gr.grade
+INNER JOIN (
+SELECT stu.student_id, SUM(sub.grades) AS my_grades
+FROM stu_sub_tb AS stu
+INNER JOIN subject_tb AS sub
+ON stu.subject_id = sub.id
+INNER JOIN grade_tb AS gra
+ON stu.grade = gra.grade
+WHERE stu.student_id = #{studentId} AND sub.sub_year= #{subYear} AND sub.semester = #{semester} AND gra.grade != 'F'
+) AS mg
+ON st.student_id = mg.student_id 
+WHERE st.student_id = #{studentId} AND su.sub_year= #{subYear} AND su.semester = #{semester};
+</select>
+
 </mapper>

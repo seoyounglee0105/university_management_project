@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.green.university.dto.GradecheckFormDto;
 import com.green.university.dto.response.GradeDto;
+import com.green.university.dto.response.MyGradeDto;
 import com.green.university.repository.interfaces.GradeRespository;
 
 @Service
@@ -20,22 +22,49 @@ public class GradeService {
 	private final Integer CURRENT_YEAR = 2023;
 	private final Integer CURRENT_SEMESTER = 1;
 	
-	
+	// 금학기 성적 조회
 	@Transactional
 	public List<GradeDto> readStuSubList(Integer studentId){
-		List<GradeDto> gradeEntityList = gradeRespository.findByStudentIdAndsemester(studentId,CURRENT_SEMESTER,CURRENT_YEAR);
+		List<GradeDto> gradeEntityList = gradeRespository.findByStudentIdAndsemester(studentId, CURRENT_SEMESTER, CURRENT_YEAR);
 		return gradeEntityList;
 	}
 	
+	// 누계성적 조회
+	@Transactional
+	public MyGradeDto readSumAndAverageByGrade(Integer studentId) {
+		System.out.println(studentId);
+		System.out.println(CURRENT_YEAR);
+		System.out.println(CURRENT_SEMESTER);
+		MyGradeDto mygradeEntity = gradeRespository.SumAndAverageBymyGrade(studentId, CURRENT_YEAR, CURRENT_SEMESTER);
+		System.out.println(mygradeEntity.toString());
+		return mygradeEntity;
+	}
+	
+	// 학기별성적조회 처음에 전부 조회
+	@Transactional
 	public List<GradeDto> findAll(Integer studentId){
 		List<GradeDto> gradeEntityAllList = gradeRespository.findByAll(studentId);
 		return gradeEntityAllList;
 	}
 	
-	public List<GradeDto> selectBygrade(Integer studentId,Integer subYear, Integer grade, String type){
-		List<GradeDto> selectgradeList = gradeRespository.chioceByGrade(studentId, subYear, grade, type);
+	// 조회하면 찾는 거
+	@Transactional
+	public List<GradeDto> selectBygrade(Integer studentId, Integer subYear, Integer semeter, String type){
+		List<GradeDto> selectgradeList = gradeRespository.chioceByGrade(studentId,subYear,semeter,type);
 		return selectgradeList;
 	}
+	
+	// 만약에 타입 전체 선택하면 조회하는거
+	@Transactional
+	public List<GradeDto> selectBygradeBytypeAll(Integer studentId, Integer subYear, Integer semeter){
+		List<GradeDto> selectgradeList = gradeRespository.chioceByGradeAlltype(studentId, subYear, semeter);
+		return selectgradeList;
+	}
+	
+	
+	
+	
+	
 	
 	
 	@Transactional
