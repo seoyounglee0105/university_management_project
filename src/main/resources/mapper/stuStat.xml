@@ -3,17 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.university.repository.interfaces.StuStatRepository">
 
-<select id="findByStudentIdOrderbyToDateDESC" resultType="com.green.university.repository.model.StuStat">
-
+<select id="findByStudentIdOrderbyToDateDesc" resultType="com.green.university.repository.model.StuStat">
 	SELECT * FROM stu_stat_tb WHERE student_id = #{studentId} ORDER BY to_date DESC LIMIT 1
-
 </select>
 
-<insert id="insert">
-	
-	INSERT INTO stu_stat_tb VALUES (#{studentId}, #{status}, #{fromDate}, #{toDate})
-	
+<insert id="insertFirstStatus">
+	INSERT INTO stu_stat_tb VALUES (#{studentId}, '재학', now(), '9999-01-01')
 </insert>
-
 
 </mapper>

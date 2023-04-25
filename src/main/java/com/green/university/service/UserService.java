@@ -39,6 +39,8 @@ public class UserService {
 	private UserRepository userRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private StuStatService stuStatService;
 	
 	/**
 	 * staff 생성 서비스로
@@ -111,6 +113,9 @@ public class UserService {
 			throw new CustomRestfullException(Define.CREATE_FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		Integer studentId = studentRepository.selectIdByCreateStudentDto(createStudentDto);
+		
+		// 학적 상태 생성 (재학)
+		stuStatService.createFirstStatus(studentId);
 		
 		User user = new User();
 		user.setId(studentId);
