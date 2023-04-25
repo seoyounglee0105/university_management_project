@@ -65,7 +65,7 @@ ALTER TABLE professor_tb AUTO_INCREMENT = 23000001;
 CREATE TABLE room_tb (
 	id VARCHAR(5) PRIMARY KEY,
     college_id INT NOT NULL,
-    FOREIGN KEY (college_id) REFERENCES college_tb (id)
+    FOREIGN KEY (college_id) REFERENCES college_tb (id) ON DELETE CASCADE
 );
 
 -- 강의
@@ -83,7 +83,7 @@ CREATE TABLE subject_tb (
     capacity INT NOT NULL COMMENT '수강 정원',
     num_of_student INT NOT NULL DEFAULT 0 COMMENT '현재 신청 인원',
     FOREIGN KEY (professor_id) REFERENCES professor_tb (id),
-    FOREIGN KEY (room_id) REFERENCES room_tb (id),
+    FOREIGN KEY (room_id) REFERENCES room_tb (id) ON DELETE CASCADE,
     FOREIGN KEY (dept_id) REFERENCES department_tb (id)
 );
 -- 과목 id 10000부터
@@ -103,6 +103,7 @@ CREATE TABLE pre_stu_sub_tb (
     PRIMARY KEY (student_id, subject_id),
     FOREIGN KEY (student_id) REFERENCES student_tb (id),
     FOREIGN KEY (subject_id) REFERENCES subject_tb (id)
+    ON DELETE CASCADE
 );
 
 -- 수강 내역
@@ -112,7 +113,7 @@ CREATE TABLE stu_sub_tb (
     PRIMARY KEY (student_id, subject_id),
     grade VARCHAR(2) COMMENT '학점 (평점)',
     FOREIGN KEY (student_id) REFERENCES student_tb (id),
-    FOREIGN KEY (subject_id) REFERENCES subject_tb (id),
+    FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE,
     FOREIGN KEY (grade) REFERENCES grade_tb (grade)
 );
 
@@ -120,7 +121,7 @@ CREATE TABLE stu_sub_tb (
 CREATE TABLE coll_tuit_tb (
 	college_id INT PRIMARY KEY,
     amount INT NOT NULL,
-    FOREIGN KEY (college_id) REFERENCES college_tb (id)
+    FOREIGN KEY (college_id) REFERENCES college_tb (id) ON DELETE CASCADE
 );
 
 -- 장학금

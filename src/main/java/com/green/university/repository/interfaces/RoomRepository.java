@@ -17,4 +17,5 @@ import com.green.university.repository.model.Room;
 public interface RoomRepository {
 	public int insert(RoomFormDto roomFormDto);
 	public List<Room> findAll();
+	public int delete(String id);
 }

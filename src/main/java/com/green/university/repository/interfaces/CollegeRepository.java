@@ -19,5 +19,5 @@ public interface CollegeRepository {
 	public int insert(CollegeFormDto CollegeFormDto);
 	public List<College> findAll();
 	public int findByName(String name);
-	
+	public int delete(Integer id);
 }

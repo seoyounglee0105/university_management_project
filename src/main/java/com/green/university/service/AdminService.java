@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.university.dto.CollTuitFormDto;
 import com.green.university.dto.CollegeFormDto;
@@ -65,6 +67,17 @@ public class AdminService {
 	}
 
 	/**
+	 * 단과대 삭제 서비스
+	 */
+	public int deleteCollege(Integer id) {
+		int resultRowCount = collegeRepository.delete(id);
+		return resultRowCount;
+	}
+
+	
+	
+	
+	/**
 	 * 학과 입력 서비스
 	 */
 	public void insertDepartment(@Validated DepartmentFormDto departmentFormDto) {
@@ -73,7 +86,7 @@ public class AdminService {
 			System.out.println("학과 입력 서비스 오류");
 		}
 	}
-	
+
 	/**
 	 * 학과 조회 서비스
 	 */
@@ -81,6 +94,15 @@ public class AdminService {
 		List<Department> departmentList = departmentRepository.findAll();
 		return departmentList;
 	}
+	
+	/**
+	 * 단과대 삭제 서비스
+	 */
+	public int deleteDepartment(Integer collegeId) {
+		int resultRowCount = departmentRepository.delete(collegeId);
+		return resultRowCount;
+	}
+	
 
 	/**
 	 * 단과대별 등록금 입력 서비스
@@ -91,13 +113,21 @@ public class AdminService {
 			System.out.println("단과대 등록금 입력 서비스 오류");
 		}
 	}
-	
+
 	/**
 	 * 단과대 등록금 조회 서비스
 	 */
 	public List<CollTuit> findCollTuit() {
 		List<CollTuit> collTuitList = collTuitRepository.findAll();
 		return collTuitList;
+	}
+	
+	/**
+	 * 단과대 등록금 삭제 서비스
+	 */
+	public int deleteCollTuit(Integer collegeId) {
+		int resultRowCount = collTuitRepository.delete(collegeId);
+		return resultRowCount;
 	}
 
 	/**
@@ -109,13 +139,21 @@ public class AdminService {
 			System.out.println("강의실 입력 서비스 오류");
 		}
 	}
-	
+
 	/**
 	 * 강의실 조회 서비스
 	 */
 	public List<Room> findRoom() {
 		List<Room> roomList = roomRepository.findAll();
 		return roomList;
+	}
+	
+	/**
+	 * 강의실 삭제 서비스
+	 */
+	public int deleteRoom(String id) {
+		int resultRowCount = roomRepository.delete(id);
+		return resultRowCount;
 	}
 
 	/**
@@ -127,13 +165,21 @@ public class AdminService {
 			System.out.println("강의 입력 서비스 오류");
 		}
 	}
-	
+
 	/**
 	 * 강의 조회 서비스
 	 */
 	public List<Subject> findSubject() {
 		List<Subject> subjectList = subjectRepository.findAll();
 		return subjectList;
+	}
+	
+	/**
+	 * 강의 삭제 서비스
+	 */
+	public int deleteSubject(Integer id) {
+		int resultRowCount = subjectRepository.delete(id);
+		return resultRowCount;
 	}
 
 	/**

@@ -86,8 +86,21 @@
 				
 			</c:if>
 			<c:if test="${crud.equals(\"delete\")}">
-				
+				<table class="room--table">
+			<tr class="first--tr">
+				<td> 강의실 </td>
+				<td> 단과대ID </td>
+			</tr>
+			<c:forEach var="room" items="${roomList}">
+				<tr>
+					<td>${room.id}</td>
+					<td>${room.collegeId} <a href="/updAdmin/deRoom?id=${room.id}">삭제</a></td>
+				</tr>
+			</c:forEach>
+		</table>
 			</c:if>
+			
+			<c:if test="${crud.equals(\"select\")}">
 			<table class="room--table">
 			<tr class="first--tr">
 				<td> 강의실 </td>
@@ -100,6 +113,7 @@
 				</tr>
 			</c:forEach>
 		</table>
+		</c:if>
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 

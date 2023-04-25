@@ -99,8 +99,41 @@
 				
 			</c:if>
 			<c:if test="${crud.equals(\"delete\")}">
-				
+				<table class="subject--table">
+			<tr class="first--tr">
+				<td> ID </td>
+				<td> 강의명 </td>
+				<td> 교수 </td>
+				<td> 강의실 </td>
+				<td> 학과ID </td>
+				<td> 구분 </td>
+				<td> 연도 </td>
+				<td> 학기 </td>
+				<td> 시간 </td>
+				<td> 이수학점 </td>
+				<td> 정원 </td>
+				<td> 신청인원 </td>
+			</tr>
+			<c:forEach var="subject" items="${subjectList}">
+				<tr>
+					<td>${subject.id}</td>
+					<td>${subject.name}</td>
+					<td>${subject.professorId}</td>
+					<td>${subject.roomId}</td>
+					<td>${subject.deptId}</td>
+					<td>${subject.type}</td>
+					<td>${subject.subYear}</td>
+					<td>${subject.semester}</td>
+					<td>${subject.grades}</td>
+					<td>${subject.capacity}</td>
+					<td>${subject.numOfStudent} 
+					<a href="/updAdmin/deSubject?id=${subject.id}">삭제</a></td>
+				</tr>
+			</c:forEach>
+		</table>
 			</c:if>
+			
+			<c:if test="${crud.equals(\"select\")}">
 			<table class="subject--table">
 			<tr class="first--tr">
 				<td> ID </td>
@@ -132,7 +165,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-
+		</c:if>
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
 </div>

@@ -58,7 +58,7 @@ public class AdminController {
 	@PostMapping("/college-proc")
 	public String insertCollege(CollegeFormDto collegeFormDto) {
 		adminService.insertCollege(collegeFormDto);
-		return "redirect:/admin/college/insert";
+		return "redirect:/admin/college";
 	}
 
 	/**

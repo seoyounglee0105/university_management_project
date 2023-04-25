@@ -10,4 +10,7 @@
 	<select id="findAll" resultType="com.green.university.repository.model.Subject">
 		select * from subject_tb
 	</select>
+	<delete id="delete">
+		delete from subject_tb where id = #{id}
+	</delete>
 </mapper>

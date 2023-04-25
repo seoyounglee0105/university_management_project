@@ -73,47 +73,60 @@
 		<h1>학과</h1>
 		<div class="split--div">
 			<div>
-				<a href="/admin/department?crud=insert">등록</a> 
-				<a href="/admin/department?crud=update">수정</a> 
-				<a href="/admin/department?crud=delete">삭제</a>
+				<a href="/admin/department?crud=insert">등록</a> <a
+					href="/admin/department?crud=update">수정</a> <a
+					href="/admin/department?crud=delete">삭제</a>
 			</div>
-		<c:if test="${crud.equals(\"insert\")}">
+			<c:if test="${crud.equals(\"insert\")}">
 				<form action="/admin/department-proc" method="get" id="insert--form">
-						<h5>등록할 학과명을 입력해주세요</h5>
-						학과명 <input type="text" name="name" value="전자과"> 
-						단과대학 <select name="collegeId">
-							<c:forEach var="college" items="${collegeList}">
-								<option value="${college.id}">${college.name}</option>
-							</c:forEach>
-						</select> 
-						<input type="submit" value="입력">
-					</form>
+					<h5>등록할 학과명을 입력해주세요</h5>
+					학과명 <input type="text" name="name" value="전자과"> 단과대학 <select
+						name="collegeId">
+						<c:forEach var="college" items="${collegeList}">
+							<option value="${college.id}">${college.name}</option>
+						</c:forEach>
+					</select> <input type="submit" value="입력">
+				</form>
 			</c:if>
 			<c:if test="${crud.equals(\"update\")}">
-				
+
 			</c:if>
 			<c:if test="${crud.equals(\"delete\")}">
-				
-			</c:if>
-			<table class="department--table">
-				<tr class="first--tr">
-					<td>ID</td>
-					<td>학과명</td>
-					<td>단과대ID</td>
-				</tr>
-				<c:forEach var="department" items="${departmentList}">
-					<tr>
-						<td>${department.id}</td>
-						<td>${department.name}</td>
-						<td>${department.collegeId}</td>
+				<table class="college--table" border="1">
+					<tr class="first--tr">
+						<td>ID</td>
+						<td>학과명</td>
+						<td>단과대ID</td>
 					</tr>
-				</c:forEach>
-			</table>
-			
+					<c:forEach var="department" items="${departmentList}">
+						<tr>
+							<td>${department.id}</td>
+							<td>${department.name}</td>
+							<td>${department.collegeId} <a href="/updAdmin/deDepartment?collegeId=${department.collegeId}">삭제</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
+			<c:if test="${crud.equals(\"select\")}">
+				<table class="department--table">
+					<tr class="first--tr">
+						<td>ID</td>
+						<td>학과명</td>
+						<td>단과대ID</td>
+					</tr>
+					<c:forEach var="department" items="${departmentList}">
+						<tr>
+							<td>${department.id}</td>
+							<td>${department.name}</td>
+							<td>${department.collegeId}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
 
-<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+			<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
-</div>
+		</div>
 
-</body>
-</html>
+		</body>
+		</html>

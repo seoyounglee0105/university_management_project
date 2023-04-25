@@ -74,31 +74,10 @@
 		<div class="split--div">
 		<div>
 				<a href="/admin/college?crud=insert">등록</a> 
-				<a href="/admin/college?crud=update">수정</a> 
 				<a href="/admin/college?crud=delete">삭제</a>
 			</div>
-		<c:if test="${crud.equals(\"insert\")}">
-				<form action="/admin/college-proc" method="post" id="insert--form">
-						<h5>단과대학을 등록해주세요</h5>
-						이름 <input type="text" name="name" value="인문대학"> 
-						<input type="submit" value="입력">
-					</form>
-			</c:if>
-			<c:if test="${crud.equals(\"update\")}">
-				<form action="/admin/college-proc" method="post" id="insert--form">
-						<h5>단과대학을 등록해주세요</h5>
-						이름 <input type="text" name="name" value="인문대학"> 
-						<input type="submit" value="입력">
-					</form>
-			</c:if>
-			<c:if test="${crud.equals(\"delete\")}">
-				<form action="/admin/college-proc" method="post" id="insert--form">
-						<h5>단과대학을 등록해주세요</h5>
-						이름 <input type="text" name="name" value="인문대학"> 
-						<input type="submit" value="입력">
-					</form>
-			</c:if>
-			<table class="college--table" border="1">
+		<c:if test="${crud.equals(\"select\")}">	
+				<table class="college--table" border="1">
 				<tr class="first--tr">
 					<td>ID</td>
 					<td>이름</td>
@@ -110,10 +89,43 @@
 					</tr>
 				</c:forEach>
 			</table>
-
+			</c:if>
 			
+			<c:if test="${crud.equals(\"insert\")}">
+				<form action="/admin/college-proc" method="post" id="insert--form">
+						<h5>단과대학을 등록해주세요</h5>
+						이름 <input type="text" name="name" value="인문대학"> 
+						<input type="submit" value="입력">
+					</form>
+					
+				<table class="college--table" border="1">
+				<tr class="first--tr">
+					<td>ID</td>
+					<td>이름</td>
+				</tr>
+				<c:forEach var="college" items="${collegeList}">
+					<tr>
+						<td>${college.id}</td>
+						<td>${college.name}</td>
+					</tr>
+				</c:forEach>
+			</table>
+			</c:if>
 			
-			
+			<c:if test="${crud.equals(\"delete\")}">
+					<table class="college--table" border="1">
+						<tr class="first--tr">
+							<td>ID</td>
+							<td>이름</td>
+						</tr>
+					<c:forEach var="college" items="${collegeList}">
+						<tr>
+							<td>${college.id}</td>
+							<td>${college.name}<a href="/updAdmin/deCollege?name=${college.name}">삭제</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>	
 		</div>
 	</main>
 </div>

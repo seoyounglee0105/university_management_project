@@ -10,4 +10,7 @@
 	<select id="findAll" resultType="com.green.university.repository.model.Department">
 		select * from department_tb
 	</select>
+	<delete id="delete">
+		delete from department_tb where college_id = #{collegeId}
+	</delete>
 </mapper>

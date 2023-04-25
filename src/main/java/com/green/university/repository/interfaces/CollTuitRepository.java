@@ -17,4 +17,5 @@ import com.green.university.repository.model.College;
 public interface CollTuitRepository {
 	public int insert(CollTuitFormDto collTuitFormDto);
 	public List<CollTuit> findAll();
+	public int delete(Integer collegeId);
 }

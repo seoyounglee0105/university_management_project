@@ -17,4 +17,5 @@ import com.green.university.repository.model.Subject;
 public interface SubjectRepository {
 	public Integer insert(SubjectFormDto subjectFormDto);
 	public List<Subject> findAll();
+	public int delete(Integer id);
 }
