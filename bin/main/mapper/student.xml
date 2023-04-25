@@ -43,5 +43,9 @@
 		address = #{address}, tel = #{tel}, email = #{email}
 		WHERE id = #{userId}
 	</update>
+	
+	<select id="selectByStudentId" resultType="com.green.university.repository.model.Student">
+		SELECT * FROM student_tb WHERE id = #{studentId}
+	</select>
 
 </mapper>

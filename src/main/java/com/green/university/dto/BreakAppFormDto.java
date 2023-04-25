@@ -12,6 +12,7 @@ import lombok.Data;
 public class BreakAppFormDto {
 	
 	private Integer studentId;
+	private Integer studentGrade;
 	private Integer fromYear;
 	private Integer fromSemester;
 	@NotNull

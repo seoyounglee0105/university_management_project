@@ -80,25 +80,27 @@
 							<table border="1">
 								<tr>
 									<th>단 과 대</th>
-									<td>공과대학</td>
+									<td>${collName}</td>
 									<th>학 과</th>
-									<td>산업공학과</td>
+									<td>${deptName}</td>
 								</tr>
 								<tr>
 									<th>학 번</th>
-									<td>2018000001</td>
+									<td>${student.id}</td>
 									<th>학 년</th>
-									<td>4학년</td>
+									<td>${student.grade}학년
+										<input type="hidden" name="studentGrade" value="${student.grade}">
+									</td>
 								</tr>
 								<tr>
 									<th>전 화 번 호</th>
-									<td>010-1111-1111</td>
+									<td>${student.tel}</td>
 									<th>성 명</th>
-									<td>홍길동</td>
+									<td>${student.name}</td>
 								</tr>
 								<tr>
 									<th>주 소</th>
-									<td colspan="3">부산광역시 수영구</td>
+									<td colspan="3">${student.address}</td>
 								</tr>
 								<tr>
 									<th>기 간</th>

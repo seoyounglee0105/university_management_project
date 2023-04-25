@@ -4,8 +4,8 @@
 <mapper namespace="com.green.university.repository.interfaces.BreakAppRepository">
 
 <insert id="insert">
-	INSERT INTO break_app_tb (student_id, from_year, from_semester, to_year, to_semester, type)
-	VALUES (#{studentId}, #{fromYear}, #{fromSemester}, #{toYear}, #{toSemester}, #{type})
+	INSERT INTO break_app_tb (student_id, student_grade, from_year, from_semester, to_year, to_semester, type)
+	VALUES (#{studentId}, #{studentGrade}, #{fromYear}, #{fromSemester}, #{toYear}, #{toSemester}, #{type})
 </insert>
 
 <select id="findByStudentId" resultType="com.green.university.repository.model.BreakApp">
