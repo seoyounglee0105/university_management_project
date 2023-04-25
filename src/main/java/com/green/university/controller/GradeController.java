@@ -1,5 +1,6 @@
 package com.green.university.controller;
 
+import java.time.Year;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,28 +41,32 @@ public class GradeController {
 	public String grade(Model model) {
 		
 		//User principal = (User)session.getAttribute(Define.PRINCIPAL);
+		int stu_id = 2018000001;
+		List<GradeDto> yearList = gradeService.readSubYear(stu_id);
+		model.addAttribute("yearList",yearList);
+		if (yearList.size() != 0) {
+			List<GradeDto> gradeList = gradeService.readStuSubList(stu_id);
+			model.addAttribute("gradeList",gradeList);
+			MyGradeDto mygrade = gradeService.readSumAndAverageByGrade(stu_id);
+			model.addAttribute("mygrade", mygrade);
+			
+		}
 		
 		// 금학기 성적조회 기능
-		List<GradeDto> gradeList = gradeService.readStuSubList(2018000001);
-
-		model.addAttribute("gradeList",gradeList);
-		
-		MyGradeDto mygrade = gradeService.readSumAndAverageByGrade(2018000001);
-		
-		System.out.println(mygrade);
-		model.addAttribute("mygrade", mygrade);
-		
 		return "grade/thisgrade";
 	}
 	
 	@GetMapping("/semetergrade")
 	public String thisgrade(Model model) {
 		//User principal = (User)session.getAttribute(Define.PRINCIPAL);
-		List<GradeDto> gradeAllList = gradeService.findAll(2018000002);
-		List<GradeDto> yearList = gradeService.readSubYear(2018000002);
-		//System.out.println(gradeDtoList);
-		model.addAttribute("yearList",yearList);
-		model.addAttribute("gradeList",gradeAllList);
+		int stu_id = 2018000001;
+		List<GradeDto> gradeAllList = gradeService.findAll(stu_id);
+		List<GradeDto> yearList = gradeService.readSubYear(stu_id);
+		System.out.println(yearList);
+			List<GradeDto> semesterList = gradeService.readSesmeter(stu_id);
+			model.addAttribute("semesterList",semesterList);
+			model.addAttribute("yearList",yearList);
+			model.addAttribute("gradeList",gradeAllList);
 		return "grade/semetergrade";
 	}
 	
@@ -76,28 +81,26 @@ public class GradeController {
 	 */
 	@PostMapping("/check")
 	public String select(Model model, HttpServletRequest httpServletRequest) {
-		
+		int stu_id = 2018000001;
+	
 		//User principal = (User)session.getAttribute(Define.PRINCIPAL);
-		List<GradeDto> yearList = gradeService.readSubYear(2018000002);
-		
+		List<GradeDto> yearList = gradeService.readSubYear(stu_id);
+		List<GradeDto> semesterList = gradeService.readSesmeter(stu_id);
 		String type = httpServletRequest.getParameter("type");
 		int subYear = Integer.parseInt(httpServletRequest.getParameter("subYear"));
-		int semeter = Integer.parseInt(httpServletRequest.getParameter("semeter"));
-		
-		System.out.println(type);
+		int sesmeter = Integer.parseInt(httpServletRequest.getParameter("sesmeter"));
 		
 		// 전체일때 타입을 빼고 조회 그게 아닐시에 타입을 넣고 조회
 		if (type.equals("전체")) {
-			List<GradeDto> gradeList = gradeService.selectBygradeBytypeAll(2018000002, subYear, semeter);
+			List<GradeDto> gradeList = gradeService.selectBygradeBytypeAll(stu_id, subYear, sesmeter);
 			model.addAttribute("gradeList", gradeList);
-			model.addAttribute("yearList", yearList);		
 		}else {
-			List<GradeDto> gradeList = gradeService.selectBygrade(2018000002, subYear, semeter, type);
+			List<GradeDto> gradeList = gradeService.selectBygrade(stu_id, subYear, sesmeter, type);
 			model.addAttribute("gradeList", gradeList);
-			model.addAttribute("yearList", yearList);		
 		}
-		
-		return "grade/checkgrade";
+		model.addAttribute("yearList", yearList);		
+		model.addAttribute("semesterList", semesterList);
+		return "grade/semetergrade";
 	};
 	
 }

@@ -23,7 +23,12 @@ public interface GradeRespository {
 	public List<GradeDto> findBysubYear(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear);
 	public List<GradeDto> findBysemester(@Param("studentId") Integer studentId, @Param("semester") Integer semester);
 	public List<GradeDto> findByType(@Param("studentId") Integer studentId, @Param("type") String type);
+	
+	// 내가 신청한 학기 나오는거
+	public List<GradeDto> findsemester(Integer studentId);
+	// 내가 신청한 연도 나오는거
 	public List<GradeDto> findByyear(Integer studentId);
+	// 학기별 성적조회 할때 전체 나오는거
 	public List<GradeDto> findByAll(Integer studentId);
 	
 	// 누계성적 조회
@@ -33,4 +38,6 @@ public interface GradeRespository {
 	public List<GradeDto> chioceByGrade(@Param("studentId") Integer studentId,@Param("subYear") Integer subYear,@Param("semester") Integer semester,@Param("type") String type);
 	// 전체 찾는거
 	public List<GradeDto> chioceByGradeAlltype(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear, @Param("semester") Integer semester);
+
+
 }

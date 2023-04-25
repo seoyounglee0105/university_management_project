@@ -44,7 +44,10 @@
 	<main>
 		<h1>금학기 성적 조회</h1>
 		<div class="split--div"></div>
-		<div>
+			<c:choose>
+				<%-- 내가 수강신청 했는정보 연도있는지 비교 --%>
+				<c:when test="${yearList.size() != 0}">	
+				<div>
 				<table border="1" class="tuition--table">
 					<thead>
 						<tr>
@@ -98,7 +101,13 @@
 				</tbody>
 				</table>
 				</div>
-
+				</c:when>
+				<c:otherwise>
+				<h1>조회할 과목이 없습니다.</h1>
+				</c:otherwise>
+				</c:choose>
+			
+				
 	</main>
 </div>
 

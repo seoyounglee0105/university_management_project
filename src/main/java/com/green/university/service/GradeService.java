@@ -47,20 +47,33 @@ public class GradeService {
 		return gradeEntityAllList;
 	}
 	
-	// 조회하면 찾는 거
+	// 학기별성적조회 조회하면 찾는 거
 	@Transactional
 	public List<GradeDto> selectBygrade(Integer studentId, Integer subYear, Integer semeter, String type){
 		List<GradeDto> selectgradeList = gradeRespository.chioceByGrade(studentId,subYear,semeter,type);
 		return selectgradeList;
 	}
 	
-	// 만약에 타입 전체 선택하면 조회하는거
+	// 만약에 타입 전체 선택하면 조회
 	@Transactional
 	public List<GradeDto> selectBygradeBytypeAll(Integer studentId, Integer subYear, Integer semeter){
 		List<GradeDto> selectgradeList = gradeRespository.chioceByGradeAlltype(studentId, subYear, semeter);
 		return selectgradeList;
 	}
 	
+	// 학생이 수강 신청한 연도 조회
+	@Transactional
+	public List<GradeDto> readSubYear(Integer StudentId){
+		List<GradeDto> yearEntityList = gradeRespository.findByyear(StudentId);
+		return yearEntityList;
+	}
+	
+	// 학생이 수강 신청한 학기 조회
+	@Transactional
+	public List<GradeDto> readSesmeter(Integer StudentId){
+		List<GradeDto> semesterEntityList = gradeRespository.findsemester(StudentId);
+		return semesterEntityList;
+	}
 	
 	
 	
@@ -85,9 +98,5 @@ public class GradeService {
 		return gradeEntityList;
 	}
 	
-	@Transactional
-	public List<GradeDto> readSubYear(Integer StudentId){
-		List<GradeDto> yearEntityList = gradeRespository.findByyear(StudentId);
-		return yearEntityList;
-	}
+	
 }

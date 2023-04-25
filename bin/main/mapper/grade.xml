@@ -75,6 +75,9 @@ on st.student_id = stud.id
 WHERE st.student_id = #{studentId} AND 	su.type = #{type};
 </select>
 
+
+
+<!-- 내가 신청한 연도 나오는거  -->
 <select id="findByyear" resultType="com.green.university.dto.response.GradeDto">
 select su.sub_year
 FROM stu_sub_tb AS st
@@ -83,6 +86,16 @@ ON st.subject_id = su.id
 WHERE st.student_id = #{studentId}
 group by su.sub_year
 ORDER BY su.sub_year DESC;
+</select>
+
+<!-- 내가 신청한 학기 나오는거 -->
+<select id="findsemester" resultType="com.green.university.dto.response.GradeDto">
+select su.semester
+FROM stu_sub_tb AS st
+INNER JOIN subject_tb AS su
+ON st.subject_id = su.id
+WHERE st.student_id = #{studentId}
+GROUP BY su.semester;
 </select>
 
 <select id="findByAll" resultType="com.green.university.dto.response.GradeDto">
