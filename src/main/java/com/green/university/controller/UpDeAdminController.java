@@ -13,7 +13,7 @@ import com.green.university.service.AdminService;
  * @author 박성희 Admin 수업 수정/삭제 Controller
  */
 @Controller
-@RequestMapping("/Admin")
+@RequestMapping("/updAdmin")
 public class UpDeAdminController {
 	@Autowired
 	private AdminService adminService;

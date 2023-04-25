@@ -68,7 +68,13 @@
 	<main>
 		<h1>강의</h1>
 		<div class="split--div">
-		<form action="/admin/subject-proc" method="post" id="insert--form">
+				<div>
+				<a href="/admin/subject?crud=insert">등록</a> 
+				<a href="/admin/subject?crud=update">수정</a> 
+				<a href="/admin/subject?crud=delete">삭제</a>
+			</div>
+		<c:if test="${crud.equals(\"insert\")}">
+				<form action="/admin/subject-proc" method="post" id="insert--form">
 		<h5>등록할 강의를 입력해주세요</h5>
 		<label for="name">강의명</label>
 		 <input type="text" id="name" name="name" value="스프링부트 뽀개기"><br>
@@ -88,8 +94,14 @@
 		
 		<input type="submit" value="입력">
 	</form>
-	
-		<table class="subject--table">
+			</c:if>
+			<c:if test="${crud.equals(\"update\")}">
+				
+			</c:if>
+			<c:if test="${crud.equals(\"delete\")}">
+				
+			</c:if>
+			<table class="subject--table">
 			<tr class="first--tr">
 				<td> ID </td>
 				<td> 강의명 </td>
@@ -120,13 +132,6 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<div>
-		<input type="submit" value="수정">
-		<input type="submit" value="삭제">
-		</div>
-		</div>
-	</main>
-</div>
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 

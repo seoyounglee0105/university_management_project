@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.university.dto.CollTuitFormDto;
 import com.green.university.dto.CollegeFormDto;
@@ -38,7 +40,8 @@ public class AdminController {
 	 * @return 단과대 페이지
 	 */
 	@GetMapping("/college")
-	public String college(Model model) {
+	public String college(Model model, @RequestParam(defaultValue = "select") String crud) {
+		model.addAttribute("crud", crud);
 		List<College> collegeList = adminService.findCollege();
 		if (collegeList.isEmpty()) {
 			model.addAttribute("collegeList", null);
@@ -47,7 +50,7 @@ public class AdminController {
 		}
 		return "/admin/college";
 	}
-	
+
 	/**
 	 * 
 	 * @return 단과대학 입력 기능
@@ -55,7 +58,7 @@ public class AdminController {
 	@PostMapping("/college-proc")
 	public String insertCollege(CollegeFormDto collegeFormDto) {
 		adminService.insertCollege(collegeFormDto);
-		return "redirect:/admin/college";
+		return "redirect:/admin/college/insert";
 	}
 
 	/**
@@ -63,7 +66,8 @@ public class AdminController {
 	 * @return 학과 페이지 페이지 이동 시, 단과대학 조회 후 이동
 	 */
 	@GetMapping("/department")
-	public String department(Model model) {
+	public String department(Model model, @RequestParam(defaultValue = "select") String crud) {
+		model.addAttribute("crud", crud);
 		List<Department> departmentList = adminService.findDepartment();
 		List<College> collegeList = adminService.findCollege();
 		if (collegeList.isEmpty()) {
@@ -78,7 +82,7 @@ public class AdminController {
 		}
 		return "/admin/department";
 	}
-	
+
 	/**
 	 * 
 	 * @return 학과 입력 기능
@@ -94,7 +98,8 @@ public class AdminController {
 	 * @return 강의실 페이지
 	 */
 	@GetMapping("/room")
-	public String room(Model model) {
+	public String room(Model model, @RequestParam(defaultValue = "select") String crud) {
+		model.addAttribute("crud", crud);
 		List<Room> roomList = adminService.findRoom();
 		List<College> collegeList = adminService.findCollege();
 		if (collegeList.isEmpty()) {
@@ -109,7 +114,7 @@ public class AdminController {
 		}
 		return "/admin/room";
 	}
-	
+
 	/**
 	 * 
 	 * @return 강의실 입력 기능
@@ -125,7 +130,8 @@ public class AdminController {
 	 * @return 강의 페이지
 	 */
 	@GetMapping("/subject")
-	public String subject(Model model) {
+	public String subject(Model model, @RequestParam(defaultValue = "select") String crud) {
+		model.addAttribute("crud", crud);
 		List<Subject> subjectList = adminService.findSubject();
 		List<College> collegeList = adminService.findCollege();
 		if (collegeList.isEmpty()) {
@@ -140,7 +146,7 @@ public class AdminController {
 		}
 		return "/admin/subject";
 	}
-	
+
 	/**
 	 * 
 	 * @return 강의 입력 기능
@@ -148,7 +154,7 @@ public class AdminController {
 	@PostMapping("/subject-proc")
 	public String insertSubject(SubjectFormDto subjectFormDto) {
 		adminService.insertSubject(subjectFormDto);
-		return "redirect:/test";
+		return "redirect:/admin/subject";
 	}
 
 	/**
@@ -156,7 +162,8 @@ public class AdminController {
 	 * @return 단과대별 등록금 페이지
 	 */
 	@GetMapping("/collTuit")
-	public String collTuit(Model model) {
+	public String collTuit(Model model, @RequestParam(defaultValue = "select") String crud) {
+		model.addAttribute("crud", crud);
 		List<CollTuit> collTuitList = adminService.findCollTuit();
 		List<College> collegeList = adminService.findCollege();
 		if (collegeList.isEmpty()) {
@@ -171,7 +178,7 @@ public class AdminController {
 		}
 		return "/admin/collTuit";
 	}
-	
+
 	/**
 	 * 
 	 * @return 단과대별 등록금 입력 기능
@@ -181,7 +188,6 @@ public class AdminController {
 		adminService.insertCollTuit(collTuitFormDto);
 		return "redirect:/admin/collTuit";
 	}
-
 
 	/**
 	 * 

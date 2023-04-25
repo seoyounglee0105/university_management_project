@@ -68,6 +68,12 @@
 	<main>
 		<h1>단대별 등록금</h1>
 		<div class="split--div">
+		<div>
+				<a href="/admin/collTuit?crud=insert">등록</a> 
+				<a href="/admin/collTuit?crud=update">수정</a> 
+				<a href="/admin/collTuit?crud=delete">삭제</a>
+			</div>
+		<c:if test="${crud.equals(\"insert\")}">
 		<form action="/admin/collTuit-proc" method="post" id="insert--form">
 			<h5>단과대학을 선택 후 등록금을 입력해주세요</h5>
 			단과대학 
@@ -77,30 +83,32 @@
 					</c:forEach>
 				</select>
 			등록금 <input type="text" name="amount" value="2500000"> <input type="submit" value="입력">
-		</form>
-		<table class="collTuit--table">
+			</form>
+		</c:if>
+			
+			<c:if test="${crud.equals(\"update\")}">
+				
+			</c:if>
+			<c:if test="${crud.equals(\"delete\")}">
+			
+			</c:if>
+			
+			<table class="collTuit--table">
 			<tr class="first--tr">
 				<td> ID </td>
 				<td> 단과대 </td>
 				<td> 금액 </td>
 			</tr>
-			<tr>
 				<c:forEach var="collTuit" items="${collTuitList}">
+			<tr>
 					<td>${collTuit.collegeId}</td>
 						<c:forEach var="college" items="${collegeList}">
 							<td>${college.name}</td>						
 						</c:forEach>
 					<td>${collTuit.amount}</td>
-				</c:forEach>
 			</tr>
+				</c:forEach>
 		</table>
-		<div>
-		<input type="submit" value="수정">
-		<input type="submit" value="삭제">
-		</div>
-		</div>
-	</main>
-</div>
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
