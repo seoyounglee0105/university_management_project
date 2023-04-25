@@ -1,9 +1,12 @@
 package com.green.university.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +15,9 @@ import com.green.university.dto.CollTuitFormDto;
 import com.green.university.dto.CollegeFormDto;
 import com.green.university.dto.DepartmentFormDto;
 import com.green.university.dto.NoticeFormDto;
+import com.green.university.dto.SubjectFormDto;
+import com.green.university.repository.model.College;
+import com.green.university.repository.model.Department;
 import com.green.university.service.AdminService;
 
 /**
@@ -56,11 +62,6 @@ public class UpDeAdminController {
 		return "redirect:/admin/department";
 	}
 	
-	@GetMapping("/updateTest")
-	public String update(Model model, @RequestParam String name) {
-		model.addAttribute("name", name);
-		return "redirect:admin/department?crud=updateById";
-	}
 	
 	/**
 	 * 
@@ -70,6 +71,16 @@ public class UpDeAdminController {
 	public String deleteSubject(Model model, @RequestParam Integer id) {
 		model.addAttribute("id", id);
 		adminService.deleteSubject(id);
+		return "redirect:/admin/subject";
+	}
+	
+	/**
+	 * 
+	 * @return 강의 수정 기능
+	 */
+	@PostMapping("/upSubject")
+	public String updateSubject(SubjectFormDto subjectFormDto) {
+		adminService.updateSubject(subjectFormDto);
 		return "redirect:/admin/subject";
 	}
 	

@@ -199,6 +199,17 @@ public class AdminService {
 		int resultRowCount = subjectRepository.delete(id);
 		return resultRowCount;
 	}
+	
+	/**
+	 * 강의 수정 서비스
+	 */
+	public int updateSubject(SubjectFormDto subjectFormDto) {
+		int resultRowCount = subjectRepository.update(subjectFormDto);  
+		if (resultRowCount != 1) {
+			System.out.println("강의 수정 서비스 오류");
+		}
+		return resultRowCount;
+	}
 
 	/**
 	 * 공지 입력 서비스

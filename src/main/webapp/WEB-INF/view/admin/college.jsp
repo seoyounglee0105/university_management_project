@@ -8,7 +8,9 @@
 	flex-direction: column;
 	align-items: center;
 }
-
+.select--button {
+	padding: 20px;
+}
 #insert--form {
 	padding: 50px;
 }
@@ -70,8 +72,9 @@
 	<main>
 		<h1>단과대학</h1>
 		<div class="split--div">
-			<div>
-				<a href="/admin/college?crud=insert">등록</a> <a href="/admin/college?crud=delete">삭제</a>
+			<div class="select--button">
+				<a href="/admin/college?crud=insert">등록</a> 
+				<a href="/admin/college?crud=delete">삭제</a>
 			</div>
 
 			<!-- 단과대학 조회 -->

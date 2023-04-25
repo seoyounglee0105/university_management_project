@@ -13,4 +13,9 @@
 	<delete id="delete">
 		delete from subject_tb where id = #{id}
 	</delete>
+	<update id="update">
+		UPDATE subject_tb
+		SET name = #{name}, room_id = #{roomId}, time = #{time}, capacity = #{capacity}
+		WHERE id = #{id}
+	</update>
 </mapper>

@@ -144,11 +144,6 @@ public class AdminController {
 		} else {
 			model.addAttribute("subjectList", subjectList);
 		}
-		if(crud.equals("update")) {
-			return "/admin/updateSubject";
-		} else if(crud.equals("delete")) {
-			return "/admin/deleteSubject";
-		}
 		return "/admin/subject";
 	}
 

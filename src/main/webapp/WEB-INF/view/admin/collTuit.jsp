@@ -105,6 +105,20 @@
 					</select> 등록금 <input type="text" name="amount" value="2500000"> 
 					<input type="submit" value="수정">
 				</form>
+				<table class="collTuit--table">
+					<tr class="first--tr">
+						<td>ID</td>
+						<td>단과대</td>
+						<td>금액</td>
+					</tr>
+					<c:forEach var="collTuit" items="${collTuitList}">
+								<tr>
+									<td>${collTuit.collegeId}</td>
+									<td>${collTuit.name}</td>
+									<td>${collTuit.amount}</td>
+								</tr>
+					</c:forEach>
+				</table>
 			</c:if>
 			
 			
@@ -145,7 +159,9 @@
 					</c:forEach>
 				</table>
 			</c:if>
-
+		</div>
+	</main>
+</div>
 			<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
 		</div>

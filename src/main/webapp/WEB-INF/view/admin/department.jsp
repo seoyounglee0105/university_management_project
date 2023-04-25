@@ -8,6 +8,9 @@
 	flex-direction: column;
 	align-items: center;
 }
+.select--button {
+	padding: 20px;
+}
 
 #insert--form {
 	padding: 50px;
@@ -70,7 +73,7 @@
 	<main>
 		<h1>학과</h1>
 		<div class="split--div">
-			<div>
+			<div class="select--button">
 				<a href="/admin/department?crud=insert">등록</a>
 				<a href="/admin/department?crud=update">수정</a> 
 				<a href="/admin/department?crud=delete">삭제</a>
@@ -88,14 +91,33 @@
 						</c:forEach>
 					</select> <input type="submit" value="입력">
 				</form>
+				<table class="department--table">
+					<tr class="first--tr">
+						<td>ID</td>
+						<td>학과명</td>
+						<td>단과대ID</td>
+					</tr>
+					<c:forEach var="department" items="${departmentList}">
+						<tr>
+							<td>${department.id}</td>
+							<td>${department.name}</td>
+							<td>${department.collegeId}</td>
+						</tr>
+					</c:forEach>
+				</table>
 			</c:if>
 
 
 			<!-- 학과 수정  -->
-			<c:if test="${crud.equals(\"updateById\")}">
+			<c:if test="${crud.equals(\"update\")}">
 				<form action="/updAdmin/upDepartment" method="post" id="insert--form">
 					<h5>변경할 학과명을 입력해주세요</h5>
-					학과명 <input type="text" value="${department.name}" readonly="readonly">
+					학과명 
+					<select name="id">
+						<c:forEach var="department" items="${departmentList}">
+							<option value="${department.id}">${department.name}</option>
+						</c:forEach>
+					</select>
 					변경 학과명 
 					<input type="text" name="name" value="전자과"> 
 					<input type="submit" value="수정">
@@ -116,33 +138,12 @@
 					</c:forEach>
 				</table>
 			</c:if>
-			
-			<!-- 학과 수정버튼 -->
-			<c:if test="${crud.equals(\"update\")}">
-				<h5>수정할 학과명을 클릭해주세요</h5>
-					<table class="department--table">
-					<tr class="first--tr">
-						<td>ID</td>
-						<td>학과명</td>
-						<td>단과대ID</td>
-					</tr>
-					<c:forEach var="department" items="${departmentList}">
-						<tr>
-							<td>${department.id}</td>
-							<td><a href="/admin/department?crud=updateById">${department.name}</a></td>
-							<td>${department.collegeId}</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</c:if>
-
-
 
 
 			<!-- 학과 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
 			<h5>삭제할 학과 이름을 클릭해주세요</h5>
-				<table class="college--table" border="1">
+				<table class="department--table" border="1">
 					<tr class="first--tr">
 						<td>ID</td>
 						<td>학과명</td>

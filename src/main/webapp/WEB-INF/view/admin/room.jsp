@@ -8,9 +8,11 @@
 	flex-direction: column;
 	align-items: center;
 }
+
 #insert--form {
 	padding: 50px;
 }
+
 .room--table {
 	border: 1px solid gray;
 	text-align: center;
@@ -46,16 +48,16 @@
 					<td><a href="/admin/college" class="selected--menu">강의실</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/department" >학과</a></td>
+					<td><a href="/admin/department">학과</a></td>
 				</tr>
 				<tr>
 					<td><a href="/admin/subject">강의</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/room" >강의실</a></td>
+					<td><a href="/admin/room">강의실</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/collTuit" >단대별 등록금</a></td>
+					<td><a href="/admin/collTuit">단대별 등록금</a></td>
 				</tr>
 				<tr>
 					<td><a href="/admin/notice">공지사항</a></td>
@@ -68,60 +70,71 @@
 	<main>
 		<h1>강의실</h1>
 		<div class="split--div">
-		
+
 			<div>
-				<a href="/admin/room?crud=insert">등록</a> 
-				<a href="/admin/room?crud=delete">삭제</a>
+				<a href="/admin/room?crud=insert">등록</a> <a href="/admin/room?crud=delete">삭제</a>
 			</div>
-			
-			
-		<!-- 강의 입력 -->
-		<c:if test="${crud.equals(\"insert\")}">
+
+
+			<!-- 강의 입력 -->
+			<c:if test="${crud.equals(\"insert\")}">
 				<form action="/admin/room-proc" method="post" id="insert--form">
 					<h5>등록할 강의실을 입력해주세요</h5>
-					강의실 <input type="text" name="id" value="C250"> 
-					단과대ID <input type="text" name="collegeId" value="1"> 
-					<input type="submit" value="입력">
+					강의실 <input type="text" name="id" value="C250"> 단과대ID <input type="text" name="collegeId" value="1"> <input type="submit" value="입력">
 				</form>
+				<table class="room--table">
+					<tr class="first--tr">
+						<td>강의실</td>
+						<td>단과대ID</td>
+					</tr>
+					<c:forEach var="room" items="${roomList}">
+						<tr>
+							<td>${room.id}</td>
+							<td>${room.collegeId}</td>
+						</tr>
+					</c:forEach>
+				</table>
 			</c:if>
-		
-		<!-- 강의 삭제 -->
+
+			<!-- 강의 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
 				<h5>삭제할 강의실을 클릭해주세요</h5>
 				<table class="room--table">
 					<tr class="first--tr">
-						<td> 강의실 </td>
-						<td> 단과대ID </td>
+						<td>강의실</td>
+						<td>단과대ID</td>
 					</tr>
-				<c:forEach var="room" items="${roomList}">
-					<tr>
-						<td><a href="/updAdmin/deRoom?id=${room.id}">${room.id}</a></td>
-						<td>${room.collegeId}</td>
-					</tr>
-				</c:forEach>
-			</table>
+					<c:forEach var="room" items="${roomList}">
+						<tr>
+							<td><a href="/updAdmin/deRoom?id=${room.id}">${room.id}</a></td>
+							<td>${room.collegeId}</td>
+						</tr>
+					</c:forEach>
+				</table>
 			</c:if>
-			
-			
+
+
 			<!-- 강의 조회 -->
 			<c:if test="${crud.equals(\"select\")}">
-			<table class="room--table">
-			<tr class="first--tr">
-				<td> 강의실 </td>
-				<td> 단과대ID </td>
-			</tr>
-			<c:forEach var="room" items="${roomList}">
-				<tr>
-					<td>${room.id}</td>
-					<td>${room.collegeId}</td>
-				</tr>
-			</c:forEach>
-		</table>
-		</c:if>
-
-<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
-
+				<table class="room--table">
+					<tr class="first--tr">
+						<td>강의실</td>
+						<td>단과대ID</td>
+					</tr>
+					<c:forEach var="room" items="${roomList}">
+						<tr>
+							<td>${room.id}</td>
+							<td>${room.collegeId}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
+		</div>
+	</main>
 </div>
+			<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
-</body>
-</html>
+		</div>
+
+		</body>
+		</html>
