@@ -15,6 +15,7 @@ public class BreakApp {
 
 	private Integer id;
 	private Integer studentId;
+	private Integer studentGrade;
 	private Integer fromYear;
 	private Integer fromSemester;
 	private Integer toYear;

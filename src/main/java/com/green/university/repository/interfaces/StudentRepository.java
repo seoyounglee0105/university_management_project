@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.green.university.dto.CreateStudentDto;
 import com.green.university.dto.UserUpdateDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
+import com.green.university.repository.model.Student;
 import com.green.university.repository.model.User;
 
 /**
@@ -28,11 +29,17 @@ public interface StudentRepository {
 	 * 전체 학생의 id만 가져오기
 	 */
 	public List<Integer> selectIdList();
+	
+	/**
+	 * @author 서영
+	 * 특정 학생의 정보 가져오기
+	 */
+	public Student selectByStudentId(Integer studentId);
 
 	// 업데이트용 정보 읽기
 	public UserInfoForUpdateDto selectByUserId(Integer userId);
 
-	// 유저정보 업데이트
+	// 유저 정보 업데이트
 	public int updateStudent(UserUpdateDto userUpdateDto);
 
 }

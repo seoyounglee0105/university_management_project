@@ -12,8 +12,6 @@ import lombok.Data;
  */
 @Data
 public class CollegeFormDto {
-	@NotNull
 	@NotBlank
-	@NotEmpty
 	private String name;
 }

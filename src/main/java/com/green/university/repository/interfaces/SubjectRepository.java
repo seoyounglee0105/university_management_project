@@ -3,7 +3,6 @@ package com.green.university.repository.interfaces;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.green.university.dto.SubjectFormDto;
 import com.green.university.dto.response.SubjectForProfessorDto;
@@ -39,4 +38,7 @@ public interface SubjectRepository {
 	 */
 	public Subject selectSubjectById(Integer id);
 	
+	public List<Subject> findAll();
+	public int delete(Integer id);
+	public int update(SubjectFormDto subjectFormDto);
 }

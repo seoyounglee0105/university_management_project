@@ -15,10 +15,8 @@
 </select>
 
 <insert id="insertCurrentSchType">
-	INSERT INTO scholarship_tb
+	INSERT INTO stu_sch_tb
 	VALUES (#{studentId}, #{schYear}, #{semester}, #{schType})
 </insert>
-
-
 
 </mapper>

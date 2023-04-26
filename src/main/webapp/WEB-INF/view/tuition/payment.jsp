@@ -80,15 +80,15 @@
 						<thead>
 							<tr>
 								<th>단 과 대</th>
-								<td>공과대학</td> <!-- 여기 고쳐야 함 !  -->
+								<td>${collName}</td> <!-- 여기 고쳐야 함 !  -->
 								<th>학 과</th>
-								<td>산업공학과</td> <!-- 여기 고쳐야 함 !  -->
+								<td>${deptName}</td> <!-- 여기 고쳐야 함 !  -->
 							</tr>
 							<tr>
 								<th>학 번</th>
 								<td>${tuition.studentId}</td>
 								<th>성 명</th>
-								<td>홍길동</td> <!-- 여기 고쳐야 함 !  -->
+								<td>${student.name}</td> <!-- 여기 고쳐야 함 !  -->
 							</tr>
 						</thead>
 						<tbody>

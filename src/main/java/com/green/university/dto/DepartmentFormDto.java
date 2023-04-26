@@ -8,6 +8,7 @@ import com.green.university.repository.model.College;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
 /**
  * 
  * @author 박성희
@@ -15,12 +16,12 @@ import lombok.Data;
  */
 @Data
 public class DepartmentFormDto {
+	private Integer id;
 	@NotNull
 	@NotBlank
 	@NotEmpty
 	private String name;
 	@NotNull
 	private Integer collegeId;
-	private String collegeName;
-	
+
 }

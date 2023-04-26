@@ -12,9 +12,8 @@ import com.green.university.repository.model.StuStat;
 public interface StuStatRepository {
 
 	// 해당 학생의 현재 학적 상태 조회
-	public StuStat findByStudentIdOrderbyToDateDESC(Integer studentId);
+	public StuStat findByStudentIdOrderbyToDateDesc(Integer studentId);
 	
-	// 해당 학생의 학적 변동 내역 추가
-	public int insert(StuStat stuStat);
-	
+	// 학생의 첫 학적 상태 생성
+	public int insertFirstStatus(Integer studentId);
 }

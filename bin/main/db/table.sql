@@ -10,7 +10,7 @@ CREATE TABLE department_tb
    id INT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR (10) NOT NULL UNIQUE,
    college_id INT NOT NULL COMMENT '단과대 id',
-   FOREIGN KEY (college_id) REFERENCES college_tb (id)
+   FOREIGN KEY (college_id) REFERENCES college_tb (id) ON DELETE CASCADE
 );
 ALTER TABLE department_tb AUTO_INCREMENT = 101;
 -- 사용자
@@ -35,7 +35,7 @@ CREATE TABLE student_tb
    semester INT NOT NULL DEFAULT 1 COMMENT '학기',
    entrance_date DATE NOT NULL,
    graduation_date DATE,
-   FOREIGN KEY (dept_id) REFERENCES department_tb (id)
+   FOREIGN KEY (dept_id) REFERENCES department_tb (id) ON DELETE CASCADE
 );
 ALTER TABLE student_tb AUTO_INCREMENT = 2023000001;
 -- 교직원
@@ -63,7 +63,7 @@ CREATE TABLE professor_tb
    email VARCHAR (20) NOT NULL,
    dept_id INT NOT NULL,
    hire_date DATE DEFAULT (current_date),
-   FOREIGN KEY (dept_id) REFERENCES department_tb (id)
+   FOREIGN KEY (dept_id) REFERENCES department_tb (id) ON DELETE CASCADE
 );
 ALTER TABLE professor_tb AUTO_INCREMENT = 23000001;
 -- 강의실
@@ -71,7 +71,7 @@ CREATE TABLE room_tb
 (
    id VARCHAR (5) PRIMARY KEY,
    college_id INT NOT NULL,
-   FOREIGN KEY (college_id) REFERENCES college_tb (id)
+   FOREIGN KEY (college_id) REFERENCES college_tb (id) ON DELETE CASCADE
 );
 -- 강의
 CREATE TABLE subject_tb
@@ -88,9 +88,9 @@ CREATE TABLE subject_tb
    grades INT NOT NULL COMMENT '이수 학점',
    capacity INT NOT NULL COMMENT '수강 정원',
    num_of_student INT NOT NULL DEFAULT 0 COMMENT '현재 신청 인원',
-   FOREIGN KEY (professor_id) REFERENCES professor_tb (id),
-   FOREIGN KEY (room_id) REFERENCES room_tb (id),
-   FOREIGN KEY (dept_id) REFERENCES department_tb (id)
+   FOREIGN KEY (professor_id) REFERENCES professor_tb (id) ON DELETE CASCADE,
+   FOREIGN KEY (room_id) REFERENCES room_tb (id) ON DELETE CASCADE,
+   FOREIGN KEY (dept_id) REFERENCES department_tb (id) ON DELETE CASCADE
 );
 -- 과목 id 10000부터
 ALTER TABLE subject_tb AUTO_INCREMENT = 10000;
@@ -110,8 +110,8 @@ CREATE TABLE pre_stu_sub_tb
       student_id,
       subject_id
    ),
-   FOREIGN KEY (student_id) REFERENCES student_tb (id),
-   FOREIGN KEY (subject_id) REFERENCES subject_tb (id)
+   FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
+   FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE
 );
 -- 수강 내역
 CREATE TABLE stu_sub_tb (
@@ -128,7 +128,7 @@ CREATE TABLE coll_tuit_tb
 (
    college_id INT PRIMARY KEY,
    amount INT NOT NULL,
-   FOREIGN KEY (college_id) REFERENCES college_tb (id)
+   FOREIGN KEY (college_id) REFERENCES college_tb (id) ON DELETE CASCADE
 );
 -- 장학금
 CREATE TABLE scholarship_tb
@@ -167,7 +167,7 @@ CREATE TABLE tuition_tb
       tui_year,
       semester
    ),
-   FOREIGN KEY (student_id) REFERENCES student_tb (id),
+   FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
    FOREIGN KEY (sch_type) REFERENCES scholarship_tb (type)
 );
 -- 학적 상태
@@ -179,7 +179,7 @@ CREATE TABLE stu_stat_tb
    from_date DATE,
    to_date DATE,
    -- 현재 속한 상태인 경우 '9999-01-01'
-   FOREIGN KEY (student_id) REFERENCES student_tb (id)
+   FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE
 );
 -- 공지사항
 CREATE TABLE notice_tb
@@ -196,13 +196,14 @@ CREATE TABLE notice_file_tb
    notice_id INT NOT NULL,
    origin_filename VARCHAR (100) COMMENT '기존 파일명' NOT NULL,
    uuid_filename VARCHAR (255) COMMENT '랜덤 문자열 포함 파일명' NOT NULL,
-   FOREIGN KEY (notice_id) REFERENCES notice_tb (id)
+   FOREIGN KEY (notice_id) REFERENCES notice_tb (id) ON DELETE CASCADE
 );
 -- 휴학 신청 내역
 CREATE TABLE break_app_tb
 (
    id INT PRIMARY KEY AUTO_INCREMENT,
    student_id INT NOT NULL,
+   student_grade INT NOT NULL,
    from_year INT NOT NULL,
    from_semester INT NOT NULL,
    to_year INT NOT NULL,
@@ -235,5 +236,5 @@ CREATE TABLE syllabus_tb
 	objective VARCHAR(255) COMMENT '강의 목표',
 	textbook VARCHAR(30) COMMENT '교재',
 	program TEXT COMMENT '주별 계획',
-	FOREIGN KEY (subject_id) REFERENCES subject_tb(id)
+	FOREIGN KEY (subject_id) REFERENCES subject_tb (id)
 );

@@ -11,5 +11,6 @@ public class GradeDto {
 	private String name;
 	private String type;
 	private String grade;
+	private String grades;
 	private String gradeValue;
 }

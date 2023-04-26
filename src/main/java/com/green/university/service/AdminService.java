@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import com.green.university.dto.CollTuitFormDto;
 import com.green.university.dto.CollegeFormDto;
@@ -18,7 +19,11 @@ import com.green.university.repository.interfaces.DepartmentRepository;
 import com.green.university.repository.interfaces.NoticeRepository;
 import com.green.university.repository.interfaces.RoomRepository;
 import com.green.university.repository.interfaces.SubjectRepository;
+import com.green.university.repository.model.CollTuit;
 import com.green.university.repository.model.College;
+import com.green.university.repository.model.Department;
+import com.green.university.repository.model.Room;
+import com.green.university.repository.model.Subject;
 
 /**
  * 
@@ -45,7 +50,7 @@ public class AdminService {
 	 * 단과대 입력 서비스
 	 */
 	@Transactional
-	public void insertCollege(CollegeFormDto collegeFormDto) {
+	public void insertCollege(@Validated CollegeFormDto collegeFormDto) {
 		int resultRowCount = collegeRepository.insert(collegeFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("단과대 입력 서비스 오류");
@@ -62,13 +67,17 @@ public class AdminService {
 	}
 
 	/**
+	 * 단과대 삭제 서비스
+	 */
+	public int deleteCollege(Integer id) {
+		int resultRowCount = collegeRepository.delete(id);
+		return resultRowCount;
+	}
+
+	/**
 	 * 학과 입력 서비스
 	 */
-	@Transactional
-	public void insertDepartment(DepartmentFormDto departmentFormDto) {
-		System.out.println(departmentFormDto);
-		int collegeId = collegeRepository.findByName(departmentFormDto.getCollegeName());
-		departmentFormDto.setCollegeId(collegeId);
+	public void insertDepartment(@Validated DepartmentFormDto departmentFormDto) {
 		int resultRowCount = departmentRepository.insert(departmentFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("학과 입력 서비스 오류");
@@ -76,10 +85,37 @@ public class AdminService {
 	}
 
 	/**
+	 * 학과 조회 서비스
+	 */
+	public List<Department> findDepartment() {
+		List<Department> departmentList = departmentRepository.findAll();
+		return departmentList;
+	}
+
+	/**
+	 * 학과 삭제 서비스
+	 */
+	public int deleteDepartment(Integer collegeId) {
+		int resultRowCount = departmentRepository.delete(collegeId);
+		return resultRowCount;
+	}
+
+	/**
+	 * 학과 수정 서비스
+	 */
+	public int updateDepartment(DepartmentFormDto departmentFormDto) {
+		int resultRowCount = departmentRepository.update(departmentFormDto);  
+		if (resultRowCount != 1) {
+			System.out.println("학과 수정 서비스 오류");
+		}
+		return resultRowCount;
+	}
+
+	/**
 	 * 단과대별 등록금 입력 서비스
 	 */
 	@Transactional
-	public void insertCollTuit(CollTuitFormDto collTuitFormDto) {
+	public void insertCollTuit(@Validated CollTuitFormDto collTuitFormDto) {
 		int resultRowCount = collTuitRepository.insert(collTuitFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("단과대 등록금 입력 서비스 오류");
@@ -87,10 +123,37 @@ public class AdminService {
 	}
 
 	/**
+	 * 단과대 등록금 조회 서비스
+	 */
+	public List<CollTuit> findCollTuit() {
+		List<CollTuit> collTuitList = collTuitRepository.findAll();
+		return collTuitList;
+	}
+
+	/**
+	 * 단과대 등록금 삭제 서비스
+	 */
+	public int deleteCollTuit(Integer collegeId) {
+		int resultRowCount = collTuitRepository.delete(collegeId);
+		return resultRowCount;
+	}
+	
+	/**
+	 * 단과대 등록금 수정 서비스
+	 */
+	public int updateCollTuit(CollTuitFormDto collTuitFormDto) {
+		int resultRowCount = collTuitRepository.update(collTuitFormDto);  
+		if (resultRowCount != 1) {
+			System.out.println("단과대 등록금 수정 서비스 오류");
+		}
+		return resultRowCount;
+	}
+
+	/**
 	 * 강의실 입력 서비스
 	 */
 	@Transactional
-	public void insertRoom(RoomFormDto roomFormDto) {
+	public void insertRoom(@Validated RoomFormDto roomFormDto) {
 		int resultRowCount = roomRepository.insert(roomFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("강의실 입력 서비스 오류");
@@ -98,10 +161,26 @@ public class AdminService {
 	}
 
 	/**
+	 * 강의실 조회 서비스
+	 */
+	public List<Room> findRoom() {
+		List<Room> roomList = roomRepository.findAll();
+		return roomList;
+	}
+
+	/**
+	 * 강의실 삭제 서비스
+	 */
+	public int deleteRoom(String id) {
+		int resultRowCount = roomRepository.delete(id);
+		return resultRowCount;
+	}
+
+	/**
 	 * 강의 입력 서비스
 	 */
 	@Transactional
-	public void insertSubject(SubjectFormDto subjectFormDto) {
+	public void insertSubject(@Validated SubjectFormDto subjectFormDto) {
 		int resultRowCount = subjectRepository.insert(subjectFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("강의 입력 서비스 오류");
@@ -109,10 +188,37 @@ public class AdminService {
 	}
 
 	/**
+	 * 강의 조회 서비스
+	 */
+	public List<Subject> findSubject() {
+		List<Subject> subjectList = subjectRepository.findAll();
+		return subjectList;
+	}
+
+	/**
+	 * 강의 삭제 서비스
+	 */
+	public int deleteSubject(Integer id) {
+		int resultRowCount = subjectRepository.delete(id);
+		return resultRowCount;
+	}
+	
+	/**
+	 * 강의 수정 서비스
+	 */
+	public int updateSubject(SubjectFormDto subjectFormDto) {
+		int resultRowCount = subjectRepository.update(subjectFormDto);  
+		if (resultRowCount != 1) {
+			System.out.println("강의 수정 서비스 오류");
+		}
+		return resultRowCount;
+	}
+
+	/**
 	 * 공지 입력 서비스
 	 */
 	@Transactional
-	public void insertNotice(NoticeFormDto noticeFormDto) {
+	public void insertNotice(@Validated NoticeFormDto noticeFormDto) {
 		int resultRowCount = noticeRepository.insert(noticeFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("공지 입력 서비스 오류");

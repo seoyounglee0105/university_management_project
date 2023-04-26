@@ -9,6 +9,16 @@ VALUES
    '토목과',
    1
 );
+INSERT INTO department_tb
+(
+   name,
+   college_id
+)
+VALUES
+(
+   '산업공학과',
+   1
+);
 INSERT INTO student_tb
 (
    id,
@@ -32,7 +42,7 @@ VALUES
    '부산광역시 수영구',
    '010-1111-1111',
    'b@test.com',
-   101,
+   102,
    1,
    1,
    '2018-03-02'
