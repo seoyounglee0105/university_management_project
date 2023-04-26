@@ -65,7 +65,7 @@ button{
 		<h1>비밀번호 변경</h1>
 		<div class="split--div"></div>
 		<form action="/password" method="post">
-			
+			<input type="hidden" name="_method" value="put"/>
 			<table class="input--table">
 				
 				<tr>

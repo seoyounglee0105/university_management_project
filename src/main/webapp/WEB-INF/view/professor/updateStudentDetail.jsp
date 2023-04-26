@@ -59,43 +59,69 @@ form {
 
 	<!-- 메인 div -->
 	<main>
-		<h1>학생 리스트 조회</h1>
+		<h1>학생 성적 기입</h1>
 		<table border="1">
 			<thead>
 				<tr>
 					<th>학생 번호</th>
 					<th>이름</th>
-					<th>소속</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>${student.studentId}</td>
-					<td>${student.studentName}</td>
-					<td>${student.deptName}</td>
+					<td>${student.id}</td>
+					<td>${student.name}</td>
 				</tr>
 			</tbody>
 		</table>
-		<table>
-			<tr>
-				<td><label>결석</label><input type="number" name="absent" id="absent"></td>
-			</tr>
-			<tr>
-				<td><label>지각</label><input type="number" name="lateness" id="lateness"></td>
-			</tr>
-			<tr>
-				<td><label>과제점수</label><input type="number" name="homework" id="homework"></td>
-			</tr>
-			<tr>
-				<td><label>중간시험</label><input type="number" name="midExam" id="midExam"></td>
-			</tr>
-			<tr>
-				<td><label>기말시험</label><input type="number" name="finalExam" id="finalExam"></td>
-			</tr>
-			<tr>
-				<td><label>환산점수</label><input type="number" name="convertedMark" id="convertedMark"></td>
-			</tr>
-		</table>
+		<form action="/professor/detail/${subjectId}/${student.id}" method="post">
+		<input type="hidden" name="_method" value="put"/>
+			<table>
+				<tr>
+					<td><label>결석</label></td>
+					<td><input type="number" name="absent" id="absent" value="1"></td>
+					<td><span style="color:#888">※결석 5회 이상시 F학점입니다.</span></td>
+				</tr>
+				<tr>
+					<td><label>지각</label></td>
+					<td><input type="number" name="lateness" id="lateness" value="1"></td>
+				</tr>
+				<tr>
+					<td><label>과제점수</label></td>
+					<td><input type="number" name="homework" id="homework" value="8"></td>
+				</tr>
+				<tr>
+					<td><label>중간시험</label></td>
+					<td><input type="number" name="midExam" id="midExam" value="25"></td>
+				</tr>
+				<tr>
+					<td><label>기말시험</label></td>
+					<td><input type="number" name="finalExam" id="finalExam" value="35"></td>
+				</tr>
+				<tr>
+					<td><label>환산점수</label></td>
+					<td><input type="number" name="convertedMark" id="convertedMark" value="68"></td>
+				</tr>
+				<tr>
+					<td><label>등급</label></td>
+					<td><select name="grade">
+							<option value="A+">A+</option>
+							<option value="A0">A0</option>
+							<option value="B+">B+</option>
+							<option value="B0">B0</option>
+							<option value="C+">C+</option>
+							<option value="C0">C0</option>
+							<option value="D+">D+</option>
+							<option value="D0">D0</option>
+							<option value="F">F</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="submit">제출</button> </td>
+				</tr>
+
+			</table>
+		</form>
 
 	</main>
 </div>

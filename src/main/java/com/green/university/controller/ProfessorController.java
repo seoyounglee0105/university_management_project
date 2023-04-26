@@ -10,16 +10,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.green.university.dto.UpdateStudentGradeDto;
 import com.green.university.dto.response.PrincipalDto;
 import com.green.university.dto.response.StudentInfoForProfessorDto;
 import com.green.university.dto.response.SubjectForProfessorDto;
 import com.green.university.dto.response.SubjectPeriodForProfessorDto;
+import com.green.university.repository.model.Student;
 import com.green.university.repository.model.Subject;
 import com.green.university.service.ProfessorService;
+import com.green.university.service.UserService;
 import com.green.university.utils.Define;
 
 /**
@@ -35,6 +38,8 @@ public class ProfessorController {
 	private ProfessorService professorService;
 	@Autowired
 	private HttpSession session;
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * 본인의 강의가 있는 년도 학기 조회하는 기능 조회한 년도 학기의 강의 리스트 출력(처음값은 현재학기)
@@ -100,12 +105,34 @@ public class ProfessorController {
 		return "/professor/subjectStudentList";
 	}
 
+	/**
+	 * 
+	 * @param model
+	 * @param subjectId
+	 * @param studentId
+	 * @return 출결 및 성적 기입 페이지
+	 */
 	@GetMapping("/detail/{subjectId}/{studentId}")
 	public String updateStudentDetail(Model model, @PathVariable Integer subjectId, @PathVariable Integer studentId) {
 		
+		Student student = userService.readStudent(studentId);
+		model.addAttribute("student", student);
+		model.addAttribute("subjectId", subjectId);
 		
 		
 		return "/professor/updateStudentDetail";
+	}
+	
+	@PutMapping("/detail/{subjectId}/{studentId}")
+	public String updateStudentDetailProc(Model model, @PathVariable Integer subjectId, @PathVariable Integer studentId, UpdateStudentGradeDto updateStudentGradeDto) {
+		
+		System.out.println(updateStudentGradeDto);
+		updateStudentGradeDto.setStudentId(studentId);
+		updateStudentGradeDto.setSubjectId(subjectId);
+		
+		professorService.updateGrade(updateStudentGradeDto);
+		
+		return "redirect:/professor/ " + subjectId + "/" + studentId;
 	}
 
 }

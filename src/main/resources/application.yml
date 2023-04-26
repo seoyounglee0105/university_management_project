@@ -10,6 +10,9 @@ spring:
     view:
       prefix: /WEB-INF/view/ # jsp 파일 경로
       suffix: .jsp # 확장자
+    hiddenmethod:
+      filter:
+        enabled: true
   datasource: 
     url: jdbc:h2:mem:testdb;MODE=MySQL
     driver-class-name: org.h2.Driver

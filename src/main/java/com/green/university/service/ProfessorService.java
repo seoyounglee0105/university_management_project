@@ -3,12 +3,17 @@ package com.green.university.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.green.university.dto.UpdateStudentGradeDto;
 import com.green.university.dto.response.StudentInfoForProfessorDto;
 import com.green.university.dto.response.SubjectForProfessorDto;
 import com.green.university.dto.response.SubjectPeriodForProfessorDto;
+import com.green.university.handler.MyRestFullExceptionHandler;
+import com.green.university.handler.exception.CustomRestfullException;
+import com.green.university.repository.interfaces.StuSubDetailRepository;
 import com.green.university.repository.interfaces.StuSubRepository;
 import com.green.university.repository.interfaces.SubjectRepository;
 import com.green.university.repository.model.Subject;
@@ -23,6 +28,8 @@ public class ProfessorService {
 	private SubjectRepository subjectRepository;
 	@Autowired
 	private StuSubRepository stuSubRepository;
+	@Autowired
+	private StuSubDetailRepository stuSubDetailRepository;
 	
 	/**
 	 * 교수가 맡은 과목들의 학기 검색
@@ -69,6 +76,17 @@ public class ProfessorService {
 		Subject subjectEntity = subjectRepository.selectSubjectById(id);
 		
 		return subjectEntity;
+	}
+	
+	@Transactional
+	public void updateGrade(UpdateStudentGradeDto updateStudentGradeDto) {
+		
+		int resultCountRow = stuSubDetailRepository.updateGrade(updateStudentGradeDto);
+		
+		if (resultCountRow != 1) {
+			throw new CustomRestfullException("요청을 처리하지 못했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 
 }
