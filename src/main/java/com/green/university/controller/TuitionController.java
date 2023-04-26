@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.green.university.dto.response.PrincipalDto;
 import com.green.university.handler.exception.CustomRestfullException;
+import com.green.university.repository.model.BreakApp;
+import com.green.university.repository.model.StuStat;
 import com.green.university.repository.model.Student;
 import com.green.university.repository.model.Tuition;
+import com.green.university.service.BreakAppService;
 import com.green.university.service.CollegeService;
 import com.green.university.service.StuStatService;
 import com.green.university.service.TuitionService;
@@ -48,6 +51,9 @@ public class TuitionController {
 	@Autowired
 	private CollegeService collegeService;
 	
+	@Autowired
+	private BreakAppService breakAppService;
+	
 	/**
 	 * @return 납부된 등록금 내역 조회 페이지
 	 */
@@ -67,7 +73,6 @@ public class TuitionController {
 	 * @return 등록금 납부 고지서 조회 페이지
 	 * 
 	 * 해당 학기 (2023-1)에 등록금을 납부한 기록이 있다면 납부하기 버튼 제거
-	 * 현재 '재학' 상태인 사용자만 진입 가능하게 할 예정
 	 */
 	@GetMapping("/payment")
 	public String tuitionPayment(Model model) {
@@ -75,6 +80,31 @@ public class TuitionController {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Student studentInfo = userService.readStudent(principal.getId());
 		model.addAttribute("student", studentInfo);
+		
+		// 등록금 납부 대상이 아니라면 진입 불가
+		// 해당 학생의 학적 상태가 '졸업' 또는 '자퇴'라면
+		StuStat stuStatEntity = stuStatService.readCurrentStatus(studentInfo.getId());
+		if (stuStatEntity.getStatus().equals("졸업") || stuStatEntity.getStatus().equals("자퇴")) {
+			System.out.println("졸업 또는 자퇴한 학생입니다.");
+			throw new CustomRestfullException("등록금 납부 대상이 아닙니다.", HttpStatus.BAD_REQUEST);
+		}
+		
+		// 해당 학생이 현재 학기 휴학을 승인받은 상태라면
+		List<BreakApp> breakAppList = breakAppService.readByStudentId(studentInfo.getId()); // 최근 순으로 정렬되어 있음
+		for (BreakApp b : breakAppList) {
+			// 휴학 신청이 승인된 상태일 때
+			if (b.getStatus().equals("승인")) {
+				// 휴학 종료 연도가 현재 연도보다 이후라면 생성하지 않음
+				if (b.getToYear() > Define.CURRENT_YEAR) {
+					throw new CustomRestfullException("등록금 납부 대상이 아닙니다.", HttpStatus.BAD_REQUEST);
+				// 휴학 종료 연도가 현재 연도와 같을 경우
+				} else if (b.getToYear() == Define.CURRENT_YEAR) {
+					if (b.getToSemester() >= Define.CURRENT_SEMESTER) {
+						throw new CustomRestfullException("등록금 납부 대상이 아닙니다.", HttpStatus.BAD_REQUEST);
+					}
+				}
+			}
+		}
 		
 		// 학과 이름
 		String deptName = collegeService.readDeptById(studentInfo.getDeptId()).getName();
@@ -84,16 +114,11 @@ public class TuitionController {
 		String collName = collegeService.readCollById(collegeService.readDeptById(studentInfo.getDeptId()).getCollegeId()).getName();
 		model.addAttribute("collName", collName);
 		
-		// 재학 상태의 사용자만 들어올 수 있게 함
-//		if () {
-//			throw new CustomRestfullException("등록금 납부 대상이 아닙니다.", null);
-//		}
-		
 		// principal.getId()를 매개변수로
 		Tuition tuitionEntity = tuitionService.readByStudentIdAndSemester(principal.getId(), Define.CURRENT_YEAR, Define.CURRENT_SEMESTER);
 		
 		// 등록금 고지서가 생성되어 있지 않다면 들어올 수 없음
-		if (tuitionEntity == null) {               // 이거 Http 상태 코드 다른 거 해야 할 것 같은데 임시로 이거
+		if (tuitionEntity == null) {               
 			throw new CustomRestfullException("등록금 납부 기간이 아닙니다.", HttpStatus.BAD_REQUEST);
 		}
 		
@@ -137,7 +162,6 @@ public class TuitionController {
 		
 		// 모든 학생에 대해 일괄 생성 (고지서 생성 대상인지는 서비스에서 확인)
 		for (Integer studentId : studentIdList) {
-			System.out.println(studentId);
 			// 생성될 때마다 +1됨
 			insertCount += tuitionService.createTuition(studentId);
 		}

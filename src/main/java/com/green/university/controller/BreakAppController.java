@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.green.university.dto.BreakAppFormDto;
 import com.green.university.dto.response.PrincipalDto;
 import com.green.university.handler.exception.CustomRestfullException;
+import com.green.university.handler.exception.UnAuthorizedException;
 import com.green.university.repository.model.BreakApp;
 import com.green.university.repository.model.College;
 import com.green.university.repository.model.Student;
@@ -50,7 +51,7 @@ public class BreakAppController {
 	private CollegeService collegeService;
 	
 	/**
-	 * @return 휴복학 신청 페이지
+	 * @return 휴학 신청 페이지
 	 */
 	@GetMapping("/application")
 	public String breakApplication(Model model) {
@@ -67,8 +68,6 @@ public class BreakAppController {
 		String collName = collegeService.readCollById(collegeService.readDeptById(studentInfo.getDeptId()).getCollegeId()).getName();
 		model.addAttribute("collName", collName);
 		
-		
-		// principal로 바꾸기
 		// 학생이 재학 상태가 아니라면 신청 불가능
 		if (stuStatService.readCurrentStatus(principal.getId()).getStatus().equals("재학") == false) {
 			throw new CustomRestfullException("휴학 신청 대상이 아닙니다.", HttpStatus.BAD_REQUEST);
@@ -91,7 +90,6 @@ public class BreakAppController {
 		if (Define.CURRENT_YEAR == breakAppFormDto.getToYear() && Define.CURRENT_SEMESTER > breakAppFormDto.getToSemester()) {
 			throw new CustomRestfullException("종료 학기가 시작 학기 이전입니다.", HttpStatus.BAD_REQUEST);
 		}
-		// principal로 고치기
 		breakAppFormDto.setStudentId(principal.getId());
 		breakAppFormDto.setFromYear(Define.CURRENT_YEAR);
 		breakAppFormDto.setFromSemester(Define.CURRENT_SEMESTER);
@@ -109,7 +107,6 @@ public class BreakAppController {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		
-		// principal로 고치기
 		List<BreakApp> breakAppList = breakAppService.readByStudentId(principal.getId());
 		
 		model.addAttribute("breakAppList", breakAppList);
@@ -119,6 +116,8 @@ public class BreakAppController {
 	
 	/**
 	 * @return 처리되지 않은 휴복학 신청 내역 페이지 (교직원용)
+	 * ++ 처리되지 않은 신청 내역이 있다면 메뉴에 띄우거나
+	 * 로그인 시 팝업으로 떴으면 함
 	 */
 	@GetMapping("/appListStaff")
 	public String breakAppListByState(Model model) {
@@ -133,8 +132,8 @@ public class BreakAppController {
 	}
 	
 	/**
-	 * @return 휴복학 신청서 확인
-	 * 학생 / 교직원에 따라 옆에 카테고리랑 밑에 버튼 바뀌어야 함
+	 * @return 휴학 신청서 확인
+	 * 학생 / 교직원에 따라 옆에 카테고리 바뀌어야 함
 	 */
 	@GetMapping("/detail/{id}")
 	public String breakDetail(@PathVariable Integer id, Model model) {
@@ -162,7 +161,11 @@ public class BreakAppController {
 	@PostMapping("/delete/{id}")
 	public String deleteBreakApp(@PathVariable Integer id) {
 		
+		// 신청서의 학번과 현재 로그인된 아이디가 일치하는지 확인
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		if (breakAppService.readById(id).getStudentId() != principal.getId()) {
+			throw new UnAuthorizedException("해당 신청자만 신청을 취소할 수 있습니다.", HttpStatus.UNAUTHORIZED);
+		}
 		
 		breakAppService.deleteById(id);
 		
@@ -174,8 +177,6 @@ public class BreakAppController {
 	 */
 	@PostMapping("/update/{id}")
 	public String updateBreakApp(@PathVariable Integer id, String status) {	
-		
-		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		
 		breakAppService.updateById(id, status);
 		

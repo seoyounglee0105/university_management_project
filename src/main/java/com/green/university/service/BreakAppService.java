@@ -12,6 +12,7 @@ import com.green.university.handler.exception.CustomPathException;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.BreakAppRepository;
 import com.green.university.repository.model.BreakApp;
+import com.green.university.utils.Define;
 
 /**
  * @author 서영
@@ -92,9 +93,6 @@ public class BreakAppService {
 	@Transactional
 	public void deleteById(Integer id) {
 		
-		// 신청서의 학번과 현재 로그인된 아이디가 일치하는지 확인
-		
-		
 		// 처리중 상태인지 확인
 		BreakApp breakAppEntity = readById(id);
 		if (breakAppEntity.getStatus().equals("처리중") == false) {
@@ -113,11 +111,23 @@ public class BreakAppService {
 	 */
 	@Transactional
 	public void updateById(Integer id, String status) {
+				
+		int resultRowCount = breakAppRepository.updateById(id, status);
 		
 		// 승인 시 학적 상태를 휴학으로 변경하기
+		if (status.equals("승인")) {
+			BreakApp breakAppEntity = breakAppRepository.findById(id);
+			
+			String newToDate = null;
+			if (breakAppEntity.getToSemester() == 1) {
+				newToDate = breakAppEntity.getToYear() + "-08-31";
+			} else {
+				newToDate = (breakAppEntity.getToYear() + 1) + "-02-28";
+			}
+			
+			stuStatService.updateStatus(breakAppEntity.getStudentId(), "휴학", newToDate);
+		}
 		
-		
-		int resultRowCount = breakAppRepository.updateById(id, status);
 		
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("신청이 처리되지 않았습니다.", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -7,8 +7,12 @@
 	SELECT * FROM stu_stat_tb WHERE student_id = #{studentId} ORDER BY to_date DESC LIMIT 1
 </select>
 
-<insert id="insertFirstStatus">
-	INSERT INTO stu_stat_tb VALUES (#{studentId}, '재학', now(), '9999-01-01')
+<insert id="insert">
+	INSERT INTO stu_stat_tb (student_id, status, from_date, to_date) VALUES (#{studentId}, #{status}, now(), #{toDate})
 </insert>
+
+<update id="updateOldStatus">
+	UPDATE stu_stat_tb SET to_date = now() WHERE id = #{id}
+</update>
 
 </mapper>
