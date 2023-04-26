@@ -3,11 +3,6 @@
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 <style>
-.split--div {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
 
 #insert--form {
 	padding: 50px;
@@ -60,7 +55,7 @@
 					<td><a href="/admin/collTuit">단대별 등록금</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/notice">공지사항</a></td>
+					<td><a href="/board/notice">공지사항</a></td>
 				</tr>
 			</table>
 		</div>
@@ -69,7 +64,7 @@
 	<!-- 메인 div -->
 	<main>
 		<h1>강의실</h1>
-		<div class="split--div">
+		<div class="split--div"></div>
 
 			<div>
 				<a href="/admin/room?crud=insert">등록</a> <a href="/admin/room?crud=delete">삭제</a>
@@ -129,9 +124,8 @@
 					</c:forEach>
 				</table>
 			</c:if>
-		</div>
 	</main>
-</div>
+
 			<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
 		</div>

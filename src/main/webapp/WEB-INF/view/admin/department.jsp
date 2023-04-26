@@ -3,11 +3,6 @@
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 <style>
-.split--div {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
 .select--button {
 	padding: 20px;
 }
@@ -63,7 +58,7 @@
 					<td><a href="/admin/collTuit">단대별 등록금</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/notice">공지사항</a></td>
+					<td><a href="/board/notice">공지사항</a></td>
 				</tr>
 			</table>
 		</div>
@@ -72,7 +67,7 @@
 	<!-- 메인 div -->
 	<main>
 		<h1>학과</h1>
-		<div class="split--div">
+		<div class="split--div"></div>
 			<div class="select--button">
 				<a href="/admin/department?crud=insert">등록</a>
 				<a href="/admin/department?crud=update">수정</a> 
@@ -84,7 +79,8 @@
 			<c:if test="${crud.equals(\"insert\")}">
 				<form action="/admin/department-proc" method="get" id="insert--form">
 					<h5>등록할 학과명을 입력해주세요</h5>
-					학과명 <input type="text" name="name" value="전자과"> 단과대학 
+					학과명 <input type="text" name="name" value="전자과"> 
+					단과대학 
 					<select name="collegeId">
 						<c:forEach var="college" items="${collegeList}">
 							<option value="${college.id}">${college.name}</option>
@@ -177,9 +173,8 @@
 					</c:forEach>
 				</table>
 			</c:if>
-		</div>
 	</main>
-</div>
+
 			<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
 		</div>
