@@ -75,14 +75,69 @@ form {
 	<main>
 		<h1>공지사항</h1>
 		<div class="split--div">
+		<a href="/board/notice?crud=insert">글쓰기</a>
+		
+		<!-- 공지 조회 -->
+			<c:if test="${crud.equals(\"select\")}">
+				<table class="notice--table">
+					<tr class="first--tr">
+						<td>번호</td>
+						<td>말머리</td>
+						<td>제목</td>
+						<td>작성일</td>
+					</tr>
+					<c:forEach var="notice" items="${noticeList}">
+						<tr onclick="location.href='/board/notice-proc-detail?id=${notice.id}';">
+							<td>${notice.id}</td>
+							<td>${notice.category}</td>
+							<td>${notice.title}</td>
+							<td>${notice.createdTime}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
+			
+			
+			
+		<!-- 공지 상세 조회 -->
+			<c:if test="${crud.equals(\"selectDetail\")}">
+						${notice.id}
+						말머리 ${notice.category}
+					<div class="title"> 
+						제목 ${notice.title} 
+					</div>
+						내용 ${notice.content}
+						
+					<a onclick="location.href='/board/notice-proc-detail?id=${notice.id}'">수정</a>
+					<a onclick="location.href='/board/notice-proc-detail?id=${notice.id}'">삭제</a>
+			</c:if>
+		
+		
+		<!-- 공지 수정 -->
+		<c:if test="${crud.equals(\"update\")}">
+			<form action="" method="post">
+				${notice.id}
+				말머리 ${notice.category}
+			<div class="title"> 
+				제목 <input type="text" value="${notice.title}"> 
+			</div>
+				내용 <input type="text" value="${notice.content}">
+				<input type="submit" value="수정">
+			</form>
+		</c:if>
+		
+		
+		
+		<!-- 공지 등록 -->
+		<c:if test="${crud.equals(\"insert\")}">
 			<form action="/board/notice-proc" method="post">
 				<h5>공지 글쓰기</h5>
 					<div class="title--top">
 						말머리 
 						<select name="category">
-							<option value="일반">일반</option>
-							<option value="학사">학사</option>
-							<option value="등록금">등록금</option>
+							<option value="[일반]">[일반]</option>
+							<option value="[학사]">[학사]</option>
+							<option value="[등록금]">[등록금]</option>
 						</select>
 					</div>
 					<div class="title">
@@ -90,13 +145,23 @@ form {
 					</div>
 						내용 <textarea name="content" cols="60" rows="20">등록금 납부기한 22일까지입니다</textarea> 
 					<div class="custom-file">
-    					<input type="file" name="file" class="" id="" accept=".jpg, .jpeg, .png">
-    					<label>파일 첨부하기</label>
- 			 		</div> 
+			   	 		<input type="file" class="custom-file-input" id="customFile" name="file" accept=".jpg, .jpeg, .png" >
+			    		<label class="custom-file-label" for="customFile">Choose file</label>
+		  			</div>
 				<input type="submit" value="등록">
 			</form>
-		</div>
-	</main>
+			<script>
+				$(".custom-file-input").on("change",function() {
+					var fileName = $(this).val().split("\\").pop();
+					$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+				});
+			</script>
+		</c:if>
+		
+		
+			
+	</div>
+</main>
 
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 

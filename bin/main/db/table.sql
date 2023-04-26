@@ -190,6 +190,7 @@ CREATE TABLE stu_stat_tb
 CREATE TABLE notice_tb
 (
    id INT PRIMARY KEY AUTO_INCREMENT,
+   category VARCHAR (10) NOT NULL,
    title VARCHAR (255) NOT NULL,
    content TEXT NOT NULL,
    created_time TIMESTAMP DEFAULT now (),
