@@ -8,14 +8,12 @@
 	flex-direction: column;
 	align-items: center;
 }
-.select--button {
-	padding: 20px;
-}
+
 #insert--form {
 	padding: 50px;
 }
 
-.college--table {
+.room--table {
 	border: 1px solid gray;
 	text-align: center;
 	width: 500px;
@@ -23,11 +21,11 @@
 	margin: 10px;
 }
 
-.college--table tr {
+.room--table tr {
 	border: 1px solid black;
 }
 
-.college--table td {
+.room--table td {
 	border: 1px solid black;
 }
 
@@ -40,14 +38,14 @@
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>수업</h2>
+			<h2>강의실</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/admin/college" class="selected--menu">단과대학</a></td>
+					<td><a href="/admin/college" class="selected--menu">강의실</a></td>
 				</tr>
 				<tr>
 					<td><a href="/admin/department">학과</a></td>
@@ -70,62 +68,63 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>단과대학</h1>
+		<h1>강의실</h1>
 		<div class="split--div">
-			<div class="select--button">
-				<a href="/admin/college?crud=insert">등록</a> 
-				<a href="/admin/college?crud=delete">삭제</a>
+
+			<div>
+				<a href="/admin/room?crud=insert">등록</a> <a href="/admin/room?crud=delete">삭제</a>
 			</div>
 
-			<!-- 단과대학 조회 -->
-			<c:if test="${crud.equals(\"select\")}">
-				<table class="college--table" border="1">
-					<tr class="first--tr">
-						<td>ID</td>
-						<td>이름</td>
-					</tr>
-					<c:forEach var="college" items="${collegeList}">
-						<tr>
-							<td>${college.id}</td>
-							<td>${college.name}</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</c:if>
 
-			<!-- 단과대학 입력 -->
+			<!-- 강의 입력 -->
 			<c:if test="${crud.equals(\"insert\")}">
-				<form action="/admin/college-proc" method="post" id="insert--form">
-					<h5>단과대학을 등록해주세요</h5>
-					이름 <input type="text" name="name" value="인문대학"> <input type="submit" value="입력">
+				<form action="/admin/room-proc" method="post" id="insert--form">
+					<h5>등록할 강의실을 입력해주세요</h5>
+					강의실 <input type="text" name="id" value="C250"> 단과대ID <input type="text" name="collegeId" value="1"> <input type="submit" value="입력">
 				</form>
-
-				<table class="college--table" border="1">
+				<table class="room--table">
 					<tr class="first--tr">
-						<td>ID</td>
-						<td>이름</td>
+						<td>강의실</td>
+						<td>단과대ID</td>
 					</tr>
-					<c:forEach var="college" items="${collegeList}">
+					<c:forEach var="room" items="${roomList}">
 						<tr>
-							<td>${college.id}</td>
-							<td>${college.name}</td>
+							<td>${room.id}</td>
+							<td>${room.collegeId}</td>
 						</tr>
 					</c:forEach>
 				</table>
 			</c:if>
 
-			<!-- 단과대학 삭제 -->
+			<!-- 강의 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
-				<h5>삭제할 단과대학 이름을 클릭해주세요</h5>
-				<table class="college--table" border="1">
+				<h5>삭제할 강의실을 클릭해주세요</h5>
+				<table class="room--table">
 					<tr class="first--tr">
-						<td>ID</td>
-						<td>이름</td>
+						<td>강의실</td>
+						<td>단과대ID</td>
 					</tr>
-					<c:forEach var="college" items="${collegeList}">
+					<c:forEach var="room" items="${roomList}">
 						<tr>
-							<td>${college.id}</td>
-							<td><a href="/updAdmin/deCollege?id=${college.id}">${college.name}</a></td>
+							<td><a href="/updAdmin/deRoom?id=${room.id}">${room.id}</a></td>
+							<td>${room.collegeId}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
+
+
+			<!-- 강의 조회 -->
+			<c:if test="${crud.equals(\"select\")}">
+				<table class="room--table">
+					<tr class="first--tr">
+						<td>강의실</td>
+						<td>단과대ID</td>
+					</tr>
+					<c:forEach var="room" items="${roomList}">
+						<tr>
+							<td>${room.id}</td>
+							<td>${room.collegeId}</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -133,9 +132,9 @@
 		</div>
 	</main>
 </div>
-<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+			<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
-</div>
+		</div>
 
-</body>
-</html>
+		</body>
+		</html>

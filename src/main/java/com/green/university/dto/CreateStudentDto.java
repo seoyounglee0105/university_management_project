@@ -27,7 +27,6 @@ public class CreateStudentDto {
 	private String gender;
 	@NotEmpty
 	private String address;
-	@NotEmpty
 	@NotBlank
 	private String tel;
 	@Min(100)

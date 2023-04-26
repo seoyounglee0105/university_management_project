@@ -20,4 +20,5 @@ public interface CollegeRepository {
 	public List<College> findAll();
 	public int findByName(String name);
 	public College findById(Integer id);
+	public int delete(Integer id);
 }

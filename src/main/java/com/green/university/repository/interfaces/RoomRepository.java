@@ -1,8 +1,12 @@
 package com.green.university.repository.interfaces;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.green.university.dto.RoomFormDto;
+import com.green.university.repository.model.Department;
+import com.green.university.repository.model.Room;
 
 /*
  *  박성희
@@ -12,4 +16,6 @@ import com.green.university.dto.RoomFormDto;
 @Mapper
 public interface RoomRepository {
 	public int insert(RoomFormDto roomFormDto);
+	public List<Room> findAll();
+	public int delete(String id);
 }

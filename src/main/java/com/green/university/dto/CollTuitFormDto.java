@@ -14,11 +14,9 @@ import lombok.Data;
  */
 @Data
 public class CollTuitFormDto {
-	@NotNull
 	@NotBlank
-	@NotEmpty
-	private College collegeId;
-	@NotNull
+	private Integer collegeId;
+	private String 	name;
 	@NotEmpty
 	private Integer amount;
 }

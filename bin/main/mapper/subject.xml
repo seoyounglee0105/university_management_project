@@ -4,8 +4,18 @@
 <mapper
 	namespace="com.green.university.repository.interfaces.SubjectRepository">
 	<insert id="insert">
-		insert into subject_tb (name, professor_id, room_id, dept_id, type, sub_year, semester, time, grades, capacity, num_of_student)
-		values(#{name}, #{professorId}, #{roomId}, #{deptId}, #{type}, #{subYear}, #{semester}, #{time}, #{grades}, #{capacity}, #{numOfStudent})
+		insert into subject_tb (name, professor_id, room_id, dept_id, type, sub_year, semester, time, grades, capacity )
+		values(#{name}, #{professorId}, #{roomId}, #{deptId}, #{type}, #{subYear}, #{semester}, #{time}, #{grades}, #{capacity} )
 	</insert>
-
+	<select id="findAll" resultType="com.green.university.repository.model.Subject">
+		select * from subject_tb
+	</select>
+	<delete id="delete">
+		delete from subject_tb where id = #{id}
+	</delete>
+	<update id="update">
+		UPDATE subject_tb
+		SET name = #{name}, room_id = #{roomId}, time = #{time}, capacity = #{capacity}
+		WHERE id = #{id}
+	</update>
 </mapper>
