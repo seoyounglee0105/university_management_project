@@ -108,20 +108,21 @@ form {
 					</div>
 						내용 ${notice.content}
 						
-					<a onclick="location.href='/board/notice-proc-detail?id=${notice.id}'">수정</a>
-					<a onclick="location.href='/board/notice-proc-detail?id=${notice.id}'">삭제</a>
+					<a href="/board/notice-update-page?id=${notice.id}">수정</a>
+					<a href="/board/notice-proc-detail?id=${notice.id}">삭제</a>
 			</c:if>
 		
 		
 		<!-- 공지 수정 -->
 		<c:if test="${crud.equals(\"update\")}">
-			<form action="" method="post">
+			<form action="/board/notice-update" method="post">
+			<input type="hidden" name="id" value="${notice.id}">
 				${notice.id}
 				말머리 ${notice.category}
 			<div class="title"> 
-				제목 <input type="text" value="${notice.title}"> 
+				제목 <input type="text" name="title" value="${notice.title}"> 
 			</div>
-				내용 <input type="text" value="${notice.content}">
+				내용 <textarea rows="20" cols="60" name="content">${notice.content}</textarea>
 				<input type="submit" value="수정">
 			</form>
 		</c:if>

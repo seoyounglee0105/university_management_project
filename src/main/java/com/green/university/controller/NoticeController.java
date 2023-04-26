@@ -48,7 +48,6 @@ public class NoticeController {
 	 */
 	@PostMapping("/notice-proc")
 	public String insertNotice(@Validated NoticeFormDto noticeFormDto) {
-		System.out.println(noticeFormDto);
 		noticeService.insertNotice(noticeFormDto);
 		return "redirect:/board/notice";
 	}
@@ -62,7 +61,6 @@ public class NoticeController {
 		model.addAttribute("crud", "selectDetail");
 		model.addAttribute("id", id);
 		Notice notice = noticeService.findByIdNotice(id);
-		System.out.println(notice);
 		if (notice == null) {
 			model.addAttribute("notice", null);
 		} else {
@@ -76,15 +74,12 @@ public class NoticeController {
 	 * @return 공지사항 수정 페이지
 	 */
 	@GetMapping("/notice-update-page")
-	public String update(Model model, @RequestParam Integer id, @Validated NoticeFormDto noticeFormDto) {		
+	public String update(Model model, @RequestParam Integer id) {		
 		model.addAttribute("crud", "update");
 		model.addAttribute("id", id);
+
 		Notice notice = noticeService.findByIdNotice(id);
-		if (notice == null) {
-			model.addAttribute("notice", null);
-		} else {
-			model.addAttribute("notice", notice);
-		}
+		model.addAttribute("notice", notice);
 		return "/board/notice";
 	}
 	
@@ -93,8 +88,9 @@ public class NoticeController {
 	 * 
 	 * @return 공지사항 수정 기능
 	 */
-	@GetMapping("/notice-update")
+	@PostMapping("/notice-update")
 	public String update(@Validated NoticeFormDto noticeFormDto) { 
+		System.out.println(noticeFormDto);
 		noticeService.updateNotice(noticeFormDto);
 		return "redirect:/board/notice";
 	}
@@ -106,15 +102,7 @@ public class NoticeController {
 	 */
 	@GetMapping("/notice-delete")
 	public String delete(Model model, @RequestParam Integer id) {		
-		model.addAttribute("crud", "selectDetail");
-		model.addAttribute("id", id);
-		Notice notice = noticeService.findByIdNotice(id);
-		System.out.println(notice);
-		if (notice == null) {
-			model.addAttribute("notice", null);
-		} else {
-			model.addAttribute("notice", notice);
-		}
+
 		return "/board/notice";
 	}
 	
