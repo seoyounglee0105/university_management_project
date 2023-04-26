@@ -16,6 +16,12 @@ public class Define {
 	
 	public final static int CURRENT_SEMESTER = 1;
 	
+	// 이미지 처리 관련
+	// 1KB = 1024byte
+	// 1MB = 1024*1024 = 1,048,476 byte
+	public final static String UPLOAD_DIRECTORY = "C:\\spring_upload\\universityManagement\\upload";
+	public final static int MAX_FILE_SIZE = 1024 * 1024 * 20;
+	
 	
 	
 }

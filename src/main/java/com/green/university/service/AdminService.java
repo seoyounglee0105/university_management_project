@@ -4,14 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.university.dto.CollTuitFormDto;
 import com.green.university.dto.CollegeFormDto;
 import com.green.university.dto.DepartmentFormDto;
-import com.green.university.dto.NoticeFormDto;
 import com.green.university.dto.RoomFormDto;
 import com.green.university.dto.SubjectFormDto;
 import com.green.university.repository.interfaces.CollTuitRepository;
@@ -23,7 +20,6 @@ import com.green.university.repository.interfaces.SubjectRepository;
 import com.green.university.repository.model.CollTuit;
 import com.green.university.repository.model.College;
 import com.green.university.repository.model.Department;
-import com.green.university.repository.model.Notice;
 import com.green.university.repository.model.Room;
 import com.green.university.repository.model.Subject;
 
@@ -45,8 +41,7 @@ public class AdminService {
 	private RoomRepository roomRepository;
 	@Autowired
 	private SubjectRepository subjectRepository;
-	@Autowired
-	private NoticeRepository noticeRepository;
+
 
 	/**
 	 * 단과대 입력 서비스
@@ -209,15 +204,5 @@ public class AdminService {
 			System.out.println("강의 수정 서비스 오류");
 		}
 		return resultRowCount;
-	}
-
-	/**
-	 * 공지 입력 서비스
-	 */
-	public void insertNotice(@Validated NoticeFormDto noticeFormDto) {
-		int resultRowCount = noticeRepository.insert(noticeFormDto);
-		if (resultRowCount != 1) {
-			System.out.println("공지 입력 서비스 오류");
-		}
 	}
 }
