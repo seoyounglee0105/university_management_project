@@ -19,4 +19,8 @@ public interface NoticeRepository {
 	public Notice findById(Integer id);
 	public int update(NoticeFormDto noticeFormDto);
 	public int delete(Integer id);
+	
+	// 파일
+	public int insertFile(NoticeFormDto noticeFormDto);
+	public int findByLimit(NoticeFormDto noticeFormDto);
 }

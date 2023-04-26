@@ -3,11 +3,6 @@
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 <style>
-.split--div {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
 form {
 	display: flex;
 	flex-direction: column;
@@ -74,7 +69,7 @@ form {
 	<!-- 메인 div -->
 	<main>
 		<h1>공지사항</h1>
-		<div class="split--div">
+		<div class="split--div"></div>
 		<a href="/board/notice?crud=insert">글쓰기</a>
 		
 		<!-- 공지 조회 -->
@@ -106,10 +101,11 @@ form {
 					<div class="title"> 
 						제목 ${notice.title} 
 					</div>
+						<img alt="" src="<c:url value="${notice.setUpImage()}"/>">
 						내용 ${notice.content}
 						
 					<a href="/board/notice-update-page?id=${notice.id}">수정</a>
-					<a href="/board/notice-proc-detail?id=${notice.id}">삭제</a>
+					<a href="/board/notice-delete?id=${notice.id}">삭제</a>
 			</c:if>
 		
 		
@@ -128,10 +124,9 @@ form {
 		</c:if>
 		
 		
-		
 		<!-- 공지 등록 -->
 		<c:if test="${crud.equals(\"insert\")}">
-			<form action="/board/notice-proc" method="post">
+			<form action="/board/notice-proc" method="post" enctype="multipart/form-data">
 				<h5>공지 글쓰기</h5>
 					<div class="title--top">
 						말머리 
@@ -158,10 +153,6 @@ form {
 				});
 			</script>
 		</c:if>
-		
-		
-			
-	</div>
 </main>
 
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>

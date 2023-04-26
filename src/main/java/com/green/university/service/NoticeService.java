@@ -39,6 +39,10 @@ public class NoticeService {
 		if (resultRowCount != 1) {
 			System.out.println("공지 입력 서비스 오류");
 		}
+		int noticeId = noticeRepository.findByLimit(noticeFormDto);
+		noticeFormDto.setNoticeId(noticeId);
+		System.out.println(noticeFormDto);
+		noticeRepository.insertFile(noticeFormDto);
 	}
 	
 	/**
@@ -48,6 +52,8 @@ public class NoticeService {
 		List<Notice> noticeList = noticeRepository.findAll();
 		return noticeList;
 	}
+	
+	
 	
 	/**
 	 * 공지 상세 조회 서비스
@@ -65,6 +71,14 @@ public class NoticeService {
 		if (resultRowCount != 1) {
 			System.out.println("공지 수정 서비스 오류");
 		}
+		return resultRowCount;
+	}
+	
+	/**
+	 * 공지 삭제 서비스
+	 */
+	public int deleteNotice(Integer id) {
+		int resultRowCount = noticeRepository.delete(id);
 		return resultRowCount;
 	}
 }

@@ -14,4 +14,10 @@ public class Notice {
 	private Integer views;
 	private Timestamp createdTime;
 	
+	private String uuidFilename;
+	private String originFilename;
+	
+	public String setUpImage() {
+		return "/images/uploads/" + uuidFilename;
+	} 
 }

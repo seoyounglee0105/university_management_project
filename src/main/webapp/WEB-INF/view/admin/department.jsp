@@ -3,11 +3,6 @@
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 <style>
-.split--div {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
 .select--button {
 	padding: 20px;
 }
@@ -72,7 +67,7 @@
 	<!-- 메인 div -->
 	<main>
 		<h1>학과</h1>
-		<div class="split--div">
+		<div class="split--div"></div>
 			<div class="select--button">
 				<a href="/admin/department?crud=insert">등록</a>
 				<a href="/admin/department?crud=update">수정</a> 
@@ -178,9 +173,8 @@
 					</c:forEach>
 				</table>
 			</c:if>
-		</div>
 	</main>
-</div>
+
 			<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
 		</div>
