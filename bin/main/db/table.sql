@@ -219,3 +219,27 @@ CREATE TABLE break_app_tb
    status VARCHAR (3) NOT NULL DEFAULT '처리중' COMMENT '처리중, 승인, 거부',
    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE
 );
+
+-- 강의 평가 테이블
+CREATE TABLE evaluation
+(
+evaluation_id INT AUTO_INCREMENT,
+student_id INT,
+subject_id INT,
+PRIMARY KEY
+(
+evaluation_id,
+student_id,
+subject_id
+),
+qna_1 INT NOT NULL COMMENT 'radio 답변 저장용 컬럼',
+qna_2 INT NOT NULL,
+qna_3 INT NOT NULL,
+qna_4 INT NOT NULL,
+qna_5 INT NOT NULL,
+qna_6 INT NOT NULL,
+qna_7 INT NOT NULL,
+improvements VARCHAR(255) COMMENT '건의사항',
+FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
+FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE
+);

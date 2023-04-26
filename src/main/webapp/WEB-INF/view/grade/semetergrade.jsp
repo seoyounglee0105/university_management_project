@@ -95,6 +95,7 @@
 								<td>${grade.grade}</td>
 							</tr>
 						</c:forEach>
+					
 					</tbody>
 				</table>
 			</c:when>
