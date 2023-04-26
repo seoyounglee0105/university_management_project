@@ -17,7 +17,9 @@ import lombok.AllArgsConstructor;
 @Mapper
 public interface CollegeRepository {
 	public int insert(CollegeFormDto CollegeFormDto);
+
 	public List<College> findAll();
+
 	public int findByName(String name);
 	public College findById(Integer id);
 	public int delete(Integer id);

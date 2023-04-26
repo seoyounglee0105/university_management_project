@@ -4,27 +4,15 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <style>
-
-form{
+form {
 	margin-left: 30px;
-	
 }
 
-.input--table td {
+.input--table th, td {
 	padding: 5px 10px;
 }
 
-button{
-	padding: 8px 20px;
-	border: none;
-	border-radius: 5px;
-	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-	margin-top: 20px;
-} 
 
-.button-td{
-	text-align: center;
-}
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -51,7 +39,7 @@ button{
 					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">패스워드 변경</a></td>
+					<td><a href="/password">비밀번호 변경</a></td>
 				</tr>
 				<tr>
 					<td><a href="/professor/subject">교수 자기 강의 조회</a></td>
@@ -62,32 +50,32 @@ button{
 
 	<!-- 메인 div -->
 	<main>
-		<h1>비밀번호 변경</h1>
+		<h1>과목 상세 조회</h1>
 		<div class="split--div"></div>
-		<form action="/password" method="post">
-			
-			<table class="input--table">
-				
+		
+		<table border="1">
+			<thead>
 				<tr>
-					<td><label for="beforePassword">현재 비밀번호 입력</label></td>
-					<td><input type="password" name="beforePassword" id="beforePassword"></td>
+					<th>과목id</th>
+					<td>10000</td>
+					<th></th>
+					<th>강의계획서</th>
+					<th>학생 성적 기입</th>
 				</tr>
-				<tr><td></td></tr>
+			</thead>
+			<c:forEach items="${subjectList}" var="subject">
+			<tbody>
 				<tr>
-					<td><label for="afterPassword">변경할 비밀번호</label></td>
-					<td><input type="password" name="afterPassword" id="afterPassword"></td>
+					<td>${subject.id}</td>
+					<td>${subject.name}</td>
+					<td>${subject.time}</td>
+					<td><a href="#">강의 계획서 보기</a></td>
+					<td><a href="#">학생 리스트 보기</a></td>
 				</tr>
-				<tr>
-					<td><label for="passwordCheck">비밀번호 확인</label></td>
-					<td><input type="password" name="passwordCheck" id="passwordCheck"></td>
-				</tr>
-				<tr>
-					<td colspan="2" class="button-td">
-						<button type="submit">입력</button>
-					</td>
-				</tr>
-			</table>
-		</form>
+			</tbody>
+			</c:forEach>
+		</table>
+
 	</main>
 </div>
 
