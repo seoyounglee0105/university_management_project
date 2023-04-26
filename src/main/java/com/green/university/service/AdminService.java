@@ -210,14 +210,4 @@ public class AdminService {
 		}
 		return resultRowCount;
 	}
-
-	/**
-	 * 공지 입력 서비스
-	 */
-	public void insertNotice(@Validated NoticeFormDto noticeFormDto) {
-		int resultRowCount = noticeRepository.insert(noticeFormDto);
-		if (resultRowCount != 1) {
-			System.out.println("공지 입력 서비스 오류");
-		}
-	}
 }

@@ -4,7 +4,7 @@
 <mapper
 	namespace="com.green.university.repository.interfaces.NoticeRepository">
 	<insert id="insert">
-		insert into notice_tb (title, content, created_date)
+		insert into notice_tb (title, content, created_time)
 		values(#{title}, #{content}, now())
 	</insert>
 

@@ -189,22 +189,4 @@ public class AdminController {
 		return "redirect:/admin/collTuit";
 	}
 
-	/**
-	 * 
-	 * @return 공지사항 페이지
-	 */
-	@GetMapping("/notice")
-	public String notice() {
-		return "/insertNotice/notice";
-	}
-
-	/**
-	 * 
-	 * @return 공지사항 입력 기능
-	 */
-	@PostMapping("/notice-proc")
-	public String insertNotice(@Validated NoticeFormDto noticeFormDto) {
-		adminService.insertNotice(noticeFormDto);
-		return "redirect:/test";
-	}
 }

@@ -63,7 +63,7 @@
 							등록금</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/notice">공지사항</a></td>
+					<td><a href="/board/notice">공지사항</a></td>
 				</tr>
 			</table>
 		</div>

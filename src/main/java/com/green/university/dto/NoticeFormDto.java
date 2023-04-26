@@ -12,13 +12,14 @@ import lombok.Data;
  */
 @Data
 public class NoticeFormDto {
+	private String category;
 	@NotEmpty
 	@Size(max = 50)
 	private String title;
 	@NotEmpty
 	private String content;
-	@NotEmpty
+	
 	private String originFileName;
-	@NotEmpty
+	
 	private String uuidFileName;
 }

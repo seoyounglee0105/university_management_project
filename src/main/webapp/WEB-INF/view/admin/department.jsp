@@ -63,7 +63,7 @@
 					<td><a href="/admin/collTuit">단대별 등록금</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/notice">공지사항</a></td>
+					<td><a href="/board/notice">공지사항</a></td>
 				</tr>
 			</table>
 		</div>
@@ -84,7 +84,8 @@
 			<c:if test="${crud.equals(\"insert\")}">
 				<form action="/admin/department-proc" method="get" id="insert--form">
 					<h5>등록할 학과명을 입력해주세요</h5>
-					학과명 <input type="text" name="name" value="전자과"> 단과대학 
+					학과명 <input type="text" name="name" value="전자과"> 
+					단과대학 
 					<select name="collegeId">
 						<c:forEach var="college" items="${collegeList}">
 							<option value="${college.id}">${college.name}</option>
