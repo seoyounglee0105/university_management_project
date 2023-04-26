@@ -4,7 +4,7 @@ CREATE TABLE college_tb
    id INT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR (10) NOT NULL UNIQUE
 );
--- 부서
+-- 학과
 CREATE TABLE department_tb
 (
    id INT PRIMARY KEY AUTO_INCREMENT,

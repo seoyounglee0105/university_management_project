@@ -21,4 +21,5 @@ public interface DepartmentRepository {
 	public List<Department> findAll();
 	public int delete(Integer id);
 	public int update(DepartmentFormDto departmentFormDto);
+	
 }

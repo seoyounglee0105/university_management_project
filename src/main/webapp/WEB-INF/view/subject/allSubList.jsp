@@ -18,6 +18,46 @@
 	text-align: left !important;
 	padding-right: 20px !important;
 }
+
+.sub--filter {
+	margin-bottom: 50px;
+}
+
+.sub--filter form {
+	display: flex;
+}
+
+.sub--filter form div {
+	background-color: buttonshadow;
+	padding: 13px 13px 7px 10px;
+}
+
+.sub--filter input[type="number"]{
+	width: 57px;
+	padding-left: 3px;
+}
+
+.sub--filter select[name="deptId"]{
+	width: 173px;
+}
+ 
+.sub--filter label {
+	margin-right: 5px;
+}
+.sub--filter input, .sub--filter select {
+	margin-right: 10px;
+	border-radius: 5px;
+	border-width: 1px;
+}
+
+.sub--filter button {
+	background-color: gray;
+	padding: 2px 6px; 
+	border: none;
+	border-radius: 5px;
+	color: white;
+	height: 28px;
+}
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -41,7 +81,7 @@
 					<td><a href="/break/application">휴학 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/break/appList" class="selected--menu">휴학 내역 조회</a></td>
+					<td><a href="/break/appList">휴학 내역 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/break/appListStaff">휴학 신청 처리(staff)</a></td>
@@ -66,23 +106,58 @@
 		<!-- 여기에 내용 넣기 -->
 		
 		<!-- 필터 및 검색 -->
-		<div>
-			<!-- 개설연도 숫자 -->
-			<!-- 개설학기 콤보박스-->
-			<!-- 대상학과 콤보박스 -->
-			<!-- 강의 검색 -->
-			<
+		<div class="sub--filter">
+			<form action="/subject/list/Search" method="get">
+				<div>
+					<!-- 개설연도 숫자 -->
+					<label for="subYear">연도 </label> 
+					<input type="number" value="<%=Define.CURRENT_YEAR %>" name="subYear" id="subYear" min="2005" max="2023">
+					<!-- 개설학기 콤보박스-->
+					<label for="subSemester">학기 </label> 
+					<select name="semester" id="subSemester">
+						<option value="1">1학기</option>
+						<option value="2">2학기</option>
+					</select>
+					<!-- 대상학과 콤보박스 -->
+					<label for="deptId">개설학과</label> 
+					<select name="deptId" id="deptId">
+						<option value="-1">전체</option>
+						<c:forEach var="dept" items="${deptList}">
+							<option value="${dept.id}">${dept.name}</option>
+						</c:forEach>
+					</select>
+					<!-- 강의 검색 -->
+					<label for="subName">강의명</label> 
+					<input type="text" name="name" list="subName">
+					<datalist id="subName">
+						<c:forEach var="subName" items="${subNameList}">
+							<option value="${subName}">
+						</c:forEach>
+					</datalist>
+					<!-- 검색 버튼 -->
+					<button type="submit">							
+						<ul class="d-flex justify-content-center" style="margin: 0;">
+							<li style="height: 24px; margin-right: 2px;">조회
+							<li style="height: 24px;"><span class="material-symbols-outlined" style="font-size: 18px; padding-top: 4px;">search</span>
+						</ul>
+					</button>
+				</div>
+			</form>
 		</div>
 		
+		<h4>
+			<span style="font-weight: 600;">강의 목록</span>&nbsp;
+			<span style="color:gray; font-size:18px;">[총 ${subjectList.size()}건]</span>
+		</h4>
 		<table border="1" class="sub--list--table">
 			<thead>
 				<tr>
-					<th>개설연도-학기</th>
+					<th>연도/학기</th>
 					<th>단과대학</th>
-					<th>대상학과</th>
+					<th>개설학과</th>
 					<th>학수번호</th>
-					<th>교과구분</th>
-					<th>강의명</th>
+					<th>강의구분</th>
+					<th style="width: 250px;">강의명</th>
 					<th>담당교수</th>
 					<th>학점</th>
 					<th>수강인원</th>
@@ -94,7 +169,7 @@
 			<tbody>
 				<c:forEach var="subject" items="${subjectList}">
 					<tr>
-						<td>${subject.subYear}년-${subject.semester}학기</td>
+						<td>${subject.subYear}-${subject.semester}학기</td>
 						<td>${subject.collName}</td>
 						<td class="sub--list--dept--name">${subject.deptName}</td>
 						<td>${subject.id}</td>

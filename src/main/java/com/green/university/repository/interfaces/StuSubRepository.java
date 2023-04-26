@@ -9,7 +9,12 @@ import com.green.university.dto.response.StudentInfoForProfessorDto;
 @Mapper
 public interface StuSubRepository {
 	
-	// 과목으로 학생정보 뽑기
+	/**
+	 * @author 김지현
+	 * @param subjectId
+	 * @return
+	 * 과목으로 학생정보 뽑기
+	 */
 	List<StudentInfoForProfessorDto> selectBySubjectId(Integer subjectId);
 
 }

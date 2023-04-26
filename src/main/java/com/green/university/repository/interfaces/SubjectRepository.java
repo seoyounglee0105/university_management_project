@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.green.university.dto.AllSubjectSearchFormDto;
+import com.green.university.dto.CurrentSemesterSubjectSearchFormDto;
 import com.green.university.dto.SubjectFormDto;
 import com.green.university.dto.response.SubjectDto;
 import com.green.university.dto.response.SubjectForProfessorDto;
@@ -28,13 +30,13 @@ public interface SubjectRepository {
 	 * @author 서영
 	 * @return 수강 신청에 사용할 강의 정보
 	 */
-	public List<SubjectDto> findDtoByCurrentSemester(@Param("subYear") Integer subYear, @Param("semester") Integer semester);
+	public List<SubjectDto> selectDtoBySemester(@Param("subYear") Integer subYear, @Param("semester") Integer semester);
 	
 	/**
 	 * @author 서영
 	 * @return 전체 강의 정보
 	 */
-	public List<SubjectDto> findDtoAll();
+	public List<SubjectDto> selectDtoAll();
 	
 	/**
 	 * @author 김지현
@@ -42,10 +44,24 @@ public interface SubjectRepository {
 	 * @return 교수 본인의 수업이 있는 년도-학기
 	 */
 	public List<SubjectPeriodForProfessorDto> selectSemester(Integer id);
+	
 	/**
 	 * @author 김지현
 	 * @return 그 학기의 본인 수업 정보들
 	 */
 	public List<SubjectForProfessorDto> selectSubjectBySemester(SubjectPeriodForProfessorDto subjectPeriodForProfessorDto);
+	
+	/**
+	 * @author 서영
+	 * @return 연도-학기-개설학과-강의명 검색을 조건으로 한 강의 정보
+	 */
+	public List<SubjectDto> selectDtoBySemesterAndDeptAndName(AllSubjectSearchFormDto allSubjectSearchFormDto);
+	
+	/**
+	 * @param currentSemesterSubjectSearchFormDto
+	 * @return 연도-학기-강의구분-개설학과-강의명 검색을 조건으로 한 강의 정보
+	 */
+	public List<SubjectDto> selectDtoBySemesterAndAndTypeAndDeptAndName(CurrentSemesterSubjectSearchFormDto currentSemesterSubjectSearchFormDto);
+	
 	
 }

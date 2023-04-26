@@ -18,6 +18,46 @@
 	text-align: left !important;
 	padding-right: 20px !important;
 }
+.sub--filter {
+	margin-bottom: 50px;
+}
+
+.sub--filter form {
+	display: flex;
+}
+
+.sub--filter form div {
+	background-color: buttonshadow;
+	padding: 13px 13px 7px 10px;
+}
+
+.sub--filter input[type="number"]{
+	width: 57px;
+ 	padding-left: 3px;
+}
+
+.sub--filter select[name="deptId"]{
+	width: 173px;
+}
+ 
+.sub--filter label {
+	margin-right: 5px;
+}
+
+.sub--filter input, .sub--filter select {
+	margin-right: 10px;
+	border-radius: 5px;
+	border-width: 1px;
+}
+
+.sub--filter button {
+	background-color: gray;
+	padding: 2px 6px; 
+	border: none;
+	border-radius: 5px;
+	color: white;
+	height: 28px;
+}
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -41,7 +81,7 @@
 					<td><a href="/break/application">휴학 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/break/appList" class="selected--menu">휴학 내역 조회</a></td>
+					<td><a href="/break/appList">휴학 내역 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/break/appListStaff">휴학 신청 처리(staff)</a></td>
@@ -66,18 +106,55 @@
 		<!-- 여기에 내용 넣기 -->
 		
 		<!-- 필터 및 검색 -->
-		<div>
-		
+		<div class="sub--filter">
+			<form action="/stuSub/list/Search" method="get">
+				<div>
+					<!-- 강의구분 콤보박스 -->
+					<label for="type">강의구분</label> 
+					<select name="type" id="type">
+						<option value="전체">전체</option>
+						<option value="전공">전공</option>
+						<option value="교양">교양</option>
+					</select>
+					<!-- 대상학과 콤보박스 -->
+					<label for="deptId">개설학과</label> 
+					<select name="deptId" id="deptId">
+						<option value="-1">전체</option>
+						<c:forEach var="dept" items="${deptList}">
+							<option value="${dept.id}">${dept.name}</option>
+						</c:forEach>
+					</select>
+					<!-- 강의 검색 -->
+					<label for="subName">강의명</label> 
+					<input type="text" name="name" list="subName">
+					<datalist id="subName">
+						<c:forEach var="subName" items="${subNameList}">
+							<option value="${subName}">
+						</c:forEach>
+					</datalist>
+					<!-- 검색 버튼 -->
+					<button type="submit">							
+						<ul class="d-flex justify-content-center" style="margin: 0;">
+							<li style="height: 24px; margin-right: 2px;">조회
+							<li style="height: 24px;"><span class="material-symbols-outlined" style="font-size: 18px; padding-top: 4px;">search</span>
+						</ul>
+					</button>
+				</div>
+			</form>
 		</div>
 		
+		<h4>
+			<span style="font-weight: 600;">강의 목록</span>&nbsp;
+			<span style="color:gray; font-size:18px;">[총 ${subjectList.size()}건]</span>
+		</h4>
 		<table border="1" class="sub--list--table">
 			<thead>
 				<tr>
 					<th>단과대학</th>
-					<th>대상학과</th>
+					<th>개설학과</th>
 					<th>학수번호</th>
-					<th>교과구분</th>
-					<th>강의명</th>
+					<th>강의구분</th>
+					<th style="width: 250px;">강의명</th>
 					<th>담당교수</th>
 					<th>학점</th>
 					<th>요일시간 (강의실)</th>
@@ -103,8 +180,8 @@
 						<td>
 							<!-- 높이가 안 맞아서 어쩔 수 없이 li로 연결함.. -->
 							<ul class="d-flex justify-content-center" style="margin: 0;">
-								<li style="height: 24px;"><a href="#">조회</a>
-								<li style="height: 24px;"><a href="#"><span class="material-symbols-outlined">content_paste_search</span></a>
+								<li style="height: 24px;"><a href="#">조회</a></li>
+								<li style="height: 24px;"><a href="#"><span class="material-symbols-outlined">content_paste_search</span></a></li>
 							</ul>
 						</td>
 					</tr>

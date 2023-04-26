@@ -219,10 +219,12 @@ CREATE TABLE break_app_tb
 );
 
 
-SELECT sub.* FROM subject_tb AS sub
+SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS prof_name FROM subject_tb AS sub
 JOIN department_tb AS dept
 ON sub.dept_id = dept.id
 JOIN college_tb AS coll
 ON dept.college_id = coll.id
 JOIN professor_tb AS prof
 ON sub.professor_id = prof.id
+WHERE sub_year = 2023 AND semester = 1;
+
