@@ -116,13 +116,9 @@ CREATE TABLE pre_stu_sub_tb
 -- 수강 내역
 CREATE TABLE stu_sub_tb
 (
+   id INT PRIMARY KEY AUTO_INCREMENT,
    student_id INT,
    subject_id INT,
-   PRIMARY KEY
-   (
-      student_id,
-      subject_id
-   ),
    grade VARCHAR (2) COMMENT '학점 (평점)',
    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
    FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE,

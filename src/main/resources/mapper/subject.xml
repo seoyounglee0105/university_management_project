@@ -18,4 +18,27 @@
 		SET name = #{name}, room_id = #{roomId}, time = #{time}, capacity = #{capacity}
 		WHERE id = #{id}
 	</update>
+	
+	<select id="findDtoAll" resultType="com.green.university.dto.response.SubjectDto">
+		SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name 
+		FROM subject_tb AS sub
+		JOIN department_tb AS dept
+		ON sub.dept_id = dept.id
+		JOIN college_tb AS coll
+		ON dept.college_id = coll.id
+		JOIN professor_tb AS prof
+		ON sub.professor_id = prof.id
+	</select>
+	
+	<select id="findDtoByCurrentSemester" resultType="com.green.university.dto.response.SubjectDto">
+		SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name 
+		FROM subject_tb AS sub
+		JOIN department_tb AS dept
+		ON sub.dept_id = dept.id
+		JOIN college_tb AS coll
+		ON dept.college_id = coll.id
+		JOIN professor_tb AS prof
+		ON sub.professor_id = prof.id
+		WHERE sub_year = #{subYear} AND semester = #{semester}
+	</select>
 </mapper>

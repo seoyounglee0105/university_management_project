@@ -1,3 +1,6 @@
+CREATE DATABASE university_db;
+USE university_db;
+
 -- 단과대
 CREATE TABLE college_tb
 (
@@ -188,7 +191,7 @@ CREATE TABLE notice_tb
    id INT PRIMARY KEY AUTO_INCREMENT,
    title VARCHAR (255) NOT NULL,
    content TEXT NOT NULL,
-   created_time TIMESTAMP DEFAULT now (),
+   created_time TIMESTAMP DEFAULT now(),
    views INT NOT NULL DEFAULT 0 COMMENT '조회수'
 );
 -- 공지사항 첨부 파일
@@ -214,3 +217,12 @@ CREATE TABLE break_app_tb
    status VARCHAR (3) NOT NULL DEFAULT '처리중' COMMENT '처리중, 승인, 거부',
    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE
 );
+
+
+SELECT sub.* FROM subject_tb AS sub
+JOIN department_tb AS dept
+ON sub.dept_id = dept.id
+JOIN college_tb AS coll
+ON dept.college_id = coll.id
+JOIN professor_tb AS prof
+ON sub.professor_id = prof.id
