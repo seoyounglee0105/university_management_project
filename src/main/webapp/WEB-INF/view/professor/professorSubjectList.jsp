@@ -4,24 +4,23 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <style>
-
-form{
+form {
 	margin-left: 30px;
 }
 
-.input--table td {
+.input--table th,td {
 	padding: 5px 10px;
 }
 
-button{
+/* button {
 	padding: 8px 20px;
 	border: none;
 	border-radius: 5px;
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 	margin-top: 20px;
-} 
+} */
 
-.button-td{
+.button-td {
 	text-align: center;
 }
 </style>
@@ -61,45 +60,39 @@ button{
 
 	<!-- 메인 div -->
 	<main>
-		<h1>교수 입력창</h1>
+		<h1>과목 조회</h1>
 		<div class="split--div"></div>
-		<form action="/user/professor" method="post">
-			<table class="input--table">
-				<tr>
-					<td><label for="name">이름</label></td>
-					<td><input type="text" name="name" id="name" value="가가가"></td>
-				</tr>
-				<tr>
-					<td><label for="birthDate">생년월일</label></td>
-					<td><input type="date" name="birthDate" id="birthDate" value="1990-07-26"></td>
-				</tr>
-				<tr>
-					<td style="padding-top: 7px"><label>성별</label></td>
-					<td style="padding-top: 7px"><label for="male">남성</label> <input type="radio" value="M" name="gender" id="male" checked="checked"> &nbsp;<label for="female">여성</label> <input type="radio" value="F" name="gender" id="female"></td>
-				</tr>
-				<tr>
-					<td><label for="address">주소</label></td>
-					<td><input type="text" name="address" id="address" value="부산시"></td>
-				</tr>
-				<tr>
-					<td><label for="tel">전화번호</label></td>
-					<td><input type="text" name="tel" id="tel" value="010-4545-4545"></td>
-				</tr>
-				<tr>
-					<td><label for="email">이메일</label></td>
-					<td><input type="text" name="email" id="email" value="abc@test.com"></td>
-				</tr>
-				<tr>
-					<td><label for="deptId">과 ID</label></td>
-					<td><input type="text" name="deptId" id="deptId" value="101"></td>
-				</tr>
-				<tr>
-					<td colspan="2" class="button-td">
-						<button type="submit">입력</button>
-					</td>
-				</tr>
-			</table>
+		<form action="/professor/subject" method="post">
+			<select name="period">
+				<c:forEach items="${semesterList}" var="yearSemester">
+					<option value="${yearSemester.subYear}year${yearSemester.semester}">${yearSemester.subYear}년도${yearSemester.semester}학기</option>
+				</c:forEach>
+			</select>
+			<button type="submit">조회</button>
 		</form>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>과목id</th>
+					<th>과목명</th>
+					<th>강의시간</th>
+					<th>강의 상세보기</th>
+					<th>학생 성적 기입</th>
+				</tr>
+			</thead>
+			<c:forEach items="${subjectList}" var="subject">
+			<tbody>
+				<tr>
+					<td>${subject.id}</td>
+					<td>${subject.name}</td>
+					<td>${subject.time}</td>
+					<td><a href="#">강의 계획서 보기</a></td>
+					<td><a href="subject/${subject.id}">학생 리스트 보기</a></td>
+				</tr>
+			</tbody>
+			</c:forEach>
+		</table>
+
 	</main>
 </div>
 

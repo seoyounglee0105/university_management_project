@@ -1,10 +1,13 @@
+CREATE DATABASE university_db;
+USE university_db;
+
 -- 단과대
 CREATE TABLE college_tb
 (
    id INT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR (10) NOT NULL UNIQUE
 );
--- 학과
+-- 부서
 CREATE TABLE department_tb
 (
    id INT PRIMARY KEY AUTO_INCREMENT,
@@ -114,14 +117,15 @@ CREATE TABLE pre_stu_sub_tb
    FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE
 );
 -- 수강 내역
-CREATE TABLE stu_sub_tb (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	student_id INT,
-    subject_id INT,
-    grade VARCHAR(2) COMMENT '학점 (평점)',
-    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
-    FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE,
-    FOREIGN KEY (grade) REFERENCES grade_tb (grade)
+CREATE TABLE stu_sub_tb
+(
+   id INT PRIMARY KEY AUTO_INCREMENT,
+   student_id INT,
+   subject_id INT,
+   grade VARCHAR (2) COMMENT '학점 (평점)',
+   FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
+   FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE,
+   FOREIGN KEY (grade) REFERENCES grade_tb (grade)
 );
 -- 단과대별 등록금
 CREATE TABLE coll_tuit_tb
@@ -187,7 +191,7 @@ CREATE TABLE notice_tb
    id INT PRIMARY KEY AUTO_INCREMENT,
    title VARCHAR (255) NOT NULL,
    content TEXT NOT NULL,
-   created_time TIMESTAMP DEFAULT now (),
+   created_time TIMESTAMP DEFAULT now(),
    views INT NOT NULL DEFAULT 0 COMMENT '조회수'
 );
 -- 공지사항 첨부 파일
@@ -213,28 +217,14 @@ CREATE TABLE break_app_tb
    status VARCHAR (3) NOT NULL DEFAULT '처리중' COMMENT '처리중, 승인, 거부',
    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE
 );
-CREATE TABLE stu_sub_detail_tb
-(
-   id INT PRIMARY KEY,
-   student_id INT NOT NULL,
-   subject_id INT NOT NULL,
-   absent INT COMMENT '결석 횟수',
-   lateness INT COMMENT '지각 횟수',
-   homework INT COMMENT '과제 점수',
-   mid_exam INT COMMENT '중간고사 점수',
-   final_exam INT COMMENT '기말고사 점수',
-   converted_mark INT COMMENT '환산점수',
-   FOREIGN KEY (id) REFERENCES stu_sub_tb(id),
-   FOREIGN KEY (student_id) REFERENCES student_tb(id),
-   FOREIGN KEY (subject_id) REFERENCES subject_tb(id)
-);
 
-CREATE TABLE syllabus_tb
-(
-	subject_id INT PRIMARY KEY ,
-	overview VARCHAR(255) COMMENT '수업 개요',
-	objective VARCHAR(255) COMMENT '강의 목표',
-	textbook VARCHAR(30) COMMENT '교재',
-	program TEXT COMMENT '주별 계획',
-	FOREIGN KEY (subject_id) REFERENCES subject_tb(id)
-);
+
+SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS prof_name FROM subject_tb AS sub
+JOIN department_tb AS dept
+ON sub.dept_id = dept.id
+JOIN college_tb AS coll
+ON dept.college_id = coll.id
+JOIN professor_tb AS prof
+ON sub.professor_id = prof.id
+WHERE sub_year = 2023 AND semester = 1;
+

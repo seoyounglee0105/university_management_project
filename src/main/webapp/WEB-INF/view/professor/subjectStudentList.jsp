@@ -4,25 +4,23 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <style>
-form{
+form {
 	margin-left: 30px;
-	
 }
 
-
-.input--table td {
+.input--table th,td {
 	padding: 5px 10px;
 }
 
-button{
+/* button {
 	padding: 8px 20px;
 	border: none;
 	border-radius: 5px;
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 	margin-top: 20px;
-} 
+} */
 
-.button-td{
+.button-td {
 	text-align: center;
 }
 </style>
@@ -62,42 +60,37 @@ button{
 
 	<!-- 메인 div -->
 	<main>
-		<h1>직원 입력창</h1>
-		<div class="split--div"></div>
-		<!-- 여기에 내용 넣기 -->
-		<form action="/user/staff" method="post">
-			<table class="input--table">
+		<h1>학생 리스트 조회</h1>
+		<table border="1">
+			<thead>
 				<tr>
-					<td><label for="name">이름</label></td>
-					<td><input type="text" name="name" id="name" value="나나나"></td>
+					<th>학생 번호</th>
+					<th>이름</th>
+					<th>소속</th>
+					<th>결석</th>
+					<th>지각</th>
+					<th>과제점수</th>
+					<th>중간시험</th>
+					<th>기말시험</th>
+					<th>환산점수</th>
 				</tr>
+			</thead>
+			<tbody>
 				<tr>
-					<td><label for="birthDate">생년월일</label></td>
-					<td><input type="date" name="birthDate" id="birthDate" value="1999-09-09"></td>
+					<td>11111</td>
+					<td>홍길동</td>
+					<td>도적학과</td>
+					<td>1</td>
+					<td>2</td>
+					<td>20</td>
+					<td>30</td>
+					<td>40</td>
+					<td>99</td>
 				</tr>
-				<tr>
-					<td style="padding-top: 7px"><label>성별</label></td>
-					<td style="padding-top: 7px"><label for="male">남성</label> <input type="radio" value="M" name="gender" id="male" checked="checked"> &nbsp;<label for="female">여성</label> <input type="radio" value="F" name="gender" id="female"></td>
-				</tr>
-				<tr>
-					<td><label for="address">주소</label></td>
-					<td><input type="text" name="address" id="address" value="부산시"></td>
-				</tr>
-				<tr>
-					<td><label for="tel">전화번호</label></td>
-					<td><input type="text" name="tel" id="tel" value="010-4525-4545"></td>
-				</tr>
-				<tr>
-					<td><label for="email">이메일</label></td>
-					<td><input type="text" name="email" id="email" value="zxc@test.com"></td>
-				</tr>
-				<tr>
-					<td colspan="2" class="button-td">
-						<button type="submit">입력</button>
-					</td>
-				</tr>
-			</table>
-		</form>
+				
+			</tbody>
+		</table>
+
 	</main>
 </div>
 

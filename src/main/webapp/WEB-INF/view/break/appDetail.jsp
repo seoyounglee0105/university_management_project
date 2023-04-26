@@ -65,6 +65,12 @@
 				<tr>
 					<td><a href="/tuition/create">고지서 생성(staff)</a></td>
 				</tr>
+				<tr>
+					<td><a href="/subject/list">전체 강의 조회</a></td>
+				</tr>
+				<tr>
+					<td><a href="/stuSub/list">강의 시간표 조회</a></td>
+				</tr>
 			</table>
 		</div>
 	</div>

@@ -1,21 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.green.university.repository.interfaces.SubjectRepository">
+<mapper namespace="com.green.university.repository.interfaces.SubjectRepository">
 	<insert id="insert">
-		insert into subject_tb (name, professor_id, room_id, dept_id, type, sub_year, semester, time, grades, capacity )
-		values(#{name}, #{professorId}, #{roomId}, #{deptId}, #{type}, #{subYear}, #{semester}, #{time}, #{grades}, #{capacity} )
+		insert into subject_tb (name, professor_id, room_id, dept_id, type, sub_year, semester, time, grades, capacity)
+		values(#{name}, #{professorId}, #{roomId}, #{deptId},
+		#{type}, #{subYear}, #{semester}, #{time}, #{grades}, #{capacity})
 	</insert>
+	
 	<select id="findAll" resultType="com.green.university.repository.model.Subject">
 		select * from subject_tb
 	</select>
+	
 	<delete id="delete">
 		delete from subject_tb where id = #{id}
 	</delete>
+	
 	<update id="update">
 		UPDATE subject_tb
 		SET name = #{name}, room_id = #{roomId}, time = #{time}, capacity = #{capacity}
 		WHERE id = #{id}
 	</update>
+	
+	<select id="selectDtoAll" resultType="com.green.university.dto.response.SubjectDto">
+		SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name 
+		FROM subject_tb AS sub
+		JOIN department_tb AS dept
+		ON sub.dept_id = dept.id
+		JOIN college_tb AS coll
+		ON dept.college_id = coll.id
+		JOIN professor_tb AS prof
+		ON sub.professor_id = prof.id
+	</select>
+	
+	<select id="selectDtoBySemester" resultType="com.green.university.dto.response.SubjectDto">
+		SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name 
+		FROM subject_tb AS sub
+		JOIN department_tb AS dept
+		ON sub.dept_id = dept.id
+		JOIN college_tb AS coll
+		ON dept.college_id = coll.id
+		JOIN professor_tb AS prof
+		ON sub.professor_id = prof.id
+		WHERE sub_year = #{subYear} AND semester = #{semester}
+	</select>
+
+	<select id="selectSemester" resultType="com.green.university.dto.response.SubjectPeriodForProfessorDto">
+		SELECT sub_year, semester FROM subject_tb
+		WHERE professor_id = #{id}
+		GROUP BY sub_year, semester
+	</select>
+
+	<select id="selectSubjectBySemester" resultType="com.green.university.dto.response.SubjectForProfessorDto">
+		SELECT * FROM subject_tb
+		WHERE professor_id = #{id}
+		AND sub_year = #{subYear}
+		AND semester = #{semester}
+	</select>
+	
+	<select id="selectDtoBySemesterAndDeptAndName" resultType="com.green.university.dto.response.SubjectDto">
+		
+		<!-- 개설학과 : 전체 -->
+		<if test="deptId == -1">
+ 			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name 
+			FROM subject_tb AS sub
+			JOIN department_tb AS dept
+			ON sub.dept_id = dept.id
+			JOIN college_tb AS coll
+			ON dept.college_id = coll.id
+			JOIN professor_tb AS prof
+			ON sub.professor_id = prof.id
+			WHERE sub.sub_year = #{subYear} 
+				AND sub.semester = #{semester}
+				AND sub.name LIKE '%'||#{name}||'%'
+		</if>
+		
+		<!-- 특정 개설학과 -->
+		<if test="deptId != -1">
+			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name 
+			FROM subject_tb AS sub
+			JOIN department_tb AS dept
+			ON sub.dept_id = dept.id
+			JOIN college_tb AS coll
+			ON dept.college_id = coll.id
+			JOIN professor_tb AS prof
+			ON sub.professor_id = prof.id
+			WHERE sub.sub_year = #{subYear} 
+				AND sub.semester = #{semester}
+				AND sub.dept_id = #{deptId}
+				AND sub.name LIKE '%'||#{name}||'%'
+		</if>
+	</select>
+
+	<select id="selectDtoBySemesterAndAndTypeAndDeptAndName" resultType="com.green.university.dto.response.SubjectDto">
+		
+		<!-- 강의구분 : 전체 & 개설학과 : 전체 -->
+		<if test="type == '전체' and deptId == -1">
+ 			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name 
+			FROM subject_tb AS sub
+			JOIN department_tb AS dept
+			ON sub.dept_id = dept.id
+			JOIN college_tb AS coll
+			ON dept.college_id = coll.id
+			JOIN professor_tb AS prof
+			ON sub.professor_id = prof.id
+			WHERE sub.sub_year = #{subYear} 
+				AND sub.semester = #{semester}
+				AND sub.name LIKE '%'||#{name}||'%'
+		</if>
+		
+		<!-- 강의구분 : 전체 & 개설학과 : 특정 -->
+		<if test="type == '전체' and deptId != -1">
+ 			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name 
+			FROM subject_tb AS sub
+			JOIN department_tb AS dept
+			ON sub.dept_id = dept.id
+			JOIN college_tb AS coll
+			ON dept.college_id = coll.id
+			JOIN professor_tb AS prof
+			ON sub.professor_id = prof.id
+			WHERE sub.sub_year = #{subYear} 
+				AND sub.semester = #{semester}
+				AND sub.dept_id = #{deptId}
+				AND sub.name LIKE '%'||#{name}||'%'
+		</if>
+		
+		<!-- 강의구분 : 특정 & 개설학과 : 전체 -->
+		<if test="type != '전체' and deptId == -1">
+ 			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name 
+			FROM subject_tb AS sub
+			JOIN department_tb AS dept
+			ON sub.dept_id = dept.id
+			JOIN college_tb AS coll
+			ON dept.college_id = coll.id
+			JOIN professor_tb AS prof
+			ON sub.professor_id = prof.id
+			WHERE sub.sub_year = #{subYear} 
+				AND sub.semester = #{semester}
+				AND sub.type = #{type}
+				AND sub.name LIKE '%'||#{name}||'%'
+		</if>
+		
+		<!-- 강의구분 : 특정 & 개설학과 : 특정 -->
+		<if test="type != '전체' and deptId != -1">
+ 			SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name 
+			FROM subject_tb AS sub
+			JOIN department_tb AS dept
+			ON sub.dept_id = dept.id
+			JOIN college_tb AS coll
+			ON dept.college_id = coll.id
+			JOIN professor_tb AS prof
+			ON sub.professor_id = prof.id
+			WHERE sub.sub_year = #{subYear} 
+				AND sub.semester = #{semester}
+				AND sub.type = #{type}
+				AND sub.dept_id = #{deptId}
+				AND sub.name LIKE '%'||#{name}||'%'
+		</if>
+		
+	</select>
 </mapper>
