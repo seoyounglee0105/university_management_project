@@ -114,19 +114,14 @@ CREATE TABLE pre_stu_sub_tb
    FOREIGN KEY (subject_id) REFERENCES subject_tb (id)
 );
 -- 수강 내역
-CREATE TABLE stu_sub_tb
-(
-   student_id INT,
-   subject_id INT,
-   PRIMARY KEY
-   (
-      student_id,
-      subject_id
-   ),
-   grade VARCHAR (2) COMMENT '학점 (평점)',
-   FOREIGN KEY (student_id) REFERENCES student_tb (id),
-   FOREIGN KEY (subject_id) REFERENCES subject_tb (id),
-   FOREIGN KEY (grade) REFERENCES grade_tb (grade)
+CREATE TABLE stu_sub_tb (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	student_id INT,
+    subject_id INT,
+    grade VARCHAR(2) COMMENT '학점 (평점)',
+    FOREIGN KEY (student_id) REFERENCES student_tb (id),
+    FOREIGN KEY (subject_id) REFERENCES subject_tb (id),
+    FOREIGN KEY (grade) REFERENCES grade_tb (grade)
 );
 -- 단과대별 등록금
 CREATE TABLE coll_tuit_tb
@@ -216,4 +211,29 @@ CREATE TABLE break_app_tb
    app_date DATE DEFAULT (current_date) NOT NULL COMMENT '신청 일자',
    status VARCHAR (3) NOT NULL DEFAULT '처리중' COMMENT '처리중, 승인, 거부',
    FOREIGN KEY (student_id) REFERENCES student_tb (id)
+);
+CREATE TABLE stu_sub_datail
+(
+   id INT PRIMARY KEY,
+   student_id INT NOT NULL,
+   subject_id INT NOT NULL,
+   absent INT COMMENT '결석 횟수',
+   lateness INT COMMENT '지각 횟수',
+   homework INT COMMENT '과제 점수',
+   mid_exam INT COMMENT '중간고사 점수',
+   final_exam INT COMMENT '기말고사 점수',
+   converted_mark INT COMMENT '환산점수',
+   FOREIGN KEY (id) REFERENCES stu_sub_tb(id),
+   FOREIGN KEY (student_id) REFERENCES student_tb(id),
+   FOREIGN KEY (subject_id) REFERENCES subject_tb(id)
+);
+
+CREATE TABLE syllabus
+(
+	subject_id INT PRIMARY KEY ,
+	overview VARCHAR(255) COMMENT '수업 개요',
+	objective VARCHAR(255) COMMENT '강의 목표',
+	textbook VARCHAR(30) COMMENT '교재',
+	program TEXT COMMENT '주별 계획',
+	FOREIGN KEY (subject_id) REFERENCES subject_tb(id)
 );

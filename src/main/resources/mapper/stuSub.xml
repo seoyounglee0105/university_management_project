@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- student_tb용 쿼리 -->
+
+<mapper namespace="com.green.university.repository.interfaces.StuSubRepository">
+	<select id="selectBySubjectId" resultType="com.green.university.dto.response.StudentInfoForProfessorDto">
+		SELECT ss.id, ss.student_id, s.name AS student_name, d.name AS dept_name, ssd.absent, ssd.lateness, ssd.mid_exam, ssd.final_exam, ssd.converted_mark
+		FROM stu_sub_tb AS ss
+		LEFT JOIN student_tb AS s
+		ON ss.student_id = s.id
+		LEFT JOIN department_tb AS d
+		ON s.dept_id = d.id
+		LEFT JOIN stu_sub_datail_tb AS ssd
+		ON ss.id = ssd.id
+		WHERE ss.subject_id = #{subjectId};
+	</select>
+
+</mapper>

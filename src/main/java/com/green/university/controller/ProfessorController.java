@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.university.dto.response.PrincipalDto;
 import com.green.university.dto.response.SubjectForProfessorDto;
@@ -31,6 +33,12 @@ public class ProfessorController {
 	@Autowired
 	private HttpSession session;
 
+	/**
+	 * 본인의 강의가 있는 년도 학기 조회하는 기능
+	 * 조회한 년도 학기의 강의 리스트 출력(처음값은 현재학기)
+	 * @param model
+	 * @return 본인 강좌 조회 페이지
+	 */
 	@GetMapping("/subject")
 	public String subjectList(Model model) {
 		
@@ -46,11 +54,19 @@ public class ProfessorController {
 		
 		return "/professor/professorSubjectList";
 	}
+	
+	/**
+	 * 조회한 년도 학기의 강의 리스트 출력
+	 * @param model
+	 * @param period: 조회할 년도 학기
+	 * @return 조회 신청한 학기의 본인 강좌 조회 페이지
+	 */
 	@PostMapping("/subject")
-	public String subjectListProc(Model model, @RequestBody String period) {
+	public String subjectListProc(Model model, @RequestParam String period) {
 		System.out.println(period);
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		List<SubjectPeriodForProfessorDto> semesterList = professorService.selectSemester(principal.getId());
+		// String[] str = period.split("=");
 		String[] strs = period.split("year");
 		SubjectPeriodForProfessorDto subjectPeriodForProfessorDto = new SubjectPeriodForProfessorDto();
 		subjectPeriodForProfessorDto.setSubYear(Integer.parseInt(strs[0]));
@@ -62,6 +78,19 @@ public class ProfessorController {
 		model.addAttribute("subjectList", subjectList);
 		
 		return "/professor/professorSubjectList";
+	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @return 과목을 듣는 학생 리스트
+	 */
+	@GetMapping("/subject/{subjectId}")
+	public String subjectStudentList(Model model, @PathVariable Integer subjectId) {
+		
+		
+		
+		return "/professor/subjectStudentList";
 	}
 	
 }

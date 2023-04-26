@@ -8,21 +8,11 @@ form {
 	margin-left: 30px;
 }
 
-.input--table th,td {
+.input--table th, td {
 	padding: 5px 10px;
 }
 
-/* button {
-	padding: 8px 20px;
-	border: none;
-	border-radius: 5px;
-	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-	margin-top: 20px;
-} */
 
-.button-td {
-	text-align: center;
-}
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -60,23 +50,16 @@ form {
 
 	<!-- 메인 div -->
 	<main>
-		<h1>과목 조회</h1>
+		<h1>과목 상세 조회</h1>
 		<div class="split--div"></div>
-		<form action="/professor/subject" method="post">
-			<select name="period">
-				<c:forEach items="${semesterList}" var="yearSemester">
-					<option value="${yearSemester.subYear}year${yearSemester.semester}">${yearSemester.subYear}년도${yearSemester.semester}학기</option>
-				</c:forEach>
-			</select>
-			<button type="submit">조회</button>
-		</form>
+		
 		<table border="1">
 			<thead>
 				<tr>
 					<th>과목id</th>
-					<th>과목명</th>
-					<th>강의시간</th>
-					<th>강의 상세보기</th>
+					<td>10000</td>
+					<th></th>
+					<th>강의계획서</th>
 					<th>학생 성적 기입</th>
 				</tr>
 			</thead>
@@ -87,7 +70,7 @@ form {
 					<td>${subject.name}</td>
 					<td>${subject.time}</td>
 					<td><a href="#">강의 계획서 보기</a></td>
-					<td><a href="subject/${subject.id}">학생 리스트 보기</a></td>
+					<td><a href="#">학생 리스트 보기</a></td>
 				</tr>
 			</tbody>
 			</c:forEach>

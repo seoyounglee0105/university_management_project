@@ -60,37 +60,35 @@ form {
 
 	<!-- 메인 div -->
 	<main>
-		<h1>과목 조회</h1>
-		<div class="split--div"></div>
-		<form action="/professor/subject" method="post">
-			<select name="period">
-				<c:forEach items="${semesterList}" var="yearSemester">
-					<option value="${yearSemester.subYear}year${yearSemester.semester}">${yearSemester.subYear}년도${yearSemester.semester}학기</option>
-				</c:forEach>
-			</select>
-			<button type="submit">조회</button>
-		</form>
+		<h1>학생 리스트 조회</h1>
 		<table border="1">
 			<thead>
 				<tr>
-					<th>과목id</th>
-					<th>과목명</th>
-					<th>강의시간</th>
-					<th>강의 상세보기</th>
-					<th>학생 성적 기입</th>
+					<th>학생 번호</th>
+					<th>이름</th>
+					<th>소속</th>
+					<th>결석</th>
+					<th>지각</th>
+					<th>과제점수</th>
+					<th>중간시험</th>
+					<th>기말시험</th>
+					<th>환산점수</th>
 				</tr>
 			</thead>
-			<c:forEach items="${subjectList}" var="subject">
 			<tbody>
 				<tr>
-					<td>${subject.id}</td>
-					<td>${subject.name}</td>
-					<td>${subject.time}</td>
-					<td><a href="#">강의 계획서 보기</a></td>
-					<td><a href="subject/${subject.id}">학생 리스트 보기</a></td>
+					<td>11111</td>
+					<td>홍길동</td>
+					<td>도적학과</td>
+					<td>1</td>
+					<td>2</td>
+					<td>20</td>
+					<td>30</td>
+					<td>40</td>
+					<td>99</td>
 				</tr>
+				
 			</tbody>
-			</c:forEach>
 		</table>
 
 	</main>
