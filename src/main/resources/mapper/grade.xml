@@ -164,4 +164,14 @@ ON st.student_id = mg.student_id
 WHERE st.student_id = #{studentId} AND su.sub_year= #{subYear} AND su.semester = #{semester};
 </select>
 
+<select id="findAvgGradeByStudentIdAndSemester" resultType="com.green.university.dto.response.GradeForScholarshipDto">
+	SELECT ss.student_id, sub_year, semester, AVG(grade_value) AS avg_grade FROM stu_sub_tb AS ss
+	JOIN grade_tb AS g
+	ON ss.grade = g.grade
+	JOIN subject_tb AS s
+	ON ss.subject_id = s.id
+	WHERE sub_year = #{subYear} AND semester = #{semester} AND ss.student_id = #{studentId}
+	GROUP BY student_id;
+</select>
+
 </mapper>

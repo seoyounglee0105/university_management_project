@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.hibernate.validator.constraints.ParameterScriptAssert;
 
 import com.green.university.dto.response.GradeDto;
+import com.green.university.dto.response.GradeForScholarshipDto;
 import com.green.university.dto.response.MyGradeDto;
 import com.green.university.repository.model.StuSub;
 
@@ -39,5 +40,10 @@ public interface GradeRespository {
 	// 전체 찾는거
 	public List<GradeDto> chioceByGradeAlltype(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear, @Param("semester") Integer semester);
 
-
+	/**
+	 * @author 서영
+	 * 장학금 유형 결정을 위한 성적 평균을 가져옴
+	 */
+	public GradeForScholarshipDto findAvgGradeByStudentIdAndSemester(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear, @Param("semester") Integer semester);
+	
 }

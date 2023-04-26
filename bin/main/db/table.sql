@@ -142,7 +142,7 @@ CREATE TABLE stu_sch_tb
    student_id INT NOT NULL,
    sch_year INT NOT NULL COMMENT '지원 연도',
    semester INT NOT NULL COMMENT '지원 학기',
-   sch_type INT NOT NULL COMMENT '장학금 유형',
+   sch_type INT COMMENT '장학금 유형',
    PRIMARY KEY
    (
       student_id,
@@ -158,7 +158,7 @@ CREATE TABLE tuition_tb
    tui_year INT NOT NULL COMMENT '등록 연도',
    semester INT NOT NULL COMMENT '등록 학기',
    tui_amount INT NOT NULL COMMENT '등록금',
-   sch_type INT NOT NULL COMMENT '장학금 유형',
+   sch_type INT COMMENT '장학금 유형',
    sch_amount INT COMMENT '장학금',
    status BOOLEAN DEFAULT false COMMENT '납부 여부',
    PRIMARY KEY
@@ -173,6 +173,7 @@ CREATE TABLE tuition_tb
 -- 학적 상태
 CREATE TABLE stu_stat_tb
 (
+   id INT PRIMARY KEY AUTO_INCREMENT,
    student_id INT NOT NULL,
    status VARCHAR (3) NOT NULL DEFAULT '재학',
    -- 재학, 휴학, 졸업, 자퇴

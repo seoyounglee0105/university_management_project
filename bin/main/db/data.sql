@@ -62,27 +62,6 @@ INSERT INTO scholarship_tb VALUES
    2,
    1500000
 );
-INSERT INTO stu_sch_tb VALUES
-(
-   2018000001,
-   2018,
-   1,
-   1
-);
-INSERT INTO stu_sch_tb VALUES
-(
-   2018000001,
-   2023,
-   1,
-   1
-);
-INSERT INTO stu_sch_tb VALUES
-(
-   2018000002,
-   2023,
-   1,
-   2
-);
 INSERT INTO tuition_tb
 (
    student_id,
@@ -129,7 +108,7 @@ VALUES
    'a@test.com',
    101,
    1,
-   1,
+   2,
    '2023-04-01'
 );
 INSERT INTO room_tb
@@ -610,14 +589,16 @@ VALUES
    'A+'
 );
 INSERT INTO stu_stat_tb VALUES
-(
+( 
+   1,
    2018000001,
-   '재학',
+   '휴학',
    current_date,
    '9999-01-01'
 );
 INSERT INTO stu_stat_tb VALUES
 (
+   2,
    2018000002,
    '재학',
    current_date,
