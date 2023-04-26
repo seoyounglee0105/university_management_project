@@ -20,5 +20,10 @@
 		AND sub_year = #{subYear}
 		AND semester = #{semester}
 	</select>
+	
+	<select id="selectSubjectById" resultType="com.green.university.repository.model.Subject">
+		SELECT * FROM subject_tb
+		WHERE id = #{id};
+	</select>
 
 </mapper>

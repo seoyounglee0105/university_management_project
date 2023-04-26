@@ -8,7 +8,7 @@ form {
 	margin-left: 30px;
 }
 
-.input--table th,td {
+.input--table th, td {
 	padding: 5px 10px;
 }
 
@@ -19,7 +19,6 @@ form {
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 	margin-top: 20px;
 } */
-
 .button-td {
 	text-align: center;
 }
@@ -60,39 +59,42 @@ form {
 
 	<!-- 메인 div -->
 	<main>
-		<h1> [${subject.name}] 학생 리스트 조회</h1>
+		<h1>학생 리스트 조회</h1>
 		<table border="1">
 			<thead>
 				<tr>
 					<th>학생 번호</th>
 					<th>이름</th>
 					<th>소속</th>
-					<th>결석</th>
-					<th>지각</th>
-					<th>과제점수</th>
-					<th>중간시험</th>
-					<th>기말시험</th>
-					<th>환산점수</th>
-					<th>점수 기입하기</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${studentList}" var="student">
 				<tr>
 					<td>${student.studentId}</td>
 					<td>${student.studentName}</td>
 					<td>${student.deptName}</td>
-					<td>${student.absent}</td>
-					<td>${student.lateness}</td>
-					<td>${student.homework}</td>
-					<td>${student.midExam}</td>
-					<td>${student.finalExam}</td>
-					<td>${student.convertedMark}</td>
-					<td><a href="/professor/detail/${subject.id}/${student.studentId}">기입</a></td>
 				</tr>
-				</c:forEach>
-				
 			</tbody>
+		</table>
+		<table>
+			<tr>
+				<td><label>결석</label><input type="number" name="absent" id="absent"></td>
+			</tr>
+			<tr>
+				<td><label>지각</label><input type="number" name="lateness" id="lateness"></td>
+			</tr>
+			<tr>
+				<td><label>과제점수</label><input type="number" name="homework" id="homework"></td>
+			</tr>
+			<tr>
+				<td><label>중간시험</label><input type="number" name="midExam" id="midExam"></td>
+			</tr>
+			<tr>
+				<td><label>기말시험</label><input type="number" name="finalExam" id="finalExam"></td>
+			</tr>
+			<tr>
+				<td><label>환산점수</label><input type="number" name="convertedMark" id="convertedMark"></td>
+			</tr>
 		</table>
 
 	</main>

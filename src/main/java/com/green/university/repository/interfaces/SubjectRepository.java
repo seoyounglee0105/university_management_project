@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.green.university.dto.SubjectFormDto;
 import com.green.university.dto.response.SubjectForProfessorDto;
 import com.green.university.dto.response.SubjectPeriodForProfessorDto;
+import com.green.university.repository.model.Subject;
 
 /*
  *  박성희
@@ -30,5 +31,12 @@ public interface SubjectRepository {
 	 * @return 그 학기의 본인 수업 정보들
 	 */
 	public List<SubjectForProfessorDto> selectSubjectBySemester(SubjectPeriodForProfessorDto subjectPeriodForProfessorDto);
+	
+	/**
+	 * @author 김지현
+	 * @param id
+	 * @return
+	 */
+	public Subject selectSubjectById(Integer id);
 	
 }

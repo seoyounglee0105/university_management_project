@@ -9,7 +9,11 @@ import com.green.university.dto.response.StudentInfoForProfessorDto;
 @Mapper
 public interface StuSubRepository {
 	
-	// 과목으로 학생정보 뽑기
+	/**
+	 * 과목으로 학생 상세정보 뽑기
+	 * @param subjectId
+	 * @return StudentInfoForProfessorDto 리스트
+	 */
 	List<StudentInfoForProfessorDto> selectBySubjectId(Integer subjectId);
 
 }

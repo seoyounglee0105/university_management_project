@@ -212,7 +212,7 @@ CREATE TABLE break_app_tb
    status VARCHAR (3) NOT NULL DEFAULT '처리중' COMMENT '처리중, 승인, 거부',
    FOREIGN KEY (student_id) REFERENCES student_tb (id)
 );
-CREATE TABLE stu_sub_datail
+CREATE TABLE stu_sub_detail_tb
 (
    id INT PRIMARY KEY,
    student_id INT NOT NULL,
@@ -228,7 +228,7 @@ CREATE TABLE stu_sub_datail
    FOREIGN KEY (subject_id) REFERENCES subject_tb(id)
 );
 
-CREATE TABLE syllabus
+CREATE TABLE syllabus_tb
 (
 	subject_id INT PRIMARY KEY ,
 	overview VARCHAR(255) COMMENT '수업 개요',
