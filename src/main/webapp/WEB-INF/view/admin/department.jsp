@@ -152,7 +152,7 @@
 					<c:forEach var="department" items="${departmentList}">
 						<tr>
 							<td>${department.id}</td>
-							<td><a href="/updAdmin/deDepartment?collegeId=${department.collegeId}">${department.name}</a></td>
+							<td><a href="/updAdmin/deDepartment?id=${department.id}">${department.name}</a></td>
 							<td>${department.collegeId}</td>
 						</tr>
 					</c:forEach>

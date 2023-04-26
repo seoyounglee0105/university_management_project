@@ -17,6 +17,6 @@ import com.green.university.repository.model.Department;
 public interface DepartmentRepository {
 	public int insert(DepartmentFormDto departmentFormDto);
 	public List<Department> findAll();
-	public int delete(Integer collegeId);
+	public int delete(Integer id);
 	public int update(DepartmentFormDto departmentFormDto);
 }

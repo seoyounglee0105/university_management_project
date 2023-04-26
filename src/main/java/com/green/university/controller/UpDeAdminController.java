@@ -46,9 +46,9 @@ public class UpDeAdminController {
 	 * @return 학과 삭제 기능
 	 */
 	@GetMapping("/deDepartment")
-	public String deleteDepartment(Model model, @RequestParam Integer collegeId) {
-		model.addAttribute("collegeId", collegeId);
-		adminService.deleteDepartment(collegeId);
+	public String deleteDepartment(Model model, @RequestParam Integer id) {
+		model.addAttribute("id", id);
+		adminService.deleteDepartment(id);
 		return "redirect:/admin/department";
 	}
 	

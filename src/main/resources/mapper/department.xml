@@ -11,7 +11,7 @@
 		select * from department_tb
 	</select>
 	<delete id="delete">
-		delete from department_tb where college_id = #{collegeId}
+		delete from department_tb where id = #{id}
 	</delete>
 	<update id="update">
 		UPDATE department_tb
