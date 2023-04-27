@@ -14,7 +14,6 @@
 
 
 </style>
-
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <!-- 등록금 내역 조회 -->
@@ -35,6 +34,9 @@
 				</tr>
 				<tr>
 					<td><a href="/grade/semetergrade">학기별 성적조회</a></td>
+				</tr>
+				<tr>
+					<td><a href="/grade/totalgrade">누계 성적</a></td>
 				</tr>
 			</table>
 		</div>
@@ -70,6 +72,10 @@
 								<td>${grade.type}</td>
 								<td>${grade.grades}</td>
 								<td>${grade.grade}</td>
+								<td>
+								<a href="/evaluation?subjectId=${grade.subjectId}" 
+					onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">강의평가</a>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

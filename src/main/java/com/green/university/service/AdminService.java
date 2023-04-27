@@ -3,6 +3,7 @@ package com.green.university.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -13,17 +14,20 @@ import com.green.university.dto.DepartmentFormDto;
 import com.green.university.dto.NoticeFormDto;
 import com.green.university.dto.RoomFormDto;
 import com.green.university.dto.SubjectFormDto;
+import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.CollTuitRepository;
 import com.green.university.repository.interfaces.CollegeRepository;
 import com.green.university.repository.interfaces.DepartmentRepository;
 import com.green.university.repository.interfaces.NoticeRepository;
 import com.green.university.repository.interfaces.RoomRepository;
 import com.green.university.repository.interfaces.SubjectRepository;
+import com.green.university.repository.interfaces.SyllaBusRepository;
 import com.green.university.repository.model.CollTuit;
 import com.green.university.repository.model.College;
 import com.green.university.repository.model.Department;
 import com.green.university.repository.model.Room;
 import com.green.university.repository.model.Subject;
+import com.green.university.utils.SubjectUtil;
 
 /**
  * 
@@ -43,7 +47,8 @@ public class AdminService {
 	private RoomRepository roomRepository;
 	@Autowired
 	private SubjectRepository subjectRepository;
-
+	@Autowired
+	private SyllaBusRepository syllaBusRepository;
 
 	/**
 	 * 단과대 입력 서비스
@@ -104,7 +109,7 @@ public class AdminService {
 	 * 학과 수정 서비스
 	 */
 	public int updateDepartment(DepartmentFormDto departmentFormDto) {
-		int resultRowCount = departmentRepository.update(departmentFormDto);  
+		int resultRowCount = departmentRepository.update(departmentFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("학과 수정 서비스 오류");
 		}
@@ -137,12 +142,12 @@ public class AdminService {
 		int resultRowCount = collTuitRepository.delete(collegeId);
 		return resultRowCount;
 	}
-	
+
 	/**
 	 * 단과대 등록금 수정 서비스
 	 */
 	public int updateCollTuit(CollTuitFormDto collTuitFormDto) {
-		int resultRowCount = collTuitRepository.update(collTuitFormDto);  
+		int resultRowCount = collTuitRepository.update(collTuitFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("단과대 등록금 수정 서비스 오류");
 		}
@@ -180,11 +185,22 @@ public class AdminService {
 	 * 강의 입력 서비스
 	 */
 	@Transactional
-	public void insertSubject(@Validated SubjectFormDto subjectFormDto) {
-		int resultRowCount = subjectRepository.insert(subjectFormDto);
-		if (resultRowCount != 1) {
-			System.out.println("강의 입력 서비스 오류");
+	public List<Subject> insertSubject(@Validated SubjectFormDto subjectFormDto) {
+		// 강의실, 강의시간 중복 검사
+		List<Subject> subjectList = subjectRepository.selectByRoomIdAndSubDayAndSubYearAndSemester(subjectFormDto);
+		if (subjectList != null) {
+			SubjectUtil subjectUtil = new SubjectUtil();
+			boolean result = subjectUtil.calculate(subjectFormDto, subjectList);
+			if (result == false) {
+				throw new CustomRestfullException("해당 시간대는 강의실을 사용중입니다! 다시 선택해주세요", HttpStatus.BAD_REQUEST);
+			}
 		}
+		subjectRepository.insert(subjectFormDto);
+		
+		// 강의계획서에 강의 ID 저장
+		Integer subjectId = subjectRepository.selectIdOrderById(subjectFormDto);
+		syllaBusRepository.insertOnlySubId(subjectId);
+		return subjectList;
 	}
 
 	/**
@@ -196,18 +212,34 @@ public class AdminService {
 	}
 
 	/**
+	 * 강의 중복 강의실,요일 조회 서비스
+	 */
+	public List<Subject> selectSubjectByRoomIdAndSubDay(@Validated SubjectFormDto subjectFormDto) {
+		// 강의실, 강의시간 중복 검사
+		List<Subject> subjectList = subjectRepository.selectByRoomIdAndSubDayAndSubYearAndSemester(subjectFormDto);
+		if (subjectList != null) {
+			SubjectUtil subjectUtil = new SubjectUtil();
+			boolean result = subjectUtil.calculate(subjectFormDto, subjectList);
+			if (result == false) {
+				throw new CustomRestfullException("해당 시간대는 강의실을 사용중입니다! 다시 선택해주세요", HttpStatus.BAD_REQUEST);
+			}
+		}
+		return subjectList;
+	}
+
+	/**
 	 * 강의 삭제 서비스
 	 */
 	public int deleteSubject(Integer id) {
 		int resultRowCount = subjectRepository.delete(id);
 		return resultRowCount;
 	}
-	
+
 	/**
 	 * 강의 수정 서비스
 	 */
 	public int updateSubject(SubjectFormDto subjectFormDto) {
-		int resultRowCount = subjectRepository.update(subjectFormDto);  
+		int resultRowCount = subjectRepository.update(subjectFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("강의 수정 서비스 오류");
 		}
