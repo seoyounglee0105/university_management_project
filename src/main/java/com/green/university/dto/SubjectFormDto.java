@@ -39,8 +39,16 @@ public class SubjectFormDto {
 	@Max(2)
 	private Integer semester;
 	@NotEmpty
-	@Size(max = 30)
-	private String time;
+	@Size(max = 1)
+	private String subDay;
+	@NotEmpty
+	@Min(9)
+	@Max(18)
+	private Integer startTime;
+	@NotEmpty
+	@Min(9)
+	@Max(18)
+	private Integer endTime;
 	@NotEmpty
 	private Integer grades;
 	@NotEmpty

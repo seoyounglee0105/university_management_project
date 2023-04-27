@@ -10,16 +10,19 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.green.university.handler.AuthIntercepter;
+import com.green.university.handler.UserRoleAuthIntercepterForStaff;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
 	@Autowired
 	private AuthIntercepter authIntercepter;
+	@Autowired
+	private UserRoleAuthIntercepterForStaff userRoleAuthIntercepterForStaff;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		// registry.addInterceptor(authIntercepter).addPathPatterns("/account/**").addPathPatterns("/auth/**");
+		// registry.addInterceptor(upserRoleAuthIntercepterForStaff).addPathPatterns("/admin/**");
 	}
 	
 	// 파일 리소스 등록
