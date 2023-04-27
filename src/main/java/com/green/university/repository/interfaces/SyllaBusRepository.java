@@ -2,12 +2,6 @@ package com.green.university.repository.interfaces;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.green.university.dto.CreateStaffDto;
-import com.green.university.dto.SyllaBusFormDto;
-import com.green.university.dto.UserUpdateDto;
-import com.green.university.dto.response.UserInfoForUpdateDto;
-import com.green.university.repository.model.User;
-
 /**
  * 
  * 

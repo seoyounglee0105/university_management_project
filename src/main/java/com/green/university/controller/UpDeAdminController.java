@@ -81,6 +81,7 @@ public class UpDeAdminController {
 	 */
 	@PutMapping("/upSubject")
 	public String updateSubject(SubjectFormDto subjectFormDto) {
+		System.out.println(subjectFormDto);
 		adminService.updateSubject(subjectFormDto);
 		return "redirect:/admin/subject";
 	}

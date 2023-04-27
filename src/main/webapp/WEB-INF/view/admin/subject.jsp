@@ -150,8 +150,27 @@
 								</c:forEach>
 							</select> 
 							변경 학과명 <input type="text" name="name"> 
-							변경 강의실 <input type="text" name="roomId"> 
-							변경 시간 <input type="text" name="time"> 
+							변경 강의실 <input type="text" name="roomId"><br>
+							변경 요일
+								<select name="subDay">
+									<option value="월">월</option>
+									<option value="화">화</option>
+									<option value="수">수</option>
+									<option value="목">목</option>
+									<option value="금">금</option>
+								</select> 
+							변경 시작시간 
+								<select name="startTime">
+									<c:forEach var="time" begin="9" end="16">
+										<option value="${time}">${time}</option>
+									</c:forEach>
+								</select>
+							변경 종료시간
+								<select name="endTime">
+									<c:forEach var="time" begin="11" end="18">
+										<option value="${time}">${time}</option>
+									</c:forEach> 
+								</select>
 							변경 정원 <input type="text" name="capacity"> 
 							<input type="submit" value="수정">
 						<table class="subject--table">

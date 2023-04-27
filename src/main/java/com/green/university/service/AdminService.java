@@ -196,7 +196,7 @@ public class AdminService {
 			}
 		}
 		subjectRepository.insert(subjectFormDto);
-		
+
 		// 강의계획서에 강의 ID 저장
 		Integer subjectId = subjectRepository.selectIdOrderById(subjectFormDto);
 		syllaBusRepository.insertOnlySubId(subjectId);
@@ -212,22 +212,6 @@ public class AdminService {
 	}
 
 	/**
-	 * 강의 중복 강의실,요일 조회 서비스
-	 */
-	public List<Subject> selectSubjectByRoomIdAndSubDay(@Validated SubjectFormDto subjectFormDto) {
-		// 강의실, 강의시간 중복 검사
-		List<Subject> subjectList = subjectRepository.selectByRoomIdAndSubDayAndSubYearAndSemester(subjectFormDto);
-		if (subjectList != null) {
-			SubjectUtil subjectUtil = new SubjectUtil();
-			boolean result = subjectUtil.calculate(subjectFormDto, subjectList);
-			if (result == false) {
-				throw new CustomRestfullException("해당 시간대는 강의실을 사용중입니다! 다시 선택해주세요", HttpStatus.BAD_REQUEST);
-			}
-		}
-		return subjectList;
-	}
-
-	/**
 	 * 강의 삭제 서비스
 	 */
 	public int deleteSubject(Integer id) {
@@ -239,6 +223,20 @@ public class AdminService {
 	 * 강의 수정 서비스
 	 */
 	public int updateSubject(SubjectFormDto subjectFormDto) {
+		// ID로 연도 학기 조회
+		Subject subject = subjectRepository.selectSubjectById(subjectFormDto.getId());
+		subjectFormDto.setSubYear(subject.getSubYear());
+		subjectFormDto.setSemester(subject.getSemester());
+		// 강의실, 강의시간 중복 검사
+		List<Subject> subjectList = subjectRepository.selectByRoomIdAndSubDayAndSubYearAndSemester(subjectFormDto);
+		System.out.println(subjectList);
+		if (subjectList != null) {
+			SubjectUtil subjectUtil = new SubjectUtil();
+			boolean result = subjectUtil.calculate(subjectFormDto, subjectList);
+			if (result == false) {
+				throw new CustomRestfullException("해당 시간대는 강의실을 사용중입니다! 다시 선택해주세요", HttpStatus.BAD_REQUEST);
+			}
+		}
 		int resultRowCount = subjectRepository.update(subjectFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("강의 수정 서비스 오류");
