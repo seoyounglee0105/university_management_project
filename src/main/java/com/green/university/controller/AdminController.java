@@ -3,6 +3,7 @@ package com.green.university.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -18,12 +19,14 @@ import com.green.university.dto.DepartmentFormDto;
 import com.green.university.dto.NoticeFormDto;
 import com.green.university.dto.RoomFormDto;
 import com.green.university.dto.SubjectFormDto;
+import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.CollTuit;
 import com.green.university.repository.model.College;
 import com.green.university.repository.model.Department;
 import com.green.university.repository.model.Room;
 import com.green.university.repository.model.Subject;
 import com.green.university.service.AdminService;
+import com.green.university.utils.SubjectUtil;
 
 /**
  * 

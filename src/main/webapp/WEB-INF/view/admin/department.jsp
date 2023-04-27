@@ -79,13 +79,14 @@
 			<c:if test="${crud.equals(\"insert\")}">
 				<form action="/admin/department-proc" method="get" id="insert--form">
 					<h5>등록할 학과명을 입력해주세요</h5>
-					학과명 <input type="text" name="name" value="전자과"> 
-					단과대학 
-					<select name="collegeId">
-						<c:forEach var="college" items="${collegeList}">
-							<option value="${college.id}">${college.name}</option>
-						</c:forEach>
-					</select> <input type="submit" value="입력">
+						학과명 <input type="text" name="name" value="전자과"> 
+						단과대학 
+							<select name="collegeId">
+								<c:forEach var="college" items="${collegeList}">
+									<option value="${college.id}">${college.name}</option>
+								</c:forEach>
+							</select> 
+							<input type="submit" value="입력">
 				</form>
 				<table class="department--table">
 					<tr class="first--tr">
@@ -107,16 +108,17 @@
 			<!-- 학과 수정  -->
 			<c:if test="${crud.equals(\"update\")}">
 				<form action="/updAdmin/upDepartment" method="post" id="insert--form">
-					<h5>변경할 학과명을 입력해주세요</h5>
-					학과명 
-					<select name="id">
-						<c:forEach var="department" items="${departmentList}">
-							<option value="${department.id}">${department.name}</option>
-						</c:forEach>
-					</select>
-					변경 학과명 
-					<input type="text" name="name" value="전자과"> 
-					<input type="submit" value="수정">
+					 <input type="hidden" name="_method" value="put"/>
+						<h5>변경할 학과명을 입력해주세요</h5>
+							학과명 
+								<select name="id">
+									<c:forEach var="department" items="${departmentList}">
+										<option value="${department.id}">${department.name}</option>
+									</c:forEach>
+								</select>
+							변경 학과명 
+							<input type="text" name="name" value="전자과"> 
+							<input type="submit" value="수정">
 				</form>
 
 				<table class="department--table">
@@ -176,8 +178,6 @@
 	</main>
 
 			<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
-
 		</div>
-
 		</body>
 		</html>

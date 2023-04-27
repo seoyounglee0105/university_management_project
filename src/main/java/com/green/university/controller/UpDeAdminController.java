@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -56,7 +57,7 @@ public class UpDeAdminController {
 	 * 
 	 * @return 학과 수정 기능
 	 */
-	@PostMapping("/upDepartment")
+	@PutMapping("/upDepartment")
 	public String updateDepartment(DepartmentFormDto departmentFormDto) {
 		adminService.updateDepartment(departmentFormDto);
 		return "redirect:/admin/department";
@@ -78,7 +79,7 @@ public class UpDeAdminController {
 	 * 
 	 * @return 강의 수정 기능
 	 */
-	@PostMapping("/upSubject")
+	@PutMapping("/upSubject")
 	public String updateSubject(SubjectFormDto subjectFormDto) {
 		adminService.updateSubject(subjectFormDto);
 		return "redirect:/admin/subject";
@@ -110,7 +111,7 @@ public class UpDeAdminController {
 	 * 
 	 * @return 단과대 등록금 수정 기능
 	 */
-	@PostMapping("/upCollTuit")
+	@PutMapping("/upCollTuit")
 	public String updateCollTuit(CollTuitFormDto collTuitFormDto) {
 		adminService.updateCollTuit(collTuitFormDto);
 		return "redirect:/admin/collTuit";

@@ -32,13 +32,18 @@
 		select * from subject_tb
 	</select>
 	
+	<select id="selectByRoomIdAndSubDayAndSubYearAndSemester" resultType="com.green.university.repository.model.Subject">
+		select * from subject_tb
+		where room_id = #{roomId} and sub_day = #{subDay} and sub_year = #{subYear} and semester = #{semester}
+	</select>
+	
 	<delete id="delete">
 		delete from subject_tb where id = #{id}
 	</delete>
 	
 	<update id="update">
 		UPDATE subject_tb
-		SET name = #{name}, room_id = #{roomId}, time = #{time}, capacity = #{capacity}
+		SET name = #{name}, room_id = #{roomId}, sub_day = #{subDay}, start_time = #{startTime}, end_time = #{endTime}, capacity = #{capacity}
 		WHERE id = #{id}
 	</update>
 	
