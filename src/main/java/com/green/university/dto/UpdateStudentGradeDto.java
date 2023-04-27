@@ -25,5 +25,7 @@ public class UpdateStudentGradeDto {
 	private Integer finalExam;
 	// 총합 환산 점수
 	private Integer convertedMark;
+	// 등급
+	private String grade;
 
 }

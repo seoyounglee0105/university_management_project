@@ -81,11 +81,17 @@ public class ProfessorService {
 	@Transactional
 	public void updateGrade(UpdateStudentGradeDto updateStudentGradeDto) {
 		
-		int resultCountRow = stuSubDetailRepository.updateGrade(updateStudentGradeDto);
+		int resultRowCount = stuSubDetailRepository.updateGrade(updateStudentGradeDto);
 		
-		if (resultCountRow != 1) {
+		if (resultRowCount != 1) {
 			throw new CustomRestfullException("요청을 처리하지 못했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		
+		resultRowCount = stuSubRepository.updateGradeByStudentIdAndSubjectId(updateStudentGradeDto);
+		if (resultRowCount != 1) {
+			throw new CustomRestfullException("요청을 처리하지 못했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 		
 	}
 

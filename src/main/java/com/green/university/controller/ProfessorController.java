@@ -126,13 +126,10 @@ public class ProfessorController {
 	@PutMapping("/detail/{subjectId}/{studentId}")
 	public String updateStudentDetailProc(Model model, @PathVariable Integer subjectId, @PathVariable Integer studentId, UpdateStudentGradeDto updateStudentGradeDto) {
 		
-		System.out.println(updateStudentGradeDto);
-		updateStudentGradeDto.setStudentId(studentId);
-		updateStudentGradeDto.setSubjectId(subjectId);
 		
 		professorService.updateGrade(updateStudentGradeDto);
 		
-		return "redirect:/professor/ " + subjectId + "/" + studentId;
+		return "redirect:/professor/detail/ " + subjectId + "/" + studentId;
 	}
 
 }

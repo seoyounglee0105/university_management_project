@@ -13,7 +13,15 @@
 		ON s.dept_id = d.id
 		LEFT JOIN stu_sub_detail_tb AS ssd
 		ON ss.id = ssd.id
-		WHERE ss.subject_id = #{subjectId};
+		WHERE ss.subject_id =
+		#{subjectId};
 	</select>
+
+	<update id="updateGradeByStudentIdAndSubjectId">
+		UPDATE stu_sub_tb
+		SET grade = #{grade}
+		WHERE student_id = #{studentId}
+		AND subject_id = #{subjectId}
+	</update>
 
 </mapper>
