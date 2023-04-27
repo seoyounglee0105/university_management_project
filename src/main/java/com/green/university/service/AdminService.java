@@ -194,6 +194,15 @@ public class AdminService {
 		List<Subject> subjectList = subjectRepository.findAll();
 		return subjectList;
 	}
+	
+	/**
+	 * 강의 중복 강의실,요일 조회 서비스
+	 */
+	public List<Subject> selectSubjectByRoomIdAndSubDay(@Validated SubjectFormDto subjectFormDto) {
+		List<Subject> subjectList = subjectRepository.selectByRoomIdAndSubDay(subjectFormDto);
+		return subjectList;
+	}
+	
 
 	/**
 	 * 강의 삭제 서비스

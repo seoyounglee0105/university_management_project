@@ -128,6 +128,7 @@
 							<td>${subject.type}</td>
 							<td>${subject.subYear}</td>
 							<td>${subject.semester}</td>
+							<td>${subject.subDay} ${subject.startTime}:00 - ${subject.endTime}:00</td>
 							<td>${subject.grades}</td>
 							<td>${subject.capacity}</td>
 							<td>${subject.numOfStudent}</td>
@@ -177,6 +178,7 @@
 								<td>${subject.type}</td>
 								<td>${subject.subYear}</td>
 								<td>${subject.semester}</td>
+								<td>${subject.subDay} ${subject.startTime}:00 - ${subject.endTime}:00</td>
 								<td>${subject.grades}</td>
 								<td>${subject.capacity}</td>
 								<td>${subject.numOfStudent}</td>
@@ -209,13 +211,14 @@
 					<c:forEach var="subject" items="${subjectList}">
 						<tr>
 							<td>${subject.id}</td>
-							<td><a href="/admin/subject?crud=deleteById">${subject.name}</a></td>
+							<td><a href="/updAdmin/deSubject?id=${subject.id}">${subject.name}</a></td>
 							<td>${subject.professorId}</td>
 							<td>${subject.roomId}</td>
 							<td>${subject.deptId}</td>
 							<td>${subject.type}</td>
 							<td>${subject.subYear}</td>
 							<td>${subject.semester}</td>
+							<td>${subject.subDay} ${subject.startTime}:00 - ${subject.endTime}:00</td>
 							<td>${subject.grades}</td>
 							<td>${subject.capacity}</td>
 						</tr>

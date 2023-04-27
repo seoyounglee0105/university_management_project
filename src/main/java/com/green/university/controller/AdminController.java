@@ -3,6 +3,7 @@ package com.green.university.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -18,12 +19,14 @@ import com.green.university.dto.DepartmentFormDto;
 import com.green.university.dto.NoticeFormDto;
 import com.green.university.dto.RoomFormDto;
 import com.green.university.dto.SubjectFormDto;
+import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.CollTuit;
 import com.green.university.repository.model.College;
 import com.green.university.repository.model.Department;
 import com.green.university.repository.model.Room;
 import com.green.university.repository.model.Subject;
 import com.green.university.service.AdminService;
+import com.green.university.utils.SubjectUtil;
 
 /**
  * 
@@ -153,6 +156,15 @@ public class AdminController {
 	 */
 	@PostMapping("/subject-proc")
 	public String insertSubject(SubjectFormDto subjectFormDto) {
+		// 강의실, 강의시간 중복 검사
+		List<Subject> subjectList = adminService.selectSubjectByRoomIdAndSubDay(subjectFormDto);
+		if(subjectList != null) {
+			SubjectUtil subjectUtil = new SubjectUtil();
+			boolean result = subjectUtil.calculate(subjectFormDto, subjectList);
+			if(result == false) {
+				throw new CustomRestfullException("해당 시간대는 강의실을 사용중입니다! 다시 선택해주세요", HttpStatus.BAD_REQUEST);
+			}			
+		}
 		adminService.insertSubject(subjectFormDto);
 		return "redirect:/admin/subject";
 	}
