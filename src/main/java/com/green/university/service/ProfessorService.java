@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
+import com.green.university.dto.SyllaBusFormDto;
 import com.green.university.dto.UpdateStudentGradeDto;
+import com.green.university.dto.response.ReadSyllabusDto;
 import com.green.university.dto.response.StudentInfoForProfessorDto;
 import com.green.university.dto.response.SubjectForProfessorDto;
 import com.green.university.dto.response.SubjectPeriodForProfessorDto;
@@ -16,6 +19,7 @@ import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.StuSubDetailRepository;
 import com.green.university.repository.interfaces.StuSubRepository;
 import com.green.university.repository.interfaces.SubjectRepository;
+import com.green.university.repository.interfaces.SyllaBusRepository;
 import com.green.university.repository.model.Subject;
 /**
  *  
@@ -30,7 +34,8 @@ public class ProfessorService {
 	private StuSubRepository stuSubRepository;
 	@Autowired
 	private StuSubDetailRepository stuSubDetailRepository;
-	
+	@Autowired
+	private SyllaBusRepository syllaBusRepository;
 	/**
 	 * 교수가 맡은 과목들의 학기 검색
 	 * @param professorId
@@ -78,6 +83,10 @@ public class ProfessorService {
 		return subjectEntity;
 	}
 	
+	/**
+	 * 출결 및 성적 기입
+	 * @param updateStudentGradeDto
+	 */
 	@Transactional
 	public void updateGrade(UpdateStudentGradeDto updateStudentGradeDto) {
 		
@@ -92,6 +101,28 @@ public class ProfessorService {
 			throw new CustomRestfullException("요청을 처리하지 못했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
+	}
+	
+	/**
+	 * 강의계획서 조회
+	 * @param subjectId
+	 * @return 강의계획서
+	 */
+	@Transactional
+	public ReadSyllabusDto readSyllabus(Integer subjectId) {
+		
+		ReadSyllabusDto readSyllabusDto = subjectRepository.selectSyllabusBySubjectId(subjectId);
+		
+		return readSyllabusDto;
+	}
+	
+	@Transactional
+	public void updateSyllabus(SyllaBusFormDto syllaBusFormDto) {
+		
+		int resultRowCount = syllaBusRepository.updateSyllabus(syllaBusFormDto);
+		if(resultRowCount != 1) {
+			throw new CustomRestfullException("제출 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		
 	}
 

@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.green.university.dto.SyllaBusFormDto;
 import com.green.university.dto.UpdateStudentGradeDto;
 import com.green.university.dto.response.PrincipalDto;
+import com.green.university.dto.response.ReadSyllabusDto;
 import com.green.university.dto.response.StudentInfoForProfessorDto;
 import com.green.university.dto.response.SubjectForProfessorDto;
 import com.green.university.dto.response.SubjectPeriodForProfessorDto;
@@ -138,9 +140,10 @@ public class ProfessorController {
 	 * @param subjectId
 	 * @return 강의계획서 조회
 	 */
-	@GetMapping("/syllabus")
-	public String readSyllabus(Model model) {
-		
+	@GetMapping("/syllabus/{subjectId}")
+	public String readSyllabus(Model model, @PathVariable Integer subjectId) {
+		ReadSyllabusDto readSyllabusDto = professorService.readSyllabus(subjectId);
+		model.addAttribute("syllabus", readSyllabusDto);
 		
 		return "/professor/readSyllabus";
 	}
@@ -150,16 +153,21 @@ public class ProfessorController {
 	 * @param model
 	 * @return 강의계획서 업데이트 창
 	 */
-	@GetMapping("/syllabus/write")
-	public String createSyllabus(Model model) {
+	@GetMapping("/syllabus/update/{subjectId}")
+	public String createSyllabus(Model model, @PathVariable Integer subjectId) {
+		ReadSyllabusDto readSyllabusDto = professorService.readSyllabus(subjectId);
 		
-		return "/professor/createSyllabus";
+		model.addAttribute("syllabus", readSyllabusDto);
+		
+		return "/professor/updateSyllabus";
 	}
 	
-	@PutMapping("/syllabus/write")
-	public String createSyllabusProc() {
+	@PutMapping("/syllabus/update/{subjectId}")
+	public String createSyllabusProc(SyllaBusFormDto syllaBusFormDto) {
+		System.out.println(syllaBusFormDto);
+		professorService.updateSyllabus(syllaBusFormDto);
 		
-		return "redirect:/professor/syllabus";
+		return "redirect:/professor/syllabus/" + syllaBusFormDto.getSubjectId();
 	}
 
 }
