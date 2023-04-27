@@ -123,7 +123,8 @@ CREATE TABLE stu_sub_tb
       student_id,
       subject_id
    ),
-   grade VARCHAR (2) COMMENT '학점 (평점)',
+   grade VARCHAR (2) COMMENT '신청 학점 (평점)',
+   complete_grade INT NOT NULL COMMENT '이수 학점',
    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
    FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE,
    FOREIGN KEY (grade) REFERENCES grade_tb (grade)
@@ -232,7 +233,7 @@ evaluation_id,
 student_id,
 subject_id
 ),
-qna_1 INT NOT NULL COMMENT 'radio 답변 저장용 컬럼',
+qna_1 INT NOT NULL COMMENT '체크하는 질문',
 qna_2 INT NOT NULL,
 qna_3 INT NOT NULL,
 qna_4 INT NOT NULL,

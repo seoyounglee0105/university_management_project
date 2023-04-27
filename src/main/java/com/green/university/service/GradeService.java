@@ -29,15 +29,16 @@ public class GradeService {
 		return gradeEntityList;
 	}
 	
-	// 누계성적 조회
+	// 금학기별 누계성적 조회
 	@Transactional
 	public MyGradeDto readSumAndAverageByGrade(Integer studentId) {
-		System.out.println(studentId);
-		System.out.println(CURRENT_YEAR);
-		System.out.println(CURRENT_SEMESTER);
-		MyGradeDto mygradeEntity = gradeRespository.SumAndAverageBymyGrade(studentId, CURRENT_YEAR, CURRENT_SEMESTER);
-		System.out.println(mygradeEntity.toString());
+		MyGradeDto mygradeEntity = gradeRespository.sumAndAverageBymyGrade(studentId, CURRENT_YEAR, CURRENT_SEMESTER);
 		return mygradeEntity;
+	}
+	// 전체 누계성적 조회
+	public List<MyGradeDto> readgradeinquiryList(Integer studentId){
+		List<MyGradeDto> myAllgradeEntity = gradeRespository.gradeinquiryBystudentId(studentId);
+		return myAllgradeEntity;
 	}
 	
 	// 학기별성적조회 처음에 전부 조회
@@ -74,11 +75,6 @@ public class GradeService {
 		List<GradeDto> semesterEntityList = gradeRespository.findsemester(StudentId);
 		return semesterEntityList;
 	}
-	
-	
-	
-	
-	
 	
 	@Transactional
 	public List<GradeDto> readGradeListBySubYear(Integer studentId, Integer subYear){

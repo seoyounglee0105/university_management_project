@@ -44,6 +44,9 @@
 					<td><a href="/grade/semetergrade" class="selected--menu">학기별
 							성적조회</a></td>
 				</tr>
+				<tr>
+					<td><a href="/grade/totalgrade">누계 성적</a></td>
+				</tr>
 			</table>
 		</div>
 	</div>
@@ -103,7 +106,9 @@
 				<h1>조회할 과목이 없습니다.</h1>
 			</c:otherwise>
 		</c:choose>
-
+		<br>
+		<br>
+	
 
 	</main>
 </div>

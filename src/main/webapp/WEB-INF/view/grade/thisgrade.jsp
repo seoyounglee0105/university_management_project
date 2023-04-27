@@ -35,6 +35,9 @@
 				<tr>
 					<td><a href="/grade/semetergrade">학기별 성적조회</a></td>
 				</tr>
+				<tr>
+					<td><a href="/grade/totalgrade">누계 성적</a></td>
+				</tr>
 			</table>
 		</div>
 	</div>
@@ -71,7 +74,7 @@
 								<td>${grade.grade}</td>
 								<td>
 								<a href="/evaluation?subjectId=${grade.subjectId}" 
-					onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">강의평가</a>
+					onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">강의평가</a>
 								</td>
 							</tr>
 						</c:forEach>

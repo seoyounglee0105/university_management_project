@@ -35,6 +35,10 @@ public class GradeController {
 	@Autowired
 	private GradeService gradeService;
 	
+	
+	
+	
+	
 	/**
 	 * 
 	 * @return 성적조회
@@ -44,13 +48,16 @@ public class GradeController {
 		
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		
+		//내가 수강 신청한 연도가 있는지 검사할려고 추가한 기능
 		List<GradeDto> yearList = gradeService.readSubYear(principal.getId());
+		
 		model.addAttribute("yearList",yearList);
 		if (yearList.size() != 0) {
 			List<GradeDto> gradeList = gradeService.readStuSubList(principal.getId());
 			model.addAttribute("gradeList",gradeList);
-			MyGradeDto mygrade = gradeService.readSumAndAverageByGrade(principal.getId());
-			model.addAttribute("mygrade", mygrade);
+			
+			MyGradeDto mygradeList = gradeService.readSumAndAverageByGrade(principal.getId());
+			model.addAttribute("mygrade", mygradeList);
 			
 		}
 		
@@ -68,11 +75,15 @@ public class GradeController {
 	public String thisgrade(Model model) {
 		
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
-		
-		List<GradeDto> gradeAllList = gradeService.findAll(principal.getId());
-		List<GradeDto> yearList = gradeService.readSubYear(principal.getId());
-		System.out.println(yearList);
+			
+			// 조회하는 기능
+			List<GradeDto> gradeAllList = gradeService.findAll(principal.getId());
+			// 학생이 신청한 연도가 있는지 찾는 기능
+			List<GradeDto> yearList = gradeService.readSubYear(principal.getId());
+			// 학생이 신청한 학기가 있는지 찾는 기능
 			List<GradeDto> semesterList = gradeService.readSesmeter(principal.getId());
+			
+			
 			model.addAttribute("semesterList",semesterList);
 			model.addAttribute("yearList",yearList);
 			model.addAttribute("gradeList",gradeAllList);
@@ -96,7 +107,6 @@ public class GradeController {
 		String type = httpServletRequest.getParameter("type");
 		int subYear = Integer.parseInt(httpServletRequest.getParameter("subYear"));
 		int sesmeter = Integer.parseInt(httpServletRequest.getParameter("sesmeter"));
-		
 		// 전체일때 타입을 빼고 조회 그게 아닐시에 타입을 넣고 조회
 		if (type.equals("전체")) {
 			List<GradeDto> gradeList = gradeService.selectBygradeBytypeAll(principal.getId(), subYear, sesmeter);
@@ -109,5 +119,22 @@ public class GradeController {
 		model.addAttribute("semesterList", semesterList);
 		return "grade/semetergrade";
 	};
+	
+	
+	/**
+	 * 
+	 * @param 
+	 * @return 토탈 누계성적 조회
+	 */
+	@GetMapping("totalgrade")
+	public String totalgrade(Model model) {
+		
+		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+		
+		List<MyGradeDto> mygradeList = gradeService.readgradeinquiryList(principal.getId());
+		System.out.println(mygradeList);
+		model.addAttribute("mygradeList", mygradeList);
+		return "grade/totalgrade";
+	}
 	
 }

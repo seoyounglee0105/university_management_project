@@ -108,7 +108,7 @@
 				</tr>
 				<tr>
 					<td>이 강의가 계속 실려 나가야 할 장점과 개선이 필요한 점</td>
-					<td colspan="5"><textarea cols="100" rows="10" name="improvements"> </textarea></td>
+					<td colspan="5"><textarea cols="130" rows="10" name="improvements"> </textarea></td>
 				</tr>
 			</tbody>
 		</table>
