@@ -65,7 +65,7 @@ button{
 		<h1>개인 정보 수정</h1>
 		<div class="split--div"></div>
 		<form action="/update" method="post">
-			
+			<input type="hidden" name="_method" value="put"/>
 			<table class="input--table">
 				<tr>
 					<td><label for="address">주소</label></td>

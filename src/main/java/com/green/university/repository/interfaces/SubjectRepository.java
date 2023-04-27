@@ -22,7 +22,6 @@ import com.green.university.repository.model.Subject;
 public interface SubjectRepository {
 	// 과목 insert
 	public Integer insert(SubjectFormDto subjectFormDto);
-	public List<Subject> findAll();
 	public int delete(Integer id);
 	public int update(SubjectFormDto subjectFormDto);
 	
@@ -63,5 +62,12 @@ public interface SubjectRepository {
 	 */
 	public List<SubjectDto> selectDtoBySemesterAndAndTypeAndDeptAndName(CurrentSemesterSubjectSearchFormDto currentSemesterSubjectSearchFormDto);
 	
+	/*
+	 * @author 김지현
+	 * @param id
+	 * @return
+	 */
+	public Subject selectSubjectById(Integer id);
 	
+	public List<Subject> findAll();
 }

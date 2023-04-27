@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.university.dto.ChangePasswordDto;
@@ -96,7 +97,7 @@ public class PersonalController {
 	 * @param userInfoForUpdateDto, password
 	 * @return updateUser.jsp
 	 */
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public String updateUserProc(@Valid UserInfoForUpdateDto userInfoForUpdateDto, @RequestParam String password) {
 		
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
@@ -146,7 +147,7 @@ public class PersonalController {
 	 * @param userInfoForUpdateDto, password
 	 * @return updateUser.jsp
 	 */
-	@PostMapping("/password")
+	@PutMapping("/password")
 	public String updatePasswordProc(@Valid ChangePasswordDto changePasswordDto) {
 
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);

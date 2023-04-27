@@ -1,19 +1,18 @@
-package com.green.university.dto.response;
+package com.green.university.dto;
 
 import lombok.Data;
 
 /**
- * 과목에 대한 학생의 디테일한 정보(교수 조회, 입력용)
+ * 학생 출결 및 성적 기입 폼 stu_sub_detail_tb update용
+ * 
  * @author 김지현
  */
 @Data
-public class StudentInfoForProfessorDto {
-
-	private Integer id;
+public class UpdateStudentGradeDto {
+	
 	private Integer studentId;
-	private String studentName;
-	// 학생 소속
-	private String deptName;
+	private Integer subjectId;
+
 	// 결석 횟수
 	private Integer absent;
 	// 지각 횟수
@@ -26,5 +25,7 @@ public class StudentInfoForProfessorDto {
 	private Integer finalExam;
 	// 총합 환산 점수
 	private Integer convertedMark;
-	
+	// 등급
+	private String grade;
+
 }
