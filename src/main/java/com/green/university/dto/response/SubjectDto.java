@@ -43,8 +43,14 @@ public class SubjectDto {
 	// 개설 학기
 	private Integer semester;
 	
-	// 강의 시간
-	private String time;
+	// 요일
+	private String subDay;
+	
+	// 강의 시작 시간
+	private Integer startTime;
+	
+	// 강의 종료 시간
+	private Integer endTime;
 	
 	// 이수 가능 학점
 	private Integer grades;
@@ -54,5 +60,8 @@ public class SubjectDto {
 	
 	// 현재 인원
 	private Integer numOfStudent;
+	
+	// 신청 여부
+	private Boolean status;
 	
 }

@@ -58,6 +58,10 @@
 	color: white;
 	height: 28px;
 }
+
+.sub--plan--view li a:hover {
+	color: black;
+}
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -183,12 +187,12 @@
 						<td class="sub--list--name">${subject.name}</td>
 						<td>${subject.professorName}</td>
 						<td>${subject.grades}</td>
-						<td>${subject.time}&nbsp;(${subject.roomId})</td>
+						<td>${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})</td>
 						<td>${subject.numOfStudent}</td>
 						<td>${subject.capacity}</td>
 						<td>
 							<!-- 높이가 안 맞아서 어쩔 수 없이 li로 연결함.. -->
-							<ul class="d-flex justify-content-center" style="margin: 0;">
+							<ul class="d-flex justify-content-center sub--plan--view" style="margin: 2px 0;">
 								<li style="height: 24px;"><a href="#">조회</a></li>
 								<li style="height: 24px;"><a href="#"><span class="material-symbols-outlined">content_paste_search</span></a></li>
 							</ul>

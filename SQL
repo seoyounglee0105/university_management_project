@@ -7,7 +7,7 @@ CREATE TABLE college_tb
    id INT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR (10) NOT NULL UNIQUE
 );
--- 부서
+-- 학과
 CREATE TABLE department_tb
 (
    id INT PRIMARY KEY AUTO_INCREMENT,
@@ -87,7 +87,9 @@ CREATE TABLE subject_tb
    type VARCHAR (2) NOT NULL COMMENT '강의 구분 (전공, 교양)',
    sub_year INT NOT NULL COMMENT '연도',
    semester INT NOT NULL COMMENT '학기',
-   time VARCHAR (35) NOT NULL COMMENT '요일 및 시간',
+   sub_day VARCHAR (1) NOT NULL COMMENT '요일',
+   start_time INT NOT NULL COMMENT '시작 시간',
+   end_time INT NOT NULL COMMENT '종료 시간',
    grades INT NOT NULL COMMENT '이수 학점',
    capacity INT NOT NULL COMMENT '수강 정원',
    num_of_student INT NOT NULL DEFAULT 0 COMMENT '현재 신청 인원',
@@ -117,15 +119,14 @@ CREATE TABLE pre_stu_sub_tb
    FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE
 );
 -- 수강 내역
-CREATE TABLE stu_sub_tb
-(
-   id INT PRIMARY KEY AUTO_INCREMENT,
-   student_id INT,
-   subject_id INT,
-   grade VARCHAR (2) COMMENT '학점 (평점)',
-   FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
-   FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE,
-   FOREIGN KEY (grade) REFERENCES grade_tb (grade)
+CREATE TABLE stu_sub_tb (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	student_id INT,
+    subject_id INT,
+    grade VARCHAR(2) COMMENT '학점 (평점)',
+    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
+    FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE,
+    FOREIGN KEY (grade) REFERENCES grade_tb (grade)
 );
 -- 단과대별 등록금
 CREATE TABLE coll_tuit_tb
@@ -146,7 +147,7 @@ CREATE TABLE stu_sch_tb
    student_id INT NOT NULL,
    sch_year INT NOT NULL COMMENT '지원 연도',
    semester INT NOT NULL COMMENT '지원 학기',
-   sch_type INT NOT NULL COMMENT '장학금 유형',
+   sch_type INT COMMENT '장학금 유형',
    PRIMARY KEY
    (
       student_id,
@@ -162,7 +163,7 @@ CREATE TABLE tuition_tb
    tui_year INT NOT NULL COMMENT '등록 연도',
    semester INT NOT NULL COMMENT '등록 학기',
    tui_amount INT NOT NULL COMMENT '등록금',
-   sch_type INT NOT NULL COMMENT '장학금 유형',
+   sch_type INT COMMENT '장학금 유형',
    sch_amount INT COMMENT '장학금',
    status BOOLEAN DEFAULT false COMMENT '납부 여부',
    PRIMARY KEY
@@ -177,6 +178,7 @@ CREATE TABLE tuition_tb
 -- 학적 상태
 CREATE TABLE stu_stat_tb
 (
+   id INT PRIMARY KEY AUTO_INCREMENT,
    student_id INT NOT NULL,
    status VARCHAR (3) NOT NULL DEFAULT '재학',
    -- 재학, 휴학, 졸업, 자퇴
@@ -189,6 +191,7 @@ CREATE TABLE stu_stat_tb
 CREATE TABLE notice_tb
 (
    id INT PRIMARY KEY AUTO_INCREMENT,
+   category VARCHAR (10) NOT NULL,
    title VARCHAR (255) NOT NULL,
    content TEXT NOT NULL,
    created_time TIMESTAMP DEFAULT now(),
@@ -217,14 +220,28 @@ CREATE TABLE break_app_tb
    status VARCHAR (3) NOT NULL DEFAULT '처리중' COMMENT '처리중, 승인, 거부',
    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE
 );
+CREATE TABLE stu_sub_detail_tb
+(
+   id INT PRIMARY KEY,
+   student_id INT NOT NULL,
+   subject_id INT NOT NULL,
+   absent INT COMMENT '결석 횟수',
+   lateness INT COMMENT '지각 횟수',
+   homework INT COMMENT '과제 점수',
+   mid_exam INT COMMENT '중간고사 점수',
+   final_exam INT COMMENT '기말고사 점수',
+   converted_mark INT COMMENT '환산점수',
+   FOREIGN KEY (id) REFERENCES stu_sub_tb(id),
+   FOREIGN KEY (student_id) REFERENCES student_tb(id),
+   FOREIGN KEY (subject_id) REFERENCES subject_tb(id)
+);
 
-
-SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS prof_name FROM subject_tb AS sub
-JOIN department_tb AS dept
-ON sub.dept_id = dept.id
-JOIN college_tb AS coll
-ON dept.college_id = coll.id
-JOIN professor_tb AS prof
-ON sub.professor_id = prof.id
-WHERE sub_year = 2023 AND semester = 1;
-
+CREATE TABLE syllabus_tb
+(
+	subject_id INT PRIMARY KEY ,
+	overview VARCHAR(255) COMMENT '수업 개요',
+	objective VARCHAR(255) COMMENT '강의 목표',
+	textbook VARCHAR(30) COMMENT '교재',
+	program TEXT COMMENT '주별 계획',
+	FOREIGN KEY (subject_id) REFERENCES subject_tb(id)
+);

@@ -70,4 +70,11 @@ public interface SubjectRepository {
 	public Subject selectSubjectById(Integer id);
 	
 	public List<Subject> findAll();
+
+	/**
+	 * @author 서영
+	 * 현재 인원 수정 (1명 추가 or 삭제)
+	 */
+	public int updateNumOfStudent(@Param("id") Integer id, @Param("type") String type);
+	
 }

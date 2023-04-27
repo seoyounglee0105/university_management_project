@@ -82,10 +82,6 @@ public class TuitionService {
 	
 	/**
 	 * 장학금 유형 결정
-	 * 
-	 * todo
-	 * 1학년 2학기 이상인 학생들은 저번 학기 성적을 기준으로 장학금 유형을 나눌 것
-	 * 1학년 1학기인 학생들은 ?...
 	 */
 	public Integer createCurrentSchType(Integer studentId) {
 		

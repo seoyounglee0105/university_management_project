@@ -23,6 +23,8 @@ public class Define {
 	public final static String UPLOAD_DIRECTORY = "C:\\spring_upload\\universityManagement\\upload";
 	public final static int MAX_FILE_SIZE = 1024 * 1024 * 20;
 	
+	// 수강 가능한 최대 학점
+	public final static int MAX_GRADES = 18;
 	
 	
 }

@@ -58,6 +58,10 @@
 	color: white;
 	height: 28px;
 }
+
+.sub--plan--view li a:hover {
+	color: black;
+}
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -94,6 +98,15 @@
 				</tr>
 				<tr>
 					<td><a href="/stuSub/list">강의 시간표 조회</a></td>
+				</tr>
+				<tr>
+					<td><a href="/stuSub/preApplication">예비 수강신청</a></td>
+				</tr>
+				<tr>
+					<td><a href="/stuSub/application">수강신청</a></td>
+				</tr>
+				<tr>
+					<td><a href="/stuSub/appList">수강신청 내역 조회</a></td>
 				</tr>
 			</table>
 		</div>
@@ -180,7 +193,7 @@
 						<td>${subject.numOfStudent}</td>
 						<td>${subject.capacity}</td>
 						<td>
-							<ul class="d-flex justify-content-center" style="margin: 0;">
+							<ul class="d-flex justify-content-center sub--plan--view" style="margin: 0;">
 								<li style="height: 24px;"><a href="#">조회</a>
 								<li style="height: 24px;"><a href="#"><span class="material-symbols-outlined">content_paste_search</span></a>
 							</ul>
