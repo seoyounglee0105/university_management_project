@@ -131,5 +131,35 @@ public class ProfessorController {
 		
 		return "redirect:/professor/detail/ " + subjectId + "/" + studentId;
 	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @param subjectId
+	 * @return 강의계획서 조회
+	 */
+	@GetMapping("/syllabus")
+	public String readSyllabus(Model model) {
+		
+		
+		return "/professor/readSyllabus";
+	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @return 강의계획서 업데이트 창
+	 */
+	@GetMapping("/syllabus/write")
+	public String createSyllabus(Model model) {
+		
+		return "/professor/createSyllabus";
+	}
+	
+	@PutMapping("/syllabus/write")
+	public String createSyllabusProc() {
+		
+		return "redirect:/professor/syllabus";
+	}
 
 }

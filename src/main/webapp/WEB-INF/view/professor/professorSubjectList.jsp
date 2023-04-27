@@ -86,7 +86,7 @@ form {
 					<td>${subject.id}</td>
 					<td>${subject.name}</td>
 					<td>${subject.time}</td>
-					<td><a href="#">강의 계획서 보기</a></td>
+					<td><a href="/professor/syllabus">강의 계획서</a> <a href="/professor/syllabus/write" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">강의 계획서 작성</a> </td>
 					<td><a href="subject/${subject.id}">학생 리스트 보기</a></td>
 				</tr>
 			</tbody>
