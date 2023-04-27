@@ -79,17 +79,26 @@
 					<label for="name">강의명</label> 
 					<input type="text" id="name" name="name" value="스프링부트 뽀개기"><br> 
 					<label for="professorId"> 교수ID </label> 
-					<input type="text" id="professorId" name="professorId" value="20231512"><br> 
+					<input type="text" id="professorId" name="professorId" value="23000001"><br> 
 					<label for="roomId"> 강의실 </label> 
-					<input type="text" id="roomId" name="roomId" value="C250"><br> 
+					<input type="text" id="roomId" name="roomId" value="C201"><br> 
 					<label for="deptId"> 학과ID </label> 
-					<input type="text" id="deptId" name="deptId" value="1234"><br> 
+					<input type="text" id="deptId" name="deptId" value="101"><br> 
 					구분 
 					<label for="major">전공</label> <input type="radio" id="major" name="type" value="전공">
 					 <label for="culture">교양</label> <input type="radio" id="culture" name="type" value="교양"><br>
 					 <label for="subYear"> 연도 </label> <input type="text" id="subYear" name="subYear" value="2023"><br>
 					<label for="semester"> 학기 </label> <input type="text" id="semester" name="semester" value="1"><br> 
-					<label for="time"> 시간 </label> <input type="text" id="time" name="time" value="수요일 10-12"><br> 
+					<label for="subDay"> 요일 </label>
+						<select name="subDay">
+							<option value="월">월</option>
+							<option value="화">화</option>
+							<option value="수">수</option>
+							<option value="목">목</option>
+							<option value="금">금</option>
+						</select> 
+					<label for="startTime"> 시작 시간 </label> <input type="text" id="startTime" name="startTime" value="10"><br> 
+					<label for="endTime"> 종료 시간 </label> <input type="text" id="endTime" name="endTime" value="12"><br> 
 					<label for="grades"> 학점 </label> <input type="text" id="grades" name="grades" value="3"><br> 
 					<label for="capacity"> 정원 </label> <input type="text" name="capacity" name="capacity" value="15"><br>
 					 <input type="submit" value="입력">
@@ -242,6 +251,7 @@
 							<td>${subject.type}</td>
 							<td>${subject.subYear}</td>
 							<td>${subject.semester}</td>
+							<td>${subject.subDay} ${subject.startTime}:00 - ${subject.endTime}:00</td>
 							<td>${subject.grades}</td>
 							<td>${subject.capacity}</td>
 							<td>${subject.numOfStudent}</td>
