@@ -12,9 +12,9 @@
 		select * from subject_tb
 	</select>
 	
-	<select id="selectByRoomIdAndSubDay" resultType="com.green.university.repository.model.Subject">
+	<select id="selectByRoomIdAndSubDayAndSubYearAndSemester" resultType="com.green.university.repository.model.Subject">
 		select * from subject_tb
-		where room_id = #{roomId} and sub_day = #{subDay}
+		where room_id = #{roomId} and sub_day = #{subDay} and sub_year = #{subYear} and semester = #{semester}
 	</select>
 	
 	<delete id="delete">
