@@ -60,7 +60,7 @@ form {
 
 	<!-- 메인 div -->
 	<main>
-		<h1>학생 리스트 조회</h1>
+		<h1> [${subject.name}] 학생 리스트 조회</h1>
 		<table border="1">
 			<thead>
 				<tr>
@@ -73,20 +73,24 @@ form {
 					<th>중간시험</th>
 					<th>기말시험</th>
 					<th>환산점수</th>
+					<th>점수 기입하기</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach items="${studentList}" var="student">
 				<tr>
-					<td>11111</td>
-					<td>홍길동</td>
-					<td>도적학과</td>
-					<td>1</td>
-					<td>2</td>
-					<td>20</td>
-					<td>30</td>
-					<td>40</td>
-					<td>99</td>
+					<td>${student.studentId}</td>
+					<td>${student.studentName}</td>
+					<td>${student.deptName}</td>
+					<td>${student.absent}</td>
+					<td>${student.lateness}</td>
+					<td>${student.homework}</td>
+					<td>${student.midExam}</td>
+					<td>${student.finalExam}</td>
+					<td>${student.convertedMark}</td>
+					<td><a href="/professor/detail/${subject.id}/${student.studentId}">기입</a></td>
 				</tr>
+				</c:forEach>
 				
 			</tbody>
 		</table>

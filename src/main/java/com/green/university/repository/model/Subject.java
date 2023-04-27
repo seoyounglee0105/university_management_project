@@ -12,7 +12,9 @@ public class Subject {
 	private String type;
 	private Integer subYear;
 	private Integer semester;
-	private String time;
+	private String subDay;
+	private Integer startTime;
+	private Integer endTime;
 	private Integer grades;
 	private Integer capacity;
 	private Integer numOfStudent;

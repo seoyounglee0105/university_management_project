@@ -2,10 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.university.repository.interfaces.SubjectRepository">
+	
+
+	<select id="selectSemester" resultType="com.green.university.dto.response.SubjectPeriodForProfessorDto">
+		SELECT sub_year, semester FROM subject_tb
+		WHERE professor_id = #{id}
+		GROUP BY sub_year, semester
+	</select>
+
+	<select id="selectSubjectBySemester" resultType="com.green.university.dto.response.SubjectForProfessorDto">
+		SELECT * FROM subject_tb
+		WHERE professor_id = #{id}
+		AND sub_year = #{subYear}
+		AND semester = #{semester}
+	</select>
+	
+	<select id="selectSubjectById" resultType="com.green.university.repository.model.Subject">
+		SELECT * FROM subject_tb
+		WHERE id = #{id};
+	</select>
+	
 	<insert id="insert">
-		insert into subject_tb (name, professor_id, room_id, dept_id, type, sub_year, semester, time, grades, capacity)
+		insert into subject_tb (name, professor_id, room_id, dept_id, type, sub_year, semester, sub_day, start_time, end_time, grades, capacity)
 		values(#{name}, #{professorId}, #{roomId}, #{deptId},
-		#{type}, #{subYear}, #{semester}, #{time}, #{grades}, #{capacity})
+		#{type}, #{subYear}, #{semester}, #{subDay}, #{startTime}, #{endTime}, #{grades}, #{capacity})
 	</insert>
 	
 	<select id="findAll" resultType="com.green.university.repository.model.Subject">
@@ -45,19 +65,6 @@
 		WHERE sub_year = #{subYear} AND semester = #{semester}
 	</select>
 
-	<select id="selectSemester" resultType="com.green.university.dto.response.SubjectPeriodForProfessorDto">
-		SELECT sub_year, semester FROM subject_tb
-		WHERE professor_id = #{id}
-		GROUP BY sub_year, semester
-	</select>
-
-	<select id="selectSubjectBySemester" resultType="com.green.university.dto.response.SubjectForProfessorDto">
-		SELECT * FROM subject_tb
-		WHERE professor_id = #{id}
-		AND sub_year = #{subYear}
-		AND semester = #{semester}
-	</select>
-	
 	<select id="selectDtoBySemesterAndDeptAndName" resultType="com.green.university.dto.response.SubjectDto">
 		
 		<!-- 개설학과 : 전체 -->
