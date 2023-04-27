@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import com.green.university.dto.CollTuitFormDto;
 import com.green.university.dto.CollegeFormDto;
 import com.green.university.dto.DepartmentFormDto;
+import com.green.university.dto.NoticeFormDto;
 import com.green.university.dto.RoomFormDto;
 import com.green.university.dto.SubjectFormDto;
 import com.green.university.repository.interfaces.CollTuitRepository;
@@ -46,6 +48,7 @@ public class AdminService {
 	/**
 	 * 단과대 입력 서비스
 	 */
+	@Transactional
 	public void insertCollege(@Validated CollegeFormDto collegeFormDto) {
 		int resultRowCount = collegeRepository.insert(collegeFormDto);
 		if (resultRowCount != 1) {
@@ -56,6 +59,7 @@ public class AdminService {
 	/**
 	 * 단과대 조회 서비스
 	 */
+	@Transactional
 	public List<College> findCollege() {
 		List<College> collegeList = collegeRepository.findAll();
 		return collegeList;
@@ -72,6 +76,7 @@ public class AdminService {
 	/**
 	 * 학과 입력 서비스
 	 */
+	@Transactional
 	public void insertDepartment(@Validated DepartmentFormDto departmentFormDto) {
 		int resultRowCount = departmentRepository.insert(departmentFormDto);
 		if (resultRowCount != 1) {
@@ -109,6 +114,7 @@ public class AdminService {
 	/**
 	 * 단과대별 등록금 입력 서비스
 	 */
+	@Transactional
 	public void insertCollTuit(@Validated CollTuitFormDto collTuitFormDto) {
 		int resultRowCount = collTuitRepository.insert(collTuitFormDto);
 		if (resultRowCount != 1) {
@@ -146,6 +152,7 @@ public class AdminService {
 	/**
 	 * 강의실 입력 서비스
 	 */
+	@Transactional
 	public void insertRoom(@Validated RoomFormDto roomFormDto) {
 		int resultRowCount = roomRepository.insert(roomFormDto);
 		if (resultRowCount != 1) {
@@ -172,6 +179,7 @@ public class AdminService {
 	/**
 	 * 강의 입력 서비스
 	 */
+	@Transactional
 	public void insertSubject(@Validated SubjectFormDto subjectFormDto) {
 		int resultRowCount = subjectRepository.insert(subjectFormDto);
 		if (resultRowCount != 1) {
@@ -205,4 +213,5 @@ public class AdminService {
 		}
 		return resultRowCount;
 	}
+
 }

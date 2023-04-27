@@ -60,6 +60,12 @@
 				<tr>
 					<td><a href="/tuition/create">고지서 생성(staff)</a></td>
 				</tr>
+				<tr>
+					<td><a href="/subject/list">전체 강의 조회</a></td>
+				</tr>
+				<tr>
+					<td><a href="/stuSub/list">강의 시간표 조회</a></td>
+				</tr>
 			</table>
 		</div>
 	</div>
@@ -70,13 +76,13 @@
 		<div class="split--div"></div>
 		<div class="d-flex flex-column align-items-center" style="width: 100%">
 			<c:choose>
-				<c:when test="${tuitionLis.size() > 0}">
+				<c:when test="${tuitionList.size() > 0}">
 	
 					<table border="1" class="list--table">
 						<thead>
 							<tr>
-								<th>연도</th>
-								<th>학기</th>
+								<th>등록연도</th>
+								<th>등록학기</th>
 								<th>장학금 유형</th>
 								<th>등록금</th>
 								<th>장학금</th>

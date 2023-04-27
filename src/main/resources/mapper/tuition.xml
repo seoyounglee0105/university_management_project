@@ -9,7 +9,7 @@
 </select>
 
 <select id="findByStudentIdAndStatus" resultType="com.green.university.repository.model.Tuition">
-	SELECT * FROM tuition_tb WHERE student_id = #{studentId} AND status = #{status}
+	SELECT * FROM tuition_tb WHERE student_id = #{studentId} AND status = #{status} ORDER BY tui_year DESC, semester DESC
 </select>
 
 <select id="findTuiAmount" resultType="com.green.university.repository.model.CollTuit">
