@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.ParameterScriptAssert;
 
 import com.green.university.dto.response.GradeDto;
 import com.green.university.dto.response.GradeForScholarshipDto;
+import com.green.university.dto.response.LuationCheckDto;
 import com.green.university.dto.response.MyGradeDto;
 import com.green.university.repository.model.StuSub;
 
@@ -57,5 +58,6 @@ public interface GradeRespository {
 	
 	// 연도 누계성적 조회
 	public List<MyGradeDto> gradeinquiryBysubYear(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear);
-
+	
+	
 }

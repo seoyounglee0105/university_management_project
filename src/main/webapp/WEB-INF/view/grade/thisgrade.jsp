@@ -70,7 +70,14 @@
 								<td>${grade.subjectId}</td>
 								<td>${grade.name}</td>
 								<td>${grade.type}</td>
+								<c:choose>
+								<c:when test="{}">
 								<td>${grade.grades}</td>
+								</c:when>
+								<c:otherwise>
+								</c:otherwise>
+								</c:choose>
+								
 								<td>${grade.grade}</td>
 								<td>
 								<a href="/evaluation?subjectId=${grade.subjectId}" 
