@@ -156,15 +156,6 @@ public class AdminController {
 	 */
 	@PostMapping("/subject-proc")
 	public String insertSubject(SubjectFormDto subjectFormDto) {
-		// 강의실, 강의시간 중복 검사
-		List<Subject> subjectList = adminService.selectSubjectByRoomIdAndSubDay(subjectFormDto);
-		if(subjectList != null) {
-			SubjectUtil subjectUtil = new SubjectUtil();
-			boolean result = subjectUtil.calculate(subjectFormDto, subjectList);
-			if(result == false) {
-				throw new CustomRestfullException("해당 시간대는 강의실을 사용중입니다! 다시 선택해주세요", HttpStatus.BAD_REQUEST);
-			}			
-		}
 		adminService.insertSubject(subjectFormDto);
 		return "redirect:/admin/subject";
 	}

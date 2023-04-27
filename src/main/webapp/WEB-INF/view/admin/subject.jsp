@@ -76,32 +76,32 @@
 			<c:if test="${crud.equals(\"insert\")}">
 				<form action="/admin/subject-proc" method="post" id="insert--form">
 					<h5>등록할 강의를 입력해주세요</h5>
-					<label for="name">강의명</label> 
-					<input type="text" id="name" name="name" value="스프링부트 뽀개기"><br> 
-					<label for="professorId"> 교수ID </label> 
-					<input type="text" id="professorId" name="professorId" value="23000001"><br> 
-					<label for="roomId"> 강의실 </label> 
-					<input type="text" id="roomId" name="roomId" value="C201"><br> 
-					<label for="deptId"> 학과ID </label> 
-					<input type="text" id="deptId" name="deptId" value="101"><br> 
-					구분 
-					<label for="major">전공</label> <input type="radio" id="major" name="type" value="전공">
-					 <label for="culture">교양</label> <input type="radio" id="culture" name="type" value="교양"><br>
-					 <label for="subYear"> 연도 </label> <input type="text" id="subYear" name="subYear" value="2023"><br>
-					<label for="semester"> 학기 </label> <input type="text" id="semester" name="semester" value="1"><br> 
-					<label for="subDay"> 요일 </label>
-						<select name="subDay">
-							<option value="월">월</option>
-							<option value="화">화</option>
-							<option value="수">수</option>
-							<option value="목">목</option>
-							<option value="금">금</option>
-						</select> 
-					<label for="startTime"> 시작 시간 </label> <input type="text" id="startTime" name="startTime" value="10"><br> 
-					<label for="endTime"> 종료 시간 </label> <input type="text" id="endTime" name="endTime" value="12"><br> 
-					<label for="grades"> 학점 </label> <input type="text" id="grades" name="grades" value="3"><br> 
-					<label for="capacity"> 정원 </label> <input type="text" name="capacity" name="capacity" value="15"><br>
-					 <input type="submit" value="입력">
+						<label for="name">강의명</label> 
+						<input type="text" id="name" name="name" value="스프링부트 뽀개기"><br> 
+						<label for="professorId"> 교수ID </label> 
+						<input type="text" id="professorId" name="professorId" value="23000001"><br> 
+						<label for="roomId"> 강의실 </label> 
+						<input type="text" id="roomId" name="roomId" value="C201"><br> 
+						<label for="deptId"> 학과ID </label> 
+						<input type="text" id="deptId" name="deptId" value="101"><br> 
+						구분 
+						<label for="major">전공</label> <input type="radio" id="major" name="type" value="전공">
+						<label for="culture">교양</label> <input type="radio" id="culture" name="type" value="교양"><br>
+						<label for="subYear"> 연도 </label> <input type="text" id="subYear" name="subYear" value="2023"><br>
+						<label for="semester"> 학기 </label> <input type="text" id="semester" name="semester" value="1"><br> 
+						<label for="subDay"> 요일 </label>
+							<select name="subDay">
+								<option value="월">월</option>
+								<option value="화">화</option>
+								<option value="수">수</option>
+								<option value="목">목</option>
+								<option value="금">금</option>
+							</select> 
+						<label for="startTime"> 시작 시간 </label> <input type="text" id="startTime" name="startTime" value="10"><br> 
+						<label for="endTime"> 종료 시간 </label> <input type="text" id="endTime" name="endTime" value="12"><br> 
+						<label for="grades"> 학점 </label> <input type="text" id="grades" name="grades" value="3"><br> 
+						<label for="capacity"> 정원 </label> <input type="text" name="capacity" name="capacity" value="15"><br>
+						 <input type="submit" value="입력">
 				</form>
 				<table class="subject--table">
 					<tr class="first--tr">
@@ -142,32 +142,33 @@
 			<!-- 강의 수정 -->
 			<c:if test="${crud.equals(\"update\")}">
 				<form action="/updAdmin/upSubject" method="post" id="insert--form">
-					<h5>강의 변경 내용을 입력해주세요</h5>
-					ID <select name="id">
-						<c:forEach var="subject" items="${subjectList}">
-							<option>${subject.id}</option>
-						</c:forEach>
-					</select> 
-					변경 학과명 <input type="text" name="name"> 
-					변경 강의실 <input type="text" name="roomId"> 
-					변경 시간 <input type="text" name="time"> 
-					변경 정원 <input type="text" name="capacity"> 
-					<input type="submit" value="수정">
-					<table class="subject--table">
-						<tr class="first--tr">
-							<td>ID</td>
-							<td>강의명</td>
-							<td>교수</td>
-							<td>강의실</td>
-							<td>학과ID</td>
-							<td>구분</td>
-							<td>연도</td>
-							<td>학기</td>
-							<td>시간</td>
-							<td>이수학점</td>
-							<td>정원</td>
-							<td>신청인원</td>
-						</tr>
+					 <input type="hidden" name="_method" value="put"/>
+						<h5>강의 변경 내용을 입력해주세요</h5>
+							ID<select name="id">
+								<c:forEach var="subject" items="${subjectList}">
+									<option>${subject.id}</option>
+								</c:forEach>
+							</select> 
+							변경 학과명 <input type="text" name="name"> 
+							변경 강의실 <input type="text" name="roomId"> 
+							변경 시간 <input type="text" name="time"> 
+							변경 정원 <input type="text" name="capacity"> 
+							<input type="submit" value="수정">
+						<table class="subject--table">
+							<tr class="first--tr">
+								<td>ID</td>
+								<td>강의명</td>
+								<td>교수</td>
+								<td>강의실</td>
+								<td>학과ID</td>
+								<td>구분</td>
+								<td>연도</td>
+								<td>학기</td>
+								<td>시간</td>
+								<td>이수학점</td>
+								<td>정원</td>
+								<td>신청인원</td>
+							</tr>
 						<c:forEach var="subject" items="${subjectList}">
 							<tr>
 								<td>${subject.id}</td>
@@ -193,21 +194,21 @@
 			<!-- 강의 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
 				<h5>삭제할 강의명을 클릭해주세요</h5>
-				<table class="subject--table">
-					<tr class="first--tr">
-						<td>ID</td>
-						<td>강의명</td>
-						<td>교수</td>
-						<td>강의실</td>
-						<td>학과ID</td>
-						<td>구분</td>
-						<td>연도</td>
-						<td>학기</td>
-						<td>시간</td>
-						<td>이수학점</td>
-						<td>정원</td>
-						<td>신청인원</td>
-					</tr>
+					<table class="subject--table">
+						<tr class="first--tr">
+							<td>ID</td>
+							<td>강의명</td>
+							<td>교수</td>
+							<td>강의실</td>
+							<td>학과ID</td>
+							<td>구분</td>
+							<td>연도</td>
+							<td>학기</td>
+							<td>시간</td>
+							<td>이수학점</td>
+							<td>정원</td>
+							<td>신청인원</td>
+						</tr>
 					<c:forEach var="subject" items="${subjectList}">
 						<tr>
 							<td>${subject.id}</td>
@@ -264,8 +265,6 @@
 			</c:if>
 	</main>
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>
-
 </div>
-
 </body>
 </html>
