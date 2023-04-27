@@ -8,7 +8,7 @@ import lombok.Getter;
 public class CustomPageException extends RuntimeException {
 	
 	private HttpStatus status;
-	
+
 	public CustomPageException(String message, HttpStatus status) {
 		super(message);
 		this.status = status;
