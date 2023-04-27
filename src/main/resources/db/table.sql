@@ -116,31 +116,15 @@ CREATE TABLE pre_stu_sub_tb
    FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE
 );
 -- 수강 내역
-<<<<<<< HEAD
-CREATE TABLE stu_sub_tb (
+CREATE TABLE stu_sub_tb(
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	student_id INT,
-    subject_id INT,
-    grade VARCHAR(2) COMMENT '학점 (평점)',
-    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
-    FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE,
-    FOREIGN KEY (grade) REFERENCES grade_tb (grade)
-=======
-CREATE TABLE stu_sub_tb
-(
    student_id INT,
    subject_id INT,
-   PRIMARY KEY
-   (
-      student_id,
-      subject_id
-   ),
    grade VARCHAR (2) COMMENT '신청 학점 (평점)',
    complete_grade INT NOT NULL COMMENT '이수 학점',
    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
    FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE,
    FOREIGN KEY (grade) REFERENCES grade_tb (grade)
->>>>>>> feature/eval
 );
 -- 단과대별 등록금
 CREATE TABLE coll_tuit_tb
@@ -234,7 +218,7 @@ CREATE TABLE break_app_tb
    status VARCHAR (3) NOT NULL DEFAULT '처리중' COMMENT '처리중, 승인, 거부',
    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE
 );
-<<<<<<< HEAD
+
 CREATE TABLE stu_sub_detail_tb
 (
    id INT PRIMARY KEY,
@@ -259,7 +243,7 @@ CREATE TABLE syllabus_tb
 	textbook VARCHAR(30) COMMENT '교재',
 	program TEXT COMMENT '주별 계획',
 	FOREIGN KEY (subject_id) REFERENCES subject_tb(id)
-=======
+);
 
 -- 강의 평가 테이블
 CREATE TABLE evaluation
@@ -283,5 +267,4 @@ qna_7 INT NOT NULL,
 improvements VARCHAR(255) COMMENT '건의사항',
 FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
 FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE
->>>>>>> feature/eval
 );
