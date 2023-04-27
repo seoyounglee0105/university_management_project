@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.green.university.dto.SyllaBusFormDto;
 import com.green.university.dto.UpdateStudentGradeDto;
 import com.green.university.dto.response.PrincipalDto;
+import com.green.university.dto.response.ReadSyllabusDto;
 import com.green.university.dto.response.StudentInfoForProfessorDto;
 import com.green.university.dto.response.SubjectForProfessorDto;
 import com.green.university.dto.response.SubjectPeriodForProfessorDto;
@@ -130,6 +132,54 @@ public class ProfessorController {
 		professorService.updateGrade(updateStudentGradeDto);
 		
 		return "redirect:/professor/detail/ " + subjectId + "/" + studentId;
+	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @param subjectId
+	 * @return 강의계획서 조회
+	 */
+	@GetMapping("/syllabus/{subjectId}")
+	public String readSyllabus(Model model, @PathVariable Integer subjectId) {
+		ReadSyllabusDto readSyllabusDto = professorService.readSyllabus(subjectId);
+		readSyllabusDto.setOverview(readSyllabusDto.getOverview().replace("\\r\\n", "<br>"));
+		readSyllabusDto.setObjective(readSyllabusDto.getObjective().replace("\\r\\n", "<br>"));
+		readSyllabusDto.setProgram(readSyllabusDto.getProgram().replace("\\r\\n", "<br>"));
+		System.out.println(readSyllabusDto.getProgram().replace("\\r\\n", "<br>"));
+		model.addAttribute("syllabus", readSyllabusDto);
+		
+		return "/professor/readSyllabus";
+	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @return 강의계획서 업데이트 창
+	 */
+	@GetMapping("/syllabus/update/{subjectId}")
+	public String createSyllabus(Model model, @PathVariable Integer subjectId) {
+		ReadSyllabusDto readSyllabusDto = professorService.readSyllabus(subjectId);
+		readSyllabusDto.setOverview(readSyllabusDto.getOverview().replace("\r\n", "<br>"));
+		readSyllabusDto.setObjective(readSyllabusDto.getObjective().replace("\r\n", "<br>"));
+		readSyllabusDto.setProgram(readSyllabusDto.getProgram().replace("\r\n", "<br>"));
+		
+		model.addAttribute("syllabus", readSyllabusDto);
+		
+		return "/professor/updateSyllabus";
+	}
+	
+	/**
+	 * 
+	 * @param syllaBusFormDto
+	 * @return 강의계획서창
+	 */
+	@PutMapping("/syllabus/update/{subjectId}")
+	public String createSyllabusProc(SyllaBusFormDto syllaBusFormDto) {
+		System.out.println(syllaBusFormDto);
+		professorService.updateSyllabus(syllaBusFormDto);
+		
+		return "redirect:/professor/syllabus/" + syllaBusFormDto.getSubjectId();
 	}
 
 }
