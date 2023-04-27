@@ -178,4 +178,17 @@
 		where name=#{name} and room_id=#{roomId} and sub_year=#{subYear} and semester=#{semester} and 
 		sub_day=#{subDay} and start_time=#{startTime} and end_time=#{endTime}
 	</select>
+	
+	<update id="updateNumOfStudent">
+		<if test="type == '추가'">
+			UPDATE subject_tb SET num_of_student = num_of_student + 1
+			WHERE id = #{id}
+		</if>
+		
+		<if test="type == '삭제'">
+			UPDATE subject_tb SET num_of_student = num_of_student - 1
+			WHERE id = #{id}
+		</if>
+	</update>
+	
 </mapper>

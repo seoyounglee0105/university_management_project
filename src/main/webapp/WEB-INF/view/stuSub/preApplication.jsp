@@ -62,6 +62,19 @@
 .sub--plan--view li a:hover {
 	color: black;
 }
+
+.sub--list--table td form button {
+	padding: 0px 4px; 
+	border: none;
+	border-radius: 4px;
+	width: 100%;
+	color: white;
+	height: 26px;
+}
+
+.sub--list--button--row {
+	padding: 2px 2px!important;
+}
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -97,10 +110,10 @@
 					<td><a href="/subject/list">전체 강의 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/list" class="selected--menu">강의 시간표 조회</a></td>
+					<td><a href="/stuSub/list">강의 시간표 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/preApplication">예비 수강신청</a></td>
+					<td><a href="/stuSub/preApplication" class="selected--menu">예비 수강신청</a></td>
 				</tr>
 				<tr>
 					<td><a href="/stuSub/application">수강신청</a></td>
@@ -114,13 +127,12 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>강의 시간표 조회 (수강신청 관련이라서 현재 연도-학기만)</h1>
+		<h1>예비 수강신청 (정원 초과 가능)</h1>
 		<div class="split--div"></div>
 		<!-- 여기에 내용 넣기 -->
-		
 		<!-- 필터 및 검색 -->
 		<div class="sub--filter">
-			<form action="/stuSub/list/Search" method="get">
+			<form action="/stuSub/preApplication/Search" method="get">
 				<div>
 					<!-- 강의구분 콤보박스 -->
 					<label for="type">강의구분</label> 
@@ -173,7 +185,7 @@
 					<th>요일시간 (강의실)</th>
 					<th>현재인원</th>
 					<th>정원</th>
-					<th>강의계획서</th>
+					<th>수강신청</th>
 				</tr>
 			</thead>
 
@@ -190,12 +202,24 @@
 						<td>${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})</td>
 						<td>${subject.numOfStudent}</td>
 						<td>${subject.capacity}</td>
-						<td>
-							<!-- 높이가 안 맞아서 어쩔 수 없이 li로 연결함.. -->
-							<ul class="d-flex justify-content-center sub--plan--view" style="margin: 2px 0;">
-								<li style="height: 24px;"><a href="#">조회</a></li>
-								<li style="height: 24px;"><a href="#"><span class="material-symbols-outlined">content_paste_search</span></a></li>
-							</ul>
+						<td class="sub--list--button--row">
+							<c:choose>
+								<%-- 신청된 상태라면 --%>
+								<c:when test="${subject.status == true}">
+									<form action="/stuSub/deletePreApp/${subject.id}" method="post">
+										<input type="hidden" name="_method" value="delete">
+										<button type="submit" onclick="return confirm('수강신청을 취소하시겠습니까?');" style="background-color: #a7a7a7;">취소</button>
+									</form>
+								</c:when>
+								
+								<%-- 신청되지 않은 상태라면 --%>
+								<c:otherwise>
+									<form action="/stuSub/insertPreApp/${subject.id}" method="post">
+										<button type="submit" onclick="return confirm('해당 강의를 수강신청하시겠습니까?');" style="background-color: #548AC2;">신청</button>
+									</form>
+								</c:otherwise>
+								
+							</c:choose>
 						</td>
 					</tr>
 				</c:forEach>

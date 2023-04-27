@@ -3,12 +3,14 @@ package com.green.university.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.green.university.dto.AllSubjectSearchFormDto;
 import com.green.university.dto.CurrentSemesterSubjectSearchFormDto;
 import com.green.university.dto.response.SubjectDto;
+import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.SubjectRepository;
 import com.green.university.utils.Define;
 
@@ -68,6 +70,28 @@ public class SubjectService {
 		List<SubjectDto> subDtoList = subjectRepository.selectDtoBySemesterAndAndTypeAndDeptAndName(dto);
 		
 		return subDtoList;
+	}
+	
+	/**
+	 * 현재 인원을 1명 추가함
+	 */
+	@Transactional
+	public void updatePlusNumOfStudent(Integer id) {
+		int resultRowCount = subjectRepository.updateNumOfStudent(id, "추가");
+		if (resultRowCount != 1) {
+			throw new CustomRestfullException("현재 인원 수정이 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/**
+	 * 현재 인원을 1명 삭제함
+	 */
+	@Transactional
+	public void updateMinusNumOfStudent(Integer id) {
+		int resultRowCount = subjectRepository.updateNumOfStudent(id, "삭제");
+		if (resultRowCount != 1) {
+			throw new CustomRestfullException("현재 인원 수정이 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	

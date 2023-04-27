@@ -12,7 +12,7 @@ public class Define {
 	
 	public final static String WRONG_PASSWORD = "비밀번호가 틀렸습니다.";
 	
-	// Integer로 했더니 ==로 비교하려면 .intvalue()를 붙여줘야해서 int로 변경함
+	// Integer로 했더니 ==로 비교하려면 .intValue()를 붙여줘야해서 int로 변경함
 	public final static int CURRENT_YEAR = 2023;
 	
 	public final static int CURRENT_SEMESTER = 1;
@@ -21,10 +21,13 @@ public class Define {
 	// 1KB = 1024byte
 	// 1MB = 1024*1024 = 1,048,476 byte
 	public final static String UPLOAD_DIRECTORY = "C:\\spring_upload\\universityManagement\\upload";
+	
 	public final static int MAX_FILE_SIZE = 1024 * 1024 * 20;
 	
 	public final static String[] PATHS = {"/professor/**", "/user/**" };
 	
+	// 수강 가능한 최대 학점
+	public final static int MAX_GRADES = 18;
 	
 	
 }
