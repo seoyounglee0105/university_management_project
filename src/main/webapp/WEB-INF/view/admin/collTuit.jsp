@@ -92,12 +92,15 @@
 			<!-- 등록금 수정 -->
 			<c:if test="${crud.equals(\"update\")}">
 				<form action="/updAdmin/upCollTuit" method="post" id="insert--form">
-					<h5>등록금을 수정해주세요</h5>
-					단과대학 <select name="collegeId">
-						<c:forEach var="college" items="${collegeList}">
-							<option value="${college.id}">${college.name}</option>
-						</c:forEach>
-					</select> 등록금 <input type="text" name="amount" value="2500000"> 
+					<input type="hidden" name="_method" value="put"/>
+						<h5>등록금을 수정해주세요</h5>
+						단과대학 
+							<select name="collegeId">
+								<c:forEach var="college" items="${collegeList}">
+									<option value="${college.id}">${college.name}</option>
+								</c:forEach>
+							</select> 
+						등록금 <input type="text" name="amount" value="2500000"> 
 					<input type="submit" value="수정">
 				</form>
 				<table class="collTuit--table">
@@ -107,11 +110,11 @@
 						<td>금액</td>
 					</tr>
 					<c:forEach var="collTuit" items="${collTuitList}">
-								<tr>
-									<td>${collTuit.collegeId}</td>
-									<td>${collTuit.name}</td>
-									<td>${collTuit.amount}</td>
-								</tr>
+						<tr>
+							<td>${collTuit.collegeId}</td>
+							<td>${collTuit.name}</td>
+							<td>${collTuit.amount}</td>
+						</tr>
 					</c:forEach>
 				</table>
 			</c:if>
@@ -120,12 +123,12 @@
 			<!-- 등록금 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
 				<h5>등록금을 삭제할 단과대학을 클릭해주세요</h5>
-				<table class="collTuit--table">
-					<tr class="first--tr">
-						<td>ID</td>
-						<td>단과대</td>
-						<td>금액</td>
-					</tr>
+					<table class="collTuit--table">
+						<tr class="first--tr">
+							<td>ID</td>
+							<td>단과대</td>
+							<td>금액</td>
+						</tr>
 					<c:forEach var="collTuit" items="${collTuitList}">
 						<tr>
 							<td>${collTuit.collegeId}</td>
@@ -145,20 +148,18 @@
 						<td>단과대</td>
 						<td>금액</td>
 					</tr>
-					<c:forEach var="collTuit" items="${collTuitList}">
-								<tr>
-									<td>${collTuit.collegeId}</td>
-									<td>${collTuit.name}</td>
-									<td>${collTuit.amount}</td>
-								</tr>
-					</c:forEach>
+				<c:forEach var="collTuit" items="${collTuitList}">
+					<tr>
+						<td>${collTuit.collegeId}</td>
+						<td>${collTuit.name}</td>
+						<td>${collTuit.amount}</td>
+					</tr>
+				</c:forEach>
 				</table>
 			</c:if>
-	</main>
+		</main>
 
 			<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
-
 		</div>
-
 		</body>
 		</html>

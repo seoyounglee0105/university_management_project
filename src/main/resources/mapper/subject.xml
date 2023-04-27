@@ -33,13 +33,18 @@
 		select * from subject_tb
 	</select>
 
+	<select id="selectByRoomIdAndSubDayAndSubYearAndSemester" resultType="com.green.university.repository.model.Subject">
+		select * from subject_tb
+		where room_id = #{roomId} and sub_day = #{subDay} and sub_year = #{subYear} and semester = #{semester}
+	</select>
+	
 	<delete id="delete">
 		delete from subject_tb where id = #{id}
 	</delete>
 
 	<update id="update">
 		UPDATE subject_tb
-		SET name = #{name}, room_id = #{roomId}, time = #{time}, capacity = #{capacity}
+		SET name = #{name}, room_id = #{roomId}, sub_day = #{subDay}, start_time = #{startTime}, end_time = #{endTime}, capacity = #{capacity}
 		WHERE id = #{id}
 	</update>
 
@@ -195,5 +200,12 @@
 		LEFT JOIN college_tb AS c
 		ON r.college_id = c.id
 		WHERE subject_id = #{subjectId};
+	</select>
+	
+	<!-- 성희 / insert한 제일 최근 강의 ID 조회 -->
+	<select id="selectIdOrderById" resultType="integer">
+		SELECT id FROM subject_tb 
+		where name=#{name} and room_id=#{roomId} and sub_year=#{subYear} and semester=#{semester} and 
+		sub_day=#{subDay} and start_time=#{startTime} and end_time=#{endTime}
 	</select>
 </mapper>

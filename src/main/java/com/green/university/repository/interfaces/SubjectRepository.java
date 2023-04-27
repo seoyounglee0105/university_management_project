@@ -27,6 +27,18 @@ public interface SubjectRepository {
 	public int update(SubjectFormDto subjectFormDto);
 	
 	/**
+	 * 성희 
+	 * 강의 입력 시 같은 강의실, 요일, 연도, 학기 정보 조회
+	 */
+	public List<Subject> selectByRoomIdAndSubDayAndSubYearAndSemester(SubjectFormDto subjectFormDto);
+	
+	/**
+	 * 성희 
+	 * 제일 최근 강의 ID 조회
+	 */
+	public Integer selectIdOrderById(SubjectFormDto subjectFormDto);
+	
+	/**
 	 * @author 서영
 	 * @return 수강 신청에 사용할 강의 정보
 	 */

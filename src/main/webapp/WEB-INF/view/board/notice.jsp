@@ -112,14 +112,15 @@ form {
 		<!-- 공지 수정 -->
 		<c:if test="${crud.equals(\"update\")}">
 			<form action="/board/notice-update" method="post">
-			<input type="hidden" name="id" value="${notice.id}">
-				${notice.id}
-				말머리 ${notice.category}
-			<div class="title"> 
-				제목 <input type="text" name="title" value="${notice.title}"> 
-			</div>
-				내용 <textarea rows="20" cols="60" name="content">${notice.content}</textarea>
-				<input type="submit" value="수정">
+				<input type="hidden" name="_method" value="put"/>
+				<input type="hidden" name="id" value="${notice.id}">
+					${notice.id}
+					말머리 ${notice.category}
+				<div class="title"> 
+					제목 <input type="text" name="title" value="${notice.title}"> 
+				</div>
+					내용 <textarea rows="20" cols="60" name="content">${notice.content}</textarea>
+					<input type="submit" value="수정">
 			</form>
 		</c:if>
 		

@@ -12,7 +12,7 @@ spring:
       suffix: .jsp # 확장자
     hiddenmethod:
       filter:
-        enabled: true
+        enabled: true # update, delete put방식으로 보내기 위한 설정
   servlet:
     multipart:
       max-file-size: 20MB
