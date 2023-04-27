@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.green.university.dto.AllSubjectSearchFormDto;
 import com.green.university.dto.CurrentSemesterSubjectSearchFormDto;
 import com.green.university.dto.SubjectFormDto;
+import com.green.university.dto.response.ReadSyllabusDto;
 import com.green.university.dto.response.SubjectDto;
 import com.green.university.dto.response.SubjectForProfessorDto;
 import com.green.university.dto.response.SubjectPeriodForProfessorDto;
@@ -89,4 +90,6 @@ public interface SubjectRepository {
 	 */
 	public int updateNumOfStudent(@Param("id") Integer id, @Param("type") String type);
 	
+	
+	public ReadSyllabusDto selectSyllabusBySubjectId(Integer subjectId);
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.green.university.handler.exception.UnAuthorizedException;
-import com.green.university.repository.model.User;
 import com.green.university.utils.Define;
 
 /**
