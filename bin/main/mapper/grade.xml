@@ -144,7 +144,7 @@ WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND su.semester 
 
 
 <!-- 누계성적 구하는 쿼리 -->
-<select id="SumAndAverageBymyGrade" resultType="com.green.university.dto.response.MyGradeDto">
+<select id="sumAndAverageBymyGrade" resultType="com.green.university.dto.response.MyGradeDto">
 SELECT  st.student_id, su.sub_year, su.semester, SUM(su.grades) AS sum_grades, mg.my_grades, SUM(gr.grade_value)/COUNT(su.name) AS average
 FROM stu_sub_tb AS st
 INNER JOIN subject_tb AS su
@@ -164,6 +164,7 @@ ON st.student_id = mg.student_id
 WHERE st.student_id = #{studentId} AND su.sub_year= #{subYear} AND su.semester = #{semester};
 </select>
 
+<<<<<<< HEAD
 <select id="findAvgGradeByStudentIdAndSemester" resultType="com.green.university.dto.response.GradeForScholarshipDto">
 	SELECT ss.student_id, sub_year, semester, AVG(grade_value) AS avg_grade FROM stu_sub_tb AS ss
 	JOIN grade_tb AS g
@@ -172,6 +173,19 @@ WHERE st.student_id = #{studentId} AND su.sub_year= #{subYear} AND su.semester =
 	ON ss.subject_id = s.id
 	WHERE sub_year = #{subYear} AND semester = #{semester} AND ss.student_id = #{studentId}
 	GROUP BY student_id;
+=======
+<!-- 전체 누계 성적 조회 -->
+
+<select id="gradeinquiryBystudentId" resultType="com.green.university.dto.response.MyGradeDto">
+SELECT su.sub_year, su.semester, SUM(su.grades) AS sum_grades,SUM(st.complete_grade) AS my_grades, AVG(gr.grade_value) AS average
+FROM stu_sub_tb AS st
+LEFT JOIN subject_tb AS su
+ON st.subject_id = su.id
+LEFT JOIN grade_tb AS gr
+ON st.grade = gr.grade
+WHERE st.student_id = #{studnet_id}
+GROUP BY su.sub_year, su.semester;
+>>>>>>> feature/eval
 </select>
 
 </mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.green.university.repository.interfaces.EvaluationRepository">
+
+
+<!-- 강의평가 저장 -->
+
+<insert id="insert">
+INSERT INTO evaluation
+(student_id, subject_id, qna_1, qna_2, qna_3,
+ qna_4, qna_5, qna_6, qna_7, improvements)
+VALUES 
+( 
+#{studentId}, #{subjectId}, #{qna1}, 
+#{qna2}, #{qna3}, #{qna4}, #{qna5}, #{qna6}, #{qna7}, #{improvements}
+);
+</insert>
+
+</mapper>

@@ -32,18 +32,31 @@ public interface GradeRespository {
 	// 학기별 성적조회 할때 전체 나오는거
 	public List<GradeDto> findByAll(Integer studentId);
 	
-	// 누계성적 조회
-	public MyGradeDto SumAndAverageBymyGrade(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear, @Param("semester") Integer semester);
-	
-	// 전공,교양 각자 찾는거
-	public List<GradeDto> chioceByGrade(@Param("studentId") Integer studentId,@Param("subYear") Integer subYear,@Param("semester") Integer semester,@Param("type") String type);
+
 	// 전체 찾는거
 	public List<GradeDto> chioceByGradeAlltype(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear, @Param("semester") Integer semester);
 
+<<<<<<< HEAD
 	/**
 	 * @author 서영
 	 * 장학금 유형 결정을 위한 성적 평균을 가져옴
 	 */
 	public GradeForScholarshipDto findAvgGradeByStudentIdAndSemester(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear, @Param("semester") Integer semester);
 	
+=======
+	
+	
+	// 전공,교양 각자 찾는거
+	public List<GradeDto> chioceByGrade(@Param("studentId") Integer studentId,@Param("subYear") Integer subYear,@Param("semester") Integer semester,@Param("type") String type);
+
+	// 누계성적 조회
+	public MyGradeDto  sumAndAverageBymyGrade(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear, @Param("semester") Integer semester);
+	
+	// 전체 누계성적 조회
+	public List<MyGradeDto> gradeinquiryBystudentId(Integer studentId);
+	
+	// 연도 누계성적 조회
+	public List<MyGradeDto> gradeinquiryBysubYear(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear);
+
+>>>>>>> feature/eval
 }
