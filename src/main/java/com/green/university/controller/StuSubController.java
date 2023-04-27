@@ -88,4 +88,34 @@ public class StuSubController {
 		return "/stuSub/subList";
 	}
 	
+	/**
+	 * @return 예비 수강 신청
+	 */
+	@GetMapping("/preApplication")
+	public String stuSubPreApplication(Model model) {
+		
+		
+		return "stuSub/preApplication";
+	}
+	
+	/**
+	 * @return 수강 신청
+	 */
+	@GetMapping("/application")
+	public String stuSubApplication(Model model) {
+	
+		
+		return "stuSub/application";
+	}
+	
+	/**
+	 * @return 수강 신청 내역
+	 */
+	@GetMapping("/appList")
+	public String stuSubAppList(Model model) {
+	
+		
+		return "stuSub/appList";
+	}
+	
 }

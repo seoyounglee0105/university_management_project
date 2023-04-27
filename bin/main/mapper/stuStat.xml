@@ -4,7 +4,7 @@
 <mapper namespace="com.green.university.repository.interfaces.StuStatRepository">
 
 <select id="findByStudentIdOrderbyToDateDesc" resultType="com.green.university.repository.model.StuStat">
-	SELECT * FROM stu_stat_tb WHERE student_id = #{studentId} ORDER BY to_date DESC LIMIT 1
+	SELECT * FROM stu_stat_tb WHERE student_id = #{studentId} ORDER BY id DESC LIMIT 1
 </select>
 
 <insert id="insert">
