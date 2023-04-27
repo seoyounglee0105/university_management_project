@@ -32,6 +32,12 @@ public interface SubjectRepository {
 	public List<Subject> selectByRoomIdAndSubDayAndSubYearAndSemester(SubjectFormDto subjectFormDto);
 	
 	/**
+	 * 성희 
+	 * 제일 최근 강의 ID 조회
+	 */
+	public Integer selectIdOrderById(SubjectFormDto subjectFormDto);
+	
+	/**
 	 * @author 서영
 	 * @return 수강 신청에 사용할 강의 정보
 	 */

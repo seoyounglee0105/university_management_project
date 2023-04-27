@@ -21,6 +21,7 @@ import com.green.university.repository.interfaces.DepartmentRepository;
 import com.green.university.repository.interfaces.NoticeRepository;
 import com.green.university.repository.interfaces.RoomRepository;
 import com.green.university.repository.interfaces.SubjectRepository;
+import com.green.university.repository.interfaces.SyllaBusRepository;
 import com.green.university.repository.model.CollTuit;
 import com.green.university.repository.model.College;
 import com.green.university.repository.model.Department;
@@ -46,6 +47,8 @@ public class AdminService {
 	private RoomRepository roomRepository;
 	@Autowired
 	private SubjectRepository subjectRepository;
+	@Autowired
+	private SyllaBusRepository syllaBusRepository;
 
 	/**
 	 * 단과대 입력 서비스
@@ -182,11 +185,22 @@ public class AdminService {
 	 * 강의 입력 서비스
 	 */
 	@Transactional
-	public void insertSubject(@Validated SubjectFormDto subjectFormDto) {
-		int resultRowCount = subjectRepository.insert(subjectFormDto);
-		if (resultRowCount != 1) {
-			System.out.println("강의 입력 서비스 오류");
+	public List<Subject> insertSubject(@Validated SubjectFormDto subjectFormDto) {
+		// 강의실, 강의시간 중복 검사
+		List<Subject> subjectList = subjectRepository.selectByRoomIdAndSubDayAndSubYearAndSemester(subjectFormDto);
+		if (subjectList != null) {
+			SubjectUtil subjectUtil = new SubjectUtil();
+			boolean result = subjectUtil.calculate(subjectFormDto, subjectList);
+			if (result == false) {
+				throw new CustomRestfullException("해당 시간대는 강의실을 사용중입니다! 다시 선택해주세요", HttpStatus.BAD_REQUEST);
+			}
 		}
+		subjectRepository.insert(subjectFormDto);
+		
+		// 강의계획서에 강의 ID 저장
+		Integer subjectId = subjectRepository.selectIdOrderById(subjectFormDto);
+		syllaBusRepository.insertOnlySubId(subjectId);
+		return subjectList;
 	}
 
 	/**

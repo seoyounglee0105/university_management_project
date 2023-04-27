@@ -171,4 +171,11 @@
 		</if>
 		
 	</select>
+	
+	<!-- 성희 / insert한 제일 최근 강의 ID 조회 -->
+	<select id="selectIdOrderById" resultType="integer">
+		SELECT id FROM subject_tb 
+		where name=#{name} and room_id=#{roomId} and sub_year=#{subYear} and semester=#{semester} and 
+		sub_day=#{subDay} and start_time=#{startTime} and end_time=#{endTime}
+	</select>
 </mapper>
