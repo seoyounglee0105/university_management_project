@@ -32,13 +32,10 @@ public class GradeService {
 	// 금학기별 누계성적 조회
 	@Transactional
 	public MyGradeDto readSumAndAverageByGrade(Integer studentId) {
-<<<<<<< HEAD
 		System.out.println(studentId);
-		MyGradeDto mygradeEntity = gradeRespository.SumAndAverageBymyGrade(studentId, Define.CURRENT_YEAR, Define.CURRENT_SEMESTER);
+		MyGradeDto mygradeEntity = gradeRespository.sumAndAverageBymyGrade(studentId, Define.CURRENT_YEAR, Define.CURRENT_SEMESTER);
 		System.out.println(mygradeEntity.toString());
-=======
-		MyGradeDto mygradeEntity = gradeRespository.sumAndAverageBymyGrade(studentId, CURRENT_YEAR, CURRENT_SEMESTER);
->>>>>>> feature/eval
+
 		return mygradeEntity;
 	}
 	// 전체 누계성적 조회
