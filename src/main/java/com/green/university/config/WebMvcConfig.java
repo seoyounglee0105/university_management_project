@@ -10,16 +10,33 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.green.university.handler.AuthIntercepter;
+import com.green.university.handler.AuthIntercepterForLogin;
+import com.green.university.handler.UserRoleAuthIntercepterForProfessor;
+import com.green.university.handler.UserRoleAuthIntercepterForStaff;
+import com.green.university.handler.UserRoleAuthIntercepterForStudent;
+import com.green.university.utils.Define;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
 	@Autowired
 	private AuthIntercepter authIntercepter;
+	@Autowired
+	private UserRoleAuthIntercepterForProfessor authIntercepterForProfessor;
+	@Autowired
+	private UserRoleAuthIntercepterForStaff authIntercepterForStaff;
+	@Autowired
+	private UserRoleAuthIntercepterForStudent authIntercepterForStudent;
+	@Autowired
+	private AuthIntercepterForLogin authIntercepterForLogin;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		// registry.addInterceptor(authIntercepter).addPathPatterns("/account/**").addPathPatterns("/auth/**");
+		registry.addInterceptor(authIntercepter).addPathPatterns(Define.PATHS);
+		registry.addInterceptor(authIntercepterForProfessor).addPathPatterns("/professor/**");
+		registry.addInterceptor(authIntercepterForStaff).addPathPatterns("/user/**");
+		// registry.addInterceptor(authIntercepterForStudent).addPathPatterns("/student/**");
+		registry.addInterceptor(authIntercepterForLogin).addPathPatterns("/");
 	}
 	
 	// 파일 리소스 등록

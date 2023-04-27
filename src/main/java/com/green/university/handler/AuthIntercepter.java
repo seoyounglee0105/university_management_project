@@ -12,6 +12,10 @@ import com.green.university.handler.exception.UnAuthorizedException;
 import com.green.university.repository.model.User;
 import com.green.university.utils.Define;
 
+/**
+ * 로그인 되어있는지 세션 검사하는 intercepter
+ * @author 김지현
+ */
 @Component
 public class AuthIntercepter implements HandlerInterceptor {
 
