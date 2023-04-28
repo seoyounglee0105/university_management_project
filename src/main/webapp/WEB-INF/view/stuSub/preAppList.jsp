@@ -76,6 +76,16 @@
 .sub--list--button--row {
 	padding: 2px 2px !important;
 }
+
+.preStuSubList--button {
+	padding: 5px 10px;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	background-color: gray;
+	font-size: 20px;
+	margin-right: 20px;
+}
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -114,13 +124,27 @@
 					<td><a href="/stuSub/list">강의 시간표 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/preApplication">예비 수강 신청</a></td>
+					<c:choose>
+						<c:when test="${type == 0}">
+							<td><a href="/stuSub/preApplication" class="selected--menu">예비 수강 신청</a></td>
+						</c:when>
+						<c:otherwise>
+							<td><a href="/stuSub/preApplication">예비 수강 신청</a></td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/preAppList?type=1">수강 신청</a></td>
+					<c:choose>
+						<c:when test="${type == 1}">
+							<td><a href="/stuSub/preAppList?type=1" class="selected--menu">수강 신청</a></td>
+						</c:when>
+						<c:otherwise>
+							<td><a href="/stuSub/preAppList?type=1">수강 신청</a></td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/appList" class="selected--menu">수강 신청 내역 조회</a></td>
+					<td><a href="/stuSub/appList">수강 신청 내역 조회</a></td>
 				</tr>
 			</table>
 		</div>
@@ -128,9 +152,33 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>수강 신청 내역 조회</h1>
+		<h1>
+			<c:choose>
+				<c:when test="${type == 0}">
+					예비 수강 신청
+				</c:when>
+				<c:otherwise>
+					수강 신청
+				</c:otherwise>
+			</c:choose>
+		</h1>
 		<div class="split--div"></div>
 		<!-- 여기에 내용 넣기 -->
+		
+		<!-- 강의 검색으로 가기 -->
+		<div class="d-flex justify-content-end align-items-center" style="margin-bottom: 50px; height: 54px; width: 100%">
+			<c:choose>
+				<%-- 예비 수강 신청 --%>
+				<c:when test="${type == 0}">
+					<a href="/stuSub/preApplication"><button class="preStuSubList--button">강의 검색</button></a>
+				</c:when>
+				<%-- 수강 신청 --%>
+				<c:otherwise>
+					<a href="/stuSub/application"><button class="preStuSubList--button">강의 검색</button></a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		
 		<div class="d-flex flex-column align-items-center" style="width: 100%">
 			<c:choose>
 				<c:when test="${stuSubList.size() > 0}">
@@ -143,7 +191,7 @@
 								<th>담당교수</th>
 								<th>학점</th>
 								<th>요일시간 (강의실)</th>
-								<th>현재인원</th>
+								<th>예비인원</th>
 								<th>정원</th>
 								<th>수강신청</th>
 							</tr>
@@ -160,9 +208,9 @@
 									<td>${stuSub.numOfStudent}</td>
 									<td>${stuSub.capacity}</td>
 									<td class="sub--list--button--row">
-										<form action="/stuSub/deleteApp/${stuSub.subjectId}?type=1" method="post">
+										<form action="/stuSub/deletePreApp/${stuSub.subjectId}?type=1" method="post">
 											<input type="hidden" name="_method" value="delete">
-											<button type="submit" onclick="return confirm('수강신청을 취소하시겠습니까?');" style="background-color: #a7a7a7;">취소</button>
+											<button type="submit" onclick="return confirm('예비수강신청을 취소하시겠습니까?');" style="background-color: #a7a7a7;">취소</button>
 										</form>
 									</td>
 								</tr>
@@ -172,7 +220,7 @@
 				</c:when>
 
 				<c:otherwise>
-					<p>수강 신청 내역이 없습니다.</p>
+					<p>예비 수강 신청 내역이 없습니다.</p>
 				</c:otherwise>
 			</c:choose>
 		</div>

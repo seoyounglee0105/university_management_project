@@ -71,13 +71,13 @@
 					<td><a href="/stuSub/list">강의 시간표 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/preApplication">예비 수강신청</a></td>
+					<td><a href="/stuSub/preApplication">예비 수강 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/application">수강신청</a></td>
+					<td><a href="/stuSub/preAppList?type=1">수강 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/appList">수강신청 내역 조회</a></td>
+					<td><a href="/stuSub/appList">수강 신청 내역 조회</a></td>
 				</tr>
 			</table>
 				</div>
@@ -136,15 +136,15 @@
 								<tr>
 									<th>휴 학 구 분</th>
 									<td colspan="3">
-										<input type="radio" name="type" value="일반" id="일반" checked> <label for="일반">일반휴학</label>
+										<input type="radio" name="type" value="일반" id="일반" checked> <label for="일반" style="margin: 0">일반휴학</label>
 										&nbsp;
-										<input type="radio" name="type" value="임신·출산·육아" id="임신"> <label for="임신">임신·출산·육아휴학</label>
+										<input type="radio" name="type" value="임신·출산·육아" id="임신"> <label for="임신" style="margin: 0">임신·출산·육아휴학</label>
 										&nbsp;
-										<input type="radio" name="type" value="질병" id="질병"> <label for="질병">질병휴학</label>
+										<input type="radio" name="type" value="질병" id="질병"> <label for="질병" style="margin: 0">질병휴학</label>
 										&nbsp;
-										<input type="radio" name="type" value="창업" id="창업"> <label for="창업">창업휴학</label>
+										<input type="radio" name="type" value="창업" id="창업"> <label for="창업" style="margin: 0">창업휴학</label>
 										&nbsp;
-										<input type="radio" name="type" value="군입대" id="군입대"> <label for="군입대">군입대휴학</label>
+										<input type="radio" name="type" value="군입대" id="군입대"> <label for="군입대" style="margin: 0">군입대휴학</label>
 									</td>
 								</tr>
 								<tr>

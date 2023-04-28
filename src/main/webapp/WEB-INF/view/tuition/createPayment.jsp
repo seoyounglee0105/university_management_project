@@ -40,13 +40,13 @@
 							<td><a href="/stuSub/list">강의 시간표 조회</a></td>
 						</tr>
 						<tr>
-							<td><a href="/stuSub/preApplication">예비 수강신청</a></td>
+							<td><a href="/stuSub/preApplication">예비 수강 신청</a></td>
 						</tr>
 						<tr>
-							<td><a href="/stuSub/application">수강신청</a></td>
+							<td><a href="/stuSub/preAppList?type=1">수강 신청</a></td>
 						</tr>
 						<tr>
-							<td><a href="/stuSub/appList">수강신청 내역 조회</a></td>
+							<td><a href="/stuSub/appList">수강 신청 내역 조회</a></td>
 						</tr>
 					</table>
 				</div>
@@ -61,6 +61,7 @@
 				<c:if test="${insertCount != null}">
 					<% out.println("<script>alert('" + request.getAttribute("insertCount") + "개의 등록금 고지서가 생성되었습니다.'); history.back(); </script>"); %>
 				</c:if>
+				<p>여기 메뉴 이름 바꿔서 예비수강신청기간 -> 수강신청기간으로 바꿀 수 있는 버튼도 추가해야 할 듯</p>
 			</main>
 		</div>
 		

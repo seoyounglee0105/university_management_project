@@ -121,7 +121,7 @@ CREATE TABLE stu_sub_tb(
    student_id INT,
    subject_id INT,
    grade VARCHAR (2) COMMENT '신청 학점 (평점)',
-   complete_grade INT NOT NULL COMMENT '이수 학점',
+   complete_grade INT COMMENT '이수 학점',
    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
    FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE,
    FOREIGN KEY (grade) REFERENCES grade_tb (grade)

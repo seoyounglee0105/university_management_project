@@ -264,6 +264,7 @@ VALUES
    'F',
    0
 );
+
 -- F : 0점이고 학기에 취득학점도 없어야 함
 INSERT INTO subject_tb
 (
@@ -544,13 +545,6 @@ INSERT INTO stu_sub_tb
 )
 VALUES
 (
-   2018000001,
-   10000,
-   'A',
-   3
-),
-
-(
    2018000002,
    10000,
    'F',
@@ -665,7 +659,7 @@ INSERT INTO stu_stat_tb VALUES
 (
    1,
    2018000001,
-   '휴학',
+   '재학',
    current_date,
    '9999-01-01'
 );
@@ -786,4 +780,37 @@ INSERT INTO syllabus_tb VALUES
    '상하수도에 대해 이해하고 실제로 상하수도를 설계할 수 있다.',
    '상하수도공학1 (편용림)',
    '1주차 - 6주차: 상하수도 개론 \r\n7주차 중간시험\r\n 8주차 - 15주차 실습 \r\n16주차 기말시험'
+);
+
+INSERT INTO subject_tb
+(
+   name,
+   professor_id,
+   room_id,
+   dept_id,
+   type,
+   sub_year,
+   semester,
+   sub_day,
+   start_time,
+   end_time,
+   grades,
+   capacity,
+   num_of_student
+)
+VALUES
+(
+   '사용자 중심 디자인',
+   '23000001',
+   'C202',
+   102,
+   '전공',
+   '2023',
+   1,
+   '수',
+   10,
+   13,
+   3,
+   30,
+   29
 );

@@ -24,6 +24,7 @@ import com.green.university.service.StuStatService;
 import com.green.university.service.TuitionService;
 import com.green.university.service.UserService;
 import com.green.university.utils.Define;
+import com.green.university.utils.StuStatUtil;
 
 /**
  * 
@@ -82,29 +83,13 @@ public class TuitionController {
 		model.addAttribute("student", studentInfo);
 		
 		// 등록금 납부 대상이 아니라면 진입 불가
-		// 해당 학생의 학적 상태가 '졸업' 또는 '자퇴'라면
-		StuStat stuStatEntity = stuStatService.readCurrentStatus(studentInfo.getId());
-		if (stuStatEntity.getStatus().equals("졸업") || stuStatEntity.getStatus().equals("자퇴")) {
-			System.out.println("졸업 또는 자퇴한 학생입니다.");
-			throw new CustomRestfullException("등록금 납부 대상이 아닙니다.", HttpStatus.BAD_REQUEST);
-		}
+		// 해당 학생의 학적 상태가 '졸업' 또는 '자퇴'라면 X
+		// 해당 학생이 이번 학기 휴학을 승인받은 상태라면 X
 		
-		// 해당 학생이 현재 학기 휴학을 승인받은 상태라면
+		StuStat stuStatEntity = stuStatService.readCurrentStatus(studentInfo.getId());
 		List<BreakApp> breakAppList = breakAppService.readByStudentId(studentInfo.getId()); // 최근 순으로 정렬되어 있음
-		for (BreakApp b : breakAppList) {
-			// 휴학 신청이 승인된 상태일 때
-			if (b.getStatus().equals("승인")) {
-				// 휴학 종료 연도가 현재 연도보다 이후라면 생성하지 않음
-				if (b.getToYear() > Define.CURRENT_YEAR) {
-					throw new CustomRestfullException("등록금 납부 대상이 아닙니다.", HttpStatus.BAD_REQUEST);
-				// 휴학 종료 연도가 현재 연도와 같을 경우
-				} else if (b.getToYear() == Define.CURRENT_YEAR) {
-					if (b.getToSemester() >= Define.CURRENT_SEMESTER) {
-						throw new CustomRestfullException("등록금 납부 대상이 아닙니다.", HttpStatus.BAD_REQUEST);
-					}
-				}
-			}
-		}
+		
+		StuStatUtil.checkStuStat("등록금", stuStatEntity, breakAppList);
 		
 		// 학과 이름
 		String deptName = collegeService.readDeptById(studentInfo.getDeptId()).getName();
