@@ -8,7 +8,7 @@ form {
 	margin-left: 30px;
 }
 
-.input--table th,td {
+.input--table th, td {
 	padding: 5px 10px;
 }
 
@@ -19,7 +19,6 @@ form {
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 	margin-top: 20px;
 } */
-
 .button-td {
 	text-align: center;
 }
@@ -37,22 +36,10 @@ form {
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/user/student">학생 ID 생성</a></td>
+					<td><a href="/subject/list">전체 강의 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/user/professor">교수 ID 생성</a></td>
-				</tr>
-				<tr>
-					<td><a href="/user/staff">직원 ID 생성</a></td>
-				</tr>
-				<tr>
-					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
-				</tr>
-				<tr>
-					<td><a href="/password">비밀번호 변경</a></td>
-				</tr>
-				<tr>
-					<td><a href="/professor/subject">교수 자기 강의 조회</a></td>
+					<td><a href="/professor/subject">내 강의 조회</a></td>
 				</tr>
 			</table>
 		</div>
@@ -81,15 +68,15 @@ form {
 				</tr>
 			</thead>
 			<c:forEach items="${subjectList}" var="subject">
-			<tbody>
-				<tr>
-					<td>${subject.id}</td>
-					<td>${subject.name}</td>
-					<td>${subject.time}</td>
-					<td><a href="/professor/syllabus/${subject.id}" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">강의 계획서</a></td>
-					<td><a href="subject/${subject.id}">학생 리스트 보기</a></td>
-				</tr>
-			</tbody>
+				<tbody>
+					<tr>
+						<td>${subject.id}</td>
+						<td>${subject.name}</td>
+						<td>${subject.time}</td>
+						<td><a href="/professor/syllabus/${subject.id}" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">강의 계획서</a></td>
+						<td><a href="subject/${subject.id}">학생 리스트 보기</a></td>
+					</tr>
+				</tbody>
 			</c:forEach>
 		</table>
 

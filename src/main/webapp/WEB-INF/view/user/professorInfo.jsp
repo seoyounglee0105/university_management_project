@@ -4,30 +4,32 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <style>
-
-form{
+form {
 	margin-left: 30px;
-	
 }
 
 .input--table {
 	margin: 10px;
 	width: 900px;
 }
+
 .input--table th {
 	text-align: center;
 }
 
-.col1{
+.col1 {
 	width: 15%;
 }
-.col2{
+
+.col2 {
 	width: 35%;
 }
-.col3{
+
+.col3 {
 	width: 15%;
 }
-.col4{
+
+.col4 {
 	width: 35%;
 }
 
@@ -38,7 +40,6 @@ form{
 .stat--table {
 	width: 1000px;
 }
-
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -53,31 +54,10 @@ form{
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/user/student">학생 ID 생성</a></td>
-				</tr>
-				<tr>
-					<td><a href="/user/professor">교수 ID 생성</a></td>
-				</tr>
-				<tr>
-					<td><a href="/user/staff">직원 ID 생성</a></td>
-				</tr>
-				<tr>
-					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
+					<td><a href="/info/professor" class="selected--menu">내 정보 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/password">비밀번호 변경</a></td>
-				</tr>
-				<tr>
-					<td><a href="/professor/subject">교수 자기 강의 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/info/student">학생 Info</a></td>
-				</tr>
-				<tr>
-					<td><a href="/info/staff">직원 Info</a></td>
-				</tr>
-				<tr>
-					<td><a href="/info/professor">교수 Info</a></td>
 				</tr>
 			</table>
 		</div>
@@ -87,47 +67,47 @@ form{
 	<main>
 		<h1>My Info</h1>
 		<div class="split--div"></div>
-			<table border="1" class="input--table" >
+		<table border="1" class="input--table">
 			<colgroup>
 				<col class="col1">
 				<col class="col2">
 				<col class="col3">
 				<col class="col4">
 			</colgroup>
-				<tr>
-					<th>ID</th>
-					<td>${professor.id}</td>
-					<th>소속</th>
-					<td>${professor.collegeName} ${professor.deptName}</td>
-				</tr>
-			</table>
-			<table border="1" class="input--table" >
+			<tr>
+				<th>ID</th>
+				<td>${professor.id}</td>
+				<th>소속</th>
+				<td>${professor.collegeName}${professor.deptName}</td>
+			</tr>
+		</table>
+		<table border="1" class="input--table">
 			<colgroup>
 				<col class="col1">
 				<col class="col2">
 				<col class="col3">
 				<col class="col4">
 			</colgroup>
-				<tr>
-					<th>성명</th>
-					<td>${professor.name}</td>
-					<th>생년월일</th>
-					<td>${professor.birthDate}</td>
-				</tr>
-				<tr>
-					<th>성별</th>
-					<td>${professor.gender}</td>
-					<th>주소</th>
-					<td>${professor.address}</td>
-				</tr>
-				<tr>
-					<th>연락처</th>
-					<td>${professor.tel}</td>
-					<th>email</th>
-					<td>${professor.email}</td>
-				</tr>
-			</table>
-			
+			<tr>
+				<th>성명</th>
+				<td>${professor.name}</td>
+				<th>생년월일</th>
+				<td>${professor.birthDate}</td>
+			</tr>
+			<tr>
+				<th>성별</th>
+				<td>${professor.gender}</td>
+				<th>주소</th>
+				<td>${professor.address}</td>
+			</tr>
+			<tr>
+				<th>연락처</th>
+				<td>${professor.tel}</td>
+				<th>email</th>
+				<td>${professor.email}</td>
+			</tr>
+		</table>
+
 	</main>
 </div>
 

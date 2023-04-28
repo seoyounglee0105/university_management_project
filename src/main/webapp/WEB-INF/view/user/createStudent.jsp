@@ -38,31 +38,19 @@ button{
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/user/student">학생 ID 생성</a></td>
+					<td><a href="/user/student">학생 등록</a></td>
 				</tr>
 				<tr>
-					<td><a href="/user/professor">교수 ID 생성</a></td>
+					<td><a href="/user/professor">교수 등록</a></td>
 				</tr>
 				<tr>
-					<td><a href="/user/staff">직원 ID 생성</a></td>
+					<td><a href="/user/staff">직원 등록</a></td>
 				</tr>
 				<tr>
-					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
+					<td><a href="/tuition/bill">등록금 고지서</a></td>
 				</tr>
 				<tr>
-					<td><a href="/password">비밀번호 변경</a></td>
-				</tr>
-				<tr>
-					<td><a href="/professor/subject">교수 자기 강의 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/info/student">학생 Info</a></td>
-				</tr>
-				<tr>
-					<td><a href="/info/staff">직원 Info</a></td>
-				</tr>
-				<tr>
-					<td><a href="/info/professor">교수 Info</a></td>
+					<td><a href="/break/list/staff">휴학 처리</a></td>
 				</tr>
 			</table>
 		</div>

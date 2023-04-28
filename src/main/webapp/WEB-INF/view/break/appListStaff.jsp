@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
@@ -18,8 +17,7 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <!-- 세부 메뉴 + 메인 -->
-<div class="d-flex justify-content-center align-items-start"
-	style="min-width: 100em;">
+<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
@@ -30,37 +28,19 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/tuition/list">등록금 내역 조회</a></td>
+					<td><a href="/user/student">학생 등록</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
+					<td><a href="/user/professor">교수 등록</a></td>
 				</tr>
 				<tr>
-					<td><a href="/break/application">휴학 신청</a></td>
+					<td><a href="/user/staff">직원 등록</a></td>
 				</tr>
 				<tr>
-					<td><a href="/break/appList">휴학 내역 조회</a></td>
+					<td><a href="/tuition/bill">등록금 고지서</a></td>
 				</tr>
 				<tr>
-					<td><a href="/break/appListStaff" class="selected--menu">휴학 신청 처리(staff)</a></td>
-				</tr>
-				<tr>
-					<td><a href="/tuition/create">고지서 생성(staff)</a></td>
-				</tr>
-				<tr>
-					<td><a href="/subject/list">전체 강의 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/stuSub/list">강의 시간표 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/stuSub/preApplication">예비 수강 신청</a></td>
-				</tr>
-				<tr>
-					<td><a href="/stuSub/preAppList?type=1">수강 신청</a></td>
-				</tr>
-				<tr>
-					<td><a href="/stuSub/appList">수강 신청 내역 조회</a></td>
+					<td><a href="/break/list/staff">휴학 처리</a></td>
 				</tr>
 			</table>
 		</div>
@@ -93,8 +73,8 @@
 									<td>${breakApp.appDate}</td>
 									<td>${breakApp.studentId}</td>
 									<td>${breakApp.type}휴학</td>
-									<td>${breakApp.fromYear}년도 ${breakApp.fromSemester}학기</td>
-									<td>${breakApp.toYear}년도 ${breakApp.toSemester}학기</td>
+									<td>${breakApp.fromYear}년도${breakApp.fromSemester}학기</td>
+									<td>${breakApp.toYear}년도${breakApp.toSemester}학기</td>
 									<td><a href="/break/detail/${breakApp.id}">Click</a></td>
 								</tr>
 							</c:forEach>

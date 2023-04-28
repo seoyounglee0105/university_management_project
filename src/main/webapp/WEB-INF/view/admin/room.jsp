@@ -54,9 +54,6 @@
 				<tr>
 					<td><a href="/admin/collTuit">단대별 등록금</a></td>
 				</tr>
-				<tr>
-					<td><a href="/board/notice">공지사항</a></td>
-				</tr>
 			</table>
 		</div>
 	</div>
