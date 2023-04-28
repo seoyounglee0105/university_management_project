@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.green.university.dto.GradecheckFormDto;
 import com.green.university.dto.response.GradeDto;
 import com.green.university.dto.response.GradeForScholarshipDto;
 import com.green.university.dto.response.MyGradeDto;

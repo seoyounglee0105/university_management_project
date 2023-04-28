@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.green.university.dto.EvaluationFormDto;
 import com.green.university.dto.response.PrincipalDto;
+import com.green.university.dto.response.QuestionDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.service.EvaluationService;
+import com.green.university.service.QuestionService;
 import com.green.university.utils.Define;
 
 @Controller
@@ -25,6 +27,8 @@ public class EvaluationController {
 	private HttpSession session;
 	@Autowired
 	private EvaluationService evaluationService;
+	@Autowired
+	private QuestionService questionService;
 	
 	/**
 	 * 편용림
@@ -33,7 +37,10 @@ public class EvaluationController {
 	 */
 	@GetMapping("")
 	public String evaluation(Model model, Integer subjectId) {
+		
+		QuestionDto dto = questionService.readQuestion();
 		model.addAttribute("subjectId", subjectId);
+		model.addAttribute("dto",dto);
 		return "/grade/evaluation"; 
 	}
 	
@@ -69,8 +76,7 @@ public class EvaluationController {
 		
 		// 창을 닫을 때 post가 작동이 안하는거 방지
 		model.addAttribute("type", 1);
-		return "/grade/evaluation";
-		
+		return "grade/evaluation";	
 	}
 	
 }

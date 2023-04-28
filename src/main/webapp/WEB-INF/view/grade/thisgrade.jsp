@@ -71,10 +71,17 @@
 								<td>${grade.name}</td>
 								<td>${grade.type}</td>
 								<td>${grade.grades}</td>
+								<c:choose>
+								<c:when test="${grade.evaluationId != null}">
 								<td>${grade.grade}</td>
+								</c:when>
+								<c:otherwise>
+								<td></td>
+								</c:otherwise>
+								</c:choose>
 								<td>
 								<a href="/evaluation?subjectId=${grade.subjectId}" 
-					onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">강의평가</a>
+								onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">강의평가</a>
 								</td>
 							</tr>
 						</c:forEach>
