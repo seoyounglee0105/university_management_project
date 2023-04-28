@@ -100,13 +100,13 @@
 					<td><a href="/stuSub/list" class="selected--menu">강의 시간표 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/preApplication">예비 수강신청</a></td>
+					<td><a href="/stuSub/preApplication">예비 수강 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/application">수강신청</a></td>
+					<td><a href="/stuSub/preAppList?type=1">수강 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/appList">수강신청 내역 조회</a></td>
+					<td><a href="/stuSub/appList">수강 신청 내역 조회</a></td>
 				</tr>
 			</table>
 		</div>

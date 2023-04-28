@@ -9,8 +9,14 @@
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId}
 	</select>
 	
-	<select id="selectListByStudentId" resultType="com.green.university.repository.model.PreStuSub">
-		SELECT * FROM pre_stu_sub_tb WHERE student_id = #{studentId}
+	<select id="selectListByStudentIdAndSemester" resultType="com.green.university.dto.response.StuSubAppDto">
+		SELECT student_id, subject_id, su.name AS subject_name, p.name AS professor_name, grades, sub_day, start_time, end_time, num_of_student, capacity, room_id
+		FROM pre_stu_sub_tb AS ss
+		LEFT JOIN subject_tb AS su
+		ON ss.subject_id = su.id
+        LEFT JOIN professor_tb AS p
+        ON su.professor_id = p.id
+		WHERE student_id = #{studentId} AND sub_year = #{subYear} AND semester = #{semester}
 	</select>
 	
 	<insert id="insert">
@@ -23,7 +29,7 @@
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId}
 	</delete>
 	
-	<select id="selectSumGrades" resultType="com.green.university.dto.response.PreStuSubSumGradesDto">
+	<select id="selectSumGrades" resultType="com.green.university.dto.response.StuSubSumGradesDto">
 		SELECT student_id, SUM(grades) AS sum_grades
 		FROM pre_stu_sub_tb AS ss
 		LEFT JOIN subject_tb AS su
@@ -32,7 +38,7 @@
 		GROUP BY student_id;
 	</select>
 	
-	<select id="selectDayTime" resultType="com.green.university.dto.response.PreStuSubDayTimeDto">
+	<select id="selectDayTime" resultType="com.green.university.dto.response.StuSubDayTimeDto">
 		SELECT id AS subject_id, name AS subject_name, sub_day, start_time, end_time
 		FROM pre_stu_sub_tb AS pss
 		LEFT JOIN subject_tb AS s

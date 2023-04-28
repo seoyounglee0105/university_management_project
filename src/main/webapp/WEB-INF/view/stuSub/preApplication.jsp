@@ -18,9 +18,6 @@
 	text-align: left !important;
 	padding-right: 20px !important;
 }
-.sub--filter {
-	margin-bottom: 50px;
-}
 
 .sub--filter form {
 	display: flex;
@@ -31,15 +28,15 @@
 	padding: 13px 13px 7px 10px;
 }
 
-.sub--filter input[type="number"]{
+.sub--filter input[type="number"] {
 	width: 57px;
- 	padding-left: 3px;
+	padding-left: 3px;
 }
 
-.sub--filter select[name="deptId"]{
+.sub--filter select[name="deptId"] {
 	width: 173px;
 }
- 
+
 .sub--filter label {
 	margin-right: 5px;
 }
@@ -52,7 +49,7 @@
 
 .sub--filter button {
 	background-color: gray;
-	padding: 2px 6px; 
+	padding: 2px 6px;
 	border: none;
 	border-radius: 5px;
 	color: white;
@@ -64,7 +61,7 @@
 }
 
 .sub--list--table td form button {
-	padding: 0px 4px; 
+	padding: 0px 4px;
 	border: none;
 	border-radius: 4px;
 	width: 100%;
@@ -73,7 +70,17 @@
 }
 
 .sub--list--button--row {
-	padding: 2px 2px!important;
+	padding: 2px 2px !important;
+}
+
+.preStuSubList--button {
+	padding: 5px 10px;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	background-color: gray;
+	font-size: 20px;
+	margin-right: 20px;
 }
 </style>
 
@@ -113,13 +120,13 @@
 					<td><a href="/stuSub/list">강의 시간표 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/preApplication" class="selected--menu">예비 수강신청</a></td>
+					<td><a href="/stuSub/preApplication" class="selected--menu">예비 수강 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/application">수강신청</a></td>
+					<td><a href="/stuSub/preAppList?type=1">수강 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/stuSub/appList">수강신청 내역 조회</a></td>
+					<td><a href="/stuSub/appList">수강 신청 내역 조회</a></td>
 				</tr>
 			</table>
 		</div>
@@ -127,50 +134,50 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>예비 수강신청 (정원 초과 가능)</h1>
+		<h1>예비 수강 신청</h1>
 		<div class="split--div"></div>
 		<!-- 여기에 내용 넣기 -->
-		<!-- 필터 및 검색 -->
-		<div class="sub--filter">
-			<form action="/stuSub/preApplication/Search" method="get">
-				<div>
-					<!-- 강의구분 콤보박스 -->
-					<label for="type">강의구분</label> 
-					<select name="type" id="type">
-						<option value="전체">전체</option>
-						<option value="전공">전공</option>
-						<option value="교양">교양</option>
-					</select>
-					<!-- 대상학과 콤보박스 -->
-					<label for="deptId">개설학과</label> 
-					<select name="deptId" id="deptId">
-						<option value="-1">전체</option>
-						<c:forEach var="dept" items="${deptList}">
-							<option value="${dept.id}">${dept.name}</option>
-						</c:forEach>
-					</select>
-					<!-- 강의 검색 -->
-					<label for="subName">강의명</label> 
-					<input type="text" name="name" list="subName">
-					<datalist id="subName">
-						<c:forEach var="subName" items="${subNameList}">
-							<option value="${subName}">
-						</c:forEach>
-					</datalist>
-					<!-- 검색 버튼 -->
-					<button type="submit">							
-						<ul class="d-flex justify-content-center" style="margin: 0;">
-							<li style="height: 24px; margin-right: 2px;">조회
-							<li style="height: 24px;"><span class="material-symbols-outlined" style="font-size: 18px; padding-top: 4px;">search</span>
-						</ul>
-					</button>
-				</div>
-			</form>
+		<div class="d-flex justify-content-between align-items-center" style="margin-bottom: 50px;">
+			<!-- 필터 및 검색 -->
+			<div class="sub--filter">
+				<form action="/stuSub/preApplication/Search" method="get">
+					<div>
+						<!-- 강의구분 콤보박스 -->
+						<label for="type">강의구분</label> <select name="type" id="type">
+							<option value="전체">전체</option>
+							<option value="전공">전공</option>
+							<option value="교양">교양</option>
+						</select>
+						<!-- 대상학과 콤보박스 -->
+						<label for="deptId">개설학과</label> <select name="deptId" id="deptId">
+							<option value="-1">전체</option>
+							<c:forEach var="dept" items="${deptList}">
+								<option value="${dept.id}">${dept.name}</option>
+							</c:forEach>
+						</select>
+						<!-- 강의 검색 -->
+						<label for="subName">강의명</label> <input type="text" name="name" list="subName">
+						<datalist id="subName">
+							<c:forEach var="subName" items="${subNameList}">
+								<option value="${subName}">
+							</c:forEach>
+						</datalist>
+						<!-- 검색 버튼 -->
+						<button type="submit">
+							<ul class="d-flex justify-content-center" style="margin: 0;">
+								<li style="height: 24px; margin-right: 2px;">조회
+								<li style="height: 24px;"><span class="material-symbols-outlined" style="font-size: 18px; padding-top: 4px;">search</span>
+							</ul>
+						</button>
+					</div>
+				</form>
+			</div>
+			<!-- 예비 수강 신청 내역으로 가기 -->
+			<a href="/stuSub/preAppList?type=0"><button class="preStuSubList--button">예비 수강 신청 내역</button></a>
 		</div>
-		
+
 		<h4>
-			<span style="font-weight: 600;">강의 목록</span>&nbsp;
-			<span style="color:gray; font-size:18px;">[총 ${subjectList.size()}건]</span>
+			<span style="font-weight: 600;">강의 목록</span>&nbsp; <span style="color: gray; font-size: 18px;">[총 ${subjectList.size()}건]</span>
 		</h4>
 		<table border="1" class="sub--list--table">
 			<thead>
@@ -183,7 +190,7 @@
 					<th>담당교수</th>
 					<th>학점</th>
 					<th>요일시간 (강의실)</th>
-					<th>현재인원</th>
+					<th>예비인원</th>
 					<th>정원</th>
 					<th>수강신청</th>
 				</tr>
@@ -199,28 +206,26 @@
 						<td class="sub--list--name">${subject.name}</td>
 						<td>${subject.professorName}</td>
 						<td>${subject.grades}</td>
-						<td>${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})</td>
+						<td>${subject.subDay}${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})</td>
 						<td>${subject.numOfStudent}</td>
 						<td>${subject.capacity}</td>
-						<td class="sub--list--button--row">
-							<c:choose>
+						<td class="sub--list--button--row"><c:choose>
 								<%-- 신청된 상태라면 --%>
 								<c:when test="${subject.status == true}">
-									<form action="/stuSub/deletePreApp/${subject.id}" method="post">
+									<form action="/stuSub/deletePreApp/${subject.id}?type=0" method="post">
 										<input type="hidden" name="_method" value="delete">
 										<button type="submit" onclick="return confirm('수강신청을 취소하시겠습니까?');" style="background-color: #a7a7a7;">취소</button>
 									</form>
 								</c:when>
-								
+
 								<%-- 신청되지 않은 상태라면 --%>
 								<c:otherwise>
-									<form action="/stuSub/insertPreApp/${subject.id}" method="post">
+									<form action="/stuSub/insertPreApp/${subject.id}?type=0" method="post">
 										<button type="submit" onclick="return confirm('해당 강의를 수강신청하시겠습니까?');" style="background-color: #548AC2;">신청</button>
 									</form>
 								</c:otherwise>
-								
-							</c:choose>
-						</td>
+
+							</c:choose></td>
 					</tr>
 				</c:forEach>
 			</tbody>

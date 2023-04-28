@@ -24,4 +24,50 @@
 		AND subject_id = #{subjectId}
 	</update>
 
+<!-- 수강신청 관련 -->
+	<select id="selectByStudentIdAndSubjectId" resultType="com.green.university.repository.model.StuSub">
+		SELECT ss.* 
+		FROM stu_sub_tb AS ss
+		LEFT JOIN subject_tb AS su
+		ON ss.subject_id = su.id
+		WHERE student_id = #{studentId} AND subject_id = #{subjectId}
+	</select>
+	
+	<select id="selectListByStudentIdAndSemester" resultType="com.green.university.dto.response.StuSubAppDto">
+		SELECT student_id, subject_id, su.name AS subject_name, p.name AS professor_name, grades, sub_day, start_time, end_time, num_of_student, capacity, room_id
+		FROM stu_sub_tb AS ss
+		LEFT JOIN subject_tb AS su
+		ON ss.subject_id = su.id
+        LEFT JOIN professor_tb AS p
+        ON su.professor_id = p.id
+		WHERE student_id = #{studentId} AND sub_year = #{subYear} AND semester = #{semester}
+	</select>
+	
+	<select id="selectSumGrades" resultType="com.green.university.dto.response.StuSubSumGradesDto">
+		SELECT student_id, SUM(grades) AS sum_grades
+		FROM stu_sub_tb AS ss
+		LEFT JOIN subject_tb AS su
+		ON ss.subject_id = su.id
+		WHERE sub_year = #{subYear} AND semester = #{semester} AND student_id = #{studentId}
+		GROUP BY student_id;
+	</select>
+	
+	<select id="selectDayTime" resultType="com.green.university.dto.response.StuSubDayTimeDto">
+		SELECT su.id AS subject_id, su.name AS subject_name, sub_day, start_time, end_time
+		FROM stu_sub_tb AS ss
+		LEFT JOIN subject_tb AS su
+		ON ss.subject_id = su.id
+		WHERE sub_year = #{subYear} AND semester = #{semester} AND student_id = #{studentId}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO stu_sub_tb (student_id, subject_id)
+		VALUES (#{studentId}, #{subjectId})
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM stu_sub_tb
+		WHERE student_id = #{studentId} AND subject_id = #{subjectId}
+	</delete>
+
 </mapper>

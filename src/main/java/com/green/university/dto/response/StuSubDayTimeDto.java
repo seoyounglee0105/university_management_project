@@ -6,7 +6,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class PreStuSubDayTimeDto {
+public class StuSubDayTimeDto {
 
 	private Integer subjectId;
 	private String subjectName;
