@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.green.university.dto.CreateStudentDto;
 import com.green.university.dto.UserUpdateDto;
+import com.green.university.dto.response.StudentInfoDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
 import com.green.university.repository.model.Student;
 import com.green.university.repository.model.User;
@@ -41,5 +42,7 @@ public interface StudentRepository {
 
 	// 유저 정보 업데이트
 	public int updateStudent(UserUpdateDto userUpdateDto);
+	// 학생 info id로 불러오기
+	public StudentInfoDto selectStudentInfoById(Integer id);
 
 }

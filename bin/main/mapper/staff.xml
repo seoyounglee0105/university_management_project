@@ -35,4 +35,10 @@
 		address = #{address}, tel = #{tel}, email = #{email}
 		WHERE id = #{userId}
 	</update>
+	
+	<select id="selectStaffById" resultType="com.green.university.repository.model.Staff">
+		SELECT *
+		FROM staff_tb
+		WHERE id = #{id}
+	</select>
 </mapper>

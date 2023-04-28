@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.green.university.dto.CreateStaffDto;
 import com.green.university.dto.UserUpdateDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
+import com.green.university.repository.model.Staff;
 import com.green.university.repository.model.User;
 
 /**
@@ -26,5 +27,8 @@ public interface StaffRepository {
 
 	// 유저정보 업데이트
 	public int updateStaff(UserUpdateDto userUpdateDto);
+	
+	// id로 staff 모델 불러오기
+	public Staff selectStaffById(Integer Id);
 
 }

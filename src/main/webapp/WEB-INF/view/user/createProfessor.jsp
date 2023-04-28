@@ -55,6 +55,15 @@ button{
 				<tr>
 					<td><a href="/professor/subject">교수 자기 강의 조회</a></td>
 				</tr>
+				<tr>
+					<td><a href="/info/student">학생 Info</a></td>
+				</tr>
+				<tr>
+					<td><a href="/info/staff">직원 Info</a></td>
+				</tr>
+				<tr>
+					<td><a href="/info/professor">교수 Info</a></td>
+				</tr>
 			</table>
 		</div>
 	</div>
