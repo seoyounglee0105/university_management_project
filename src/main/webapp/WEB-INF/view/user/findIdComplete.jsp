@@ -45,6 +45,11 @@
 	margin-top: 20px;
 	margin-left: 200px;
 }
+
+.section--content{
+	margin: 20px 50px;
+	text-align: center;
+}
 </style>
 </head>
 
@@ -57,10 +62,9 @@
 			<h2>아이디 찾기</h2>
 			<br>
 		</div>
-		<div>
-			가나다님의 아이디는<br> 
-			<span style="font-weight: bold;">123456789</span><br>
-			입니다.
+		<div class="section--content">
+			${name}님의 아이디는<br> 
+			<span style="font-weight: bold;">${id}</span>입니다.
 		</div>
 	</section>
 

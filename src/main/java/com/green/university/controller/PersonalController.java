@@ -229,21 +229,15 @@ public class PersonalController {
 	/**
 	 * 아이디 찾기 포스트
 	 * @param findIdFormDto
-	 * @return 아이디 표시 페이지
+	 * @return 찾은 아이디 표시 페이지
 	 */
 	@PostMapping("/find/id")
-	public String findIdProc(FindIdFormDto findIdFormDto) {
+	public String findIdProc(Model model, FindIdFormDto findIdFormDto) {
 		
-		
-		return "redirect:/find/id/complete";
-	}
-	
-	/**
-	 * 찾은 아이디 표시
-	 * @return 아이디 찾기 완료 페이지
-	 */
-	@GetMapping("/find/id/complete")
-	public String findIdComplete(Model model) {
+		Integer findId = userService.readIdByNameAndEmail(findIdFormDto);
+		System.out.println(findId);
+		model.addAttribute("id", findId);
+		model.addAttribute("name", findIdFormDto.getName());
 		
 		return "/user/findIdComplete";
 	}
@@ -264,20 +258,15 @@ public class PersonalController {
 	 * @return 비밀번호 표시 페이지
 	 */
 	@PostMapping("/find/password")
-	public String findPasswordProc(FindPasswordFormDto findPasswordFormDto) {
+	public String findPasswordProc(Model model, FindPasswordFormDto findPasswordFormDto) {
 		
-		return "redirect:/find/password/complete";
-	}
-	
-	/**
-	 * 찾은 비밀번호 표시
-	 * @return 비밀번호 찾기 완료 페이지
-	 */
-	@GetMapping("/find/password/complete")
-	public String findPassword(Model model) {
+		String password = userService.updateTempPassword(findPasswordFormDto);
+		model.addAttribute("name", findPasswordFormDto.getName());
+		model.addAttribute("password", password);
 		
 		return "/user/findPasswordComplete";
 	}
+	
 	
 	
 	@GetMapping("/error")

@@ -15,7 +15,8 @@
 		AND gender = #{gender}
 		AND address =#{address}
 		AND tel = #{tel}
-		AND email = #{email}
+		AND email
+		= #{email}
 
 	</select>
 
@@ -35,10 +36,25 @@
 		address = #{address}, tel = #{tel}, email = #{email}
 		WHERE id = #{userId}
 	</update>
-	
+
 	<select id="selectStaffById" resultType="com.green.university.repository.model.Staff">
 		SELECT *
 		FROM staff_tb
 		WHERE id = #{id}
+	</select>
+
+	<select id="selectIdByNameAndEmail" resultType="integer">
+		SELECT id
+		FROM staff_tb
+		WHERE name = #{name}
+		AND email = #{email}
+	</select>
+	
+	<select id="selectStaffByIdAndNameAndEmail" resultType="integer">
+		SELECT id
+		FROM staff_tb
+		WHERE id = #{id} 
+		AND name = #{name}
+		AND email = #{email}
 	</select>
 </mapper>
