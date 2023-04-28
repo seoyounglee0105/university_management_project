@@ -32,13 +32,27 @@ public class StuStatService {
 	@Transactional
 	public StuStat readCurrentStatus(Integer studentId) {
 
-		StuStat stuStatEntity = stuStatRepository.findByStudentIdOrderbyToDateDesc(studentId);
+		StuStat stuStatEntity = stuStatRepository.selectByStudentIdOrderbyIdDesc(studentId).get(0);
 		
 		return stuStatEntity;
 	}
 	
 	/**
-	 * 임시로 여기서 만듦, 나중에 StudentService로 옮기기
+	 * @param studentId
+	 * @return 해당 학생의 전체 학적 변동 내역 조회
+	 */
+	@Transactional
+	public List<StuStat> readStatusList(Integer studentId) {
+		
+		List<StuStat> stuStatList = stuStatRepository.selectByStudentIdOrderbyIdDesc(studentId);
+		
+		return stuStatList;
+	}
+	
+	
+	
+	/**
+	 * 모든 학생 id 리스트
 	 */
 	public List<Integer> readIdList() {
 		
@@ -72,7 +86,7 @@ public class StuStatService {
 	public void updateStatus(Integer studentId, String newStatus, String newToDate) {
 		
 		// 가장 최근의 기존 학적 상태 데이터의 id
-		Integer targetId = stuStatRepository.findByStudentIdOrderbyToDateDesc(studentId).getId();
+		Integer targetId = stuStatRepository.selectByStudentIdOrderbyIdDesc(studentId).get(0).getId();
 		
 		// 기존 학적 상태의 to_date를 now()로 변경
 		int updateRowCount = stuStatRepository.updateOldStatus(targetId);

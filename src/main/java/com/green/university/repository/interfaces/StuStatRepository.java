@@ -1,5 +1,7 @@
 package com.green.university.repository.interfaces;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,8 +14,8 @@ import com.green.university.repository.model.StuStat;
 @Mapper
 public interface StuStatRepository {
 
-	// 해당 학생의 현재 학적 상태 조회
-	public StuStat findByStudentIdOrderbyToDateDesc(Integer studentId);
+	// 해당 학생의 모든 학적 변동 내역 조회
+	public List<StuStat> selectByStudentIdOrderbyIdDesc(Integer studentId);
 	
 	// 학생의 학적 상태 생성
 	public int insert(@Param("studentId") Integer studentId, @Param("status") String status, @Param("toDate") String toDate);
