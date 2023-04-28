@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.university.dto.ChangePasswordDto;
+import com.green.university.dto.FindIdFormDto;
+import com.green.university.dto.FindPasswordFormDto;
 import com.green.university.dto.LoginDto;
 import com.green.university.dto.UserUpdateDto;
 import com.green.university.dto.response.PrincipalDto;
@@ -220,4 +222,68 @@ public class PersonalController {
 		model.addAttribute("professor", professor);
 		return "/user/professorInfo";
 	}
+	
+	/**
+	 * 아이디 찾기
+	 * @return 아이디 찾기 페이지
+	 */
+	@GetMapping("/find/id")
+	public String findId() {
+		
+		return "/user/findId";
+	}
+	
+	/**
+	 * 아이디 찾기 포스트
+	 * @param findIdFormDto
+	 * @return 아이디 표시 페이지
+	 */
+	@PostMapping("/find/id")
+	public String findIdProc(FindIdFormDto findIdFormDto) {
+		
+		
+		return "redirect:/find/id/complete";
+	}
+	
+	/**
+	 * 찾은 아이디 표시
+	 * @return 아이디 찾기 완료 페이지
+	 */
+	@GetMapping("/find/id/complete")
+	public String findIdComplete(Model model) {
+		
+		return "/user/findIdComplete";
+	}
+	
+	/**
+	 * 비밀번호 찾기
+	 * @return 아이디 찾기 페이지
+	 */
+	@GetMapping("/find/password")
+	public String findPassword() {
+		
+		return "/user/findPassword";
+	}
+	
+	/**
+	 * 비밀번호 찾기 포스트
+	 * @param findIdFormDto
+	 * @return 비밀번호 표시 페이지
+	 */
+	@PostMapping("/find/password")
+	public String findPasswordProc(FindPasswordFormDto findPasswordFormDto) {
+		
+		return "redirect:/find/password/complete";
+	}
+	
+	/**
+	 * 찾은 비밀번호 표시
+	 * @return 비밀번호 찾기 완료 페이지
+	 */
+	@GetMapping("/find/password/complete")
+	public String findPassword(Model model) {
+		
+		return "/user/findPasswordComplete";
+	}
+	
 }
