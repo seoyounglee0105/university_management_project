@@ -20,10 +20,10 @@ spring:
       max-file-size: 20MB
       max-request-size: 20MB      
   datasource: 
-    url: jdbc:h2:mem:testdb;MODE=MySQL
-    driver-class-name: org.h2.Driver
-    username: sa 
-    password: 
+    url: jdbc:mysql://localhost:3306/university_management?serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: asd1234
   sql: 
     init: # 초기 sql 파일 읽기 222222222222222222
       schema-locations: # 스키마 (테이블 생성 등)

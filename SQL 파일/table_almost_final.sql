@@ -1,3 +1,6 @@
+CREATE DATABASE university_management;
+use university_management;
+
 -- 단과대
 CREATE TABLE college_tb
 (
@@ -26,10 +29,10 @@ CREATE TABLE student_tb
    id INT PRIMARY KEY AUTO_INCREMENT COMMENT '학번',
    name VARCHAR (30) NOT NULL,
    birth_date DATE NOT NULL,
-   gender CHAR (2) NOT NULL COMMENT '남성/여성',
+   gender CHAR (2) NOT NULL COMMENT '남자: 남성, 여자: 여성',
    address VARCHAR (100) NOT NULL,
    tel VARCHAR (13) NOT NULL,
-   email VARCHAR (20) NOT NULL,
+   email VARCHAR (30) NOT NULL,
    dept_id INT NOT NULL COMMENT '학과',
    grade INT NOT NULL DEFAULT 1 COMMENT '학년',
    semester INT NOT NULL DEFAULT 1 COMMENT '학기',
@@ -47,7 +50,7 @@ CREATE TABLE staff_tb
    gender CHAR (1) NOT NULL COMMENT '남자: M, 여자: F',
    address VARCHAR (100) NOT NULL,
    tel VARCHAR (13) NOT NULL,
-   email VARCHAR (20) NOT NULL,
+   email VARCHAR (30) NOT NULL,
    hire_date DATE DEFAULT (current_date)
 );
 ALTER TABLE staff_tb AUTO_INCREMENT = 230001;
@@ -60,7 +63,7 @@ CREATE TABLE professor_tb
    gender CHAR (1) NOT NULL COMMENT '남자: M, 여자: F',
    address VARCHAR (100) NOT NULL,
    tel VARCHAR (13) NOT NULL,
-   email VARCHAR (20) NOT NULL,
+   email VARCHAR (30) NOT NULL,
    dept_id INT NOT NULL,
    hire_date DATE DEFAULT (current_date),
    FOREIGN KEY (dept_id) REFERENCES department_tb (id) ON DELETE CASCADE
@@ -117,9 +120,10 @@ CREATE TABLE pre_stu_sub_tb
 );
 -- 수강 내역
 CREATE TABLE stu_sub_tb(
-	id INT PRIMARY KEY AUTO_INCREMENT,
+	id INT AUTO_INCREMENT,
    student_id INT,
    subject_id INT,
+   primary key(student_id, subject_id),
    grade VARCHAR (2) COMMENT '신청 학점 (평점)',
    complete_grade INT COMMENT '이수 학점',
    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
@@ -192,7 +196,7 @@ CREATE TABLE notice_tb
    category VARCHAR (10) NOT NULL,
    title VARCHAR (255) NOT NULL,
    content TEXT NOT NULL,
-   created_time TIMESTAMP DEFAULT now (),
+   created_time TIMESTAMP DEFAULT now(),
    views INT NOT NULL DEFAULT 0 COMMENT '조회수'
 );
 -- 공지사항 첨부 파일
@@ -257,13 +261,13 @@ evaluation_id,
 student_id,
 subject_id
 ),
-qna_1 INT NOT NULL COMMENT '체크하는 질문',
-qna_2 INT NOT NULL,
-qna_3 INT NOT NULL,
-qna_4 INT NOT NULL,
-qna_5 INT NOT NULL,
-qna_6 INT NOT NULL,
-qna_7 INT NOT NULL,
+answer1 INT NOT NULL COMMENT '응답',
+answer2 INT NOT NULL,
+answer3 INT NOT NULL,
+answer4 INT NOT NULL,
+answer5 INT NOT NULL,
+answer6 INT NOT NULL,
+answer7 INT NOT NULL,
 improvements VARCHAR(255) COMMENT '건의사항',
 FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
 FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE
@@ -274,12 +278,12 @@ FOREIGN KEY (subject_id) REFERENCES subject_tb (id) ON DELETE CASCADE
 CREATE TABLE question_tb
 (
 id INT PRIMARY KEY AUTO_INCREMENT,
-que_1 VARCHAR(100) NOT NULL COMMENT '질문 내용',
-que_2 VARCHAR(100) NOT NULL,
-que_3 VARCHAR(100) NOT NULL,
-que_4 VARCHAR(100) NOT NULL,
-que_5 VARCHAR(100) NOT NULL,
-que_6 VARCHAR(100) NOT NULL,
-que_7 VARCHAR(100) NOT NULL,
+question1 VARCHAR(100) NOT NULL COMMENT '질문 내용',
+question2 VARCHAR(100) NOT NULL,
+question3 VARCHAR(100) NOT NULL,
+question4 VARCHAR(100) NOT NULL,
+question5 VARCHAR(100) NOT NULL,
+question6 VARCHAR(100) NOT NULL,
+question7 VARCHAR(100) NOT NULL,
 sug_content VARCHAR(255) NOT NULL
 );

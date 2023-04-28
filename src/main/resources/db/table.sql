@@ -26,7 +26,7 @@ CREATE TABLE student_tb
    id INT PRIMARY KEY AUTO_INCREMENT COMMENT '학번',
    name VARCHAR (30) NOT NULL,
    birth_date DATE NOT NULL,
-   gender CHAR (1) NOT NULL COMMENT '남자: M, 여자: F',
+   gender CHAR (2) NOT NULL COMMENT '남성/여성',
    address VARCHAR (100) NOT NULL,
    tel VARCHAR (13) NOT NULL,
    email VARCHAR (20) NOT NULL,
