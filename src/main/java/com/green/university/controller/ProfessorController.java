@@ -114,7 +114,7 @@ public class ProfessorController {
 	 * @param studentId
 	 * @return 출결 및 성적 기입 페이지
 	 */
-	@GetMapping("/detail/{subjectId}/{studentId}")
+	@GetMapping("/subject/{subjectId}/{studentId}")
 	public String updateStudentDetail(Model model, @PathVariable Integer subjectId, @PathVariable Integer studentId) {
 		
 		Student student = userService.readStudent(studentId);
@@ -125,7 +125,8 @@ public class ProfessorController {
 		return "/professor/updateStudentDetail";
 	}
 	
-	@PutMapping("/detail/{subjectId}/{studentId}")
+	
+	@PutMapping("/subject/{subjectId}/{studentId}")
 	public String updateStudentDetailProc(Model model, @PathVariable Integer subjectId, @PathVariable Integer studentId, UpdateStudentGradeDto updateStudentGradeDto) {
 		
 		

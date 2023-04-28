@@ -45,7 +45,7 @@ import com.green.university.utils.StuStatUtil;
  */
 
 @Controller
-@RequestMapping("/stuSub")
+@RequestMapping("/sugang")
 public class StuSubController {
 
 	@Autowired
@@ -74,7 +74,7 @@ public class StuSubController {
 	
 	
 	// 과목 조회 (현재 학기)
-	@GetMapping("/list")
+	@GetMapping("/subjectList")
 	public String readSubjectList(Model model) {
 
 		// 강의 리스트
@@ -98,7 +98,7 @@ public class StuSubController {
 	}
 	
 	// 전체 강의 목록에서 필터링
-	@GetMapping("/list/Search")
+	@GetMapping("/subjectList/search")
 	public String readSubjectListSearch(Model model, @Validated CurrentSemesterSubjectSearchFormDto currentSemesterSubjectSearchFormDto) {
 		
 		// 강의 리스트
@@ -125,7 +125,7 @@ public class StuSubController {
 	/**
 	 * @return 예비 수강 신청
 	 */
-	@GetMapping("/preApplication")
+	@GetMapping("/pre")
 	public String preStuSubApplication(Model model) {
 		
 		// 이번 학기에 재학 상태가 되지 않는 학생이라면 진입 불가
@@ -171,7 +171,8 @@ public class StuSubController {
 	/**
 	 * 예비 수강 신청 처리 (신청)
 	 */
-	@PostMapping("/insertPreApp/{subjectId}")
+
+	@PostMapping("/pre/{subjectId}")
 	public String insertPreStuSubAppProc(@PathVariable Integer subjectId, @RequestParam Integer type) {
 		
 		Integer studentId = ((PrincipalDto) session.getAttribute(Define.PRINCIPAL)).getId();
@@ -187,9 +188,10 @@ public class StuSubController {
 	/**
 	 * 예비 수강 신청 처리 (취소)
 	 */
-	@DeleteMapping("/deletePreApp/{subjectId}")
+
+	@DeleteMapping("/pre/{subjectId}")
 	public String deletePreStuSubAppProc(@PathVariable Integer subjectId, @RequestParam Integer type) {
-		
+	
 		Integer studentId = ((PrincipalDto) session.getAttribute(Define.PRINCIPAL)).getId();
 		preStuSubService.deletePreStuSub(studentId, subjectId);
 		
@@ -201,7 +203,7 @@ public class StuSubController {
 	}
 	
 	// 예비 수강 신청 강의 목록에서 필터링
-	@GetMapping("/preApplication/Search")
+	@GetMapping("/pre/search")
 	public String preStuSubApplicationSearch(Model model, @Validated CurrentSemesterSubjectSearchFormDto currentSemesterSubjectSearchFormDto) {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
@@ -283,7 +285,7 @@ public class StuSubController {
 	}
 	
 	// 수강 신청 강의 목록에서 필터링
-	@GetMapping("/application/Search")
+	@GetMapping("/application/search")
 	public String stuSubApplicationSearch(Model model, @Validated CurrentSemesterSubjectSearchFormDto currentSemesterSubjectSearchFormDto) {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
@@ -381,7 +383,7 @@ public class StuSubController {
 	/**
 	 * @return 수강 신청 내역
 	 */
-	@GetMapping("/appList")
+	@GetMapping("/list")
 	public String stuSubAppList(Model model) {
 	
 		// 이번 학기에 재학 상태가 되지 않는 학생이라면 진입 불가

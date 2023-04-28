@@ -102,7 +102,7 @@ public class BreakAppController {
 	/**
 	 * @return 휴복학 신청 내역 페이지 (학생용)
 	 */
-	@GetMapping("/appList")
+	@GetMapping("/list")
 	public String breakAppListByStudentId(Model model) {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
@@ -119,7 +119,7 @@ public class BreakAppController {
 	 * ++ 처리되지 않은 신청 내역이 있다면 메뉴에 띄우거나
 	 * 로그인 시 팝업으로 떴으면 함
 	 */
-	@GetMapping("/appListStaff")
+	@GetMapping("/list/staff")
 	public String breakAppListByState(Model model) {
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);

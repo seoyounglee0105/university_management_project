@@ -38,33 +38,40 @@ button{
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
+			 <c:choose>
+			 	<c:when test="${principal.userRole.equals(\"student\")}">
+					<tr>
+						<td><a href="/info/student" class="selected--menu">내 정보 조회</a></td>
+					</tr>
+				</c:when>
+			 	<c:when test="${principal.userRole.equals(\"professor\")}">
+					<tr>
+						<td><a href="/info/professor" class="selected--menu">내 정보 조회</a></td>
+					</tr>
+				</c:when>
+			 	<c:otherwise>
+					<tr>
+						<td><a href="/info/staff" class="selected--menu">내 정보 조회</a></td>
+					</tr>
+				</c:otherwise>
+			 </c:choose>
 				<tr>
-					<td><a href="/user/student">학생 ID 생성</a></td>
+					<td><a href="/password">비밀번호 변경</a></td>
 				</tr>
-				<tr>
-					<td><a href="/user/professor">교수 ID 생성</a></td>
-				</tr>
-				<tr>
-					<td><a href="/user/staff">직원 ID 생성</a></td>
-				</tr>
-				<tr>
-					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
-				</tr>
-				<tr>
-					<td><a href="#">패스워드 변경</a></td>
-				</tr>
-				<tr>
-					<td><a href="/professor/subject">교수 자기 강의 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/info/student">학생 Info</a></td>
-				</tr>
-				<tr>
-					<td><a href="/info/staff">직원 Info</a></td>
-				</tr>
-				<tr>
-					<td><a href="/info/professor">교수 Info</a></td>
-				</tr>
+				<c:if test="${principal.userRole.equals(\"student\")}">
+					<tr>
+						<td><a href="/break/application">휴학 신청</a></td>
+					</tr>
+					<tr>
+						<td><a href="/break/list">휴학 내역 조회</a></td>
+					</tr>
+					<tr>
+						<td><a href="/tuition/list">등록금 내역 조회</a></td>
+					</tr>
+					<tr>
+						<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
+					</tr>
+				</c:if>
 			</table>
 		</div>
 	</div>

@@ -47,7 +47,7 @@ public class PersonalController {
 	 * 
 	 * @return login.jsp
 	 */
-	@GetMapping("")
+	@GetMapping("/login")
 	public String login() {
 
 		return "/user/login";
@@ -66,7 +66,7 @@ public class PersonalController {
 		PrincipalDto principal = userService.login(loginDto);
 		session.setAttribute(Define.PRINCIPAL, principal);
 
-		return "redirect:/test";
+		return "redirect:/info/student";
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class PersonalController {
 	public String logout() {
 		session.invalidate();
 		
-		return "redirect:/";
+		return "redirect:/login";
 	}
 	
 	/**
@@ -286,4 +286,6 @@ public class PersonalController {
 		return "/user/findPasswordComplete";
 	}
 	
+	
+
 }

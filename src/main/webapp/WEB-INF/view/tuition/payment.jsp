@@ -46,37 +46,22 @@
 				<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/tuition/list">등록금 내역 조회</a></td>
+					<td><a href="/info/student" class="selected--menu">내 정보 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/payment" class="selected--menu">등록금 납부 고지서</a></td>
+					<td><a href="/password">비밀번호 변경</a></td>
 				</tr>
 				<tr>
 					<td><a href="/break/application">휴학 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/break/appList">휴학 내역 조회</a></td>
+					<td><a href="/break/list">휴학 내역 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/break/appListStaff">휴학 신청 처리(staff)</a></td>
+					<td><a href="/tuition/list">등록금 내역 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/create">고지서 생성(staff)</a></td>
-				</tr>
-				<tr>
-					<td><a href="/subject/list">전체 강의 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/stuSub/list">강의 시간표 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/stuSub/preApplication">예비 수강 신청</a></td>
-				</tr>
-				<tr>
-					<td><a href="/stuSub/preAppList?type=1">수강 신청</a></td>
-				</tr>
-				<tr>
-					<td><a href="/stuSub/appList">수강 신청 내역 조회</a></td>
+					<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
 				</tr>
 			</table>
 				</div>

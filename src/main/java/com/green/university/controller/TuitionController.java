@@ -137,7 +137,7 @@ public class TuitionController {
 	/**
 	 * 등록금 납부 고지서 생성
 	 */
-	@GetMapping("/createTui")
+	@GetMapping("/bill")
 	public String CreateTuiProc(Model model) {
 		
 		List<Integer> studentIdList = stuStatService.readIdList();

@@ -44,7 +44,7 @@ public class GradeController {
 	 * 
 	 * @return 성적조회
 	 */
-	@GetMapping("/thisgrade")
+	@GetMapping("/thisSemester")
 	public String grade(Model model) {
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		
@@ -71,7 +71,7 @@ public class GradeController {
 	 * @param 
 	 * @return 학기별 성적조회
 	 */
-	@GetMapping("/semetergrade")
+	@GetMapping("/semester")
 	public String thisgrade(Model model) {
 		
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
@@ -96,7 +96,7 @@ public class GradeController {
 	 *  
 	 * @return
 	 */
-	@PostMapping("/check")
+	@PostMapping("/read")
 	public String select(Model model, HttpServletRequest httpServletRequest) {
 		
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
@@ -126,7 +126,7 @@ public class GradeController {
 	 * @param 
 	 * @return 토탈 누계성적 조회
 	 */
-	@GetMapping("totalgrade")
+	@GetMapping("total")
 	public String totalgrade(Model model) {
 		
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);

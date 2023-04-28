@@ -99,17 +99,6 @@ public class UserController {
 		return "redirect:/user/student";
 	}
 	
-	/**
-	 * @author 서영
-	 * 학적 변동 페이지 (내 정보 조회에 합쳐서 보여줄지 고민)
-	 */
-	@GetMapping("/stuStat")
-	public String readStuStat() {
-		
-		
-		return "/user/stuStat";
-	}
-	
 	
 
 }

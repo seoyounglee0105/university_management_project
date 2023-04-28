@@ -6,7 +6,12 @@ server:
       force: true
 
 spring: 
+  web:
+    resources:
+      add-mappings: false
   mvc:
+    throw-exception-if-no-handler-found: true
+    dispatch-options-request: false
     view:
       prefix: /WEB-INF/view/ # jsp 파일 경로
       suffix: .jsp # 확장자

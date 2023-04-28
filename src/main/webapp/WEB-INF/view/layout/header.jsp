@@ -18,31 +18,53 @@
 </style>
 </head>
 <body>
-		<header class="d-flex flex-column">
-			<div class="header--top">
-				<ul>
-					<!-- todo 삭제 -->
-					<li style="margin-right: 20px;"><a href="/">임시 로그인</a>
-					<li class="material--li"><span class="material-symbols-outlined">account_circle</span>
-					<li> ${principal.name} 님 (${principal.id})
-					<li style="margin: 0 15px;">ㅣ
-					<li class="material--li"><span style="color: #9BD2EC;" class="material-symbols-outlined">logout</span>
-					<li><a href="/logout">로그아웃</a>
-				</ul>
-			</div>
+	<header class="d-flex flex-column">
+		<div class="header--top">
+			<ul>
+				<!-- todo 삭제 -->
+				<li style="margin-right: 20px;"><a href="/">임시 로그인</a>
+				<li class="material--li"><span class="material-symbols-outlined">account_circle</span>
+				<li>${principal.name}님(${principal.id})
+				<li style="margin: 0 15px;">ㅣ
+				<li class="material--li"><span style="color: #9BD2EC;" class="material-symbols-outlined">logout</span>
+				<li><a href="/logout">로그아웃</a>
+			</ul>
+		</div>
 
-			<nav class="main--menu">
-				<a href="#"><img class="logo" alt="" src="/images/logo.png"></a>
-				<!-- userRole에 따라 메뉴 다르게 표시 -->
-				<ul>
-					<li><a href="#">홈</a>
-					<li><a href="/tuition/list">서영</a>
-					<li><a href="/user/student">지현</a>
-					<li><a href="/admin/college">성희</a>
+		<nav class="main--menu">
+			<a href="#"><img class="logo" alt="" src="/images/logo.png"></a>
+			<!-- userRole에 따라 메뉴 다르게 표시 -->
+			<c:choose>
+				<c:when test="${principal.userRole.equals(\"student\")}">
+					<ul>
+						<li><a href="/layout/main">홈</a>
+						<li><a href="/info/student">MY</a>
+						<li><a href="/subject/list">수업</a>
+						<li><a href="/sugang/subjectList">수강신청</a>
+						<li><a href="/grade/thisSemester">성적조회</a>
+						<li><a href="/notice">학사정보</a>
+					</ul>
+				</c:when>
 
-					<li><a href="/grade/thisgrade">용림</a>
-					<li><a href="#">메뉴5</a>
+				<c:when test="${principal.userRole.equals(\"professor\")}">
+					<ul>
+						<li><a href="/layout/main">홈</a>
+						<li><a href="/info/professor">MY</a>
+						<li><a href="/subject/list">수업</a>
+						<li><a href="/notice">학사정보</a>
+					</ul>
+				</c:when>
 
-				</ul>
-			</nav>
-		</header>
+				<c:otherwise>
+					<ul>
+						<li><a href="/layout/main">홈</a>
+						<li><a href="/info/staff">MY</a>
+						<li><a href="/user/student">학사관리</a>
+						<li><a href="/admin/college">등록</a>
+						<li><a href="/notice">학사정보</a>
+					</ul>
+				</c:otherwise>
+			</c:choose>
+
+		</nav>
+	</header>
