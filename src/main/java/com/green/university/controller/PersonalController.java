@@ -105,11 +105,7 @@ public class PersonalController {
 		
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		// 패스워드 인코더 적용 후
-//		if(!passwordEncoder.matches(password, principal.getPassword())) {
-//			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
-//		}
-		// 패스워드 인코더 적용 전
-		if(!password.equals(principal.getPassword())) {
+		if(!passwordEncoder.matches(password, principal.getPassword())) {
 			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
 		
@@ -155,17 +151,14 @@ public class PersonalController {
 
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		// 패스워드 인코더 적용 후
-//		if(!passwordEncoder.matches(password, principal.getPassword())) {
-//			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
-//		}
-		// 패스워드 인코더 적용 전
-		if (!changePasswordDto.getBeforePassword().equals(principal.getPassword())) {
+		if(!passwordEncoder.matches(changePasswordDto.getBeforePassword(), principal.getPassword())) {
 			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
 		if(!changePasswordDto.getAfterPassword().equals(changePasswordDto.getPasswordCheck())) {
 			throw new UnAuthorizedException("변경할 비밀번호와 비밀번호 확인은 같아야합니다.", HttpStatus.BAD_REQUEST);
 		}
 		changePasswordDto.setId(principal.getId());
+		changePasswordDto.setAfterPassword(passwordEncoder.encode(changePasswordDto.getAfterPassword()));
 		userService.updatePassword(changePasswordDto);
 
 		return "redirect:/password";
@@ -287,5 +280,8 @@ public class PersonalController {
 	}
 	
 	
-
+	@GetMapping("/error")
+	public String handleError() {
+		return "/error/errorPage";
+	}
 }

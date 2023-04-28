@@ -64,8 +64,7 @@ public class UserService {
 		User user = new User();
 
 		user.setId(staffId);
-		// user.setPassword(passwordEncoder.encode(staffId + ""));
-		user.setPassword(staffId + ""); // 삭제 예정
+		user.setPassword(passwordEncoder.encode(staffId + ""));
 		user.setUserRole("staff");
 
 		resultCountRow = userRepository.insertToUser(user);
@@ -93,8 +92,7 @@ public class UserService {
 
 		User user = new User();
 		user.setId(professorId);
-		// user.setPassword(passwordEncoder.encode(professorId + ""));
-		user.setPassword(professorId + ""); // 삭제 예정
+		user.setPassword(passwordEncoder.encode(professorId + ""));
 		user.setUserRole("professor");
 
 		resultCountRow = userRepository.insertToUser(user);
@@ -124,8 +122,7 @@ public class UserService {
 
 		User user = new User();
 		user.setId(studentId);
-		// user.setPassword(passwordEncoder.encode(studentId + ""));
-		user.setPassword(studentId + ""); // 삭제 예정
+		user.setPassword(passwordEncoder.encode(studentId + ""));
 		user.setUserRole("student");
 
 		resultCountRow = userRepository.insertToUser(user);
@@ -143,13 +140,10 @@ public class UserService {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-//		if(!passwordEncoder.matches(loginDto.getPassword(), userEntity.getPassword())) {
-//			throw new CustomRestfullException(Define.WRONG_PASSWORD , HttpStatus.BAD_REQUEST);
-//		}
-
-		if (!loginDto.getPassword().equals(userEntity.getPassword())) {
-			throw new CustomRestfullException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
+		if(!passwordEncoder.matches(loginDto.getPassword(), userEntity.getPassword())) {
+			throw new CustomRestfullException(Define.WRONG_PASSWORD , HttpStatus.BAD_REQUEST);
 		}
+
 
 		return userEntity;
 	}

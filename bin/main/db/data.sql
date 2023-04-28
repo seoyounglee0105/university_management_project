@@ -186,37 +186,37 @@ VALUES
 INSERT INTO user_tb VALUES
 (
    2018000001,
-   '2018000001',
+   '$2a$10$fXVPmpG.D9iVDC/Clj9MU.Jp.uQDyGu4QflOJydT/ChDT90.rdtUu',
    'student'
 ),
 
 (
    2018000002,
-   '2018000002',
+   '$2a$10$fXVPmpG.D9iVDC/Clj9MU.Jp.uQDyGu4QflOJydT/ChDT90.rdtUu',
    'student'
 ),
 
 (
    230001,
-   '230001',
+   '$2a$10$fXVPmpG.D9iVDC/Clj9MU.Jp.uQDyGu4QflOJydT/ChDT90.rdtUu',
    'staff'
 ),
 
 (
    230002,
-   '230002',
+   '$2a$10$fXVPmpG.D9iVDC/Clj9MU.Jp.uQDyGu4QflOJydT/ChDT90.rdtUu',
    'staff'
 ),
 
 (
    23000001,
-   '23000001',
+   '$2a$10$fXVPmpG.D9iVDC/Clj9MU.Jp.uQDyGu4QflOJydT/ChDT90.rdtUu',
    'professor'
 ),
 
 (
    23000002,
-   '23000002',
+   '$2a$10$fXVPmpG.D9iVDC/Clj9MU.Jp.uQDyGu4QflOJydT/ChDT90.rdtUu',
    'professor'
 );
 INSERT INTO grade_tb
