@@ -38,9 +38,11 @@ public class EvaluationController {
 	@GetMapping("")
 	public String evaluation(Model model, Integer subjectId) {
 		
+		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		QuestionDto dto = questionService.readQuestion();
 		model.addAttribute("subjectId", subjectId);
 		model.addAttribute("dto",dto);
+		model.addAttribute("principal",principal);
 		return "/grade/evaluation"; 
 	}
 	

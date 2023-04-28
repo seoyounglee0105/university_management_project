@@ -11,6 +11,9 @@
 .tuition--table td {
 	padding: 1px 5px;
 }
+.radiocheck li{
+list-style: none;
+}
 </style>
 <body>
 	<c:if test="${type == 1}">
@@ -23,88 +26,149 @@
 		<br><br>
 		<form action="/evaluation/insert/${subjectId}" method="post">
 		<br> <br>
-		<table border="1" class="tuition--table">
-			<thead>
-				<tr>
-					<th></th>
-					<th>매우 그렇다</th>
-					<th>그런 편이다</th>
-					<th>보통이다</th>
-					<th>그렇지 않다</th>
-					<th>전혀 그렇지 않다</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>강의평가</td>
-					<td>5</td>
-					<td>4</td>
-					<td>3</td>
-					<td>2</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>${dto.que1}</td>
-					<td><input type="radio" name ="qna1" value="5"></td>
-					<td><input type="radio" name ="qna1" value="4"></td>
-					<td><input type="radio" name ="qna1" value="3"></td>
-					<td><input type="radio" name ="qna1" value="2"></td>
-					<td><input type="radio" name ="qna1" value="1"></td>
-				</tr>
-				<tr>
-					<td>${dto.que2}</td>
-					<td><input type="radio" name ="qna2" value="5"></td>
-					<td><input type="radio" name ="qna2" value="4"></td>
-					<td><input type="radio" name ="qna2" value="3"></td>
-					<td><input type="radio" name ="qna2" value="2"></td>
-					<td><input type="radio" name ="qna2" value="1"></td>
-				</tr>
-				<tr>
-					<td>${dto.que3}</td>
-					<td><input type="radio" name ="qna3" value="5"></td>
-					<td><input type="radio" name ="qna3" value="4"></td>
-					<td><input type="radio" name ="qna3" value="3"></td>
-					<td><input type="radio" name ="qna3" value="2"></td>
-					<td><input type="radio" name ="qna3" value="1"></td>
-				</tr>
-				<tr>
-					<td>${dto.que4}</td>
-					<td><input type="radio" name ="qna4" value="5"></td>
-					<td><input type="radio" name ="qna4" value="4"></td>
-					<td><input type="radio" name ="qna4" value="3"></td>
-					<td><input type="radio" name ="qna4" value="2"></td>
-					<td><input type="radio" name ="qna4" value="1"></td>
-				</tr>
-				<tr>
-					<td>${dto.que5}</td>
-					<td><input type="radio" name ="qna5" value="5"></td>
-					<td><input type="radio" name ="qna5" value="4"></td>
-					<td><input type="radio" name ="qna5" value="3"></td>
-					<td><input type="radio" name ="qna5" value="2"></td>
-					<td><input type="radio" name ="qna5" value="1"></td>
-				</tr>
-				<tr>
-					<td>${dto.que6}</td>
-					<td><input type="radio" name ="qna6" value="5"></td>
-					<td><input type="radio" name ="qna6" value="4"></td>
-					<td><input type="radio" name ="qna6" value="3"></td>
-					<td><input type="radio" name ="qna6" value="2"></td>
-					<td><input type="radio" name ="qna6" value="1"></td>
-				</tr>
-				<tr>
-					<td>${dto.que7}</td>
-					<td><input type="radio" name ="qna7" value="5"></td>
-					<td><input type="radio" name ="qna7" value="4"></td>
-					<td><input type="radio" name ="qna7" value="3"></td>
-					<td><input type="radio" name ="qna7" value="2"></td>
-					<td><input type="radio" name ="qna7" value="1"></td>
-				</tr>
-				<tr>
-					<td>${dto.sugContent}</td>
-					<td colspan="5"><textarea cols="130" rows="10" name="improvements"> </textarea></td>
-				</tr>
-			</tbody>
-		</table>
+					<div>${principal.name}</div>
+					<div></div>
+		
+					<ul class="radiocheck">
+					<li>1.&nbsp;${dto.que1}</li>
+					<li>&nbsp;</li>
+					<li>
+					<input type="radio" name ="qna1" value="5">매우 만족
+					</li>
+					<li>
+					<input type="radio" name ="qna1" value="4">만족
+					</li>
+					<li>
+					<input type="radio" name ="qna1" value="3">보통
+					</li>
+					<li>
+					<input type="radio" name ="qna1" value="2">그렇지 않다
+					</li>
+					<li>
+					<input type="radio" name ="qna1" value="1">전혀 그렇지 않다.
+					</li>
+					</ul>
+					<ul class="radiocheck">
+					<li>2.&nbsp;${dto.que2}</li>
+					<li>&nbsp;</li>
+					<li>
+					<input type="radio" name ="qna2" value="5">매우 만족
+					</li>
+					<li>
+					<input type="radio" name ="qna2" value="4">만족
+					</li>
+					<li>
+					<input type="radio" name ="qna2" value="3">보통
+					</li>
+					<li>
+					<input type="radio" name ="qna2" value="2">그렇지 않다
+					</li>
+					<li>
+					<input type="radio" name ="qna2" value="1">전혀 그렇지 않다.
+					</li>
+					</ul>
+					<ul class="radiocheck">
+					<li>3.&nbsp;${dto.que3}</li>
+					<li>&nbsp;</li>
+					<li>
+					<input type="radio" name ="qna3" value="5">매우 만족
+					</li>
+					<li>
+					<input type="radio" name ="qna3" value="4">만족
+					</li>
+					<li>
+					<input type="radio" name ="qna3" value="3">보통
+					</li>
+					<li>
+					<input type="radio" name ="qna3" value="2">그렇지 않다
+					</li>
+					<li>
+					<input type="radio" name ="qna3" value="1">전혀 그렇지 않다.
+					</li>
+					</ul>
+						<ul class="radiocheck">
+					<li>4.&nbsp;${dto.que4}</li>
+					<li>&nbsp;</li>
+					<li>
+					<input type="radio" name ="qna4" value="5">매우 만족
+					</li>
+					<li>
+					<input type="radio" name ="qna4" value="4">만족
+					</li>
+					<li>
+					<input type="radio" name ="qna4" value="3">보통
+					</li>
+					<li>
+					<input type="radio" name ="qna4" value="2">그렇지 않다
+					</li>
+					<li>
+					<input type="radio" name ="qna4" value="1">전혀 그렇지 않다.
+					</li>
+					</ul>
+					<ul class="radiocheck">
+					<li>5.&nbsp;${dto.que5}</li>
+					<li>&nbsp;</li>
+					<li>
+					<input type="radio" name ="qna5" value="5">매우 만족
+					</li>
+					<li>
+					<input type="radio" name ="qna5" value="4">만족
+					</li>
+					<li>
+					<input type="radio" name ="qna5" value="3">보통
+					</li>
+					<li>
+					<input type="radio" name ="qna5" value="2">그렇지 않다
+					</li>
+					<li>
+					<input type="radio" name ="qna5" value="1">전혀 그렇지 않다.
+					</li>
+					</ul>
+					<ul class="radiocheck">
+					<li>6.&nbsp;${dto.que6}</li>
+					<li>&nbsp;</li>
+					<li>
+					<input type="radio" name ="qna6" value="5">매우 만족
+					</li>
+					<li>
+					<input type="radio" name ="qna6" value="4">만족
+					</li>
+					<li>
+					<input type="radio" name ="qna6" value="3">보통
+					</li>
+					<li>
+					<input type="radio" name ="qna6" value="2">그렇지 않다
+					</li>
+					<li>
+					<input type="radio" name ="qna6" value="1">전혀 그렇지 않다.
+					</li>
+					</ul>
+					<ul class="radiocheck">
+					<li>7.&nbsp;${dto.que7}</li>
+					<li>&nbsp;</li>
+					<li>
+					<input type="radio" name ="qna7" value="5">매우 만족
+					</li>
+					<li>
+					<input type="radio" name ="qna7" value="4">만족
+					</li>
+					<li>
+					<input type="radio" name ="qna7" value="3">보통
+					</li>
+					<li>
+					<input type="radio" name ="qna7" value="2">그렇지 않다
+					</li>
+					<li>
+					<input type="radio" name ="qna7" value="1">전혀 그렇지 않다.
+					</li>
+					</ul>
+					<ul class="radiocheck">
+					<li>${dto.sugContent}</li>
+					<li>&nbsp;</li>
+					<li><textarea cols="130" rows="10" name="improvements"> </textarea></li>
+					</ul>
+					
+					
 		<input type="submit" value="제출하기">
 		</form>		
 	</main>
