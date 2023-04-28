@@ -10,21 +10,35 @@ form{
 	
 }
 
+.input--table {
+	margin: 10px;
+	width: 900px;
+}
+.input--table th {
+	text-align: center;
+}
+
+.col1{
+	width: 15%;
+}
+.col2{
+	width: 35%;
+}
+.col3{
+	width: 15%;
+}
+.col4{
+	width: 35%;
+}
+
 .input--table td {
 	padding: 5px 10px;
 }
 
-button{
-	padding: 8px 20px;
-	border: none;
-	border-radius: 5px;
-	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-	margin-top: 20px;
-} 
-
-.button-td{
-	text-align: center;
+.stat--table {
+	width: 1000px;
 }
+
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -51,7 +65,7 @@ button{
 					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">패스워드 변경</a></td>
+					<td><a href="/password">비밀번호 변경</a></td>
 				</tr>
 				<tr>
 					<td><a href="/professor/subject">교수 자기 강의 조회</a></td>
@@ -71,32 +85,49 @@ button{
 
 	<!-- 메인 div -->
 	<main>
-		<h1>비밀번호 변경</h1>
+		<h1>My Info</h1>
 		<div class="split--div"></div>
-		<form action="/password" method="post">
-			<input type="hidden" name="_method" value="put"/>
-			<table class="input--table">
-				
+			<table border="1" class="input--table" >
+			<colgroup>
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+			</colgroup>
 				<tr>
-					<td><label for="beforePassword">현재 비밀번호 입력</label></td>
-					<td><input type="password" name="beforePassword" id="beforePassword"></td>
-				</tr>
-				<tr><td></td></tr>
-				<tr>
-					<td><label for="afterPassword">변경할 비밀번호</label></td>
-					<td><input type="password" name="afterPassword" id="afterPassword"></td>
-				</tr>
-				<tr>
-					<td><label for="passwordCheck">비밀번호 확인</label></td>
-					<td><input type="password" name="passwordCheck" id="passwordCheck"></td>
-				</tr>
-				<tr>
-					<td colspan="2" class="button-td">
-						<button type="submit">입력</button>
-					</td>
+					<th>ID</th>
+					<td>${professor.id}</td>
+					<th>소속</th>
+					<td>${professor.collegeName} ${professor.deptName}</td>
 				</tr>
 			</table>
-		</form>
+			<table border="1" class="input--table" >
+			<colgroup>
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+			</colgroup>
+				<tr>
+					<th>성명</th>
+					<td>${professor.name}</td>
+					<th>생년월일</th>
+					<td>${professor.birthDate}</td>
+				</tr>
+				<tr>
+					<th>성별</th>
+					<td>${professor.gender}</td>
+					<th>주소</th>
+					<td>${professor.address}</td>
+				</tr>
+				<tr>
+					<th>연락처</th>
+					<td>${professor.tel}</td>
+					<th>email</th>
+					<td>${professor.email}</td>
+				</tr>
+			</table>
+			
 	</main>
 </div>
 

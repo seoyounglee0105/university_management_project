@@ -7,9 +7,9 @@
 		INSERT INTO professor_tb (name, birth_date, gender, address, tel, dept_id, email)
 		VALUES (#{name}, #{birthDate}, #{gender}, #{address}, #{tel}, #{deptId}, #{email})
 	</insert>
-	
+
 	<select id="selectIdByCreateProfessorDto" resultType="integer">
-		SELECT id FROM professor_tb 
+		SELECT id FROM professor_tb
 		WHERE name = #{name}
 		AND birth_date = #{birthDate}
 		AND gender = #{gender}
@@ -17,20 +17,35 @@
 		AND tel = #{tel}
 		AND dept_id = #{deptId}
 		AND email = #{email}
-		
+
 	</select>
-	
-	
-	
+
 	<select id="selectByUserId" resultType="com.green.university.dto.response.UserInfoForUpdateDto">
 		SELECT address, tel, email
 		FROM professor_tb
 		WHERE id = #{userId}
 	</select>
-	
+
 	<update id="updateProfessor">
 		UPDATE professor_tb SET
 		address = #{address}, tel = #{tel}, email = #{email}
 		WHERE id = #{userId}
 	</update>
+
+	<select id="selectProfessorById" resultType="com.green.university.repository.model.Professor">
+		SELECT *
+		FROM professor_tb
+		WHERE id = #{id}
+	</select>
+
+	<select id="selectProfessorInfoById" resultType="com.green.university.dto.response.ProfessorInfoDto">
+		SELECT p.id, p.name, p.birth_date, p.gender, p.address, p.tel, p.email, d.name AS dept_name, c.name AS college_name
+		FROM professor_tb AS p
+		LEFT JOIN department_tb AS d
+		ON p.dept_id = d.id
+		LEFT JOIN college_tb AS c
+		ON d.college_id = c.id
+		WHERE p.id = #{id};
+	</select>
+
 </mapper>

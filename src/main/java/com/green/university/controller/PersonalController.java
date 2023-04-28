@@ -5,7 +5,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +17,11 @@ import com.green.university.dto.ChangePasswordDto;
 import com.green.university.dto.LoginDto;
 import com.green.university.dto.UserUpdateDto;
 import com.green.university.dto.response.PrincipalDto;
+import com.green.university.dto.response.ProfessorInfoDto;
+import com.green.university.dto.response.StudentInfoDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
 import com.green.university.handler.exception.UnAuthorizedException;
-import com.green.university.repository.model.User;
+import com.green.university.repository.model.Staff;
 import com.green.university.service.UserService;
 import com.green.university.utils.Define;
 
@@ -78,13 +79,13 @@ public class PersonalController {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		UserInfoForUpdateDto userInfoForUpdateDto = null;
 		if ("staff".equals(principal.getUserRole())) {
-			userInfoForUpdateDto = userService.readStaffInfo(principal.getId());
+			userInfoForUpdateDto = userService.readStaffInfoForUpdate(principal.getId());
 		}
 		if ("student".equals(principal.getUserRole())) {
-			userInfoForUpdateDto = userService.readStudentInfo(principal.getId());
+			userInfoForUpdateDto = userService.readStudentInfoForUpdate(principal.getId());
 		}
 		if ("professor".equals(principal.getUserRole())) {
-			userInfoForUpdateDto = userService.readProfessorInfo(principal.getId());
+			userInfoForUpdateDto = userService.readProfessorInfoForUpdate(principal.getId());
 		}
 		model.addAttribute("userInfo", userInfoForUpdateDto);
 
@@ -178,5 +179,45 @@ public class PersonalController {
 		
 		return "redirect:/";
 	}
-
+	
+	/**
+	 * 학생 정보 조회
+	 * @param model
+	 * @return 학생 정보 조회 페이지
+	 */
+	@GetMapping("/info/student")
+	public String readStudentInfo(Model model) {
+		
+		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+		StudentInfoDto student = userService.readStudentInfo(principal.getId());
+		model.addAttribute("student", student);
+		
+		return "/user/studentInfo";
+	}
+	/**
+	 * 직원 정보 조회
+	 * @param model
+	 * @return 직원 정보조회 페이지
+	 */
+	@GetMapping("/info/staff")
+	public String readStaffInfo(Model model) {
+		
+		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+		Staff staff = userService.readStaff(principal.getId());
+		model.addAttribute("staff", staff);
+		
+		return "/user/staffInfo";
+	}
+	/**
+	 * 교수 정보 조회
+	 * @param model
+	 * @return 교수 정보 조회 페이지
+	 */
+	@GetMapping("/info/professor")
+	public String readProfessorInfo(Model model) {
+		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+		ProfessorInfoDto professor = userService.readProfessorInfo(principal.getId());
+		model.addAttribute("professor", professor);
+		return "/user/professorInfo";
+	}
 }
