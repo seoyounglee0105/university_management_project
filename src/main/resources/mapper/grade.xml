@@ -5,7 +5,7 @@
 <mapper namespace="com.green.university.repository.interfaces.GradeRespository">
 
 <select id="findByStudentIdAndsemester" resultType="com.green.university.dto.response.GradeDto">
-SELECT su.sub_year, su.semester, st.subject_id, su.name,pr.name, su.type,gr.grade, su.grades, RANK() OVER(ORDER BY gr.grade_value DESC) 석차
+SELECT su.sub_year, su.semester, st.subject_id, su.name,pr.name, su.type,gr.grade, su.grades, RANK() OVER(ORDER BY gr.grade_value DESC) 석차, ev.evaluation_id
 FROM stu_sub_tb AS st
 INNER JOIN subject_tb AS su
 ON st.subject_id = su.id
@@ -15,6 +15,8 @@ INNER JOIN grade_tb AS gr
 ON st.grade = gr.grade
 INNER JOIN student_tb AS stud
 on st.student_id = stud.id
+LEFT JOIN evaluation AS ev
+ON st.subject_id = ev.subject_id
 WHERE st.student_id = #{studentId} AND 	su.semester = #{semester} AND su.sub_year = #{subYear};
 </select>
 

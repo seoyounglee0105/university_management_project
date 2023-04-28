@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.green.university.dto.EvaluationFormDto;
 import com.green.university.dto.response.GradeDto;
 import com.green.university.dto.response.MyGradeDto;
 import com.green.university.dto.response.PrincipalDto;
@@ -38,9 +37,6 @@ public class GradeController {
 	@Autowired
 	private GradeService gradeService;
 	
-	@Autowired
-	private EvaluationService evaluationService;
-	
 	
 	
 	
@@ -50,23 +46,22 @@ public class GradeController {
 	 */
 	@GetMapping("/thisgrade")
 	public String grade(Model model) {
-		
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		
 		//내가 수강 신청한 연도가 있는지 검사할려고 추가한 기능
 		List<GradeDto> yearList = gradeService.readSubYear(principal.getId());
 		
 		model.addAttribute("yearList",yearList);
-		System.out.println("111111111");
 		if (yearList.size() != 0) {
+			// 금학기 성적조회 기능
 			List<GradeDto> gradeList = gradeService.readStuSubList(principal.getId());
 			model.addAttribute("gradeList",gradeList);
+			System.out.println(gradeList.toString());
+			// 누계 성적 조회
 			MyGradeDto mygradeList = gradeService.readSumAndAverageByGrade(principal.getId());
 			model.addAttribute("mygrade", mygradeList);
+			
 		}
-		Evaluation dto = evaluationService.readEvaluationByStudentIdAndSubjectId(principal.getId());
-		System.out.println(dto);
-		// 금학기 성적조회 기능
 		return "grade/thisgrade";
 	}
 	

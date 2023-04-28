@@ -4,13 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.hibernate.validator.constraints.ParameterScriptAssert;
 
 import com.green.university.dto.response.GradeDto;
 import com.green.university.dto.response.GradeForScholarshipDto;
-import com.green.university.dto.response.LuationCheckDto;
 import com.green.university.dto.response.MyGradeDto;
-import com.green.university.repository.model.StuSub;
 
 /**
  * 
