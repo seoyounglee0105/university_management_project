@@ -60,7 +60,7 @@ CREATE TABLE professor_tb
    id INT PRIMARY KEY AUTO_INCREMENT,
    name VARCHAR (30) NOT NULL,
    birth_date DATE NOT NULL,
-   gender CHAR (1) NOT NULL COMMENT '남자: M, 여자: F',
+   gender CHAR (1) NOT NULL COMMENT '남자: 남성, 여자: 여성',
    address VARCHAR (100) NOT NULL,
    tel VARCHAR (13) NOT NULL,
    email VARCHAR (30) NOT NULL,
@@ -120,10 +120,9 @@ CREATE TABLE pre_stu_sub_tb
 );
 -- 수강 내역
 CREATE TABLE stu_sub_tb(
-	id INT AUTO_INCREMENT,
+	id INT PRIMARY KEY  AUTO_INCREMENT,
    student_id INT,
    subject_id INT,
-   primary key(student_id, subject_id),
    grade VARCHAR (2) COMMENT '신청 학점 (평점)',
    complete_grade INT COMMENT '이수 학점',
    FOREIGN KEY (student_id) REFERENCES student_tb (id) ON DELETE CASCADE,
