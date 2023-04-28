@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 <style>
 form {
@@ -75,20 +75,27 @@ form {
 		<!-- 공지 조회 -->
 			<c:if test="${crud.equals(\"select\")}">
 				<table class="notice--table">
-					<tr class="first--tr">
-						<td>번호</td>
-						<td>말머리</td>
-						<td>제목</td>
-						<td>작성일</td>
-					</tr>
-					<c:forEach var="notice" items="${noticeList}">
-						<tr onclick="location.href='/board/notice-proc-detail?id=${notice.id}';">
-							<td>${notice.id}</td>
-							<td>${notice.category}</td>
-							<td>${notice.title}</td>
-							<td>${notice.createdTime}</td>
-						</tr>
-					</c:forEach>
+					<c:choose>
+						<c:when test="${fn:length(noticeList) != 0}">
+							<c:forEach var="notice" items="${noticeList}">
+									<tr class="first--tr">
+										<td>번호</td>
+										<td>말머리</td>
+										<td>제목</td>
+										<td>작성일</td>
+									</tr>
+									<tr onclick="location.href='/board/notice-proc-detail?id=${notice.id}';">
+										<td>${notice.id}</td>
+										<td>${notice.category}</td>
+										<td>${notice.title}</td>
+										<td>${notice.createdTime}</td>
+									</tr>
+								</c:forEach>	
+						</c:when>
+							<c:otherwise>
+								공지사항이 없습니다. 작성해주세요
+							</c:otherwise>	
+						</c:choose>
 				</table>
 			</c:if>
 			

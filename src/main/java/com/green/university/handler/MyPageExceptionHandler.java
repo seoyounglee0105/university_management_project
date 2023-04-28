@@ -26,16 +26,16 @@ public class MyPageExceptionHandler {
 		return modelAndView;
 	}
 	
-	/**
-	 * 마이바티스 제약 오류
-	 * @param e
-	 * @return 에러페이지
-	 */
-	@ExceptionHandler(DataIntegrityViolationException.class)
-	public ModelAndView dataIntegrityViolationException(DataIntegrityViolationException e) {
-		ModelAndView modelAndView = new ModelAndView("errorPage");
-		modelAndView.addObject("statusCode", HttpStatus.NOT_FOUND.value());
-		modelAndView.addObject("message", e.getMessage());
-		return modelAndView;
-	}
+//	/**
+//	 * 마이바티스 제약 오류
+//	 * @param e
+//	 * @return 에러페이지
+//	 */
+//	@ExceptionHandler(DataIntegrityViolationException.class)
+//	public ModelAndView dataIntegrityViolationException(DataIntegrityViolationException e) {
+//		ModelAndView modelAndView = new ModelAndView("errorPage");
+//		modelAndView.addObject("statusCode", HttpStatus.NOT_FOUND.value());
+//		modelAndView.addObject("message", e.getMessage());
+//		return modelAndView;
+//	}
 }
