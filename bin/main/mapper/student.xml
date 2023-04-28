@@ -17,7 +17,8 @@
 		AND gender = #{gender}
 		AND address =#{address}
 		AND tel = #{tel}
-		AND dept_id = #{deptId}
+		AND
+		dept_id = #{deptId}
 		AND entrance_date = #{entranceDate}
 		AND email = #{email}
 
@@ -43,9 +44,19 @@
 		address = #{address}, tel = #{tel}, email = #{email}
 		WHERE id = #{userId}
 	</update>
-	
+
 	<select id="selectByStudentId" resultType="com.green.university.repository.model.Student">
 		SELECT * FROM student_tb WHERE id = #{studentId}
+	</select>
+
+	<select id="selectStudentInfoById" resultType="com.green.university.dto.response.StudentInfoDto">
+		SELECT s.id, s.name, s.birth_date, s.gender, s.address, s.tel, s.email, s.grade, s.semester, s.entrance_date, s.graduation_date, d.name AS dept_name, c.name AS college_name
+		FROM student_tb AS s
+		LEFT JOIN department_tb AS d
+		ON s.dept_id = d.id
+		LEFT JOIN college_tb AS c
+		ON d.college_id = c.id
+		WHERE s.id = #{id};
 	</select>
 
 </mapper>

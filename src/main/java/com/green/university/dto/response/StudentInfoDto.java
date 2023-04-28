@@ -1,11 +1,11 @@
-package com.green.university.repository.model;
+package com.green.university.dto.response;
 
 import java.sql.Date;
 
 import lombok.Data;
 
 @Data
-public class Professor {
+public class StudentInfoDto {
 
 	private Integer id;
 	private String name;
@@ -15,5 +15,10 @@ public class Professor {
 	private String tel;
 	private String email;
 	private Integer deptId;
-	private Date hireDate;
+	private Integer grade;
+	private Integer semester;
+	private Date entranceDate;
+	private Date graduationDate;
+	private String deptName;
+	private String collegeName;
 }

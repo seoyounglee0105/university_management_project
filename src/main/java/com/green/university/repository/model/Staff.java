@@ -13,6 +13,7 @@ public class Staff {
 	private String gender;
 	private String address;
 	private String tel;
+	private String email;
 	private Date hireDate;
 	
 }
