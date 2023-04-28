@@ -77,7 +77,7 @@
 			
 			<!-- 학과 입력 -->
 			<c:if test="${crud.equals(\"insert\")}">
-				<form action="/admin/department-proc" method="get" id="insert--form">
+				<form action="/admin/department-proc" method="post" id="insert--form">
 					<h5>등록할 학과명을 입력해주세요</h5>
 						학과명 <input type="text" name="name" value="전자과"> 
 						단과대학 

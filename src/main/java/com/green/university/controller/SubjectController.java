@@ -58,7 +58,7 @@ public class SubjectController {
 	}
 	
 	// 전체 강의 목록에서 필터링
-	@GetMapping("/list/Search")
+	@GetMapping("/list/search")
 	public String readSubjectListSearch(Model model, @Validated AllSubjectSearchFormDto allSubjectSearchFormDto) {
 		
 		// 강의 리스트

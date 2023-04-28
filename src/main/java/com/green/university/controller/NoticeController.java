@@ -30,7 +30,7 @@ import com.green.university.utils.Define;
  *
  */
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/notice")
 public class NoticeController {
 	@Autowired
 	NoticeService noticeService;
@@ -39,7 +39,7 @@ public class NoticeController {
 	 * 
 	 * @return 공지사항 페이지
 	 */
-	@GetMapping("/notice")
+	@GetMapping("")
 	public String notice(Model model, @RequestParam(defaultValue = "select") String crud) {
 		model.addAttribute("crud", crud);
 		List<Notice> noticeList = noticeService.findNotice();
@@ -55,7 +55,7 @@ public class NoticeController {
 	 * 
 	 * @return 공지사항 입력 기능
 	 */
-	@PostMapping("/notice-proc")
+	@PostMapping("/write")
 	public String insertNotice(@Validated NoticeFormDto noticeFormDto) {
 
 		MultipartFile file = noticeFormDto.getFile();
@@ -88,7 +88,7 @@ public class NoticeController {
 	 * 
 	 * @return 공지사항 상세 조회 기능
 	 */
-	@GetMapping("/notice-proc-detail")
+	@GetMapping("/read")
 	public String findByIdNotice(Model model, @RequestParam Integer id) {
 		model.addAttribute("crud", "selectDetail");
 		model.addAttribute("id", id);
@@ -106,7 +106,7 @@ public class NoticeController {
 	 * 
 	 * @return 공지사항 수정 페이지
 	 */
-	@PutMapping("/notice-update-page")
+	@GetMapping("/update")
 	public String update(Model model, @RequestParam Integer id) {
 		model.addAttribute("crud", "update");
 		model.addAttribute("id", id);
@@ -120,7 +120,7 @@ public class NoticeController {
 	 * 
 	 * @return 공지사항 수정 기능
 	 */
-	@PostMapping("/notice-update")
+	@PutMapping("/update")
 	public String update(@Validated NoticeFormDto noticeFormDto) {
 		System.out.println(noticeFormDto);
 		noticeService.updateNotice(noticeFormDto);
@@ -131,7 +131,7 @@ public class NoticeController {
 	 * 
 	 * @return 공지사항 삭제 조회 기능
 	 */
-	@GetMapping("/notice-delete")
+	@GetMapping("/delete")
 	public String delete(Model model, @RequestParam Integer id) {
 		model.addAttribute("id", id);
 		noticeService.deleteNotice(id);

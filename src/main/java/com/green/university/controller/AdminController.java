@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -58,11 +59,24 @@ public class AdminController {
 	 * 
 	 * @return 단과대학 입력 기능
 	 */
-	@PostMapping("/college-proc")
-	public String insertCollege(CollegeFormDto collegeFormDto) {
+	@PostMapping("/college")
+	public String collegeProc(CollegeFormDto collegeFormDto) {
 		adminService.insertCollege(collegeFormDto);
 		return "redirect:/admin/college";
 	}
+	
+	/**
+	 * 
+	 * @return 단과대학 삭제 기능
+	 */
+	@GetMapping("/collegeDelete")
+	public String deleteCollege(Model model, @RequestParam Integer id) {
+		model.addAttribute("id", id);
+		adminService.deleteCollege(id);
+		return "redirect:/admin/college";
+	}
+	
+	
 
 	/**
 	 * 
@@ -90,12 +104,35 @@ public class AdminController {
 	 * 
 	 * @return 학과 입력 기능
 	 */
-	@GetMapping("/department-proc")
-	public String insertDepartment(DepartmentFormDto departmentFormDto) {
+	@PostMapping("/department")
+	public String departmentProc(DepartmentFormDto departmentFormDto) {
 		adminService.insertDepartment(departmentFormDto);
 		return "redirect:/admin/department";
 	}
+	
+	/**
+	 * 
+	 * @return 학과 삭제 기능
+	 */
+	@GetMapping("/departmentDelete")
+	public String deleteDepartment(Model model, @RequestParam Integer id) {
+		model.addAttribute("id", id);
+		adminService.deleteDepartment(id);
+		return "redirect:/admin/department";
+	}
+	
+	/**
+	 * 
+	 * @return 학과 수정 기능
+	 */
+	@PutMapping("/department")
+	public String updateDepartment(DepartmentFormDto departmentFormDto) {
+		adminService.updateDepartment(departmentFormDto);
+		return "redirect:/admin/department";
+	}
 
+	
+	
 	/**
 	 * 
 	 * @return 강의실 페이지
@@ -122,11 +159,23 @@ public class AdminController {
 	 * 
 	 * @return 강의실 입력 기능
 	 */
-	@PostMapping("/room-proc")
-	public String insertRoom(RoomFormDto roomFormDto) {
+	@PostMapping("/room")
+	public String roomProc(RoomFormDto roomFormDto) {
 		adminService.insertRoom(roomFormDto);
 		return "redirect:/admin/room";
 	}
+	
+	/**
+	 * 
+	 * @return 강의실 삭제 기능
+	 */
+	@GetMapping("/roomDelete")
+	public String deleteRoom(Model model, @RequestParam String id) {
+		model.addAttribute("id", id);
+		adminService.deleteRoom(id);
+		return "redirect:/admin/room";
+	}
+	
 
 	/**
 	 * 
@@ -154,17 +203,43 @@ public class AdminController {
 	 * 
 	 * @return 강의 입력 기능
 	 */
-	@PostMapping("/subject-proc")
+	@PostMapping("/subject")
 	public String insertSubject(SubjectFormDto subjectFormDto) {
 		adminService.insertSubject(subjectFormDto);
 		return "redirect:/admin/subject";
 	}
+	
+	
+	/**
+	 * 
+	 * @return 강의 삭제 기능
+	 */
+	@GetMapping("/subjectDelete")
+	public String deleteSubject(Model model, @RequestParam Integer id) {
+		model.addAttribute("id", id);
+		adminService.deleteSubject(id);
+		return "redirect:/admin/subject";
+	}
+	
+	/**
+	 * 
+	 * @return 강의 수정 기능
+	 */
+	@PutMapping("/subject")
+	public String updateSubject(SubjectFormDto subjectFormDto) {
+		System.out.println(subjectFormDto);
+		adminService.updateSubject(subjectFormDto);
+		return "redirect:/admin/subject";
+	}
+	
+	
+	
 
 	/**
 	 * 
 	 * @return 단과대별 등록금 페이지
 	 */
-	@GetMapping("/collTuit")
+	@GetMapping("/tuition")
 	public String collTuit(Model model, @RequestParam(defaultValue = "select") String crud) {
 		model.addAttribute("crud", crud);
 		List<CollTuit> collTuitList = adminService.findCollTuit();
@@ -186,9 +261,30 @@ public class AdminController {
 	 * 
 	 * @return 단과대별 등록금 입력 기능
 	 */
-	@PostMapping("/collTuit-proc")
+	@PostMapping("/tuition")
 	public String insertcollTuit(CollTuitFormDto collTuitFormDto) {
 		adminService.insertCollTuit(collTuitFormDto);
+		return "redirect:/admin/collTuit";
+	}
+	
+	/**
+	 * 
+	 * @return 단과대 등록금 삭제 기능
+	 */
+	@GetMapping("/tuitionDelete")
+	public String deleteCollTuit(Model model, @RequestParam Integer collegeId) {
+		model.addAttribute("collegeId", collegeId);
+		adminService.deleteCollTuit(collegeId);
+		return "redirect:/admin/collTuit";
+	}
+	
+	/**
+	 * 
+	 * @return 단과대 등록금 수정 기능
+	 */
+	@PutMapping("/tuitionUpdate")
+	public String updateCollTuit(CollTuitFormDto collTuitFormDto) {
+		adminService.updateCollTuit(collTuitFormDto);
 		return "redirect:/admin/collTuit";
 	}
 

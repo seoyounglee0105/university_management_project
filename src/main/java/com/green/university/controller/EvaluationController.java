@@ -40,7 +40,7 @@ public class EvaluationController {
 	/*
 	 *  강의평가 insert 기능
 	 */
-	@PostMapping("/insert/{subjectId}")
+	@PostMapping("/write/{subjectId}")
 	public String evaluationCheck(@PathVariable Integer subjectId, EvaluationFormDto evaluationFormDto, Model model ) {
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		
