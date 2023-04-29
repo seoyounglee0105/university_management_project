@@ -15,7 +15,7 @@ INNER JOIN grade_tb AS gr
 ON st.grade = gr.grade
 INNER JOIN student_tb AS stud
 on st.student_id = stud.id
-LEFT JOIN evaluation AS ev
+LEFT JOIN evaluation_tb AS ev
 ON st.subject_id = ev.subject_id
 WHERE st.student_id = #{studentId} AND 	su.semester = #{semester} AND su.sub_year = #{subYear};
 </select>

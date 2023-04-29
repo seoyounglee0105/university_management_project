@@ -1,10 +1,10 @@
-package com.green.university.dto.response;
+package com.green.university.repository.model;
 
 import lombok.Data;
 
 @Data
-public class QuestionDto {
-	
+public class Questionstion {
+	private Integer id;
 	private String question1;
 	private String question2;
 	private String question3;
@@ -12,5 +12,5 @@ public class QuestionDto {
 	private String question5;
 	private String question6;
 	private String question7;
-	private String sugContent;
+	private String sug_content;
 }

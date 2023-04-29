@@ -8,20 +8,20 @@
 <!-- 강의평가 저장 -->
 
 <insert id="insert">
-INSERT INTO evaluation
-(student_id, subject_id, qna_1, qna_2, qna_3,
- qna_4, qna_5, qna_6, qna_7, improvements)
+INSERT INTO evaluation_tb
+(student_id, subject_id, answer1, answer2, answer3,
+ answer4, answer5, answer6, answer7, improvements)
 VALUES 
 ( 
-#{studentId}, #{subjectId}, #{qna1}, 
-#{qna2}, #{qna3}, #{qna4}, #{qna5}, #{qna6}, #{qna7}, #{improvements}
+#{studentId}, #{subjectId}, #{answer1}, 
+#{answer2}, #{answer3}, #{answer4}, #{answer5}, #{answer6}, #{answer7}, #{improvements}
 );
 </insert>
 
 <!-- 그 과목에 강의평가를 했는지 안했는지 확인 -->
 <select id="checkevaluationBystudentIdAndsubjectId" resultType="com.green.university.repository.model.Evaluation">
 SELECT *
-FROM evaluation
+FROM evaluation_tb
 WHERE student_id = #{studentId};
 </select>
 

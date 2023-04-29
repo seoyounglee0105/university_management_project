@@ -7,13 +7,13 @@ public class EvaluationFormDto {
 
 	private Integer studentId;
 	private Integer subjectId;
-	private Integer qna1;
-	private Integer qna2;
-	private Integer qna3;
-	private Integer qna4;
-	private Integer qna5;
-	private Integer qna6;
-	private Integer qna7;
+	private Integer answer1;
+	private Integer answer2;
+	private Integer answer3;
+	private Integer answer4;
+	private Integer answer5;
+	private Integer answer6;
+	private Integer answer7;
 	private String improvements;
 	
 	

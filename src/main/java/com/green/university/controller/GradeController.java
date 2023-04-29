@@ -56,7 +56,6 @@ public class GradeController {
 			// 금학기 성적조회 기능
 			List<GradeDto> gradeList = gradeService.readStuSubList(principal.getId());
 			model.addAttribute("gradeList",gradeList);
-			System.out.println(gradeList.toString());
 			// 누계 성적 조회
 			MyGradeDto mygradeList = gradeService.readSumAndAverageByGrade(principal.getId());
 			model.addAttribute("mygrade", mygradeList);
@@ -132,7 +131,6 @@ public class GradeController {
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		
 		List<MyGradeDto> mygradeList = gradeService.readgradeinquiryList(principal.getId());
-		System.out.println(mygradeList);
 		model.addAttribute("mygradeList", mygradeList);
 		return "grade/totalgrade";
 	}
