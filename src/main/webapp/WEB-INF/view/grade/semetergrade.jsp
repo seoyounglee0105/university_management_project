@@ -58,7 +58,7 @@
 			<%-- 내가 수강신청 했는정보 연도있는지 비교 --%>
 			<c:when test="${yearList.size() != 0}">
 				<div class="select_box">
-					<form action="/grade/check" method="post">
+					<form action="/grade/read" method="post">
 						<select name="subYear">
 							<c:forEach var="grade" items="${yearList}">
 								<option value="${grade.subYear}">${grade.subYear}년</option>

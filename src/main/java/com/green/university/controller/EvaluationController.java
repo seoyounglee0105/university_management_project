@@ -1,6 +1,9 @@
 package com.green.university.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.green.university.dto.EvaluationFormDto;
+import com.green.university.dto.MyEvaluationDto;
 import com.green.university.dto.response.PrincipalDto;
 import com.green.university.dto.response.QuestionDto;
 import com.green.university.handler.exception.CustomRestfullException;
+import com.green.university.repository.model.Evaluation;
 import com.green.university.service.EvaluationService;
 import com.green.university.service.QuestionService;
 import com.green.university.utils.Define;
@@ -41,7 +46,7 @@ public class EvaluationController {
 		QuestionDto dto = questionService.readQuestion();
 		model.addAttribute("subjectId", subjectId);
 		model.addAttribute("dto",dto);
-		return "/grade/evaluation"; 
+		return "evaluation/evaluation"; 
 	}
 	
 	/*
@@ -75,7 +80,14 @@ public class EvaluationController {
 		
 		// 창을 닫을 때 post가 작동이 안하는거 방지
 		model.addAttribute("type", 1);
-		return "grade/evaluation";	
+		return "evaluation/evaluation";	
+	}
+	@GetMapping("/myEvaluation")
+	public String MyEvaluation(Model model) {
+		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+		List<MyEvaluationDto> eval = evaluationService.readEvaluationByProfessorId(principal.getId());
+		model.addAttribute("eval", eval);
+		return "evaluation/myEvaluation";
 	}
 	
 }

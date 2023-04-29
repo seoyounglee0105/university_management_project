@@ -25,4 +25,15 @@ FROM evaluation_tb
 WHERE student_id = #{studentId};
 </select>
 
+<!-- 교수 자기 강의평가 조회 -->
+<select id="selectEvaluationFormDtoByprofessorId" resultType="com.green.university.dto.MyEvaluationDto">
+SELECT s.name, s.professor_id, e.*  
+FROM evaluation_tb AS e
+INNER JOIN subject_tb AS s
+ON e.subject_id = s.id
+WHERE professor_id = #{professorId};
+</select>
+
+
+
 </mapper>

@@ -1,11 +1,14 @@
 package com.green.university.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.green.university.dto.EvaluationFormDto;
+import com.green.university.dto.MyEvaluationDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.EvaluationRepository;
 import com.green.university.repository.interfaces.QuestionRepository;
@@ -30,6 +33,13 @@ public class EvaluationService {
 	@Transactional
 	public Evaluation readEvaluationByStudentIdAndSubjectId(Integer studentId) {
 		Evaluation evaluation = evaluationRepository.checkevaluationBystudentIdAndsubjectId(studentId);
+		return evaluation;
+	}
+	
+	@Transactional
+	public List<MyEvaluationDto> readEvaluationByProfessorId(Integer professorId) {
+		List<MyEvaluationDto> evaluation = evaluationRepository.selectEvaluationFormDtoByprofessorId(professorId);
+		System.out.println(evaluation);
 		return evaluation;
 	}
 }

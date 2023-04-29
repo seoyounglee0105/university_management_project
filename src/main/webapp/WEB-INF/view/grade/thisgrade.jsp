@@ -79,10 +79,17 @@
 								<td></td>
 								</c:otherwise>
 								</c:choose>
+								<c:choose>
+								<c:when test="${grade.evaluationId != null}">
+								<td>강의평가 완료</td>
+								</c:when>
+								<c:otherwise>
 								<td>
 								<a href="/evaluation?subjectId=${grade.subjectId}" 
 								onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">강의평가</a>
 								</td>
+								</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -109,7 +116,7 @@
 				<td>${mygrade.semester}학기</td>
 				<td>${mygrade.sumGrades}</td>
 				<td>${mygrade.myGrades}</td>
-				<td>${mygrade.average}</td>
+				<td>${mygrade.average()}</td>
 				</tr>
 				</tbody>
 				</table>

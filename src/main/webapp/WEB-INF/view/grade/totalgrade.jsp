@@ -76,7 +76,7 @@
 				<td>${mygrade.semester}학기</td>
 				<td>${mygrade.sumGrades}</td>
 				<td>${mygrade.myGrades}</td>
-				<td>${mygrade.average}</td>
+				<td>${mygrade.average()}</td>
 				</tr>
 				</c:forEach>
 				</tbody>
