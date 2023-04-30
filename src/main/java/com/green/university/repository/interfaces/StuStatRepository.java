@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.green.university.dto.response.StudentInfoStatListDto;
 import com.green.university.repository.model.StuStat;
 
 /**
@@ -22,5 +23,11 @@ public interface StuStatRepository {
 
 	// 학생의 기존 학적 상태의 to_date를 now()로 변경 
 	public int updateOldStatus(Integer id);
+	
+	/**
+	 * 학생 내정보 조회에 학적변동리스트
+	 * @author 김지현
+	 */
+	public List<StudentInfoStatListDto> selectStuStatListBystudentId(Integer studentId);
 	
 }
