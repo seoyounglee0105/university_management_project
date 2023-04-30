@@ -67,7 +67,7 @@
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>강의실</h2>
+			<h2>학사정보</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
@@ -121,7 +121,7 @@
 		<!-- 공지 상세 조회 -->
 			<c:if test="${crud.equals(\"read\")}">
 				<div class="container">
-						<table class="table">
+						<table class="table table-bordered table-sm">
 						<tr class="category">
 							<td class="table-active">말머리</td>
 							<td>${notice.category}</td>

@@ -3,32 +3,20 @@
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 <style>
-.select--button {
-	padding: 20px;
+.container {
+	width: 700px;
 }
-
-#insert--form {
-	padding: 50px;
-}
-
-.department--table {
-	border: 1px solid gray;
-	text-align: center;
-	width: 500px;
-	margin-top: 20px;
-	margin: 10px;
-}
-
-.department--table tr {
-	border: 1px solid black;
-}
-
-.department--table td {
-	border: 1px solid black;
-}
-
 .first--tr {
-	font-weight: bold;
+	background-color: #f7f6f6;
+	font-weight: bolder;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#submit {
+	background-color: #031734;
+	color: #ccc;
+	text-decoration: none;
+	margin-left: 100px;
 }
 </style>
 <!-- 세부 메뉴 + 메인 -->
@@ -36,7 +24,7 @@
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>학과</h2>
+			<h2>등록</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
@@ -76,29 +64,31 @@
 			<c:if test="${crud.equals(\"insert\")}">
 				<form action="/admin/department-proc" method="post" id="insert--form">
 					<h5>등록할 학과명을 입력해주세요</h5>
-						학과명 <input type="text" name="name" value="전자과"> 
+						학과명 <input type="text" class="form-control form-control-sm" name="name" value="전자과"> 
 						단과대학 
-							<select name="collegeId">
+							<select name="collegeId" class="form-control form-control-sm">
 								<c:forEach var="college" items="${collegeList}">
 									<option value="${college.id}">${college.name}</option>
 								</c:forEach>
 							</select> 
-							<input type="submit" value="입력">
+							<input type="submit" class="btn btn-link" id="submit" value="입력">
 				</form>
-				<table class="department--table">
-					<tr class="first--tr">
-						<td>ID</td>
-						<td>학과명</td>
-						<td>단과대ID</td>
-					</tr>
-					<c:forEach var="department" items="${departmentList}">
-						<tr>
-							<td>${department.id}</td>
-							<td>${department.name}</td>
-							<td>${department.collegeId}</td>
+				<div class="container">
+					<table class="table table-bordered">
+						<tr class="first--tr">
+							<td>ID</td>
+							<td>학과명</td>
+							<td>단과대ID</td>
 						</tr>
-					</c:forEach>
-				</table>
+						<c:forEach var="department" items="${departmentList}">
+							<tr>
+								<td>${department.id}</td>
+								<td>${department.name}</td>
+								<td>${department.collegeId}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
 			</c:if>
 
 
@@ -157,7 +147,7 @@
 			
 			<!-- 학과 조회 -->
 			<c:if test="${crud.equals(\"select\")}">
-				<table class="department--table">
+				<table class="form-control form-control-sm">
 					<tr class="first--tr">
 						<td>ID</td>
 						<td>학과명</td>
