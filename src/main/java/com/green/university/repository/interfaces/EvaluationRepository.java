@@ -20,7 +20,7 @@ public interface EvaluationRepository {
 	public int insert(EvaluationFormDto evaluationFormDto);
 	
 	// 강의평가 했는지 조회
-	public Evaluation checkevaluationBystudentIdAndsubjectId(Integer studentId);
+	public Evaluation selectEvaluation(Integer studentId);
 	
 	//교수 강의평가 조회
 	public List<MyEvaluationDto> selectEvaluationFormDtoByprofessorId(Integer professorId);

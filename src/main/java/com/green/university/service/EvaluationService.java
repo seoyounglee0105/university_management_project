@@ -32,7 +32,7 @@ public class EvaluationService {
 	
 	@Transactional
 	public Evaluation readEvaluationByStudentIdAndSubjectId(Integer studentId) {
-		Evaluation evaluation = evaluationRepository.checkevaluationBystudentIdAndsubjectId(studentId);
+		Evaluation evaluation = evaluationRepository.selectEvaluation(studentId);
 		return evaluation;
 	}
 	

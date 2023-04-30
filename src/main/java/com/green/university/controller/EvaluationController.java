@@ -50,30 +50,30 @@ public class EvaluationController {
 	}
 	
 	/*
-	 *  강의평가 insert 기능
+	 *  강의평가 post
 	 */
 	@PostMapping("/write/{subjectId}")
-	public String evaluationCheck(@PathVariable Integer subjectId, EvaluationFormDto evaluationFormDto, Model model ) {
+	public String EvaluationProc(@PathVariable Integer subjectId, EvaluationFormDto evaluationFormDto, Model model ) {
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		
-		// 강의평가 접속한 studentId랑 신청한 과목값을 넣어줘서 insert
+		
 		evaluationFormDto.setStudentId(principal.getId());
 		evaluationFormDto.setSubjectId(subjectId);
 		
 		if (evaluationFormDto.getAnswer1() == null) {
-			throw new CustomRestfullException("질문에 모두 답 해주세요", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("1번 질문에 답 해주세요", HttpStatus.BAD_REQUEST);
 		}else if(evaluationFormDto.getAnswer2() == null) {
-			throw new CustomRestfullException("질문에 모두 답 해주세요", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("2번 질문에 답 해주세요", HttpStatus.BAD_REQUEST);
 		}else if(evaluationFormDto.getAnswer3() == null) {
-			throw new CustomRestfullException("질문에 모두 답 해주세요", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("3번 질문에 답 해주세요", HttpStatus.BAD_REQUEST);
 		}else if(evaluationFormDto.getAnswer4() == null) {
-			throw new CustomRestfullException("질문에 모두 답 해주세요", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("4번 질문에 답 해주세요", HttpStatus.BAD_REQUEST);
 		}else if(evaluationFormDto.getAnswer5() == null) {
-			throw new CustomRestfullException("질문에 모두 답 해주세요", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("5번 질문에 답 해주세요", HttpStatus.BAD_REQUEST);
 		}else if(evaluationFormDto.getAnswer6() == null) {
-			throw new CustomRestfullException("질문에 모두 답 해주세요", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("6번 질문에 답 해주세요", HttpStatus.BAD_REQUEST);
 		}else if(evaluationFormDto.getAnswer7() == null) {
-			throw new CustomRestfullException("질문에 모두 답 해주세요", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("7번 질문에 답 해주세요", HttpStatus.BAD_REQUEST);
 		}else {
 			evaluationService.createEvanluation(evaluationFormDto);
 		}
@@ -82,7 +82,7 @@ public class EvaluationController {
 		model.addAttribute("type", 1);
 		return "evaluation/evaluation";	
 	}
-	@GetMapping("/myEvaluation")
+	@GetMapping("/mySubject")
 	public String MyEvaluation(Model model) {
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		List<MyEvaluationDto> eval = evaluationService.readEvaluationByProfessorId(principal.getId());

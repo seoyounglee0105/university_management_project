@@ -19,7 +19,7 @@ VALUES
 </insert>
 
 <!-- 그 과목에 강의평가를 했는지 안했는지 확인 -->
-<select id="checkevaluationBystudentIdAndsubjectId" resultType="com.green.university.repository.model.Evaluation">
+<select id="selectEvaluationFormDto" resultType="com.green.university.repository.model.Evaluation">
 SELECT *
 FROM evaluation_tb
 WHERE student_id = #{studentId};

@@ -4,7 +4,29 @@
 
 <mapper namespace="com.green.university.repository.interfaces.GradeRespository">
 
-<select id="findByStudentIdAndsemester" resultType="com.green.university.dto.response.GradeDto">
+<!-- 학생이 수강한 연도 조회  -->
+<select id="selectSubYearByStudentId" resultType="com.green.university.dto.response.GradeDto">
+select su.sub_year
+FROM stu_sub_tb AS st
+INNER JOIN subject_tb AS su
+ON st.subject_id = su.id
+WHERE st.student_id = #{studentId}
+group by su.sub_year
+ORDER BY su.sub_year DESC;
+</select>
+
+<!-- 학생이 수강한 학기 조회 -->
+<select id="selectSemesterByStudentId" resultType="com.green.university.dto.response.GradeDto">
+select su.semester
+FROM stu_sub_tb AS st
+INNER JOIN subject_tb AS su
+ON st.subject_id = su.id
+WHERE st.student_id = #{studentId}
+GROUP BY su.semester;
+</select>
+
+<!-- 금학기 성적 조회 -->
+<select id="selectGradeDtoBySemester" resultType="com.green.university.dto.response.GradeDto">
 SELECT su.sub_year, su.semester, st.subject_id, su.name,pr.name, su.type,gr.grade, su.grades, RANK() OVER(ORDER BY gr.grade_value DESC) 석차, ev.evaluation_id
 FROM stu_sub_tb AS st
 INNER JOIN subject_tb AS su
@@ -17,90 +39,12 @@ INNER JOIN student_tb AS stud
 on st.student_id = stud.id
 LEFT JOIN evaluation_tb AS ev
 ON st.subject_id = ev.subject_id
-WHERE st.student_id = #{studentId} AND 	su.semester = #{semester} AND su.sub_year = #{subYear};
+WHERE st.student_id = #{studentId} AND 	su.semester = #{semester} AND su.sub_year = #{subYear}
+ORDER BY st.subject_id;
 </select>
 
-<select id="findBySemeter" resultType="com.green.university.dto.response.GradeDto">
-SELECT su.sub_year,su.semester,st.subject_id,su.name,pr.name,su.type,gr.grade,su.grades
-FROM stu_sub_tb AS st
-INNER JOIN subject_tb AS su
-ON st.subject_id = su.id
-INNER JOIN professor_tb AS pr
-ON su.professor_id = pr.id
-INNER JOIN grade_tb AS gr
-ON st.grade = gr.grade
-INNER JOIN student_tb AS stud
-on st.student_id = stud.id
-WHERE st.student_id = #{studentId} AND su.semeter = {semester};
-</select>
-
-<select id="findBysubYear" resultType="com.green.university.dto.response.GradeDto">
-SELECT su.sub_year,su.semester,st.subject_id,su.name,pr.name,su.type,gr.grade
-FROM stu_sub_tb AS st
-INNER JOIN subject_tb AS su
-ON st.subject_id = su.id
-INNER JOIN professor_tb AS pr
-ON su.professor_id = pr.id
-INNER JOIN grade_tb AS gr
-ON st.grade = gr.grade
-INNER JOIN student_tb AS stud
-on st.student_id = stud.id
-WHERE st.student_id = #{studentId} AND su.sub_year = {subYear};
-</select>
-
-
-<select id="findBysemester" resultType="com.green.university.dto.response.GradeDto">
-SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type,gr.grade
-FROM stu_sub_tb AS st
-INNER JOIN subject_tb AS su
-ON st.subject_id = su.id
-INNER JOIN professor_tb AS pr
-ON su.professor_id = pr.id
-INNER JOIN grade_tb AS gr
-ON st.grade = gr.grade
-INNER JOIN student_tb AS stud
-on st.student_id = stud.id
-WHERE st.student_id = #{studentId} AND 	su.semester = #{semester};
-</select>
-
-<select id="findBytype" resultType="com.green.university.dto.response.GradeDto">
-SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade
-FROM stu_sub_tb AS st
-INNER JOIN subject_tb AS su
-ON st.subject_id = su.id
-INNER JOIN professor_tb AS pr
-ON su.professor_id = pr.id
-INNER JOIN grade_tb AS gr
-ON st.grade = gr.grade
-INNER JOIN student_tb AS stud
-on st.student_id = stud.id
-WHERE st.student_id = #{studentId} AND 	su.type = #{type};
-</select>
-
-
-
-<!-- 내가 신청한 연도 나오는거  -->
-<select id="findByyear" resultType="com.green.university.dto.response.GradeDto">
-select su.sub_year
-FROM stu_sub_tb AS st
-INNER JOIN subject_tb AS su
-ON st.subject_id = su.id
-WHERE st.student_id = #{studentId}
-group by su.sub_year
-ORDER BY su.sub_year DESC;
-</select>
-
-<!-- 내가 신청한 학기 나오는거 -->
-<select id="findsemester" resultType="com.green.university.dto.response.GradeDto">
-select su.semester
-FROM stu_sub_tb AS st
-INNER JOIN subject_tb AS su
-ON st.subject_id = su.id
-WHERE st.student_id = #{studentId}
-GROUP BY su.semester;
-</select>
-
-<select id="findByAll" resultType="com.green.university.dto.response.GradeDto">
+<!-- 전체성적 조회 -->
+<select id="selectGradeDtoByStudentId" resultType="com.green.university.dto.response.GradeDto">
 SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade,su.grades
 FROM stu_sub_tb AS st
 INNER JOIN subject_tb AS su
@@ -114,22 +58,20 @@ on st.student_id = stud.id
 WHERE st.student_id = #{studentId};
 </select>
 
-<!-- 성적조회할때 내가 다닌 연도만 나오게 하는 쿼리 -->
-<select id="chioceByGrade" resultType="com.green.university.dto.response.GradeDto">
-SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade, su.grades
+<!-- 전체 누계 성적 조회 -->
+<select id="selectMyGradeDtoByStudentId" resultType="com.green.university.dto.response.MyGradeDto">
+SELECT su.sub_year, su.semester, SUM(su.grades) AS sum_grades,SUM(st.complete_grade) AS my_grades, AVG(gr.grade_value) AS average
 FROM stu_sub_tb AS st
-INNER JOIN subject_tb AS su
+LEFT JOIN subject_tb AS su
 ON st.subject_id = su.id
-INNER JOIN professor_tb AS pr
-ON su.professor_id = pr.id
-INNER JOIN grade_tb AS gr
+LEFT JOIN grade_tb AS gr
 ON st.grade = gr.grade
-INNER JOIN student_tb AS stud
-on st.student_id = stud.id
-WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND su.semester = #{semester} AND su.type = #{type};
+WHERE st.student_id = #{student_id}
+GROUP BY su.sub_year, su.semester;
 </select>
 
-<select id="chioceByGradeAlltype" resultType="com.green.university.dto.response.GradeDto">
+<!-- 학기별 조회 (전체 조회) -->
+<select id="selectGradeDtoByStudentIdAndSubYear" resultType="com.green.university.dto.response.GradeDto">
 SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade, su.grades
 FROM stu_sub_tb AS st
 INNER JOIN subject_tb AS su
@@ -143,10 +85,23 @@ on st.student_id = stud.id
 WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND su.semester = #{semester};
 </select>
 
+<!-- 학기별 조회 (선택 조회) -->
+<select id="selectGradeDtoBytype" resultType="com.green.university.dto.response.GradeDto">
+SELECT su.sub_year, su.semester, st.subject_id, su.name, pr.name, su.type, gr.grade, su.grades
+FROM stu_sub_tb AS st
+INNER JOIN subject_tb AS su
+ON st.subject_id = su.id
+INNER JOIN professor_tb AS pr
+ON su.professor_id = pr.id
+INNER JOIN grade_tb AS gr
+ON st.grade = gr.grade
+INNER JOIN student_tb AS stud
+on st.student_id = stud.id
+WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND su.semester = #{semester} AND su.type = #{type};
+</select>
 
-
-<!-- 누계성적 구하는 쿼리 -->
-<select id="sumAndAverageBymyGrade" resultType="com.green.university.dto.response.MyGradeDto">
+<!-- 금학기 누계 성적 조회 -->
+<select id="selectMyGradeDtoBySemester" resultType="com.green.university.dto.response.MyGradeDto">
 SELECT  st.student_id, su.sub_year, su.semester, SUM(su.grades) AS sum_grades, mg.my_grades, SUM(gr.grade_value)/COUNT(su.name) AS average
 FROM stu_sub_tb AS st
 INNER JOIN subject_tb AS su
@@ -160,13 +115,13 @@ INNER JOIN subject_tb AS sub
 ON stu.subject_id = sub.id
 INNER JOIN grade_tb AS gra
 ON stu.grade = gra.grade
-WHERE stu.student_id = #{studentId} AND sub.sub_year= #{subYear} AND sub.semester = #{semester} AND gra.grade != 'F'
+WHERE stu.student_id = #{studentId} AND sub.sub_year = #{subYear} AND sub.semester = #{semester} AND gra.grade != 'F'
 ) AS mg
 ON st.student_id = mg.student_id 
-WHERE st.student_id = #{studentId} AND su.sub_year= #{subYear} AND su.semester = #{semester};
+WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND su.semester = #{semester};
 </select>
 
-
+<!-- 장학금 -->
 <select id="findAvgGradeByStudentIdAndSemester" resultType="com.green.university.dto.response.GradeForScholarshipDto">
 	SELECT ss.student_id, sub_year, semester, AVG(grade_value) AS avg_grade FROM stu_sub_tb AS ss
 	JOIN grade_tb AS g
@@ -176,19 +131,5 @@ WHERE st.student_id = #{studentId} AND su.sub_year= #{subYear} AND su.semester =
 	WHERE sub_year = #{subYear} AND semester = #{semester} AND ss.student_id = #{studentId}
 	GROUP BY student_id;
 </select>
-
-<!-- 전체 누계 성적 조회 -->
-
-<select id="gradeinquiryBystudentId" resultType="com.green.university.dto.response.MyGradeDto">
-SELECT su.sub_year, su.semester, SUM(su.grades) AS sum_grades,SUM(st.complete_grade) AS my_grades, AVG(gr.grade_value) AS average
-FROM stu_sub_tb AS st
-LEFT JOIN subject_tb AS su
-ON st.subject_id = su.id
-LEFT JOIN grade_tb AS gr
-ON st.grade = gr.grade
-WHERE st.student_id = #{student_id}
-GROUP BY su.sub_year, su.semester;
-</select>
-
 
 </mapper>

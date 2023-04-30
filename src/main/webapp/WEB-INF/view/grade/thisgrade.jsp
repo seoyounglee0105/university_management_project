@@ -16,7 +16,7 @@
 </style>
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
-<!-- 등록금 내역 조회 -->
+<!-- 금학기 -->
 
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start"
@@ -47,7 +47,7 @@
 		<h1>금학기 성적 조회</h1>
 		<div class="split--div"></div>
 			<c:choose>
-				<%-- 내가 수강신청 했는정보 연도있는지 비교 --%>
+				<%-- 수강연도 조회해서 검사 --%>
 				<c:when test="${yearList.size() != 0}">	
 				<div>
 				<table border="1" class="tuition--table">
@@ -64,6 +64,7 @@
 					</thead>
 					<tbody>
 						<c:forEach var="grade" items="${gradeList}">
+						<%-- 금학기 성적조회 --%>
 							<tr>
 								<td>${grade.subYear}년</td>
 								<td>${grade.semester}학기</td>
@@ -72,6 +73,7 @@
 								<td>${grade.type}</td>
 								<td>${grade.grades}</td>
 								<c:choose>
+								<%-- 강의평가 했는지 검사 --%>
 								<c:when test="${grade.evaluationId != null}">
 								<td>${grade.grade}</td>
 								</c:when>
@@ -80,6 +82,7 @@
 								</c:otherwise>
 								</c:choose>
 								<c:choose>
+								<%-- 강의평가 했는지 검사 --%>
 								<c:when test="${grade.evaluationId != null}">
 								<td>강의평가 완료</td>
 								</c:when>
@@ -112,6 +115,7 @@
 				</thead>
 				<tbody>
 				<tr>
+				<%-- 금학기 누계성적 --%>
 				<td>${mygrade.subYear}년</td>
 				<td>${mygrade.semester}학기</td>
 				<td>${mygrade.sumGrades}</td>
@@ -123,7 +127,7 @@
 				</div>
 				</c:when>
 				<c:otherwise>
-				<h1>조회할 과목이 없습니다.</h1>
+				<h3>강의 신청 및 수강 이력 확인 바랍니다.</h3>
 				</c:otherwise>
 				</c:choose>
 			

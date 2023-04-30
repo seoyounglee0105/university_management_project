@@ -24,7 +24,7 @@
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
-<!-- 등록금 내역 조회 -->
+<!-- 총 누계 성적 -->
 
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start"
@@ -36,15 +36,16 @@
 		</div>
 		<!-- 메뉴 -->
 		<div class="sub--menu--mid">
-				<table class="sub--menu--table" border="1">
+			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/grade/thisSemester" class="selected--menu">금학기 성적조회</a></td>
+					<td><a href="/grade/thisSemester" >금학기
+							성적조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/grade/semester">학기별 성적조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/grade/total">누계 성적</a></td>
+					<td><a href="/grade/total" class="selected--menu">누계 성적</a></td>
 				</tr>
 			</table>
 		</div>
@@ -54,38 +55,37 @@
 	<main>
 		<h1>총 누계 성적</h1>
 		<div class="split--div"></div>
-		
-			<%-- 내가 수강신청 했는정보 연도있는지 비교 --%>
-				
-				
-		
+		<c:choose>
+			<c:when test="${yearList.size() != 0}">
 				<table border="1" class="tuition--table">
-				<thead>
-				<tr>
-				<th>연도</th>
-				<th>학기</th>
-				<th>신청학점</th>
-				<th>취득학점</th>
-				<th>평점평균</th>
-				</tr>
-				</thead>
-				<tbody>
-				<c:forEach var="mygrade" items="${mygradeList}">
-				<tr>
-				<td>${mygrade.subYear}년</td>
-				<td>${mygrade.semester}학기</td>
-				<td>${mygrade.sumGrades}</td>
-				<td>${mygrade.myGrades}</td>
-				<td>${mygrade.average()}</td>
-				</tr>
-				</c:forEach>
-				</tbody>
+					<thead>
+						<tr>
+							<th>연도</th>
+							<th>학기</th>
+							<th>신청학점</th>
+							<th>취득학점</th>
+							<th>평점평균</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="mygrade" items="${mygradeList}">
+							<tr>
+								<td>${mygrade.subYear}년</td>
+								<td>${mygrade.semester}학기</td>
+								<td>${mygrade.sumGrades}</td>
+								<td>${mygrade.myGrades}</td>
+								<td>${mygrade.average()}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
 				</table>
-					
+			</c:when>
+			<c:otherwise>
+				<h3>강의 신청 및 수강 이력 확인 바랍니다.</h3>
+			</c:otherwise>
+		</c:choose>
+		<br> <br>
 
-		<br>
-		<br>
-	
 
 	</main>
 </div>
