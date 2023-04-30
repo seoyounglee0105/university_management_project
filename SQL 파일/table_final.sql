@@ -251,9 +251,9 @@ CREATE TABLE stu_sub_detail_tb
    mid_exam INT COMMENT '중간고사 점수',
    final_exam INT COMMENT '기말고사 점수',
    converted_mark INT COMMENT '환산점수',
-   FOREIGN KEY (id) REFERENCES stu_sub_tb(id),
-   FOREIGN KEY (student_id) REFERENCES student_tb(id),
-   FOREIGN KEY (subject_id) REFERENCES subject_tb(id)
+   FOREIGN KEY (id) REFERENCES stu_sub_tb(id) ON DELETE CASCADE,
+   FOREIGN KEY (student_id) REFERENCES student_tb(id) ON DELETE CASCADE,
+   FOREIGN KEY (subject_id) REFERENCES subject_tb(id) ON DELETE CASCADE
 );
 
 CREATE TABLE syllabus_tb
@@ -263,7 +263,7 @@ CREATE TABLE syllabus_tb
 	objective VARCHAR(255) COMMENT '강의 목표',
 	textbook VARCHAR(30) COMMENT '교재',
 	program TEXT COMMENT '주별 계획',
-	FOREIGN KEY (subject_id) REFERENCES subject_tb(id)
+	FOREIGN KEY (subject_id) REFERENCES subject_tb(id) ON DELETE CASCADE
 );
 
 -- 강의 평가 테이블

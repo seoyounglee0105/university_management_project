@@ -12,6 +12,7 @@ import com.green.university.dto.response.StuSubDayTimeDto;
 import com.green.university.dto.response.StuSubSumGradesDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.PreStuSubRepository;
+import com.green.university.repository.interfaces.StuSubDetailRepository;
 import com.green.university.repository.interfaces.StuSubRepository;
 import com.green.university.repository.interfaces.SubjectRepository;
 import com.green.university.repository.model.PreStuSub;
@@ -39,6 +40,9 @@ public class StuSubService {
 	@Autowired
 	private PreStuSubRepository preStuSubRepository;
 
+	@Autowired
+	private StuSubDetailRepository stuSubDetailRepository;
+	
 	
 	// 학생의 수강신청 내역에 해당 강의가 존재하는지 확인
 	public StuSub readStuSub(Integer studentId, Integer subjectId) {
@@ -63,6 +67,11 @@ public class StuSubService {
 		// 신청 대상 과목 정보
 		Subject targetSubject = subjectRepository.selectSubjectById(subjectId);
 		
+		// 신청 대상 과목의 정원이 다 찼다면 신청 불가
+		if (targetSubject.getNumOfStudent() >= targetSubject.getCapacity()) {
+			throw new CustomRestfullException("정원이 초과되었습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 		// 현재 총 신청 학점
 		StuSubSumGradesDto stuSubSumGradesDto = stuSubRepository.selectSumGrades(studentId, Define.CURRENT_YEAR, Define.CURRENT_SEMESTER);
 		
@@ -78,10 +87,9 @@ public class StuSubService {
 		// 수강신청 내역 추가
 		int resultRowCount = stuSubRepository.insert(studentId, subjectId);
 		
-		// 신청 대상 과목의 정원이 다 찼다면 신청 불가
-		if (targetSubject.getNumOfStudent() >= targetSubject.getCapacity()) {
-			throw new CustomRestfullException("정원이 초과되었습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		// 수강 상세 내역에도 데이터 추가
+		StuSub stuSub = stuSubRepository.selectByStudentIdAndSubjectId(studentId, subjectId);
+		stuSubDetailRepository.insert(stuSub.getId(), studentId, subjectId);
 		
 		// 해당 강의 현재인원 +1
 		subjectService.updatePlusNumOfStudent(subjectId);
@@ -89,6 +97,7 @@ public class StuSubService {
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("수강신청이 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		
 	}
 	
 	// 학생의 수강신청 내역 삭제
@@ -124,6 +133,10 @@ public class StuSubService {
 				// 수강 신청 내역이 없다면
 				if (stuSubRepository.selectByStudentIdAndSubjectId(pss.getStudentId(), pss.getSubjectId()) == null) {
 					stuSubRepository.insert(pss.getStudentId(), pss.getSubjectId());
+					
+					// 수강 상세 내역에도 데이터 추가
+					StuSub stuSub = stuSubRepository.selectByStudentIdAndSubjectId(pss.getStudentId(), pss.getSubjectId());
+					stuSubDetailRepository.insert(stuSub.getId(), pss.getStudentId(), pss.getSubjectId());
 				}
 			}
 		}

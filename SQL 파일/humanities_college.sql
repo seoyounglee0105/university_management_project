@@ -1,3 +1,8 @@
+INSERT INTO staff_tb
+VALUES (230002, '이서영', '2000-01-05', '여성', '부산시 수영구', '010-0743-3282', 'os010312@naver.com', '2023-01-01');
+INSERT INTO user_tb
+VALUES (230002, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'staff');
+
 -- 인문대학 - 철학과, 국사학과, 언어학과, 영어영문학과, 국어국문학과
 
 -- 단과대 1개(college_tb) - id : 2
