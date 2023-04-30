@@ -149,7 +149,7 @@
 			</div>
 
 			<!-- 예비 수강 신청 내역으로 가기 -->
-			<a href="/sugang/preAppList?type=1"><button class="preStuSubList--button">예비 수강 신청 내역</button></a>
+			<a href="/sugang/preAppList?type=1"><button class="preStuSubList--button">수강 신청 내역</button></a>
 		</div>
 		<c:choose>
 			<c:when test="${subjectList.isEmpty() == false}">
