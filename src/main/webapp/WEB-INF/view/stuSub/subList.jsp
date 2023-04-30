@@ -76,16 +76,16 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/sugang/subjectList">강의 시간표 조회</a></td>
+					<td><a href="/sugang/subjectList" class="selected--menu">강의 시간표 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/sugang/pre">예비 수강신청</a></td>
+					<td><a href="/sugang/pre">예비 수강 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/sugang/application">수강신청</a></td>
+					<td><a href="/sugang/preAppList?type=1">수강 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/sugang/list">수강신청 내역 조회</a></td>
+					<td><a href="/sugang/list">수강 신청 내역 조회</a></td>
 				</tr>
 			</table>
 		</div>
@@ -93,13 +93,11 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>강의 시간표 조회 (수강신청 관련이라서 현재 연도-학기만)</h1>
+		<h1>강의 시간표 조회</h1>
 		<div class="split--div"></div>
-		<!-- 여기에 내용 넣기 -->
-		
 		<!-- 필터 및 검색 -->
 		<div class="sub--filter">
-			<form action="/stuSub/list/Search" method="get">
+			<form action="/sugang/subjectList/search" method="get">
 				<div>
 					<!-- 강의구분 콤보박스 -->
 					<label for="type">강의구분</label> 
@@ -134,52 +132,68 @@
 				</div>
 			</form>
 		</div>
+		<c:choose>
+			<c:when test="${subjectList.isEmpty() == false}">
+				<h4>
+					<span style="font-weight: 600;">강의 목록</span>&nbsp;
+					<span style="color:gray; font-size:18px;">[총 ${subjectList.size()}건]</span>
+				</h4>
+				<table border="1" class="sub--list--table">
+					<thead>
+						<tr>
+							<th>단과대학</th>
+							<th>개설학과</th>
+							<th>학수번호</th>
+							<th>강의구분</th>
+							<th style="width: 250px;">강의명</th>
+							<th>담당교수</th>
+							<th>학점</th>
+							<th>요일시간 (강의실)</th>
+							<th>현재인원</th>
+							<th>정원</th>
+							<th>강의계획서</th>
+						</tr>
+					</thead>
 		
-		<h4>
-			<span style="font-weight: 600;">강의 목록</span>&nbsp;
-			<span style="color:gray; font-size:18px;">[총 ${subjectList.size()}건]</span>
-		</h4>
-		<table border="1" class="sub--list--table">
-			<thead>
-				<tr>
-					<th>단과대학</th>
-					<th>개설학과</th>
-					<th>학수번호</th>
-					<th>강의구분</th>
-					<th style="width: 250px;">강의명</th>
-					<th>담당교수</th>
-					<th>학점</th>
-					<th>요일시간 (강의실)</th>
-					<th>현재인원</th>
-					<th>정원</th>
-					<th>강의계획서</th>
-				</tr>
-			</thead>
+					<tbody>
+						<c:forEach var="subject" items="${subjectList}">
+							<tr>
+								<td>${subject.collName}</td>
+								<td class="sub--list--dept--name">${subject.deptName}</td>
+								<td>${subject.id}</td>
+								<td>${subject.type}</td>
+								<td class="sub--list--name">${subject.name}</td>
+								<td>${subject.professorName}</td>
+								<td>${subject.grades}</td>
+								<td>
+									<c:choose>
+										<c:when test="${subject.startTime < 10}">
+											${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})								
+										</c:when>
+										<c:otherwise>
+											${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})							
+										</c:otherwise>
+									</c:choose>
+								</td>
+								<td>${subject.numOfStudent}</td>
+								<td>${subject.capacity}</td>
+								<td>
+									<!-- 높이가 안 맞아서 어쩔 수 없이 li로 연결함.. -->
+									<ul class="d-flex justify-content-center sub--plan--view" style="margin: 2px 0;">
+										<li style="height: 24px;"><a href="#">조회</a></li>
+										<li style="height: 24px;"><a href="#"><span class="material-symbols-outlined">content_paste_search</span></a></li>
+									</ul>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:when>
+			<c:otherwise>
+				<p class="no--list--p">검색 결과가 없습니다.</p>
+			</c:otherwise>
+		</c:choose>
 
-			<tbody>
-				<c:forEach var="subject" items="${subjectList}">
-					<tr>
-						<td>${subject.collName}</td>
-						<td class="sub--list--dept--name">${subject.deptName}</td>
-						<td>${subject.id}</td>
-						<td>${subject.type}</td>
-						<td class="sub--list--name">${subject.name}</td>
-						<td>${subject.professorName}</td>
-						<td>${subject.grades}</td>
-						<td>${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})</td>
-						<td>${subject.numOfStudent}</td>
-						<td>${subject.capacity}</td>
-						<td>
-							<!-- 높이가 안 맞아서 어쩔 수 없이 li로 연결함.. -->
-							<ul class="d-flex justify-content-center sub--plan--view" style="margin: 2px 0;">
-								<li style="height: 24px;"><a href="#">조회</a></li>
-								<li style="height: 24px;"><a href="#"><span class="material-symbols-outlined">content_paste_search</span></a></li>
-							</ul>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
 	</main>
 </div>
 

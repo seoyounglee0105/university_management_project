@@ -35,4 +35,7 @@ public interface PreStuSubRepository {
 	// 예비 수강 신청 내역 삭제
 	int delete(@Param("studentId") Integer studentId, @Param("subjectId") Integer subjectId);
 	
+	// 예비 수강 신청 내역에 해당 강의가 있는 학생들 조회
+	List<PreStuSub> selectBySubjectId(Integer subjectId);
+	
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -22,6 +23,7 @@ import com.green.university.dto.CurrentSemesterSubjectSearchFormDto;
 import com.green.university.dto.response.PrincipalDto;
 import com.green.university.dto.response.StuSubAppDto;
 import com.green.university.dto.response.SubjectDto;
+import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.BreakApp;
 import com.green.university.repository.model.Department;
 import com.green.university.repository.model.PreStuSub;
@@ -72,6 +74,34 @@ public class StuSubController {
 	@Autowired
 	private UserService userService;
 	
+	// 예비 수강신청 기간 : 0, 수강신청 기간 : 1, 수강신청 기간 종료 : 2
+	public static int SUGANG_PERIOD = 0;
+	
+	// 예비 수강신청 기간에서 수강신청 기간으로 변경하는 페이지 (교직원용)
+	@GetMapping("/period")
+	public String updatePeriod() {
+		
+		return "/stuSub/updatePeriod";
+	}
+	
+	// 예비 수강 신청 기간 -> 수강 신청 기간
+	@GetMapping("/updatePeriod1")
+	public String updatePeriodProc1() {
+		SUGANG_PERIOD = 1;
+
+		stuSubService.createStuSubByPreStuSub();
+		
+		return "/stuSub/updatePeriod";
+	}
+	
+	// 수강 신청 기간 -> 종료
+	@GetMapping("/updatePeriod2")
+	public String updatePeriodProc2() {
+		SUGANG_PERIOD = 2;
+		
+		return "/stuSub/updatePeriod";
+	}
+	
 	
 	// 과목 조회 (현재 학기)
 	@GetMapping("/subjectList")
@@ -111,7 +141,7 @@ public class StuSubController {
 		
 		// 필터에 사용할 강의 이름 정보 (중복 값 제거)
 		List<String> subNameList = new ArrayList<>();
-		for (SubjectDto subject : subjectList) {
+		for (SubjectDto subject : subjectService.readSubjectListByCurrentSemester()) {
 			if (subNameList.contains(subject.getName()) == false) {
 				subNameList.add(subject.getName());
 			}
@@ -127,6 +157,11 @@ public class StuSubController {
 	 */
 	@GetMapping("/pre")
 	public String preStuSubApplication(Model model) {
+		
+		// 예비 수강 신청 기간이 아니라면
+		if (SUGANG_PERIOD != 0) {
+			throw new CustomRestfullException("예비 수강 신청 기간이 아닙니다.", HttpStatus.BAD_REQUEST);
+		}
 		
 		// 이번 학기에 재학 상태가 되지 않는 학생이라면 진입 불가
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
@@ -173,16 +208,18 @@ public class StuSubController {
 	 */
 
 	@PostMapping("/pre/{subjectId}")
-	public String insertPreStuSubAppProc(@PathVariable Integer subjectId, @RequestParam Integer type) {
+	public String insertPreStuSubAppProc(@PathVariable Integer subjectId) {
+		
+		// 예비 수강 신청 기간이 아니라면
+		if (SUGANG_PERIOD != 0) {
+			throw new CustomRestfullException("예비 수강 신청 기간이 아닙니다.", HttpStatus.BAD_REQUEST);
+		}
 		
 		Integer studentId = ((PrincipalDto) session.getAttribute(Define.PRINCIPAL)).getId();
 		preStuSubService.createPreStuSub(studentId, subjectId);
 		
-		if (type == 0) {
-			return "redirect:/stuSub/preApplication";
-		} else {
-			return "redirect:/stuSub/preAppList";
-		}
+		// 강의 검색 페이지에서 신청 시
+		return "redirect:/sugang/pre";
 	}
 	
 	/**
@@ -191,20 +228,32 @@ public class StuSubController {
 
 	@DeleteMapping("/pre/{subjectId}")
 	public String deletePreStuSubAppProc(@PathVariable Integer subjectId, @RequestParam Integer type) {
+		
+		// 예비 수강 신청 기간이 아니라면
+		if (SUGANG_PERIOD != 0) {
+			throw new CustomRestfullException("예비 수강 신청 기간이 아닙니다.", HttpStatus.BAD_REQUEST);
+		}
 	
 		Integer studentId = ((PrincipalDto) session.getAttribute(Define.PRINCIPAL)).getId();
 		preStuSubService.deletePreStuSub(studentId, subjectId);
 		
+		// 강의 검색 페이지에서 취소 시
 		if (type == 0) {
-			return "redirect:/stuSub/preApplication";
+			return "redirect:/sugang/pre";
+		// 수강 신청 내역 페이지에서 취소 시
 		} else {
-			return "redirect:/stuSub/preAppList";
+			return "redirect:/sugang/preAppList?type=0";
 		}
 	}
 	
 	// 예비 수강 신청 강의 목록에서 필터링
 	@GetMapping("/pre/search")
 	public String preStuSubApplicationSearch(Model model, @Validated CurrentSemesterSubjectSearchFormDto currentSemesterSubjectSearchFormDto) {
+		
+		// 예비 수강 신청 기간이 아니라면
+		if (SUGANG_PERIOD != 0) {
+			throw new CustomRestfullException("예비 수강 신청 기간이 아닙니다.", HttpStatus.BAD_REQUEST);
+		}
 		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		
@@ -228,7 +277,7 @@ public class StuSubController {
 		
 		// 필터에 사용할 강의 이름 정보 (중복 값 제거)
 		List<String> subNameList = new ArrayList<>();
-		for (SubjectDto subject : subjectList) {
+		for (SubjectDto subject : subjectService.readSubjectListByCurrentSemester()) {
 			if (subNameList.contains(subject.getName()) == false) {
 				subNameList.add(subject.getName());
 			}
@@ -245,6 +294,11 @@ public class StuSubController {
 	 */
 	@GetMapping("/application")
 	public String stuSubApplication(Model model) {
+		
+		// 수강 신청 기간이 아니라면
+		if (SUGANG_PERIOD != 1) {
+			throw new CustomRestfullException("수강 신청 기간이 아닙니다.", HttpStatus.BAD_REQUEST);
+		}
 	
 		// 이번 학기에 재학 상태가 되지 않는 학생이라면 진입 불가
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
@@ -288,6 +342,11 @@ public class StuSubController {
 	@GetMapping("/application/search")
 	public String stuSubApplicationSearch(Model model, @Validated CurrentSemesterSubjectSearchFormDto currentSemesterSubjectSearchFormDto) {
 		
+		// 수강 신청 기간이 아니라면
+		if (SUGANG_PERIOD != 1) {
+			throw new CustomRestfullException("수강 신청 기간이 아닙니다.", HttpStatus.BAD_REQUEST);
+		}
+		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		
 		// 강의 리스트
@@ -325,13 +384,20 @@ public class StuSubController {
 	@PostMapping("/insertApp/{subjectId}")
 	public String insertStuSubAppProc(@PathVariable Integer subjectId, @RequestParam Integer type) {
 		
+		// 수강 신청 기간이 아니라면
+		if (SUGANG_PERIOD != 1) {
+			throw new CustomRestfullException("수강 신청 기간이 아닙니다.", HttpStatus.BAD_REQUEST);
+		}
+		
 		Integer studentId = ((PrincipalDto) session.getAttribute(Define.PRINCIPAL)).getId();
 		stuSubService.createStuSub(studentId, subjectId);
 		
+		// 강의 검색 페이지에서 신청 시
 		if (type == 0) {
-			return "redirect:/stuSub/application";
+			return "redirect:/sugang/application";
+		// 예비 수강 신청 내역 페이지에서 신청 시
 		} else {
-			return "redirect:/stuSub/appList";
+			return "redirect:/sugang/preAppList?type=1";
 		}
 	}
 	
@@ -341,13 +407,20 @@ public class StuSubController {
 	@DeleteMapping("/deleteApp/{subjectId}")
 	public String deleteStuSubAppProc(@PathVariable Integer subjectId, @RequestParam Integer type) {
 		
+		// 수강 신청 기간이 아니라면
+		if (SUGANG_PERIOD != 1) {
+			throw new CustomRestfullException("수강 신청 기간이 아닙니다.", HttpStatus.BAD_REQUEST);
+		}
+		
 		Integer studentId = ((PrincipalDto) session.getAttribute(Define.PRINCIPAL)).getId();
 		stuSubService.deleteStuSub(studentId, subjectId);
 		
+		// 강의 검색 페이지에서 취소 시
 		if (type == 0) {
-			return "redirect:/stuSub/application";
+			return "redirect:/sugang/application";
+		// 예비 수강 신청 내역 페이지에서 취소 시
 		} else {
-			return "redirect:/stuSub/appList";
+			return "redirect:/sugang/preAppList?type=1";
 		}
 	}
 	
@@ -366,16 +439,42 @@ public class StuSubController {
 		StuStatUtil.checkStuStat("수강신청", stuStatEntity, breakAppList);
 		
 		model.addAttribute("type", type);
+		
 
 		// 예비 수강 신청 기간에 조회 시
 		if (type == 0) {
 			List<StuSubAppDto> preStuSubList = preStuSubService.readPreStuSubList(principal.getId());
 			model.addAttribute("stuSubList", preStuSubList);
 			
+			int sumGrades = 0;
+			for (StuSubAppDto s : preStuSubList) {
+				sumGrades += s.getGrades();
+			}
+			model.addAttribute("sumGrades", sumGrades);
+			
 			return "/stuSub/preAppList";
 		}
 		
 		// 수강 신청 기간에 조회 시 (예비 수강 신청 목록에서 수강 신청으로 자동으로 넘어간 강의와, 직접 신청해야 하는 강의를 분리해서 보여줄 것)
+		
+		// 수강 신청 기간이 아니라면
+		if (SUGANG_PERIOD != 1) {
+			throw new CustomRestfullException("수강 신청 기간이 아닙니다.", HttpStatus.BAD_REQUEST);
+		}
+		
+		// 수강 신청이 완료되지 않은 예비 수강 신청 내역
+		List<StuSubAppDto> preStuSubList1 = stuSubService.readPreStuSubByStuSub(principal.getId());		
+		model.addAttribute("stuSubList", preStuSubList1);
+		
+		// 수강 신청 내역
+		List<StuSubAppDto> stuSubList = stuSubService.readStuSubList(principal.getId());
+		model.addAttribute("stuSubListC", stuSubList);
+		
+		int sumGrades = 0;
+		for (StuSubAppDto s : stuSubList) {
+			sumGrades += s.getGrades();
+		}
+		model.addAttribute("sumGrades", sumGrades);
 		
 		return "/stuSub/preAppList";
 	}
@@ -386,6 +485,11 @@ public class StuSubController {
 	@GetMapping("/list")
 	public String stuSubAppList(Model model) {
 	
+		// 예비 수강 신청 기간이라면
+		if (SUGANG_PERIOD == 0) {
+			throw new CustomRestfullException("수강 신청 기간이 아닙니다.", HttpStatus.BAD_REQUEST);
+		}
+		
 		// 이번 학기에 재학 상태가 되지 않는 학생이라면 진입 불가
 		// 해당 학생의 학적 상태가 '졸업' 또는 '자퇴'라면 X
 		// 해당 학생이 이번 학기 휴학을 승인받은 상태라면 X
@@ -399,7 +503,13 @@ public class StuSubController {
 		List<StuSubAppDto> stuSubList = stuSubService.readStuSubList(principal.getId());
 		model.addAttribute("stuSubList", stuSubList);
 		
-		return "stuSub/appList";
+		int sumGrades = 0;
+		for (StuSubAppDto s : stuSubList) {
+			sumGrades += s.getGrades();
+		}
+		model.addAttribute("sumGrades", sumGrades);
+		
+		return "/stuSub/appList";
 	}
 	
 }

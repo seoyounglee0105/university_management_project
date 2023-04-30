@@ -21,7 +21,7 @@
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>등록</h2>
+			<h2>학사관리</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
@@ -37,10 +37,13 @@
 					<td><a href="/user/staff">직원 등록</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/bill">등록금 고지서</a></td>
+					<td><a href="/tuition/bill">등록금 고지서 발송</a></td>
 				</tr>
 				<tr>
-					<td><a href="/break/list/staff">휴학 처리</a></td>
+					<td><a href="/break/list/staff" class="selected--menu">휴학 처리</a></td>
+				</tr>
+				<tr>
+					<td><a href="/sugang/period">수강 신청 기간 설정</a></td>
 				</tr>
 			</table>
 		</div>
@@ -73,8 +76,8 @@
 									<td>${breakApp.appDate}</td>
 									<td>${breakApp.studentId}</td>
 									<td>${breakApp.type}휴학</td>
-									<td>${breakApp.fromYear}년도${breakApp.fromSemester}학기</td>
-									<td>${breakApp.toYear}년도${breakApp.toSemester}학기</td>
+									<td>${breakApp.fromYear}년도&nbsp;${breakApp.fromSemester}학기</td>
+									<td>${breakApp.toYear}년도&nbsp;${breakApp.toSemester}학기</td>
 									<td><a href="/break/detail/${breakApp.id}">Click</a></td>
 								</tr>
 							</c:forEach>
@@ -83,7 +86,7 @@
 				</c:when>
 
 				<c:otherwise>
-					<p>대기 중인 신청 내역이 없습니다.</p>
+					<p class="no--list--p">대기 중인 신청 내역이 없습니다.</p>
 				</c:otherwise>
 			</c:choose>
 		</div>

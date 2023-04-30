@@ -19,13 +19,13 @@ public interface BreakAppRepository {
 	public int insert(BreakAppFormDto breakAppFormDto);
 	
 	// 학생의 휴학 신청 조회하기
-	public List<BreakApp> findByStudentId(Integer studentId);
+	public List<BreakApp> selectByStudentId(Integer studentId);
 	
 	// 처리되지 않은 휴학 신청 조회하기 (교직원용)
-	public List<BreakApp> findByStatus(String status);
+	public List<BreakApp> selectByStatus(String status);
 	
 	// 특정 휴학 신청서 조회하기
-	public BreakApp findById(Integer id);
+	public BreakApp selectById(Integer id);
 	
 	// 휴학 신청 취소하기 (학생용)
 	public int deleteById(Integer id);

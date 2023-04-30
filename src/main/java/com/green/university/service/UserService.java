@@ -140,8 +140,8 @@ public class UserService {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		if(!passwordEncoder.matches(loginDto.getPassword(), userEntity.getPassword())) {
-			throw new CustomRestfullException(Define.WRONG_PASSWORD , HttpStatus.BAD_REQUEST);
+		if (!passwordEncoder.matches(loginDto.getPassword(), userEntity.getPassword())) {
+			throw new CustomRestfullException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
 
 

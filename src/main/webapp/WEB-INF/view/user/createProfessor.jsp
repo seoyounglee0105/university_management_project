@@ -31,7 +31,7 @@ button{
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>MY</h2>
+			<h2>학사관리</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
@@ -41,16 +41,19 @@ button{
 					<td><a href="/user/student">학생 등록</a></td>
 				</tr>
 				<tr>
-					<td><a href="/user/professor">교수 등록</a></td>
+					<td><a href="/user/professor" class="selected--menu">교수 등록</a></td>
 				</tr>
 				<tr>
 					<td><a href="/user/staff">직원 등록</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/bill">등록금 고지서</a></td>
+					<td><a href="/tuition/bill">등록금 고지서 발송</a></td>
 				</tr>
 				<tr>
 					<td><a href="/break/list/staff">휴학 처리</a></td>
+				</tr>
+				<tr>
+					<td><a href="/sugang/period">수강 신청 기간 설정</a></td>
 				</tr>
 			</table>
 		</div>

@@ -71,7 +71,7 @@ public class StuStatService {
 	@Transactional
 	public void createFirstStatus(Integer studentId) {
 		
-		int resultRowCount = stuStatRepository.insert(studentId, "재학", "9999-01-01");
+		int resultRowCount = stuStatRepository.insert(studentId, "재학", "9999-01-01", null);
 		
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("학적 상태 생성에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -81,9 +81,10 @@ public class StuStatService {
 	/**
 	 * 학적 상태 변동
 	 * 새로운 상태 추가 + 기존 학적 상태의 to_date를 now()로 변경
+	 * breakAppId가 없다면 null로 받기
 	 */
 	
-	public void updateStatus(Integer studentId, String newStatus, String newToDate) {
+	public void updateStatus(Integer studentId, String newStatus, String newToDate, Integer breakAppId) {
 		
 		// 가장 최근의 기존 학적 상태 데이터의 id
 		Integer targetId = stuStatRepository.selectByStudentIdOrderbyIdDesc(studentId).get(0).getId();
@@ -92,7 +93,7 @@ public class StuStatService {
 		int updateRowCount = stuStatRepository.updateOldStatus(targetId);
 		
 		// 새로운 학적 상태 추가
-		int insertRowCount = stuStatRepository.insert(studentId, newStatus, newToDate);
+		int insertRowCount = stuStatRepository.insert(studentId, newStatus, newToDate, breakAppId);
 		
 		if (updateRowCount != 1 || insertRowCount != 1) {
 			throw new CustomRestfullException("학적 상태 변경에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);

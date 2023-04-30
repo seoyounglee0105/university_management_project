@@ -4,15 +4,15 @@
 
 <mapper namespace="com.green.university.repository.interfaces.TuitionRepository">
 
-<select id="findByStudentId" resultType="com.green.university.repository.model.Tuition">
+<select id="selectByStudentId" resultType="com.green.university.repository.model.Tuition">
 	SELECT * FROM tuition_tb WHERE student_id = #{studentId}
 </select>
 
-<select id="findByStudentIdAndStatus" resultType="com.green.university.repository.model.Tuition">
+<select id="selectByStudentIdAndStatus" resultType="com.green.university.repository.model.Tuition">
 	SELECT * FROM tuition_tb WHERE student_id = #{studentId} AND status = #{status} ORDER BY tui_year DESC, semester DESC
 </select>
 
-<select id="findTuiAmount" resultType="com.green.university.repository.model.CollTuit">
+<select id="selectTuiAmountByStudentId" resultType="com.green.university.repository.model.CollTuit">
 	SELECT amount FROM coll_tuit_tb
 	WHERE college_id = (SELECT d.college_id FROM student_tb AS s
 						JOIN department_tb AS d
@@ -25,7 +25,7 @@
 	VALUES (#{studentId}, #{tuiYear}, #{semester}, #{tuiAmount}, #{schType}, #{schAmount})
 </insert>
 
-<select id="findByStudentIdAndSemester" resultType="com.green.university.repository.model.Tuition">
+<select id="selectByStudentIdAndSemester" resultType="com.green.university.repository.model.Tuition">
 	SELECT * FROM tuition_tb
 	WHERE student_id = #{studentId} AND tui_year = #{tuiYear} AND semester = #{semester}
 </select>

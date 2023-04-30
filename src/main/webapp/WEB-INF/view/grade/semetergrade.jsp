@@ -102,7 +102,7 @@
 				</table>
 			</c:when>
 			<c:otherwise>
-				<h1>조회할 과목이 없습니다.</h1>
+				<p class="no--list--p">조회할 과목이 없습니다.</p>
 			</c:otherwise>
 		</c:choose>
 		<br>

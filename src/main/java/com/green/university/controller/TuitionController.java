@@ -67,7 +67,7 @@ public class TuitionController {
 		
 		model.addAttribute("tuitionList", tuitionList);
 		
-		return "tuition/tuiList";	
+		return "/tuition/tuiList";	
 	}
 	
 	/**
@@ -109,7 +109,7 @@ public class TuitionController {
 		
 		model.addAttribute("tuition", tuitionEntity);
 		
-		return "tuition/payment";
+		return "/tuition/payment";
 	}
 	
 	/**
@@ -131,7 +131,7 @@ public class TuitionController {
 	@GetMapping("/bill")
 	public String CreatePayment(Model model) {
 		
-		return "tuition/createPayment";
+		return "/tuition/createPayment";
 	}
 	
 	/**
@@ -151,11 +151,11 @@ public class TuitionController {
 			insertCount += tuitionService.createTuition(studentId);
 		}
 		
-		// jsp로 값 보내기
+		// jsp로 생성 개수 보내기
 		model.addAttribute("insertCount", insertCount);
 		System.out.println(insertCount);
 		
-		return "tuition/createPayment";
+		return "/tuition/createPayment";
 	}
 	
 	

@@ -95,13 +95,13 @@
 					<td><a href="/sugang/subjectList">강의 시간표 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/sugang/pre">예비 수강신청</a></td>
+					<td><a href="/sugang/pre">예비 수강 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/sugang/application">수강신청</a></td>
+					<td><a href="/sugang/preAppList?type=1" class="selected--menu">수강 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/sugang/list">수강신청 내역 조회</a></td>
+					<td><a href="/sugang/list">수강 신청 내역 조회</a></td>
 				</tr>
 			</table>
 		</div>
@@ -112,10 +112,10 @@
 		<h1>수강 신청</h1>
 		<div class="split--div"></div>
 
-		<div class="d-flex justify-content-between align-items-center" style="margin-bottom: 50px;">
+		<div class="d-flex justify-content-between align-items-start" style="margin-bottom: 50px;">
 			<!-- 필터 및 검색 -->
 			<div class="sub--filter">
-				<form action="/stuSub/preApplication/Search" method="get">
+				<form action="/sugang/application/search" method="get">
 					<div>
 						<!-- 강의구분 콤보박스 -->
 						<label for="type">강의구분</label> <select name="type" id="type">
@@ -149,69 +149,82 @@
 			</div>
 
 			<!-- 예비 수강 신청 내역으로 가기 -->
-			<a href="/stuSub/preAppList?type=1"><button class="preStuSubList--button">예비 수강 신청 내역</button></a>
+			<a href="/sugang/preAppList?type=1"><button class="preStuSubList--button">수강 신청 내역</button></a>
 		</div>
+		<c:choose>
+			<c:when test="${subjectList.isEmpty() == false}">
+				<h4>
+					<span style="font-weight: 600;">강의 목록</span>&nbsp; <span style="color: gray; font-size: 18px;">[총 ${subjectList.size()}건]</span>
+				</h4>
+				<table border="1" class="sub--list--table">
+					<thead>
+						<tr>
+							<th>단과대학</th>
+							<th>개설학과</th>
+							<th>학수번호</th>
+							<th>강의구분</th>
+							<th style="width: 250px;">강의명</th>
+							<th>담당교수</th>
+							<th>학점</th>
+							<th>요일시간 (강의실)</th>
+							<th>현재인원</th>
+							<th>정원</th>
+							<th>수강신청</th>
+						</tr>
+					</thead>
 
-		<h4>
-			<span style="font-weight: 600;">강의 목록</span>&nbsp; <span style="color: gray; font-size: 18px;">[총 ${subjectList.size()}건]</span>
-		</h4>
-		<table border="1" class="sub--list--table">
-			<thead>
-				<tr>
-					<th>단과대학</th>
-					<th>개설학과</th>
-					<th>학수번호</th>
-					<th>강의구분</th>
-					<th style="width: 250px;">강의명</th>
-					<th>담당교수</th>
-					<th>학점</th>
-					<th>요일시간 (강의실)</th>
-					<th>현재인원</th>
-					<th>정원</th>
-					<th>수강신청</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<c:forEach var="subject" items="${subjectList}">
-					<tr>
-						<td>${subject.collName}</td>
-						<td>${subject.deptName}</td>
-						<td>${subject.id}</td>
-						<td>${subject.type}</td>
-						<td class="sub--list--name">${subject.name}</td>
-						<td>${subject.professorName}</td>
-						<td>${subject.grades}</td>
-						<td>${subject.subDay}${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})</td>
-						<td>${subject.numOfStudent}</td>
-						<td>${subject.capacity}</td>
-						<td class="sub--list--button--row"><c:choose>
-								<%-- 신청된 상태라면 --%>
-								<c:when test="${subject.status == true}">
-									<form action="/stuSub/deleteApp/${subject.id}?type=0" method="post">
-										<input type="hidden" name="_method" value="delete">
-										<button type="submit" onclick="return confirm('수강신청을 취소하시겠습니까?');" style="background-color: #a7a7a7;">취소</button>
-									</form>
+					<tbody>
+						<c:forEach var="subject" items="${subjectList}">
+							<tr>
+								<td>${subject.collName}</td>
+								<td>${subject.deptName}</td>
+								<td>${subject.id}</td>
+								<td>${subject.type}</td>
+								<td class="sub--list--name">${subject.name}</td>
+								<td>${subject.professorName}</td>
+								<td>${subject.grades}</td>
+								<td><c:choose>
+										<c:when test="${subject.startTime < 10}">
+									${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})								
 								</c:when>
-
-								<%-- 정원이 가득 찬 상태라면 --%>
-								<c:when test="${subject.numOfStudent >= subject.capacity}">
-									<%-- 높이 맞추느라 버튼으로 함 --%>
-									<button type="button" style="background-color: white; color: gray" disabled>신청마감</button>
-								</c:when>
-
-								<%-- 신청되지 않은 상태라면 --%>
-								<c:otherwise>
-									<form action="/stuSub/insertApp/${subject.id}?type=0" method="post">
-										<button type="submit" onclick="return confirm('해당 강의를 수강신청하시겠습니까?');" style="background-color: #548AC2;">신청</button>
-									</form>
+										<c:otherwise>
+									${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})							
 								</c:otherwise>
+									</c:choose></td>
+								<td>${subject.numOfStudent}</td>
+								<td>${subject.capacity}</td>
+								<td class="sub--list--button--row"><c:choose>
+										<%-- 신청된 상태라면 --%>
+										<c:when test="${subject.status == true}">
+											<form action="/sugang/deleteApp/${subject.id}?type=0" method="post">
+												<input type="hidden" name="_method" value="delete">
+												<button type="submit" onclick="return confirm('수강신청을 취소하시겠습니까?');" style="background-color: #a7a7a7;">취소</button>
+											</form>
+										</c:when>
 
-							</c:choose></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+										<%-- 정원이 가득 찬 상태라면 --%>
+										<c:when test="${subject.numOfStudent >= subject.capacity}">
+											<%-- 높이 맞추느라 버튼으로 함 --%>
+											<button type="button" style="background-color: white; color: gray" disabled>신청마감</button>
+										</c:when>
+
+										<%-- 신청되지 않은 상태라면 --%>
+										<c:otherwise>
+											<form action="/sugang/insertApp/${subject.id}?type=0" method="post">
+												<button type="submit" style="background-color: #548AC2;">신청</button>
+											</form>
+										</c:otherwise>
+
+									</c:choose></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:when>
+			<c:otherwise>
+				<p class="no--list--p">검색 결과가 없습니다.</p>
+			</c:otherwise>
+		</c:choose>
 	</main>
 </div>
 

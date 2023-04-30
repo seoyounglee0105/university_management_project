@@ -4,7 +4,7 @@
 
 <mapper namespace="com.green.university.repository.interfaces.ScholarshipRepository">
 
-<select id="findByStudentIdAndSemester" resultType="com.green.university.repository.model.Scholarship">
+<select id="selectByStudentIdAndSemester" resultType="com.green.university.repository.model.Scholarship">
 	SELECT sch.max_amount, sch.type 
 	FROM scholarship_tb AS sch
 	JOIN stu_sch_tb AS ss

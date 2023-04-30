@@ -53,4 +53,9 @@ public interface StuSubRepository {
 	
 	// 수강 신청 내역 삭제
 	int delete(@Param("studentId") Integer studentId, @Param("subjectId") Integer subjectId);
-}
+	
+	// 수강 신청 내역과 예비 수강 신청 내역 조인 후 조회 
+	// type == 1 : 수강 신청, 예비 수강 신청에 둘 다 존재
+	// type == 0 : 예비 수강 신청에만 존재
+	List<StuSubAppDto> selectJoinListByStudentId(Integer studentId);
+}	
