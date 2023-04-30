@@ -41,9 +41,19 @@ public class PersonalController {
 	private HttpSession session;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	/**
+	 * @author 서영
+	 * 메인 홈페이지
+	 */
+	@GetMapping("")
+	public String home() {
+		
+		return "/main";
+	}
 
 	/**
-	 * 로그인 폼, 메인페이지
+	 * 로그인 폼
 	 * 
 	 * @return login.jsp
 	 */
@@ -66,7 +76,7 @@ public class PersonalController {
 		PrincipalDto principal = userService.login(loginDto);
 		session.setAttribute(Define.PRINCIPAL, principal);
 
-		return "redirect:/info/student";
+		return "redirect:/";
 	}
 
 	/**

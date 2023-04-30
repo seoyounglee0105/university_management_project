@@ -82,14 +82,29 @@ public interface SubjectRepository {
 	 */
 	public Subject selectSubjectById(Integer id);
 	
-	public List<Subject> findAll();
+	public List<Subject> selectAll();
 
 	/**
 	 * @author 서영
-	 * 현재 인원 수정 (1명 추가 or 삭제)
+	 * 현재 인원 수정 (1명 추가 or 삭제 or 0으로 초기화)
 	 */
 	public int updateNumOfStudent(@Param("id") Integer id, @Param("type") String type);
 	
 	
 	public ReadSyllabusDto selectSyllabusBySubjectId(Integer subjectId);
+	
+	/**
+	 * @author 서영
+	 * 정원 >= 신청인원인 강의의 id 리스트
+	 */
+	public List<Integer> selectIdByLessNumOfStudent();
+	
+	/**
+	 * @author 서영
+	 * 정원 < 신청인원인 강의의 id 리스트
+	 */
+	public List<Integer> selectIdByMoreNumOfStudent();
+	
+	
+	
 }

@@ -8,15 +8,15 @@
 	VALUES (#{studentId}, #{studentGrade}, #{fromYear}, #{fromSemester}, #{toYear}, #{toSemester}, #{type})
 </insert>
 
-<select id="findByStudentId" resultType="com.green.university.repository.model.BreakApp">
+<select id="selectByStudentId" resultType="com.green.university.repository.model.BreakApp">
 	SELECT * FROM break_app_tb WHERE student_id = #{studentId} ORDER BY id DESC
 </select>
 
-<select id="findByStatus" resultType="com.green.university.repository.model.BreakApp">
+<select id="selectByStatus" resultType="com.green.university.repository.model.BreakApp">
 	SELECT * FROM break_app_tb WHERE status = #{status}
 </select>
 
-<select id="findById" resultType="com.green.university.repository.model.BreakApp">
+<select id="selectById" resultType="com.green.university.repository.model.BreakApp">
 	SELECT * FROM break_app_tb WHERE id = #{id}
 </select>
 

@@ -2,6 +2,9 @@ package com.green.university.dto.response;
 
 import lombok.Data;
 
+/**
+ * @author 서영
+ */
 @Data
 public class StuSubAppDto {
 
@@ -17,5 +20,7 @@ public class StuSubAppDto {
 	private Integer numOfStudent;
 	private Integer capacity;
 	private String roomId;
+	
+	private Boolean status;
 	
 }

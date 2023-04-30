@@ -25,7 +25,7 @@
 						<div class="login--id">
 							<label for="userId"><span class="material-symbols-outlined">person</span></label>
 							&nbsp;
-							<input type="text" name="id" id="userId" placeholder="아이디를 입력하세요" required>
+							<input type="text" name="id" id="userId" placeholder="아이디를 입력하세요" required value="2023000051" maxlength="10">
 							<div class="checkbox--id"><input type="checkbox">&nbsp;ID 저장 </div>
 						</div>
 					</div>
@@ -33,7 +33,7 @@
 						<div class="login--pwd">
 							<label for="password"><span class="material-symbols-outlined">lock</span></label>
 							&nbsp;
-							<input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요" required>
+							<input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요" required value="123123">
 						</div>
 					</div>
 				</div>

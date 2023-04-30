@@ -1,3 +1,4 @@
+<%@page import="com.green.university.controller.StuSubController"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -24,13 +25,13 @@
 					<td><a href="/user/staff">직원 등록</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/bill" class="selected--menu">등록금 고지서 발송</a></td>
+					<td><a href="/tuition/bill">등록금 고지서 발송</a></td>
 				</tr>
 				<tr>
 					<td><a href="/break/list/staff">휴학 처리</a></td>
 				</tr>
 				<tr>
-					<td><a href="/sugang/period">수강 신청 기간 설정</a></td>
+					<td><a href="/sugang/period" class="selected--menu">수강 신청 기간 설정</a></td>
 				</tr>
 			</table>
 		</div>
@@ -38,15 +39,23 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>등록금 고지서 발송</h1>
+		<h1>수강 신청 기간 설정</h1>
 		<div class="split--div"></div>
-		<a href="/tuition/create"><button type="submit" class="btn btn-primary create--tui">등록금 고지서 발송</button></a>
-		<c:if test="${insertCount != null}">
-			<%
-			out.println(
-					"<script>alert('" + request.getAttribute("insertCount") + "개의 등록금 고지서가 생성되었습니다.'); history.back(); </script>");
-			%>
-		</c:if>
+		<% if (StuSubController.SUGANG_PERIOD == 0) { %>
+			<p class="no--list--p">현재 예비 수강 신청 기간입니다.</p> 
+			<br>
+			<a href="/sugang/updatePeriod1"><button type="submit" class="btn btn-primary create--tui">수강 신청 기간 시작</button></a>
+			
+		<% } else if (StuSubController.SUGANG_PERIOD == 1) { %>
+			<p class="no--list--p">현재 수강 신청 기간입니다.</p> 
+			<br>
+			<a href="/sugang/updatePeriod2"><button type="submit" class="btn btn-primary create--tui">수강 신청 기간 종료</button></a>
+			
+		<% } else { %>
+			<p class="no--list--p">이번 학기 수강 신청 기간이 종료되었습니다.</p>
+			
+		<% } %>
+		
 	</main>
 </div>
 

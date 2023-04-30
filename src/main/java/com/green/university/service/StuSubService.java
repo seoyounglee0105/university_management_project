@@ -36,6 +36,9 @@ public class StuSubService {
 	@Autowired
 	private SubjectService subjectService;
 	
+	@Autowired
+	private PreStuSubRepository preStuSubRepository;
+
 	
 	// 학생의 수강신청 내역에 해당 강의가 존재하는지 확인
 	public StuSub readStuSub(Integer studentId, Integer subjectId) {
@@ -102,5 +105,46 @@ public class StuSubService {
 			throw new CustomRestfullException("예비 수강신청 취소가 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	// 예비 수강 신청 기간 -> 수강 신청 기간 변경 시 로직
+	@Transactional
+	public void createStuSubByPreStuSub() {
+		
+		// 1. 정원 >= 신청인원인 강의
+		List<Integer> idList1 = subjectRepository.selectIdByLessNumOfStudent();
+		
+		for (Integer subjectId : idList1) {
+			
+			// 예비 수강 신청에서 해당 강의를 신청했던 내역 가져오기
+			List<PreStuSub> preAppList = preStuSubRepository.selectBySubjectId(subjectId);
+			
+			// 예비 수강 신청했던 인원들이 자동으로 수강 신청되도록 
+			// 해당 내역 그대로 수강 신청 추가
+			for (PreStuSub pss : preAppList) {
+				// 수강 신청 내역이 없다면
+				if (stuSubRepository.selectByStudentIdAndSubjectId(pss.getStudentId(), pss.getSubjectId()) == null) {
+					stuSubRepository.insert(pss.getStudentId(), pss.getSubjectId());
+				}
+			}
+		}
+		
+		// 2. 정원 < 신청인원인 강의
+		List<Integer> idList2 = subjectRepository.selectIdByMoreNumOfStudent();
+		
+		for (Integer subjectId : idList2) {
+			
+			// 강의의 현재 인원 초기화
+			subjectRepository.updateNumOfStudent(subjectId, "초기화");
+			
+		}
+	}
+	
+	// 수강 신청 내역과 예비 수강 신청 내역 조인 후 조회 -> 예비 수강 신청에만 존재
+	@Transactional
+	public List<StuSubAppDto> readPreStuSubByStuSub(Integer studentId) {
+		List<StuSubAppDto> dtoList = stuSubRepository.selectJoinListByStudentId(studentId);
+		return dtoList;
+	}
+	
 	
 }

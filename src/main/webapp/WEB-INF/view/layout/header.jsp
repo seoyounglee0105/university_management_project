@@ -22,9 +22,9 @@
 		<div class="header--top">
 			<ul>
 				<!-- todo 삭제 -->
-				<li style="margin-right: 20px;"><a href="/">임시 로그인</a>
+				<li style="margin-right: 20px;"><a href="/login">임시 로그인</a>
 				<li class="material--li"><span class="material-symbols-outlined">account_circle</span>
-				<li>${principal.name}님(${principal.id})
+				<li>${principal.name}님 (${principal.id})
 				<li style="margin: 0 15px;">ㅣ
 				<li class="material--li"><span style="color: #9BD2EC;" class="material-symbols-outlined">logout</span>
 				<li><a href="/logout">로그아웃</a>
@@ -37,18 +37,18 @@
 			<c:choose>
 				<c:when test="${principal.userRole.equals(\"student\")}">
 					<ul>
-						<li><a href="/layout/main">홈</a>
+						<li><a href="/">홈</a>
 						<li><a href="/info/student">MY</a>
 						<li><a href="/subject/list">수업</a>
 						<li><a href="/sugang/subjectList">수강신청</a>
-						<li><a href="/grade/thisSemester">성적조회</a>
+						<li><a href="/grade/thisSemester">성적</a>
 						<li><a href="/notice">학사정보</a>
 					</ul>
 				</c:when>
 
 				<c:when test="${principal.userRole.equals(\"professor\")}">
 					<ul>
-						<li><a href="/layout/main">홈</a>
+						<li><a href="/">홈</a>
 						<li><a href="/info/professor">MY</a>
 						<li><a href="/subject/list">수업</a>
 						<li><a href="/notice">학사정보</a>
@@ -57,7 +57,7 @@
 
 				<c:otherwise>
 					<ul>
-						<li><a href="/layout/main">홈</a>
+						<li><a href="/">홈</a>
 						<li><a href="/info/staff">MY</a>
 						<li><a href="/user/student">학사관리</a>
 						<li><a href="/admin/college">등록</a>

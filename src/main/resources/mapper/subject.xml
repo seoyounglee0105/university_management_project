@@ -24,12 +24,11 @@
 
 	<insert id="insert">
 		insert into subject_tb (name, professor_id, room_id, dept_id, type, sub_year, semester, sub_day, start_time, end_time, grades, capacity)
-		values(#{name}, #{professorId}, #{roomId},
-		#{deptId},
-		#{type}, #{subYear}, #{semester}, #{subDay}, #{startTime}, #{endTime}, #{grades}, #{capacity})
+		values(#{name}, #{professorId}, #{roomId}, #{deptId}, #{type}, #{subYear}, #{semester}, 
+			   #{subDay}, #{startTime}, #{endTime}, #{grades}, #{capacity})
 	</insert>
 
-	<select id="findAll" resultType="com.green.university.repository.model.Subject">
+	<select id="selectAll" resultType="com.green.university.repository.model.Subject">
 		select * from subject_tb
 	</select>
 
@@ -52,8 +51,7 @@
 		SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 		FROM subject_tb AS sub
 		JOIN department_tb AS dept
-		ON sub.dept_id =
-		dept.id
+		ON sub.dept_id = dept.id
 		JOIN college_tb AS coll
 		ON dept.college_id = coll.id
 		JOIN professor_tb AS prof
@@ -64,14 +62,12 @@
 		SELECT sub.*, dept.name AS dept_name, coll.name AS coll_name, prof.name AS professor_name
 		FROM subject_tb AS sub
 		JOIN department_tb AS dept
-		ON
-		sub.dept_id = dept.id
+		ON sub.dept_id = dept.id
 		JOIN college_tb AS coll
 		ON dept.college_id = coll.id
 		JOIN professor_tb AS prof
 		ON sub.professor_id = prof.id
-		WHERE sub_year =
-		#{subYear} AND semester = #{semester}
+		WHERE sub_year = #{subYear} AND semester = #{semester}
 	</select>
 
 	<select id="selectDtoBySemesterAndDeptAndName" resultType="com.green.university.dto.response.SubjectDto">
@@ -86,10 +82,9 @@
 			ON dept.college_id = coll.id
 			JOIN professor_tb AS prof
 			ON sub.professor_id = prof.id
-			WHERE sub.sub_year =
-			#{subYear}
+			WHERE sub.sub_year = #{subYear}
 			AND sub.semester = #{semester}
-			AND sub.name LIKE '%'||#{name}||'%'
+			AND sub.name LIKE CONCAT('%', #{name}, '%')
 		</if>
 
 		<!-- 특정 개설학과 -->
@@ -102,12 +97,10 @@
 			ON dept.college_id = coll.id
 			JOIN professor_tb AS prof
 			ON sub.professor_id = prof.id
-			WHERE sub.sub_year =
-			#{subYear}
+			WHERE sub.sub_year = #{subYear}
 			AND sub.semester = #{semester}
 			AND sub.dept_id = #{deptId}
-			AND sub.name LIKE
-			'%'||#{name}||'%'
+			AND sub.name LIKE CONCAT('%', #{name}, '%')
 		</if>
 	</select>
 
@@ -123,10 +116,9 @@
 			ON dept.college_id = coll.id
 			JOIN professor_tb AS prof
 			ON sub.professor_id = prof.id
-			WHERE sub.sub_year =
-			#{subYear}
+			WHERE sub.sub_year = #{subYear}
 			AND sub.semester = #{semester}
-			AND sub.name LIKE '%'||#{name}||'%'
+			AND sub.name LIKE CONCAT('%', #{name}, '%')
 		</if>
 
 		<!-- 강의구분 : 전체 & 개설학과 : 특정 -->
@@ -139,12 +131,10 @@
 			ON dept.college_id = coll.id
 			JOIN professor_tb AS prof
 			ON sub.professor_id = prof.id
-			WHERE sub.sub_year =
-			#{subYear}
+			WHERE sub.sub_year = #{subYear}
 			AND sub.semester = #{semester}
 			AND sub.dept_id = #{deptId}
-			AND sub.name LIKE
-			'%'||#{name}||'%'
+			AND sub.name LIKE CONCAT('%', #{name}, '%')
 		</if>
 
 		<!-- 강의구분 : 특정 & 개설학과 : 전체 -->
@@ -161,8 +151,7 @@
 			#{subYear}
 			AND sub.semester = #{semester}
 			AND sub.type = #{type}
-			AND sub.name LIKE
-			'%'||#{name}||'%'
+			AND sub.name LIKE CONCAT('%', #{name}, '%')
 		</if>
 
 		<!-- 강의구분 : 특정 & 개설학과 : 특정 -->
@@ -175,13 +164,11 @@
 			ON dept.college_id = coll.id
 			JOIN professor_tb AS prof
 			ON sub.professor_id = prof.id
-			WHERE sub.sub_year =
-			#{subYear}
+			WHERE sub.sub_year = #{subYear}
 			AND sub.semester = #{semester}
 			AND sub.type = #{type}
 			AND sub.dept_id = #{deptId}
-			AND
-			sub.name LIKE '%'||#{name}||'%'
+			AND sub.name LIKE CONCAT('%', #{name}, '%')
 		</if>
 	</select>
 
@@ -219,6 +206,21 @@
 			UPDATE subject_tb SET num_of_student = num_of_student - 1
 			WHERE id = #{id}
 		</if>
+		
+		<if test="type == '초기화'">
+			UPDATE subject_tb SET num_of_student = 0
+			WHERE id = #{id}
+		</if>
 	</update>
+	
+	<select id="selectIdByLessNumOfStudent" resultType="Integer">
+		SELECT id FROM subject_tb
+		WHERE capacity >= num_of_student
+	</select>
+	
+	<select id="selectIdByMoreNumOfStudent" resultType="Integer">
+		SELECT id FROM subject_tb
+		WHERE num_of_student > capacity
+	</select>
 	
 </mapper>

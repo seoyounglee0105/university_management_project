@@ -93,13 +93,13 @@
 					<td><a href="/sugang/subjectList">강의 시간표 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/sugang/pre">예비 수강신청</a></td>
+					<td><a href="/sugang/pre">예비 수강 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/sugang/application">수강신청</a></td>
+					<td><a href="/sugang/preAppList?type=1">수강 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/sugang/list">수강신청 내역 조회</a></td>
+					<td><a href="/sugang/list" class="selected--menu">수강 신청 내역 조회</a></td>
 				</tr>
 			</table>
 		</div>
@@ -110,10 +110,14 @@
 		<h1>수강 신청 내역 조회</h1>
 		<div class="split--div"></div>
 		<!-- 여기에 내용 넣기 -->
-		<div class="d-flex flex-column align-items-center" style="width: 100%">
+		<div style="width: 100%">
 			<c:choose>
 				<c:when test="${stuSubList.size() > 0}">
 
+					<h4>
+						<span style="font-weight: 600;">신청 내역</span>&nbsp;
+						<span style="color:gray; font-size:18px;">[총 ${sumGrades}학점]</span>
+					</h4>
 					<table border="1" class="sub--list--table">
 						<thead>
 							<tr>
@@ -135,11 +139,20 @@
 									<td class="sub--list--name">${stuSub.subjectName}</td>
 									<td>${stuSub.professorName}</td>
 									<td>${stuSub.grades}</td>
-									<td>${stuSub.subDay} ${stuSub.startTime}:00-${stuSub.endTime}:00&nbsp;(${stuSub.roomId})</td>
+									<td>
+										<c:choose>
+											<c:when test="${stuSub.startTime < 10}">
+												${stuSub.subDay} 0${stuSub.startTime}:00-${stuSub.endTime}:00&nbsp;(${stuSub.roomId})								
+											</c:when>
+											<c:otherwise>
+												${stuSub.subDay} ${stuSub.startTime}:00-${stuSub.endTime}:00&nbsp;(${stuSub.roomId})							
+											</c:otherwise>
+										</c:choose>
+									</td>
 									<td>${stuSub.numOfStudent}</td>
 									<td>${stuSub.capacity}</td>
 									<td class="sub--list--button--row">
-										<form action="/stuSub/deleteApp/${stuSub.subjectId}?type=1" method="post">
+										<form action="/sugang/deleteApp/${stuSub.subjectId}?type=1" method="post">
 											<input type="hidden" name="_method" value="delete">
 											<button type="submit" onclick="return confirm('수강신청을 취소하시겠습니까?');" style="background-color: #a7a7a7;">취소</button>
 										</form>
@@ -151,7 +164,7 @@
 				</c:when>
 
 				<c:otherwise>
-					<p>수강 신청 내역이 없습니다.</p>
+					<p class="no--list--p">수강 신청 내역이 없습니다.</p>
 				</c:otherwise>
 			</c:choose>
 		</div>

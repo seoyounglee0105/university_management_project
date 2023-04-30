@@ -52,7 +52,7 @@ public class TuitionService {
 	@Transactional
 	public List<Tuition> readTuitionList(Integer studentId) {
 		
-		List<Tuition> tuitionEntityList = tuitionRepository.findByStudentId(studentId);
+		List<Tuition> tuitionEntityList = tuitionRepository.selectByStudentId(studentId);
 		
 		return tuitionEntityList;
 	}
@@ -64,7 +64,7 @@ public class TuitionService {
 	@Transactional
 	public List<Tuition> readTuitionListByStatus(Integer studentId, Boolean status) {
 		
-		List<Tuition> tuitionEntityList = tuitionRepository.findByStudentIdAndStatus(studentId, status);
+		List<Tuition> tuitionEntityList = tuitionRepository.selectByStudentIdAndStatus(studentId, status);
 		
 		return tuitionEntityList;
 	}
@@ -75,7 +75,7 @@ public class TuitionService {
 	@Transactional
 	public Tuition readByStudentIdAndSemester(Integer studentId, Integer tuiYear, Integer semester) {
 		
-		Tuition tuitionEntity = tuitionRepository.findByStudentIdAndSemester(studentId, tuiYear, semester);
+		Tuition tuitionEntity = tuitionRepository.selectByStudentIdAndSemester(studentId, tuiYear, semester);
 		
 		return tuitionEntity;
 	}
@@ -168,7 +168,7 @@ public class TuitionService {
 		}
 		
 		// 등록금액
-		Integer tuiAmount = tuitionRepository.findTuiAmount(studentId).getAmount();
+		Integer tuiAmount = tuitionRepository.selectTuiAmountByStudentId(studentId).getAmount();
 		
 		// 장학금 유형 결정 + 유형 반환 (null이면 장학금 지원 대상이 아님)
 		Integer schType = createCurrentSchType(studentId);
@@ -180,7 +180,7 @@ public class TuitionService {
 		Integer schAmount = 0;
 		
 		if (schType != null) {
-			schEntity = scholarshipRepository.findByStudentIdAndSemester(studentId, Define.CURRENT_YEAR, Define.CURRENT_SEMESTER);
+			schEntity = scholarshipRepository.selectByStudentIdAndSemester(studentId, Define.CURRENT_YEAR, Define.CURRENT_SEMESTER);
 			// 등록금액보다 최대 장학금액이 더 크다면
 			if (tuiAmount < schAmount) {
 				schAmount = tuiAmount;
@@ -212,7 +212,7 @@ public class TuitionService {
 		} else {
 			String status = stuStatService.readCurrentStatus(studentId).getStatus();
 			if ("휴학".equals(status)) {
-				stuStatService.updateStatus(studentId, "재학", "9999-01-01");
+				stuStatService.updateStatus(studentId, "재학", "9999-01-01", null);
 			}
 			
 		}

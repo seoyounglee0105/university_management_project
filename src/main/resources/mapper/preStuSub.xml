@@ -45,5 +45,10 @@
 		ON pss.subject_id = s.id
 		WHERE student_id = #{studentId}
 	</select>
+	
+	<select id="selectBySubjectId" resultType="com.green.university.repository.model.PreStuSub">
+		SELECT * FROM pre_stu_sub_tb
+		WHERE subject_id = #{subjectId}
+	</select>
 
 </mapper>

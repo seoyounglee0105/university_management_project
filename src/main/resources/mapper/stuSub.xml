@@ -13,8 +13,7 @@
 		ON s.dept_id = d.id
 		LEFT JOIN stu_sub_detail_tb AS ssd
 		ON ss.id = ssd.id
-		WHERE ss.subject_id =
-		#{subjectId};
+		WHERE ss.subject_id = #{subjectId};
 	</select>
 
 	<update id="updateGradeByStudentIdAndSubjectId">
@@ -69,5 +68,18 @@
 		DELETE FROM stu_sub_tb
 		WHERE student_id = #{studentId} AND subject_id = #{subjectId}
 	</delete>
+
+	<select id="selectJoinListByStudentId" resultType="com.green.university.dto.response.StuSubAppDto">
+		SELECT pss.student_id, pss.subject_id, su.name AS subject_name, p.name AS professor_name, grades, sub_day, start_time, end_time, num_of_student, capacity, room_id
+		FROM pre_stu_sub_tb AS pss
+		LEFT JOIN stu_sub_tb AS ss
+		ON pss.subject_id = ss.subject_id AND pss.student_id = ss.student_id
+		LEFT JOIN subject_tb AS su
+		ON pss.subject_id = su.id
+        LEFT JOIN professor_tb AS p
+        ON su.professor_id = p.id
+		WHERE pss.student_id = #{studentId}
+			AND ss.subject_id IS NULL;
+	</select>
 
 </mapper>

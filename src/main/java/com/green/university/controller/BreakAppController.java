@@ -73,7 +73,16 @@ public class BreakAppController {
 			throw new CustomRestfullException("휴학 신청 대상이 아닙니다.", HttpStatus.BAD_REQUEST);
 		}
 		
-		return "break/application";
+		List<BreakApp> breakList = breakAppService.readByStudentId(principal.getId());	
+		// 이미 이번 학기 신청 내역이 있다면 신청 불가능
+		if (breakList.isEmpty() == false) {
+			if (breakList.get(0).getFromYear() == Define.CURRENT_YEAR
+					&& breakList.get(0).getFromSemester() == Define.CURRENT_SEMESTER) {
+				throw new CustomRestfullException("이미 휴학 신청 내역이 존재합니다.", HttpStatus.BAD_REQUEST);
+			}
+		}
+		
+		return "/break/application";
 	}
 	
 	/**
@@ -96,7 +105,7 @@ public class BreakAppController {
 		
 		breakAppService.createBreakApp(breakAppFormDto);
 		
-		return "redirect:/break/appList";
+		return "redirect:/break/list";
 	}
 	
 	/**
@@ -116,8 +125,6 @@ public class BreakAppController {
 	
 	/**
 	 * @return 처리되지 않은 휴복학 신청 내역 페이지 (교직원용)
-	 * ++ 처리되지 않은 신청 내역이 있다면 메뉴에 띄우거나
-	 * 로그인 시 팝업으로 떴으면 함
 	 */
 	@GetMapping("/list/staff")
 	public String breakAppListByState(Model model) {
@@ -163,13 +170,13 @@ public class BreakAppController {
 		
 		// 신청서의 학번과 현재 로그인된 아이디가 일치하는지 확인
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
-		if (breakAppService.readById(id).getStudentId() != principal.getId()) {
-			throw new UnAuthorizedException("해당 신청자만 신청을 취소할 수 있습니다.", HttpStatus.UNAUTHORIZED);
+		if (breakAppService.readById(id).getStudentId().equals(principal.getId()) == false) {
+			throw new CustomRestfullException("해당 신청자만 신청을 취소할 수 있습니다.", HttpStatus.UNAUTHORIZED);
 		}
 		
 		breakAppService.deleteById(id);
 		
-		return "redirect:/break/appList";
+		return "redirect:/break/list";
 	}
 	
 	/**
@@ -180,7 +187,7 @@ public class BreakAppController {
 		
 		breakAppService.updateById(id, status);
 		
-		return "redirect:/break/appListStaff";
+		return "redirect:/break/list/staff";
 	}
 	
 	

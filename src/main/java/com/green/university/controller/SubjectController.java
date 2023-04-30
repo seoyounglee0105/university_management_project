@@ -71,7 +71,7 @@ public class SubjectController {
 		
 		// 필터에 사용할 강의 이름 정보 (중복 값 제거)
 		List<String> subNameList = new ArrayList<>();
-		for (SubjectDto subject : subjectList) {
+		for (SubjectDto subject : subjectService.readSubjectList()) {
 			if (subNameList.contains(subject.getName()) == false) {
 				subNameList.add(subject.getName());
 			}

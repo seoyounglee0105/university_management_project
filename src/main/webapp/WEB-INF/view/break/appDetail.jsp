@@ -47,39 +47,46 @@
 		<div class="sub--menu--mid">
 			<%-- 학생인지 교직원인지에 따라 나중에 카테고리 바뀌게 해야 함 --%>
 			<table class="sub--menu--table" border="1">
-				<tr>
-					<td><a href="/tuition/list">등록금 내역 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
-				</tr>
-				<tr>
-					<td><a href="/break/application">휴학 신청</a></td>
-				</tr>
-				<tr>
-					<td><a href="/break/appList" class="selected--menu">휴학 내역 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/break/appListStaff">휴학 신청 처리(staff)</a></td>
-				</tr>
-				<tr>
-					<td><a href="/tuition/create">고지서 생성(staff)</a></td>
-				</tr>
-				<tr>
-					<td><a href="/subject/list">전체 강의 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/stuSub/list">강의 시간표 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/stuSub/preApplication">예비 수강 신청</a></td>
-				</tr>
-				<tr>
-					<td><a href=/stuSub/preAppList?type=1>수강 신청</a></td>
-				</tr>
-				<tr>
-					<td><a href="/stuSub/appList">수강 신청 내역 조회</a></td>
-				</tr>
+				<c:choose>
+					<c:when test="${principal.userRole.equals(\"student\")}">
+						<tr>
+							<td><a href="/info/student">내 정보 조회</a></td>
+						</tr>
+						<tr>
+							<td><a href="/password">비밀번호 변경</a></td>
+						</tr>
+						<tr>
+							<td><a href="/break/application">휴학 신청</a></td>
+						</tr>
+						<tr>
+							<td><a href="/break/list" class="selected--menu">휴학 내역 조회</a></td>
+						</tr>
+						<tr>
+							<td><a href="/tuition/list">등록금 내역 조회</a></td>
+						</tr>
+						<tr>
+							<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
+						</tr>
+					</c:when>
+					<c:when test="${principal.userRole.equals(\"staff\")}">
+						<tr>
+							<td><a href="/user/student">학생 등록</a></td>
+						</tr>
+						<tr>
+							<td><a href="/user/professor">교수 등록</a></td>
+						</tr>
+						<tr>
+							<td><a href="/user/staff">직원 등록</a></td>
+						</tr>
+						<tr>
+							<td><a href="/tuition/bill">등록금 고지서</a></td>
+						</tr>
+						<tr>
+							<td><a href="/break/list/staff" class="selected--menu">휴학 처리</a></td>
+						</tr>
+					</c:when>
+				</c:choose>
+
 			</table>
 		</div>
 	</div>
@@ -132,8 +139,6 @@
 				</table>
 			</div>
 
-			<!-- todo : '처리중'이고 학생으로 로그인되어 있으면 취소할 수 있게 취소 버튼 -->
-			<!-- todo : '처리중'이고 교직원으로 로그인되어 있으면 해당 신청서에 대해 처리하는 승인/거부 버튼  -->
 			<c:if test="${breakApp.status.equals(\"처리중\")}">
 				<c:choose>
 					<c:when test="${principal.userRole.equals(\"student\")}">

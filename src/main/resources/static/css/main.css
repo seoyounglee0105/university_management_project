@@ -166,3 +166,9 @@ main h1:first-of-type {
 	color: #075AA4;
 	font-weight: 600;
 }
+
+.no--list--p {
+	font-size: 20px;
+	color: #6c6a6a;
+	font-weight: 600;
+}
