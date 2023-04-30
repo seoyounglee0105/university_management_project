@@ -15,6 +15,7 @@
 </style>
 </head>
 <body>
+
 	<div class="login--div">
 		<div class="main--logo">
 			<a href="#"><img class="logo" alt="" src="/images/logo.png"></a>
@@ -24,8 +25,8 @@
 					<div class="id--container">
 						<div class="login--id">
 							<label for="userId"><span class="material-symbols-outlined">person</span></label>
-							<input type="text" name="id" id="userId" placeholder="아이디를 입력하세요" required>
-							<div class="checkbox--id"><input type="checkbox"> ID 저장 </div>
+							<input type="text" name="id" id="userId" placeholder="아이디를 입력하세요" required value="${cookie.id}">
+							<div class="checkbox--id"><input type="checkbox" name="rememberId"> ID 저장 </div>
 						</div>
 					</div>
 					<div class="pwd--container">

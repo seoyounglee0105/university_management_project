@@ -12,5 +12,6 @@ public class LoginDto {
 	private Integer id;
 	@NotBlank
 	private String password;
+	private String rememberId;
 	
 }

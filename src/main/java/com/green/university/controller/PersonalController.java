@@ -1,5 +1,8 @@
 package com.green.university.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -61,9 +64,25 @@ public class PersonalController {
 	 * @return 메인 페이지 이동(수정 예정)
 	 */
 	@PostMapping("/login")
-	public String signInProc(@Valid LoginDto loginDto) {
+	public String signInProc(@Valid LoginDto loginDto, HttpServletResponse response, HttpServletRequest request) {
 
 		PrincipalDto principal = userService.login(loginDto);
+		if("on".equals(loginDto.getRememberId())) {
+			Cookie cookie = new Cookie("id", loginDto.getId() + "");
+			cookie.setMaxAge(60 * 60 * 24 * 7);
+			response.addCookie(cookie);
+		} else {
+			Cookie[] cookies = request.getCookies();
+			if(cookies != null){
+				for(Cookie c : cookies){
+					if(c.getName().equals("email")){
+						c.setMaxAge(0);
+						response.addCookie(c);
+						break;
+					}
+				}
+			}
+		}
 		session.setAttribute(Define.PRINCIPAL, principal);
 
 		return "redirect:/info/student";
