@@ -3,7 +3,7 @@ package com.green.university.dto;
 import lombok.Data;
 
 @Data
-public class EvaluationFormDto {
+public class EvaluationDto {
 
 	private Integer studentId;
 	private Integer subjectId;

@@ -99,26 +99,33 @@
 	<main>
 		<h1>내 강의 평가</h1>
 		<div class="split--div"></div>
-		<!-- 여기에 내용 넣기 -->
 
-		<!-- 필터 및 검색 -->
 		<div>
-		<table border="1" class="sub--list--table">
-		<thead>
-		<tr>
-		<th>과목 이름</th>
-		<th>총 평가 점수</th>
-		<th>건의 사항</th>
-		</tr>
-		</thead>
-		<c:forEach var ="eval" items="${eval}">
-		<tr>
-		<td>${eval.name}</td>
-		<td>${eval.answerSum()}</td>
-		<td>${eval.improvements}</td>
-		</tr>
-		</c:forEach>
-		</table>
+		<!-- 강의평가 과목 조회 -->
+		<form action="/evaluation/read" method="post">
+		<select name="subjectId">
+			<c:forEach var="dto" items="${subjectName}">
+				<option value="${dto.name}">${dto.name}</option>
+			</c:forEach>
+		</select>
+			<input type="submit" value="조회">
+			</form>
+			<table border="1" class="sub--list--table">
+				<thead>
+					<tr>
+						<th>과목 이름</th>
+						<th>총 평가 점수</th>
+						<th>건의 사항</th>
+					</tr>
+				</thead>
+				<c:forEach var="eval" items="${eval}">
+					<tr>
+						<td>${eval.name}</td>
+						<td>${eval.answerSum()}</td>
+						<td>${eval.improvements}</td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
 	</main>
 </div>

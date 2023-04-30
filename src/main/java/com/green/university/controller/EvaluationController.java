@@ -2,6 +2,7 @@ package com.green.university.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.green.university.dto.EvaluationFormDto;
+import com.green.university.dto.EvaluationDto;
 import com.green.university.dto.MyEvaluationDto;
 import com.green.university.dto.response.PrincipalDto;
 import com.green.university.dto.response.QuestionDto;
@@ -53,7 +54,7 @@ public class EvaluationController {
 	 *  강의평가 post
 	 */
 	@PostMapping("/write/{subjectId}")
-	public String EvaluationProc(@PathVariable Integer subjectId, EvaluationFormDto evaluationFormDto, Model model ) {
+	public String EvaluationProc(@PathVariable Integer subjectId, EvaluationDto evaluationFormDto, Model model ) {
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		
 		
@@ -82,10 +83,31 @@ public class EvaluationController {
 		model.addAttribute("type", 1);
 		return "evaluation/evaluation";	
 	}
-	@GetMapping("/mySubject")
-	public String MyEvaluation(Model model) {
+	
+	// 강의 평가 처음화면 (교수)
+	@GetMapping("/read")
+	public String readEvaluation(Model model) {
+		
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+		
+		List<MyEvaluationDto> subjectName = evaluationService.readSubjectName(principal.getId());
 		List<MyEvaluationDto> eval = evaluationService.readEvaluationByProfessorId(principal.getId());
+		model.addAttribute("subjectName", subjectName);
+		model.addAttribute("eval", eval);
+		
+		return "evaluation/myEvaluation";
+	}
+	
+	// 과목별 강의 평가 조회 (교수)
+	@PostMapping("/read")
+	public String readEvaluation(Model model, HttpServletRequest httpServletRequest) {
+		
+		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+		String name = httpServletRequest.getParameter("subjectId");
+		
+		List<MyEvaluationDto> subjectName = evaluationService.readSubjectName(principal.getId());
+		List<MyEvaluationDto> eval = evaluationService.readEvaluationByProfessorIdAndName(principal.getId(), name);
+		model.addAttribute("subjectName", subjectName);
 		model.addAttribute("eval", eval);
 		return "evaluation/myEvaluation";
 	}
