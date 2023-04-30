@@ -59,10 +59,12 @@
 }
 label {
 	background-color: #fff;
+	margin: 0 0 0 3px;
+	padding-top: 3px;
 }
 .login--id {
 	display: flex;
-	flex-direction: row;
+	align-items: center;
 	height: 30px;
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -70,6 +72,8 @@ label {
 }
 
 .login--pwd {
+	display: flex;
+	align-items: center;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	background-color: #fff;
@@ -85,6 +89,7 @@ label {
 #userId, #password {
 	border: hidden;
 	background-color: #fff;
+	margin-left: 5px;
 }
 
 #userId { 

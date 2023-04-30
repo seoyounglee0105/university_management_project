@@ -24,13 +24,15 @@
 					<div class="id--container">
 						<div class="login--id">
 							<label for="userId"><span class="material-symbols-outlined">person</span></label>
+							&nbsp;
 							<input type="text" name="id" id="userId" placeholder="아이디를 입력하세요" required>
-							<div class="checkbox--id"><input type="checkbox"> ID 저장 </div>
+							<div class="checkbox--id"><input type="checkbox">&nbsp;ID 저장 </div>
 						</div>
 					</div>
 					<div class="pwd--container">
 						<div class="login--pwd">
 							<label for="password"><span class="material-symbols-outlined">lock</span></label>
+							&nbsp;
 							<input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요" required>
 						</div>
 					</div>
@@ -39,7 +41,8 @@
 						<input type="submit" value="로그인" id="input--submit">
 					</div>
 				<ul class="login--info">
-					<li><a href="/find/id" onclick="window.open(this.href, '_blank', 'width=500, height=300'); return false;"> ID 찾기 </a></li>
+					<li><a href="/find/id" onclick="window.open(this.href, '_blank', 'width=500, height=300'); return false;"> 아이디 찾기 </a></li>
+					<li>ㅣ
 					<li><a href="/find/password" onclick="window.open(this.href, '_blank', 'width=500, height=350'); return false;"> 비밀번호 찾기 </a></li>
 				</ul>
 		</form>
