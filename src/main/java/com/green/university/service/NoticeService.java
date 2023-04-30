@@ -28,6 +28,15 @@ public class NoticeService {
 	 * 공지 입력 서비스
 	 */
 	public void insertNotice(@Validated NoticeFormDto noticeFormDto) {
+//		List<Notice> noticeList = noticeRepository.selectByNoticeDto();
+//		if(noticeList.size() != 0) {
+//			for (int i = 0; i < noticeList.size(); i++) {
+//				if(noticeList.get(i).getTitle().equals(noticeFormDto.getTitle()) &&
+//					noticeList.get(i).getContent().equals(noticeFormDto.getContent())) {
+//						throw new CustomRestfullException("이미 입력된 공지입니다", HttpStatus.BAD_REQUEST);
+//				}
+//			}			
+//		}
 		int resultRowCount = noticeRepository.insert(noticeFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("공지 입력 서비스 오류");

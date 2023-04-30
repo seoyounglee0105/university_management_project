@@ -51,7 +51,7 @@
 					<td><a href="/admin/room">강의실</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/collTuit" class="selected--menu">단대별 등록금</a></td>
+					<td><a href="/admin/tuition" class="selected--menu">단대별 등록금</a></td>
 				</tr>
 			</table>
 		</div>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,7 +82,7 @@ public class NoticeController {
 			}
 		}
 		noticeService.insertNotice(noticeFormDto);
-		return "redirect:/board/notice";
+		return "redirect:/notice";
 	}
 
 	/**
@@ -89,8 +90,8 @@ public class NoticeController {
 	 * @return 공지사항 상세 조회 기능
 	 */
 	@GetMapping("/read")
-	public String findByIdNotice(Model model, @RequestParam Integer id) {
-		model.addAttribute("crud", "selectDetail");
+	public String selectByIdNotice(Model model, @RequestParam Integer id) {
+		model.addAttribute("crud", "read");
 		model.addAttribute("id", id);
 		
 		Notice notice = noticeService.findByIdNotice(id);
@@ -122,9 +123,8 @@ public class NoticeController {
 	 */
 	@PutMapping("/update")
 	public String update(@Validated NoticeFormDto noticeFormDto) {
-		System.out.println(noticeFormDto);
 		noticeService.updateNotice(noticeFormDto);
-		return "redirect:/board/notice";
+		return "redirect:/notice";
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class NoticeController {
 	public String delete(Model model, @RequestParam Integer id) {
 		model.addAttribute("id", id);
 		noticeService.deleteNotice(id);
-		return "redirect:/board/notice";
+		return "redirect:/notice";
 	}
 
 }

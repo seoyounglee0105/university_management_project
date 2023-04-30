@@ -7,6 +7,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.green.university.utils.TimestampUtil;
+
 import lombok.Data;
 /**
  * 
@@ -27,4 +29,9 @@ public class NoticeFormDto {
 	private MultipartFile file;	
 	private String originFilename;
 	private String uuidFilename;
+	
+	public String timeFormat() {
+		TimestampUtil timestampUtil = new TimestampUtil();
+		return timestampUtil.dateTimeToString(createdTime);
+	}
 }
