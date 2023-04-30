@@ -32,7 +32,7 @@ public class NoticeService {
 		if (resultRowCount != 1) {
 			System.out.println("공지 입력 서비스 오류");
 		}
-		int noticeId = noticeRepository.findByLimit(noticeFormDto);
+		int noticeId = noticeRepository.selectLimit(noticeFormDto);
 		noticeFormDto.setNoticeId(noticeId);
 		if(noticeFormDto.getOriginFilename() != null) {
 			noticeRepository.insertFile(noticeFormDto);
@@ -43,7 +43,7 @@ public class NoticeService {
 	 * 공지 조회 서비스
 	 */
 	public List<Notice> findNotice() {
-		List<Notice> noticeList = noticeRepository.findAll();
+		List<Notice> noticeList = noticeRepository.selectByNoticeDto();
 		return noticeList;
 	}
 	
@@ -53,7 +53,7 @@ public class NoticeService {
 	 * 공지 상세 조회 서비스
 	 */
 	public Notice findByIdNotice(Integer id) {
-		Notice notice = noticeRepository.findById(id);
+		Notice notice = noticeRepository.selectById(id);
 		return notice;
 	}
 	
@@ -61,7 +61,7 @@ public class NoticeService {
 	 * 공지 수정 서비스
 	 */
 	public int updateNotice(NoticeFormDto noticeFormDto) {
-		int resultRowCount = noticeRepository.update(noticeFormDto);
+		int resultRowCount = noticeRepository.updateByNoticeDto(noticeFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("공지 수정 서비스 오류");
 		}
@@ -72,7 +72,7 @@ public class NoticeService {
 	 * 공지 삭제 서비스
 	 */
 	public int deleteNotice(Integer id) {
-		int resultRowCount = noticeRepository.delete(id);
+		int resultRowCount = noticeRepository.deleteById(id);
 		return resultRowCount;
 	}
 }

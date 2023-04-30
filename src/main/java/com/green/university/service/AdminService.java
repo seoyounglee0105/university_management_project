@@ -54,9 +54,9 @@ public class AdminService {
 	 * 단과대 입력 서비스
 	 */
 	@Transactional
-	public void insertCollege(@Validated CollegeFormDto collegeFormDto) {
+	public void createCollege(@Validated CollegeFormDto collegeFormDto) {
 		// 같은 이름 중복 검사
-		List<College> collegeList = collegeRepository.findAll();
+		List<College> collegeList = collegeRepository.selectCollegeDto();
 		for (int i = 0; i < collegeList.size(); i++) {
 			if(collegeList.get(i).getName().equals(collegeFormDto.getName())) {
 				throw new CustomRestfullException("이미 존재하는 단과대입니다", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,8 +73,8 @@ public class AdminService {
 	 * 단과대 조회 서비스
 	 */
 	@Transactional
-	public List<College> findCollege() {
-		List<College> collegeList = collegeRepository.findAll();
+	public List<College> readCollege() {
+		List<College> collegeList = collegeRepository.selectCollegeDto();
 		return collegeList;
 	}
 
@@ -82,7 +82,7 @@ public class AdminService {
 	 * 단과대 삭제 서비스
 	 */
 	public int deleteCollege(Integer id) {
-		int resultRowCount = collegeRepository.delete(id);
+		int resultRowCount = collegeRepository.deleteById(id);
 		return resultRowCount;
 	}
 
@@ -90,9 +90,9 @@ public class AdminService {
 	 * 학과 입력 서비스
 	 */
 	@Transactional
-	public void insertDepartment(@Validated DepartmentFormDto departmentFormDto) {
+	public void createDepartment(@Validated DepartmentFormDto departmentFormDto) {
 		// 같은 학과 이름 중복 검사
-		List<Department> departmentList = departmentRepository.findAll();
+		List<Department> departmentList = departmentRepository.selectByDepartmentDto();
 		for (int i = 0; i < departmentList.size(); i++) {
 			if(departmentList.get(i).getName().equals(departmentFormDto.getName())) {
 				throw new CustomRestfullException("이미 존재하는 학과입니다", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -108,8 +108,8 @@ public class AdminService {
 	/**
 	 * 학과 조회 서비스
 	 */
-	public List<Department> findDepartment() {
-		List<Department> departmentList = departmentRepository.findAll();
+	public List<Department> readDepartment() {
+		List<Department> departmentList = departmentRepository.selectByDepartmentDto();
 		return departmentList;
 	}
 
@@ -117,7 +117,7 @@ public class AdminService {
 	 * 학과 삭제 서비스
 	 */
 	public int deleteDepartment(Integer collegeId) {
-		int resultRowCount = departmentRepository.delete(collegeId);
+		int resultRowCount = departmentRepository.deleteById(collegeId);
 		return resultRowCount;
 	}
 
@@ -125,7 +125,7 @@ public class AdminService {
 	 * 학과 수정 서비스
 	 */
 	public int updateDepartment(DepartmentFormDto departmentFormDto) {
-		int resultRowCount = departmentRepository.update(departmentFormDto);
+		int resultRowCount = departmentRepository.updateByDepartmentDto(departmentFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("학과 수정 서비스 오류");
 		}
@@ -136,9 +136,9 @@ public class AdminService {
 	 * 단과대별 등록금 입력 서비스
 	 */
 	@Transactional
-	public void insertCollTuit(@Validated CollTuitFormDto collTuitFormDto) {
+	public void createCollTuit(@Validated CollTuitFormDto collTuitFormDto) {
 		// 등록금 중복 입력 검사
-		List<College> collegeList = collegeRepository.findAll();
+		List<College> collegeList = collegeRepository.selectCollegeDto();
 		for (int i = 0; i < collegeList.size(); i++) {
 			if(collegeList.get(i).getId() == (collTuitFormDto.getCollegeId())) {
 				throw new CustomRestfullException("이미 등록금이 입력된 학과입니다", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -154,8 +154,8 @@ public class AdminService {
 	/**
 	 * 단과대 등록금 조회 서비스
 	 */
-	public List<CollTuit> findCollTuit() {
-		List<CollTuit> collTuitList = collTuitRepository.findAll();
+	public List<CollTuit> readCollTuit() {
+		List<CollTuit> collTuitList = collTuitRepository.selectByCollTuitDto();
 		return collTuitList;
 	}
 
@@ -163,7 +163,7 @@ public class AdminService {
 	 * 단과대 등록금 삭제 서비스
 	 */
 	public int deleteCollTuit(Integer collegeId) {
-		int resultRowCount = collTuitRepository.delete(collegeId);
+		int resultRowCount = collTuitRepository.deleteById(collegeId);
 		return resultRowCount;
 	}
 
@@ -171,7 +171,7 @@ public class AdminService {
 	 * 단과대 등록금 수정 서비스
 	 */
 	public int updateCollTuit(CollTuitFormDto collTuitFormDto) {
-		int resultRowCount = collTuitRepository.update(collTuitFormDto);
+		int resultRowCount = collTuitRepository.updateByCollTuitDto(collTuitFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("단과대 등록금 수정 서비스 오류");
 		}
@@ -182,9 +182,9 @@ public class AdminService {
 	 * 강의실 입력 서비스
 	 */
 	@Transactional
-	public void insertRoom(@Validated RoomFormDto roomFormDto) {
+	public void createRoom(@Validated RoomFormDto roomFormDto) {
 		// 강의실 중복 입력 검사
-		List<Room> roomList = roomRepository.findAll();
+		List<Room> roomList = roomRepository.selectByRoomDto();
 		for (int i = 0; i < roomList.size(); i++) {
 			if(roomList.get(i).getId().equals((roomFormDto.getId()))) {
 				throw new CustomRestfullException("이미 존재하는 강의실입니다", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -200,8 +200,8 @@ public class AdminService {
 	/**
 	 * 강의실 조회 서비스
 	 */
-	public List<Room> findRoom() {
-		List<Room> roomList = roomRepository.findAll();
+	public List<Room> readRoom() {
+		List<Room> roomList = roomRepository.selectByRoomDto();
 		return roomList;
 	}
 
@@ -209,7 +209,7 @@ public class AdminService {
 	 * 강의실 삭제 서비스
 	 */
 	public int deleteRoom(String id) {
-		int resultRowCount = roomRepository.delete(id);
+		int resultRowCount = roomRepository.deleteById(id);
 		return resultRowCount;
 	}
 
@@ -217,7 +217,7 @@ public class AdminService {
 	 * 강의 입력 서비스
 	 */
 	@Transactional
-	public List<Subject> insertSubject(@Validated SubjectFormDto subjectFormDto) {
+	public List<Subject> createSubjectAndSyllabus(@Validated SubjectFormDto subjectFormDto) {
 		// 강의실, 강의시간 중복 검사
 		List<Subject> subjectList = subjectRepository.selectByRoomIdAndSubDayAndSubYearAndSemester(subjectFormDto);
 		if (subjectList != null) {
@@ -238,7 +238,7 @@ public class AdminService {
 	/**
 	 * 강의 조회 서비스
 	 */
-	public List<Subject> findSubject() {
+	public List<Subject> readSubject() {
 		List<Subject> subjectList = subjectRepository.findAll();
 		return subjectList;
 	}
@@ -247,7 +247,7 @@ public class AdminService {
 	 * 강의 삭제 서비스
 	 */
 	public int deleteSubject(Integer id) {
-		int resultRowCount = subjectRepository.delete(id);
+		int resultRowCount = subjectRepository.deleteById(id);
 		syllaBusRepository.delete(id);
 		return resultRowCount;
 	}
@@ -269,7 +269,7 @@ public class AdminService {
 				throw new CustomRestfullException("해당 시간대는 강의실을 사용중입니다! 다시 선택해주세요", HttpStatus.BAD_REQUEST);
 			}
 		}
-		int resultRowCount = subjectRepository.update(subjectFormDto);
+		int resultRowCount = subjectRepository.updateBySubjectDto(subjectFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("강의 수정 서비스 오류");
 		}

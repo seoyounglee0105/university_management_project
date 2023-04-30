@@ -18,9 +18,9 @@ import lombok.AllArgsConstructor;
 public interface CollegeRepository {
 	public int insert(CollegeFormDto CollegeFormDto);
 
-	public List<College> findAll();
+	public List<College> selectCollegeDto();
 
-	public int findByName(String name);
-	public College findById(Integer id);
-	public int delete(Integer id);
+	public int selectCollegeDtoByName(String name);
+	public College selectCollegeDtoById(Integer id);
+	public int deleteById(Integer id);
 }

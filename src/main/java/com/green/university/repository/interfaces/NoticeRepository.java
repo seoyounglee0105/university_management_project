@@ -15,12 +15,12 @@ import com.green.university.repository.model.Notice;
 @Mapper
 public interface NoticeRepository {
 	public int insert(NoticeFormDto noticeFormDto);
-	public List<Notice> findAll();
-	public Notice findById(Integer id);
-	public int update(NoticeFormDto noticeFormDto);
-	public int delete(Integer id);
+	public List<Notice> selectByNoticeDto();
+	public Notice selectById(Integer id);
+	public int updateByNoticeDto(NoticeFormDto noticeFormDto);
+	public int deleteById(Integer id);
 	
 	// 파일
 	public int insertFile(NoticeFormDto noticeFormDto);
-	public int findByLimit(NoticeFormDto noticeFormDto);
+	public int selectLimit(NoticeFormDto noticeFormDto);
 }
