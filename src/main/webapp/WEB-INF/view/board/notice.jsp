@@ -88,7 +88,7 @@
 		
 		<!-- 공지 조회 -->
 			<c:if test="${crud.equals(\"select\")}">
-				<table class="notice--table">
+				<table class="table">
 					<c:choose>
 						<c:when test="${fn:length(noticeList) != 0}">
 									<tr class="first--tr">

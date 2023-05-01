@@ -30,7 +30,7 @@ h5 {
 	background-color: #031734;
 	color: #ccc;
 	text-decoration: none;
-	margin-left: 20px;
+	margin-left: 20px !important;
 }
 </style>
 <!-- 세부 메뉴 + 메인 -->
@@ -302,7 +302,7 @@ h5 {
 					</table>
 					<div class="button">
 						<c:if test="${principal.userRole.equals(\"staff\")}">
-							<a href="/admin/subject?crud=insert" class="btn btn-link" id="submit">등록</a> 
+							<a href="/admin/subject?crud=insert" class="btn btn-link submit" id="submit">등록</a> 
 							<a href="/admin/subject?crud=update" class="btn btn-link" id="submit">수정</a> 
 							<a href="/admin/subject?crud=delete" class="btn btn-link" id="submit">삭제</a>
 						</c:if>
