@@ -58,8 +58,8 @@
 			<br>
 		</div>
 		<div>
-			가나다님의 임시 비밀번호는<br> 
-			<span style="font-weight: bold;">123456789</span><br>
+			${name}님의 임시 비밀번호는<br> 
+			<span style="font-weight: bold;">${password}</span><br>
 			입니다. 보안을 위해 로그인 후 비밀번호를 변경해주세요.
 		</div>
 	</section>

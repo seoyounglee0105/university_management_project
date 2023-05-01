@@ -11,10 +11,11 @@ public class TempPassword {
 	
 	public String returnTempPassword() {
 		int tempPassword = 0;
-		while(tempPassword > 100000) {
-		 tempPassword = (int)Math.random()*1000000;
+		while(tempPassword < 100000) {
+		 tempPassword = (int)(Math.random()*1000000);
 		}
 		password = tempPassword + "";
+		System.out.println(password);
 		return password;
 	}
 
