@@ -26,18 +26,13 @@
 	width: 500px;
 }
 
-#submit {
-	background-color: #031734;
-	color: #ccc;
-	text-decoration: none;
-	margin-left: 100px;
-}
-
 .table {
 	width: 1000px;
 	margin-bottom: 20px;
 	cursor: pointer;
 }
+
+
 
 .first--tr {
 	background-color: #f7f6f6;
@@ -61,13 +56,35 @@
 	font-weight: bold;
 }
 
-.button {
-	display: flex;
-	justify-content: center;
-}
-
 .second--tr:hover {
 	font-weight: bold;
+}
+.button {
+	border: 1px solid #031734;
+	border-radius: 3px;
+	background-color: #031734;
+	color: #ccc;
+	text-decoration: none;
+	margin: 5px;
+	padding: 3px;
+}
+.button:hover {
+	color: #ccc;
+
+}
+.select--button {
+	margin-left: 200px;
+}
+.input--box {
+	border: 1px solid #D2D1D1;
+	border-radius: 3px;
+	height: 35px;
+	margin-right: 20px;
+}
+.form--container {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 90px;
 }
 </style>
 <!-- 세부 메뉴 + 메인 -->
@@ -115,10 +132,11 @@
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-								해당 키워드로 작성된 공지글이 없습니다.
+							<h5>해당 키워드로 작성된 공지글이 없습니다.</h5>
 					</c:otherwise>
 				</c:choose>
 			</table>
+			<div class="paging--container">
 			<c:forEach var="index" begin="1" end="${listCount}">
 				<c:choose>
 					<c:when test="${keyword != null}">
@@ -129,8 +147,9 @@
 					</c:otherwise>
 				</c:choose>
 				</c:forEach>
+			</div>
 			<c:if test="${principal.userRole.equals(\"staff\")}">
-				<a href="/notice?crud=write" class="button" id="submit">등록</a>
+				<a href="/notice?crud=write" class="button">등록</a>
 			</c:if>
 		</c:if>
 
@@ -142,7 +161,7 @@
 					<option value="title">제목</option>
 					<option value="keyword">제목+내용</option>
 				</select>
-				<input type="text" name="keyword"> 
+				<input type="text" name="keyword" class="input--box" placeholder="검색어를 입력하세요"> 
 				<input type="submit" class="button" value="검색">
 			</form>
 			<table class="table">
@@ -241,7 +260,7 @@
 					<div class="custom-file">
 						<input type="file" class="custom-file-input" id="customFile" name="file" accept=".jpg, .jpeg, .png"> <label class="custom-file-label" for="customFile">Choose file</label>
 					</div>
-					<a href="/notice" class="btn btn-link" id="submit">목록</a> <input type="submit" class="btn btn-link" id="submit" value="등록">
+					<a href="/notice" class="button">목록</a> <input type="submit" class="button" value="등록">
 				</form>
 				<script>
 					$(".custom-file-input").on(

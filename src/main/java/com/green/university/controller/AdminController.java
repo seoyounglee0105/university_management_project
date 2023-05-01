@@ -236,7 +236,7 @@ public class AdminController {
 	@GetMapping("/tuition")
 	public String collTuit(Model model, @RequestParam(defaultValue = "select") String crud) {
 		model.addAttribute("crud", crud);
-		List<CollTuit> collTuitList = adminService.readCollTuit();
+		List<CollTuitFormDto> collTuitList = adminService.readCollTuit();
 		List<College> collegeList = adminService.readCollege();
 		if (collegeList.isEmpty()) {
 			model.addAttribute("collegeList", null);
@@ -258,7 +258,7 @@ public class AdminController {
 	@PostMapping("/tuition")
 	public String insertcollTuit(CollTuitFormDto collTuitFormDto) {
 		adminService.createCollTuit(collTuitFormDto);
-		return "redirect:/admin/collTuit";
+		return "redirect:/admin/tuition";
 	}
 	
 	/**
@@ -269,7 +269,7 @@ public class AdminController {
 	public String deleteCollTuit(Model model, @RequestParam Integer collegeId) {
 		model.addAttribute("collegeId", collegeId);
 		adminService.deleteCollTuit(collegeId);
-		return "redirect:/admin/collTuit";
+		return "redirect:/admin/tuition";
 	}
 	
 	/**
@@ -279,7 +279,7 @@ public class AdminController {
 	@PutMapping("/tuitionUpdate")
 	public String updateCollTuit(CollTuitFormDto collTuitFormDto) {
 		adminService.updateCollTuit(collTuitFormDto);
-		return "redirect:/admin/collTuit";
+		return "redirect:/admin/tuition";
 	}
 
 }
