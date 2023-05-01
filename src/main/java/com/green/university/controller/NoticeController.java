@@ -1,7 +1,6 @@
 package com.green.university.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +21,6 @@ import com.green.university.dto.NoticeFormDto;
 import com.green.university.dto.NoticePageFormDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.Notice;
-import com.green.university.service.AdminService;
 import com.green.university.service.NoticeService;
 import com.green.university.utils.Define;
 
