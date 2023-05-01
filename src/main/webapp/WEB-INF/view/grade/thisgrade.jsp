@@ -13,7 +13,7 @@
 </style>
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
-<!-- 등록금 내역 조회 -->
+<!-- 금학기 -->
 
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -42,21 +42,21 @@
 	<main>
 		<h1>금학기 성적 조회</h1>
 		<div class="split--div"></div>
-		<c:choose>
-			<%-- 내가 수강신청 했는정보 연도있는지 비교 --%>
-			<c:when test="${yearList.size() != 0}">
+
+			<c:choose>
+				<%-- 수강연도 조회해서 검사 --%>
+				<c:when test="${yearList.size() != 0}">	
 				<div>
-					<table border="1" class="tuition--table">
-						<thead>
-							<tr>
-								<th>연도</th>
-								<th>학기</th>
-								<th>과목번호</th>
-								<th>과목명</th>
-								<th>강의구분</th>
-								<th>이수학점</th>
-								<th>학점
-								<th>
+				<table border="1" class="tuition--table">
+					<thead>
+						<tr>
+							<th>연도</th>
+							<th>학기</th>
+							<th>과목번호</th>
+							<th>과목명</th>
+							<th>강의구분</th>
+							<th>이수학점</th>
+							<th>학점<th>
 							</tr>
 						</thead>
 						<tbody>
@@ -84,37 +84,39 @@
 				</div>
 
 				<div>
-					<br>
-					<h4 style="font-weight: 600;">누계 성적</h4>
-					<hr>
-					<table border="1" class="tuition--table">
-						<thead>
-							<tr>
-								<th>연도</th>
-								<th>학기</th>
-								<th>신청학점</th>
-								<th>취득학점</th>
-								<th>평점평균</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>${mygrade.subYear}년</td>
-								<td>${mygrade.semester}학기</td>
-								<td>${mygrade.sumGrades}</td>
-								<td>${mygrade.myGrades}</td>
-								<td>${mygrade.average}</td>
-							</tr>
-						</tbody>
-					</table>
+
+				<br>
+				<h1>누계 성적</h1>
+				<div class="split--div"></div>
+				<table border="1" class="tuition--table">
+				<thead>
+				<tr>
+				<th>연도</th>
+				<th>학기</th>
+				<th>신청학점</th>
+				<th>취득학점</th>
+				<th>평점평균</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<%-- 금학기 누계성적 --%>
+				<td>${mygrade.subYear}년</td>
+				<td>${mygrade.semester}학기</td>
+				<td>${mygrade.sumGrades}</td>
+				<td>${mygrade.myGrades}</td>
+				<td>${mygrade.average()}</td>
+				</tr>
+				</tbody>
+				</table>
 				</div>
-			</c:when>
-			<c:otherwise>
-				<p class="no--list--p">조회할 과목이 없습니다.</p>
-			</c:otherwise>
-		</c:choose>
-
-
+				</c:when>
+				<c:otherwise>
+				<h3>강의 신청 및 수강 이력 확인 바랍니다.</h3>
+				</c:otherwise>
+				</c:choose>
+			
+				
 	</main>
 </div>
 

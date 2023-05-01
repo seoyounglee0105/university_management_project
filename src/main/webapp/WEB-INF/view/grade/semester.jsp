@@ -14,17 +14,22 @@
 
 .select_box {
 	display: flex;
+	justify-content: flex-start;
 }
 
 .select_box select {
 	margin-top: 50px;
 	margin-left: 20px;
 }
+.button{
+width: 50px;
+margin-left: 20px;
+}
 </style>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
-<!-- 등록금 내역 조회 -->
+<!-- 학기별 성적 조회 -->
 
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start"
@@ -36,12 +41,13 @@
 		</div>
 		<!-- 메뉴 -->
 		<div class="sub--menu--mid">
-				<table class="sub--menu--table" border="1">
+			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/grade/thisSemester" class="selected--menu">금학기 성적조회</a></td>
+					<td><a href="/grade/thisSemester">금학기 성적조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/grade/semester">학기별 성적조회</a></td>
+					<td><a href="/grade/semester" class="selected--menu">학기별
+							성적조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/grade/total">누계 성적</a></td>
@@ -49,32 +55,35 @@
 			</table>
 		</div>
 	</div>
-	<!-- type: 연도 학기 전공 -->
 	<!-- 메인 div -->
 	<main>
 		<h1>학기 별 조회</h1>
 		<div class="split--div"></div>
 		<c:choose>
-			<%-- 내가 수강신청 했는정보 연도있는지 비교 --%>
+			<%-- 수강연도 조회해서 검사 --%>
 			<c:when test="${yearList.size() != 0}">
 				<div class="select_box">
-					<form action="/grade/check" method="post">
+					<%-- 타입 받아서 조회 --%>
+					<form action="/grade/read" method="post">
 						<select name="subYear">
 							<c:forEach var="grade" items="${yearList}">
 								<option value="${grade.subYear}">${grade.subYear}년</option>
 							</c:forEach>
-						</select> <select name="sesmeter">
+						</select> 
+						<select name="sesmeter">
 							<c:forEach var="grade" items="${semesterList}">
-							<option value="${grade.semester}">${grade.semester}학기</option>
+								<option value="${grade.semester}">${grade.semester}학기</option>
 							</c:forEach>
-						</select> <select name="type">
+						</select> 
+						<select name="type">
 							<option value="전체">전체</option>
 							<option value="전공">전공</option>
 							<option value="교양">교양</option>
-						</select> <input type="submit" value="조회">
+						</select> 
+						<input type="submit" value="조회" class="button">
 					</form>
 				</div>
-				<div class="split--div"></div>
+				<br>
 				<table border="1" class="tuition--table">
 					<thead>
 						<tr>
@@ -87,6 +96,7 @@
 						</tr>
 					</thead>
 					<tbody>
+						<%-- 조회한 값 --%>
 						<c:forEach var="grade" items="${gradeList}">
 							<tr>
 								<td>${grade.subYear}년</td>
@@ -97,17 +107,16 @@
 								<td>${grade.grade}</td>
 							</tr>
 						</c:forEach>
-					
+
 					</tbody>
 				</table>
 			</c:when>
 			<c:otherwise>
-				<p class="no--list--p">조회할 과목이 없습니다.</p>
+				<h3>강의 신청 및 수강 이력 확인 바랍니다.</h3>
 			</c:otherwise>
 		</c:choose>
-		<br>
-		<br>
-	
+		<br> <br>
+
 
 	</main>
 </div>
