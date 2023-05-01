@@ -3,6 +3,7 @@ package com.green.university.dto;
 import java.sql.Date;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -25,7 +26,7 @@ public class CreateStaffDto {
 	private String gender;
 	@NotEmpty
 	private String address;
-	@NotBlank
+	@Size(min = 11, max = 13)
 	private String tel;
 	@Email
 	private String email;

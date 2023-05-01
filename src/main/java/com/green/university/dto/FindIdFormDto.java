@@ -1,5 +1,8 @@
 package com.green.university.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import lombok.Data;
 
 /**
@@ -10,7 +13,9 @@ import lombok.Data;
 @Data
 public class FindIdFormDto {
 
+	@NotBlank
 	private String name;
+	@Email
 	private String email;
 	private String userRole;
 	

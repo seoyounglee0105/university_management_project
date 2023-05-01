@@ -5,8 +5,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,7 @@ import com.green.university.dto.CreateStaffDto;
 import com.green.university.dto.CreateStudentDto;
 import com.green.university.dto.ProfessorListForm;
 import com.green.university.dto.StudentListForm;
+import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.Professor;
 import com.green.university.repository.model.Student;
 import com.green.university.service.ProfessorService;
@@ -56,9 +59,15 @@ public class UserController {
 	 * @return "redirect:/user/staff"
 	 */
 	@PostMapping("/staff")
-	public String createStaffProc(@Valid CreateStaffDto createStaffDto) {
+	public String createStaffProc(@Valid CreateStaffDto createStaffDto, BindingResult bindingResult) {
 
-		System.out.println(createStaffDto.toString());
+		if(bindingResult.hasErrors()) {
+			StringBuilder sb = new StringBuilder();
+			bindingResult.getAllErrors().forEach(error -> {
+				sb.append(error.getDefaultMessage()).append("\\n"); 
+			});
+			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
+		}
 		userService.createStaffToStaffAndUser(createStaffDto);
 
 		return "redirect:/user/staff";
@@ -80,8 +89,16 @@ public class UserController {
 	 * @return "redirect:/user/professor"
 	 */
 	@PostMapping("/professor")
-	public String createProfessorProc(@Valid CreateProfessorDto createProfessorDto) {
+	public String createProfessorProc(@Valid CreateProfessorDto createProfessorDto, BindingResult bindingResult) {
 
+		if(bindingResult.hasErrors()) {
+			StringBuilder sb = new StringBuilder();
+			bindingResult.getAllErrors().forEach(error -> {
+				sb.append(error.getDefaultMessage()).append("\\n"); 
+			});
+			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
+		}
+		
 		userService.createProfessorToProfessorAndUser(createProfessorDto);
 
 		return "redirect:/user/professor";
@@ -103,8 +120,16 @@ public class UserController {
 	 * @return "redirect:/user/student"
 	 */
 	@PostMapping("/student")
-	public String createStudentProc(@Valid CreateStudentDto createStudentDto) {
+	public String createStudentProc(@Valid CreateStudentDto createStudentDto, BindingResult bindingResult) {
 
+		if(bindingResult.hasErrors()) {
+			StringBuilder sb = new StringBuilder();
+			bindingResult.getAllErrors().forEach(error -> {
+				sb.append(error.getDefaultMessage()).append("\\n"); 
+			});
+			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
+		}
+		
 		userService.createStudentToStudentAndUser(createStudentDto);
 
 		return "redirect:/user/student";
