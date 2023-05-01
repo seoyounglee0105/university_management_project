@@ -129,7 +129,7 @@ public class TuitionController {
 	 * 장학금 유형 설정 + 등록금 납부 고지서 생성 페이지
 	 */
 	@GetMapping("/bill")
-	public String CreatePayment(Model model) {
+	public String createPayment(Model model) {
 		
 		return "/tuition/createPayment";
 	}
@@ -138,7 +138,7 @@ public class TuitionController {
 	 * 등록금 납부 고지서 생성
 	 */
 	@GetMapping("/create")
-	public String CreateTuiProc(Model model) {
+	public String createTuiProc(Model model) {
 		
 		List<Integer> studentIdList = stuStatService.readIdList();
 		

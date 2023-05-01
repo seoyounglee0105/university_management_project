@@ -23,7 +23,9 @@ import com.green.university.dto.response.ProfessorInfoDto;
 import com.green.university.dto.response.StudentInfoDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
 import com.green.university.handler.exception.UnAuthorizedException;
+import com.green.university.repository.model.Professor;
 import com.green.university.repository.model.Staff;
+import com.green.university.repository.model.Student;
 import com.green.university.service.UserService;
 import com.green.university.utils.Define;
 
@@ -47,7 +49,21 @@ public class PersonalController {
 	 * 메인 홈페이지
 	 */
 	@GetMapping("")
-	public String home() {
+	public String home(Model model) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		
+		if (principal.getUserRole().equals("student")) {
+			StudentInfoDto studentInfo = userService.readStudentInfo(principal.getId());
+			model.addAttribute("userInfo", studentInfo);
+		} else if (principal.getUserRole().equals("staff")) {
+			Staff staffInfo = userService.readStaff(principal.getId());
+			model.addAttribute("userInfo", staffInfo);
+		} else {
+			ProfessorInfoDto professorInfo = userService.readProfessorInfo(principal.getId());
+			model.addAttribute("userInfo", professorInfo);
+		}
+		
 		
 		return "/main";
 	}
