@@ -25,8 +25,6 @@ list-style: none;
 		<br><br>
 		<form action="/evaluation/write/${subjectId}" method="post">
 		<br> <br>
-					<div>${principal.name}</div>
-					<div></div>
 		
 					<ul class="radiocheck">
 					<li>1.&nbsp;${dto.question1}</li>

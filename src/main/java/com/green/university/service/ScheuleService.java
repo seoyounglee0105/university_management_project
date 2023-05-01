@@ -24,13 +24,17 @@ public class ScheuleService {
 		List<Schedule> schedule = scheuleRepository.selectSchodule();
 		return schedule;
 	}
+	
 	// 학사일정 추가
 	@Transactional
-	public ScheduleFormDto createSchedule(ScheduleFormDto dto) {
-		
-		ScheduleFormDto schedule = scheuleRepository.insertSchoeduleFormDto(dto);
-		
-		return schedule;
+	public void createSchedule(Integer staffId, ScheduleFormDto dto) {
+		Schedule schedule = new Schedule();
+		schedule.setStaffId(staffId);
+		schedule.setStartDay(dto.getStartDay());
+		schedule.setEndDay(dto.getEndDay());
+		schedule.setContent(dto.getContent());
+		System.out.println(schedule);
+		int resultRowCount = scheuleRepository.insertSchoeduleFormDto(schedule);
 	}
 	
 	// 학사일정 업데이트

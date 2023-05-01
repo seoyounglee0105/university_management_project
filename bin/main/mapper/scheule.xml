@@ -9,9 +9,9 @@
 
 <insert id="insertSchoeduleFormDto">
 INSERT INTO schedule_tb
-(staff_id, year, mouth, day, content)
+(staff_id, start_day, end_day, content)
 VALUES
-(#{staffId}, #{year}, #{mouth}, #{day}, #{content});
+(#{staffId}, #{startDay}, #{endDay}, #{content});
 </insert>
 
 <!-- 전체 조회 -->
