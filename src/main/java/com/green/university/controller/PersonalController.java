@@ -155,7 +155,7 @@ public class PersonalController {
 		if ("professor".equals(principal.getUserRole())) {
 			userService.updateProfessor(updateDto);
 		}
-
+		
 		return "redirect:/update";
 	}
 

@@ -110,6 +110,7 @@ form{
 					<td>${staff.email}</td>
 				</tr>
 			</table>
+			<button type="button" onclick="location.href='/update'">수정하기</button>
 	</main>
 </div>
 

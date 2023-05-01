@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.university.dto.CreateProfessorDto;
 import com.green.university.dto.CreateStaffDto;
@@ -110,17 +111,26 @@ public class UserController {
 	 * @return 학생 조회 페이지
 	 */
 	@GetMapping("/studentList")
-	public String showStudentList(Model model) {
+	public String showStudentList(Model model, @RequestParam(required = false) Integer studentId, @RequestParam(required = false) Integer deptId) {
 		
 		StudentListForm studentListForm = new StudentListForm();
 		studentListForm.setPage(0);
+		if(studentId != null) {
+			studentListForm.setStudentId(studentId);
+		} else if (deptId != null) {
+			studentListForm.setDeptId(deptId);
+		}
 		Integer amount = studentService.readStudentAmount(studentListForm);
+		if(studentId != null) {
+			amount = 1;
+		}
 		System.out.println("amount: " + amount);
 		System.out.println("listCount: " + Math.ceil(amount/20.0));
 		List<Student> list = studentService.readStudentList(studentListForm);
 		
 		model.addAttribute("listCount", Math.ceil(amount/20.0));
 		model.addAttribute("studentList", list);
+		model.addAttribute("deptId", deptId);
 		
 		return "/user/studentList";
 	}
@@ -131,9 +141,12 @@ public class UserController {
 	 * @return 학생 조회 페이지
 	 */
 	@GetMapping("/studentList/{page}")
-	public String showStudentListByPage(Model model, @PathVariable Integer page) {
+	public String showStudentListByPage(Model model, @PathVariable Integer page, @RequestParam(required = false) Integer deptId) {
 		
 		StudentListForm studentListForm = new StudentListForm();
+		if (deptId != null) {
+			studentListForm.setDeptId(deptId);
+		}
 		studentListForm.setPage((page - 1) * 20);
 		Integer amount = studentService.readStudentAmount(studentListForm);
 		System.out.println("amount: " + amount);
