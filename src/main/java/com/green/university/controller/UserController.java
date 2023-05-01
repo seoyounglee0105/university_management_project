@@ -1,18 +1,23 @@
 package com.green.university.controller;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.green.university.dto.CreateProfessorDto;
 import com.green.university.dto.CreateStaffDto;
 import com.green.university.dto.CreateStudentDto;
+import com.green.university.dto.StudentListForm;
+import com.green.university.repository.model.Student;
+import com.green.university.service.StudentService;
 import com.green.university.service.UserService;
 
 /**
@@ -27,7 +32,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private HttpSession session;
+	private StudentService studentService;
 
 	/**
 	 * @return staff 입력 페이지
@@ -97,6 +102,48 @@ public class UserController {
 		userService.createStudentToStudentAndUser(createStudentDto);
 
 		return "redirect:/user/student";
+	}
+	
+	/**
+	 * 학생 조회
+	 * @param model
+	 * @return 학생 조회 페이지
+	 */
+	@GetMapping("/studentList")
+	public String showStudentList(Model model) {
+		
+		StudentListForm studentListForm = new StudentListForm();
+		studentListForm.setPage(0);
+		Integer amount = studentService.readStudentAmount(studentListForm);
+		System.out.println("amount: " + amount);
+		System.out.println("listCount: " + Math.ceil(amount/20.0));
+		List<Student> list = studentService.readStudentList(studentListForm);
+		
+		model.addAttribute("listCount", Math.ceil(amount/20.0));
+		model.addAttribute("studentList", list);
+		
+		return "/user/studentList";
+	}
+	
+	/**
+	 * 학생 조회
+	 * @param model
+	 * @return 학생 조회 페이지
+	 */
+	@GetMapping("/studentList/{page}")
+	public String showStudentListByPage(Model model, @PathVariable Integer page) {
+		
+		StudentListForm studentListForm = new StudentListForm();
+		studentListForm.setPage((page - 1) * 20);
+		Integer amount = studentService.readStudentAmount(studentListForm);
+		System.out.println("amount: " + amount);
+		System.out.println("listCount: " + Math.ceil(amount/20.0));
+		List<Student> list = studentService.readStudentList(studentListForm);
+		
+		model.addAttribute("listCount", Math.ceil(amount/20.0));
+		model.addAttribute("studentList", list);
+		
+		return "/user/studentList";
 	}
 	
 	
