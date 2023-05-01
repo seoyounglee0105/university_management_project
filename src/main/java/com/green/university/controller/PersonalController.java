@@ -29,7 +29,11 @@ import com.green.university.dto.response.StudentInfoDto;
 import com.green.university.dto.response.StudentInfoStatListDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
 import com.green.university.handler.exception.UnAuthorizedException;
+import com.green.university.repository.model.BreakApp;
 import com.green.university.repository.model.Staff;
+import com.green.university.repository.model.StuStat;
+import com.green.university.service.BreakAppService;
+import com.green.university.service.StuStatService;
 import com.green.university.service.UserService;
 import com.green.university.utils.Define;
 
@@ -47,13 +51,37 @@ public class PersonalController {
 	private HttpSession session;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private StuStatService stuStatService;
+	@Autowired
+	private BreakAppService breakAppService;
 	
 	/**
 	 * @author 서영
 	 * 메인 홈페이지
 	 */
 	@GetMapping("")
-	public String home() {
+	public String home(Model model) {
+		
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
+		
+		if (principal.getUserRole().equals("student")) {
+			StudentInfoDto studentInfo = userService.readStudentInfo(principal.getId());
+			StuStat stuStat = stuStatService.readCurrentStatus(principal.getId());
+			model.addAttribute("userInfo", studentInfo);
+			model.addAttribute("currentStatus", stuStat.getStatus());
+		} else if (principal.getUserRole().equals("staff")) {
+			Staff staffInfo = userService.readStaff(principal.getId());
+			model.addAttribute("userInfo", staffInfo);
+			
+			List<BreakApp> breakAppList = breakAppService.readByStatus("처리중");
+			model.addAttribute("breakAppSize", breakAppList.size());
+			
+		} else {
+			ProfessorInfoDto professorInfo = userService.readProfessorInfo(principal.getId());
+			model.addAttribute("userInfo", professorInfo);
+		}
+		
 		
 		return "/main";
 	}

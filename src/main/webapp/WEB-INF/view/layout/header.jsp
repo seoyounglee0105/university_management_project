@@ -32,7 +32,7 @@
 		</div>
 
 		<nav class="main--menu">
-			<a href="#"><img class="logo" alt="" src="/images/logo.png"></a>
+			<a href="/"><img class="logo" alt="" src="/images/logo.png"></a>
 			<!-- userRole에 따라 메뉴 다르게 표시 -->
 			<c:choose>
 				<c:when test="${principal.userRole.equals(\"student\")}">

@@ -86,24 +86,18 @@ header {
 }
 
 .main--menu ul li {
-	margin: 0 10px;
-	width: 210px;
-	text-align: center;
-	position: relative;
+	margin: 0 20px;
 }
 
 .main--menu ul li a {
-	display: inline-block;
-	width: 100%;
+	padding: 27px 50px;
 	font-size: 27px;
 	font-weight: 600;
-	line-height: 100px;
 }
 
 .main--menu ul li a:hover {
 	border-bottom: 4px solid #075AA4;
 	color: #075AA4;
-	font-size: 28px;
 }
 
 .sub--menu {
