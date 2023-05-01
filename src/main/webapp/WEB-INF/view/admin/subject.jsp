@@ -4,7 +4,10 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 <link rel="stylesheet" href="/css/admin.css">
 <style>
-
+.table--container {
+	width: 1000px !important;
+	font-size: 13px;
+}
 </style>
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -43,33 +46,28 @@
 
 			<!-- 강의 입력 -->
 			<c:if test="${crud.equals(\"insert\")}">
-				<h5>등록할 강의를 입력해주세요</h5>
-					<form action="/admin/subject-proc" method="post" class="form-group">
-						<div class="insert--container">
+				<form action="/admin/subject-proc" method="post" class="form--container">
+					<span class="material-symbols-outlined symbol">school</span><span class="insert">등록하기</span>
+						<div class="insert--form">
 						<label for="name">강의명</label> 
-						<input type="text" class="form-control" id="name" name="name" value="스프링부트 뽀개기">
-						<div class="form--container">
+						<input type="text" class="input--box" id="name" name="name">
 							<label for="professorId"> 교수ID </label> 
-							<input type="text" class="form-control" id="professorId" name="professorId" value="23000001"> 
+							<input type="text" class="input--box" id="professorId" name="professorId" value="23000001"> 
 							<label for="roomId"> 강의실 </label> 
-							<input type="text" class="form-control" id="roomId" name="roomId" value="C201">
+							<input type="text" class="input--box" id="roomId" name="roomId" value="C201">
 							<label for="deptId"> 학과ID </label> 
-							<input type="text" class="form-control" id="deptId" name="deptId" value="101">
-						</div>
-						<div class="form--container">
+							<input type="text" class="input--box" id="deptId" name="deptId" value="101">
 						구분 
 							<label for="major">전공</label> 
-							<input type="radio" class="form-check-input" id="major" name="type" value="전공">
+							<input type="radio" class="input--box" id="major" name="type" value="전공">
 							<label for="culture">교양</label> 
-							<input type="radio" class="form-check-input" id="culture" name="type" value="교양">
+							<input type="radio" class="input--box" id="culture" name="type" value="교양">
 							<label for="subYear"> 연도 </label> 
-							<input type="text" class="form-control" id="subYear" name="subYear" value="2023">
+							<input type="text" class="input--box" id="subYear" name="subYear" value="2023">
 							<label for="semester"> 학기 </label> 
-							<input type="text" class="form-control" id="semester" name="semester" value="1">
-						</div>
-						<div class="form--container">
+							<input type="text" class="input--box" id="semester" name="semester" value="1">
 							<label for="subDay"> 요일 </label>
-								<select name="subDay" class="form-control form-control-sm">
+								<select name="subDay" class="input--box">
 									<option value="월">월</option>
 									<option value="화">화</option>
 									<option value="수">수</option>
@@ -77,20 +75,18 @@
 									<option value="금">금</option>
 								</select> 
 							<label for="startTime"> 시작 시간 </label> 
-							<input type="text" class="form-control" id="startTime" name="startTime" value="10">
+							<input type="text" class="input--box" id="startTime" name="startTime" value="10">
 							<label for="endTime"> 종료 시간 </label> 
-							<input type="text" class="form-control" id="endTime" name="endTime" value="12"> 
+							<input type="text" class="input--box" id="endTime" name="endTime" value="12"> 
 							<label for="grades"> 학점 </label> 
-							<input type="text" class="form-control" id="grades" name="grades" value="3">
+							<input type="text" class="input--box" id="grades" name="grades" value="3">
 							<label for="capacity"> 정원 </label> 
-							<input type="text" class="form-control" name="capacity" name="capacity" value="15">
-						</div>
-						<input type="submit" class="btn btn-link" id="submit" value="입력">
+							<input type="text" class="input--box" name="capacity" name="capacity" value="15">
+						<input type="submit" class="button" value="입력">
 						</div>
 					</form>
 				
-				<h5> 현재 등록 강의 </h5>
-				<table class="table table-bordered table-sm">
+				<table class="table--container">
 					<tr class="first--tr">
 						<td>ID</td>
 						<td>강의명</td>
@@ -129,17 +125,17 @@
 			<c:if test="${crud.equals(\"update\")}">
 				<form action="/updAdmin/upSubject" method="post" id="insert--form">
 					 <input type="hidden" name="_method" value="put"/>
-						<h5>강의 변경 내용을 입력해주세요</h5>
-							ID<select name="id" class="form-control">
+						<span class="material-symbols-outlined symbol">school</span><span class="insert">수정하기</span><br>
+							ID<select name="id" class="input--box">
 								<c:forEach var="subject" items="${subjectList}">
 									<option>${subject.id}</option>
 								</c:forEach>
 							</select> 
-							변경 학과명 <input type="text" class="form-control" name="name"> 
-							변경 강의실 <input type="text" class="form-control" name="roomId">
+							변경 학과명 <input type="text" class="input--box" name="name"> 
+							변경 강의실 <input type="text" class="input--box" name="roomId">
 							<div></div>
 							변경 요일
-								<select name="subDay" class="form-control">
+								<select name="subDay" class="input--box">
 									<option value="월">월</option>
 									<option value="화">화</option>
 									<option value="수">수</option>
@@ -147,21 +143,21 @@
 									<option value="금">금</option>
 								</select> 
 							변경 시작시간 
-								<select name="startTime" class="form-control">
+								<select name="startTime" class="input--box">
 									<c:forEach var="time" begin="9" end="16">
 										<option value="${time}">${time}</option>
 									</c:forEach>
 								</select>
 							변경 종료시간
-								<select name="endTime" class="form-control">
+								<select name="endTime" class="input--box">
 									<c:forEach var="time" begin="11" end="18">
 										<option value="${time}">${time}</option>
 									</c:forEach> 
 								</select>
-							변경 정원 <input type="text" class="form-control" name="capacity"> 
-							<input type="submit" value="수정" class="btn btn-link submit" id="submit">
-					<div class="container">
-					<table class="table table-bordered table-sm">
+							변경 정원 <input type="text" class="input--box" name="capacity"> 
+							<input type="submit" value="수정" class="button">
+					<div class="form--container">
+					<table class="table--container">
 							<tr class="first--tr">
 								<td>ID</td>
 								<td>강의명</td>
@@ -202,8 +198,8 @@
 			<!-- 강의 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
 				<h5>삭제할 강의명을 클릭해주세요</h5>
-				<div class="container">
-				<table class="table table-bordered table-sm">
+				<div class="form--container">
+				<table class="table--container">
 						<tr class="first--tr">
 							<td>ID</td>
 							<td>강의명</td>
@@ -240,8 +236,8 @@
 
 			<!-- 강의 조회 -->
 			<c:if test="${crud.equals(\"select\")}">
-			<div class="container">
-				<table class="table table-bordered table-sm">
+			<div class="form--container">
+				<table class="table--container">
 					<tr class="first--tr">
 						<td>ID</td>
 						<td>강의명</td>
@@ -273,13 +269,11 @@
 							</tr>
 						</c:forEach>
 					</table>
-					<div class="button">
 						<c:if test="${principal.userRole.equals(\"staff\")}">
-							<a href="/admin/subject?crud=insert" class="btn btn-link submit" id="submit">등록</a> 
-							<a href="/admin/subject?crud=update" class="btn btn-link" id="submit">수정</a> 
-							<a href="/admin/subject?crud=delete" class="btn btn-link" id="submit">삭제</a>
+							<a href="/admin/subject?crud=insert" class="button" >등록</a> 
+							<a href="/admin/subject?crud=update" class="button">수정</a> 
+							<a href="/admin/subject?crud=delete" class="button" >삭제</a>
 						</c:if>
-					</div>
 				</div>
 			</c:if>
 	</main>

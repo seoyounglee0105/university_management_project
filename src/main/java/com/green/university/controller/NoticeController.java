@@ -131,10 +131,33 @@ public class NoticeController {
 	 *  공지사항 검색 기능
 	 */
 	@GetMapping("/search")
-	public String showNoticeByKeyword(Model model, String keyword) {
-		model.addAttribute("keyword", keyword);
+	public String showNoticeByKeyword(Model model, NoticePageFormDto noticePageFormDto) {
+		model.addAttribute("keyword", noticePageFormDto.getKeyword());
 		model.addAttribute("crud", "selectKeyword");
-		List<Notice> noticeList = noticeService.readNoticeByKeyword(keyword);
+		noticePageFormDto.setPage(0);
+		List<Notice> noticeList  = noticeService.readNoticeByKeyword(noticePageFormDto);
+		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
+		model.addAttribute("listCount", Math.ceil(amount/10.0));
+		if (noticeList.isEmpty()) {
+			model.addAttribute("noticeList", null);
+		} else {
+			model.addAttribute("noticeList", noticeList);
+		}
+		return "/board/notice";
+	}
+	
+	/**
+	 *  공지사항 검색 기능 (키워드 검색 페이징 처리)
+	 */
+	@GetMapping("/search/{page}")
+	public String showNoticeByKeywordAndPage(Model model, NoticePageFormDto noticePageFormDto, @PathVariable Integer page, @RequestParam String keyword) {
+		model.addAttribute("keyword", noticePageFormDto.getKeyword());
+		model.addAttribute("crud", "selectKeyword");
+		noticePageFormDto.setPage((page - 1) * 10);
+		List<Notice> noticeList = noticeService.readNoticeByKeyword(noticePageFormDto);
+		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
+		
+		model.addAttribute("listCount", Math.ceil(amount/10.0));
 		if (noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {

@@ -4,7 +4,9 @@
 .table--container {
 	width: 500px;
 	border: 1px solid #D2D1D1;
+	border-width: 1px 0px;
 	margin: 20px;
+	margin-top: 80px;
 }
 .first--tr {
 	background-color: #F0EFEF;
@@ -13,6 +15,7 @@
 }
 table tr, td {
 	border: 1px solid #D2D1D1;
+	border-width: 1px 0px;
 	padding: 5px 15px;
 }
 .button {
@@ -31,6 +34,7 @@ table tr, td {
 .select--button {
 	margin-left: 200px;
 }
+
 .input--box {
 	border: 1px solid #D2D1D1;
 	border-radius: 3px;

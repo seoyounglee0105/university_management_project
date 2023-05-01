@@ -30,9 +30,6 @@ public class NoticeFormDto {
 	private String originFilename;
 	private String uuidFilename;
 	
-	// 검색
-	private String keyword;
-	
 	// 공지 시간 처리
 	public String timeFormat() {
 		TimestampUtil timestampUtil = new TimestampUtil();

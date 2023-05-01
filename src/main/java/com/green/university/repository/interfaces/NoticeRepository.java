@@ -3,6 +3,7 @@ package com.green.university.repository.interfaces;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.green.university.dto.NoticeFormDto;
 import com.green.university.dto.NoticePageFormDto;
@@ -30,5 +31,8 @@ public interface NoticeRepository {
 	public Integer selectNoticeCount(NoticePageFormDto noticePageFormDto);
 	
 	// 검색
-	public List<Notice> selectNoticeByKeyword(String keyword);
+	public List<Notice> selectNoticeByKeyword(NoticePageFormDto noticePageFormDto);
+	public List<Notice> selectNoticeByTitle(NoticePageFormDto noticePageFormDto);
+	public Integer selectNoticeCountByTitle(NoticePageFormDto noticePageFormDto);
+	public Integer selectNoticeCountByKeyword(NoticePageFormDto noticePageFormDto);
 }

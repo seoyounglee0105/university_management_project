@@ -22,7 +22,6 @@
 		<div class="header--top">
 			<ul>
 				<!-- todo 삭제 -->
-				<li style="margin-right: 20px;"><a href="/login">임시 로그인</a>
 				<li class="material--li"><span class="material-symbols-outlined">account_circle</span>
 				<li>${principal.name}님 (${principal.id})
 				<li style="margin: 0 15px;">ㅣ

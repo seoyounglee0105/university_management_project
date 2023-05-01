@@ -44,15 +44,16 @@
 
 			<!-- 강의 입력 -->
 			<c:if test="${crud.equals(\"insert\")}">
-			<div class="container">
-				<form action="/admin/room-proc" method="post" id="insert--form">
-					<h5>등록할 강의실을 입력해주세요</h5>
-						강의실 <input type="text" name="id" value="C250"> 
-						단과대ID <input type="text" name="collegeId" value="1"> 
-						<input type="submit" value="입력" class="btn btn-link" id="submit">
+			<div class="form--container">
+				<form action="/admin/room-proc" method="post" class="insert--form">
+					<div class="insert--form">
+						<span class="material-symbols-outlined symbol">school</span><span class="insert">등록하기</span><br>
+							<input type="text" name="id" class="input--box" placeholder="등록할 강의실을 입력하세요"> 
+							<input type="text" name="collegeId" class="input--box" placeholder="단과대 번호를 입력하세요"> 
+						<input type="submit" value="입력" class="button">
+					</div>
 				</form>
-			</div>
-				<table class="table table-bordered table-sm">
+				<table class="table--container">
 					<tr class="first--tr">
 						<td>강의실</td>
 						<td>단과대ID</td>
@@ -63,13 +64,15 @@
 							<td>${room.collegeId}</td>
 						</tr>
 					</c:forEach>
-				</table>
+					</table>
+				</div>
 			</c:if>
+
 
 			<!-- 강의 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
 				<h5>삭제할 강의실을 클릭해주세요</h5>
-					<table class="table table-bordered table-sm">
+					<table class="table--container">
 						<tr class="first--tr">
 							<td>강의실</td>
 							<td>단과대ID</td>
@@ -86,8 +89,8 @@
 
 			<!-- 강의 조회 -->
 			<c:if test="${crud.equals(\"select\")}">
-				<div class="container">
-					<table class="table table-bordered table-sm">
+				<div class="form--container">
+					<table class="table--container">
 					<tr class="first--tr">
 						<td>강의실</td>
 						<td>단과대ID</td>
@@ -101,8 +104,8 @@
 					</table>
 				</div>
 				<div>
-				<a href="/admin/room?crud=insert" class="btn btn-link" id="submit">등록</a> 
-				<a href="/admin/room?crud=delete" class="btn btn-link" id="submit">삭제</a>
+				<a href="/admin/room?crud=insert" class="button">등록</a> 
+				<a href="/admin/room?crud=delete" class="button">삭제</a>
 			</div>
 			</c:if>
 	</main>

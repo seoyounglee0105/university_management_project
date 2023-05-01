@@ -70,7 +70,7 @@
 				페이지가 존재하지 않거나, 사용할 수 없는 페이지입니다 <br> 입력하신 주소가 정확한지 다시 한번 확인해주시기 바랍니다
 			</p>
 		</div>
-		<a href="#">이전 화면</a>
+		<a onclick="history.back();">이전 화면</a>
 		<img alt="logo_name" src="/images/logo_name.png" id="logo--name"> 
 	</div>
 </body>

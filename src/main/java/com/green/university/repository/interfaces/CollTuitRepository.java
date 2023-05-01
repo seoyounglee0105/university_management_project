@@ -16,7 +16,7 @@ import com.green.university.repository.model.College;
 @Mapper
 public interface CollTuitRepository {
 	public int insert(CollTuitFormDto collTuitFormDto);
-	public List<CollTuit> selectByCollTuitDto();
+	public List<CollTuitFormDto> selectByCollTuitDto();
 	public int deleteById(Integer collegeId);
 	public int updateByCollTuitDto(CollTuitFormDto collTuitFormDto);
 }

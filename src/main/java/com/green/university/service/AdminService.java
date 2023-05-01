@@ -140,9 +140,9 @@ public class AdminService {
 	@Transactional
 	public void createCollTuit(@Validated CollTuitFormDto collTuitFormDto) {
 		// 등록금 중복 입력 검사
-		List<College> collegeList = collegeRepository.selectCollegeDto();
-		for (int i = 0; i < collegeList.size(); i++) {
-			if(collegeList.get(i).getId() == (collTuitFormDto.getCollegeId())) {
+		List<CollTuitFormDto> collTuitList = collTuitRepository.selectByCollTuitDto();
+		for (int i = 0; i < collTuitList.size(); i++) {
+			if(collTuitList.get(i).getCollegeId() == (collTuitFormDto.getCollegeId())) {
 				throw new CustomRestfullException("이미 등록금이 입력된 학과입니다", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
@@ -156,8 +156,8 @@ public class AdminService {
 	/**
 	 * 단과대 등록금 조회 서비스
 	 */
-	public List<CollTuit> readCollTuit() {
-		List<CollTuit> collTuitList = collTuitRepository.selectByCollTuitDto();
+	public List<CollTuitFormDto> readCollTuit() {
+		List<CollTuitFormDto> collTuitList = collTuitRepository.selectByCollTuitDto();
 		return collTuitList;
 	}
 

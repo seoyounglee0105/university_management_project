@@ -43,7 +43,7 @@
 			<!-- 학과 입력 -->
 			<c:if test="${crud.equals(\"insert\")}">
 			<div class="container">
-				<form action="/admin/department-proc" method="post" class="form-container">
+				<form action="/admin/department-proc" method="post" class="form--container">
 					<span class="material-symbols-outlined symbol">school</span><span class="insert">등록하기</span><br>
 						<input type="text" class="input--box" name="name" placeholder="학과를 입력해주세요"> 
 							<select name="collegeId" class="input--box">
@@ -76,16 +76,15 @@
 			<!-- 학과 수정  -->
 			<c:if test="${crud.equals(\"update\")}">
 			<div class="container">
-				<form action="/updAdmin/upDepartment" method="post" id="insert--form">
-					 <input type="hidden" class="form--container" name="_method" value="put"/>
+				<form action="/updAdmin/upDepartment" method="post" id="form--container">
+					 <input type="hidden" name="_method" value="put"/>
 						<span class="material-symbols-outlined symbol">school</span><span class="insert">수정하기</span><br>
-								<select name="id" class="form--container">
+								<select name="id" class="input--box">
 									<c:forEach var="department" items="${departmentList}">
 										<option value="${department.id}">${department.name}</option>
 									</c:forEach>
 								</select>
-							변경 학과명 
-							<input type="text" class="form-control form-control-sm insert" name="name" value="전자과"> 
+							<input type="text" class="input--box" name="name" placeholder="변경할 학과명을 입력하세요"> 
 							<input type="submit" value="수정" class="button">
 				</form>
 
