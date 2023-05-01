@@ -137,5 +137,5 @@ public class NoticeController {
 		noticeService.deleteNotice(id);
 		return "redirect:/board/notice";
 	}
-
+	
 }

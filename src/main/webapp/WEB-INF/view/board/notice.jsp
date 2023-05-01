@@ -47,6 +47,9 @@ form {
 				<tr>
 					<td><a href="/board/notice">공지사항</a></td>
 				</tr>
+				<tr>
+					<td><a href="/scheule/main">학사일정</a></td>				
+				</tr>
 			</table>
 		</div>
 	</div>
