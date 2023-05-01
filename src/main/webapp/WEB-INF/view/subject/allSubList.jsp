@@ -64,6 +64,16 @@
 .sub--plan--view li a:hover {
 	color: black;
 }
+
+.page--list {
+	display: flex;
+	justify-content: center;
+}
+
+.page--list li {
+	margin: 30px 20px;
+}
+
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -79,7 +89,7 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/subject/list" class="selected--menu">전체 강의 조회</a></td>
+					<td><a href="/subject/list/1" class="selected--menu">전체 강의 조회</a></td>
 				</tr>
 				<c:if test="${principal.userRole.equals(\"professor\") }">
 					<tr>
@@ -103,7 +113,7 @@
 
 		<!-- 필터 및 검색 -->
 		<div class="sub--filter">
-			<form action="/subject/list/search" method="get">
+			<form action="/subject/list/search/1" method="get">
 				<div>
 					<!-- 개설연도 숫자 -->
 					<label for="subYear">연도 </label> <input type="number"
@@ -145,7 +155,7 @@
 		<c:choose>
 			<c:when test="${subjectList.isEmpty() == false}">
 				<h4>
-					<span style="font-weight: 600;">강의 목록</span>&nbsp; <span style="color: gray; font-size: 18px;">[총 ${subjectList.size()}건]</span>
+					<span style="font-weight: 600;">강의 목록</span>&nbsp; <span style="color: gray; font-size: 18px;">[총 ${subjectCount}건]</span>
 				</h4>
 				<table border="1" class="sub--list--table">
 					<thead>
@@ -187,6 +197,11 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<ul class="page--list">
+					<c:forEach var="i" begin="1" end="${pageCount}" step="1">
+						<li><a href="/subject/list/${i}">${i}</a>			
+					</c:forEach>
+				</ul>
 			</c:when>
 			<c:otherwise>
 				<p class="no--list--p">검색 결과가 없습니다.</p>

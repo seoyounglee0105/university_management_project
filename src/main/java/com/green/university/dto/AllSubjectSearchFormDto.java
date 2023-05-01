@@ -29,4 +29,6 @@ public class AllSubjectSearchFormDto {
 	@NotNull
 	private String name;
 	
+	private Integer page;
+	
 }

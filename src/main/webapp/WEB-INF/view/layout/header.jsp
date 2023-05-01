@@ -39,7 +39,7 @@
 					<ul>
 						<li><a href="/">홈</a>
 						<li><a href="/info/student">MY</a>
-						<li><a href="/subject/list">수업</a>
+						<li><a href="/subject/list/1">수업</a>
 						<li><a href="/sugang/subjectList">수강신청</a>
 						<li><a href="/grade/thisSemester">성적</a>
 						<li><a href="/notice">학사정보</a>

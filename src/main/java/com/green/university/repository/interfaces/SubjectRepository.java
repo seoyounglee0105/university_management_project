@@ -50,6 +50,8 @@ public interface SubjectRepository {
 	 */
 	public List<SubjectDto> selectDtoAll();
 	
+	public List<SubjectDto> selectDtoAllLimit(Integer page);
+	
 	/**
 	 * @author 김지현
 	 * @param 교수 id
@@ -68,6 +70,8 @@ public interface SubjectRepository {
 	 * @return 연도-학기-개설학과-강의명 검색을 조건으로 한 강의 정보
 	 */
 	public List<SubjectDto> selectDtoBySemesterAndDeptAndName(AllSubjectSearchFormDto allSubjectSearchFormDto);
+	
+	public List<SubjectDto> selectDtoBySemesterAndDeptAndNameLimit(AllSubjectSearchFormDto allSubjectSearchFormDto);
 	
 	/**
 	 * @param currentSemesterSubjectSearchFormDto

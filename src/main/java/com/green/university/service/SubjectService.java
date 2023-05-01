@@ -37,6 +37,17 @@ public class SubjectService {
 	}
 	
 	/**
+	 * 페이징 처리
+	 */
+	@Transactional
+	public List<SubjectDto> readSubjectListPage(Integer page) {
+		
+		List<SubjectDto> subDtoList = subjectRepository.selectDtoAllLimit(page);
+		
+		return subDtoList;
+	}
+	
+	/**
 	 * @param allSubjectSearchFormDto
 	 * @return 전체 강의 목록에서 필터링할 때 출력할 강의
 	 */
@@ -44,6 +55,19 @@ public class SubjectService {
 	public List<SubjectDto> readSubjectListSearch(AllSubjectSearchFormDto allSubjectSearchFormDto) {
 		
 		List<SubjectDto> subDtoList = subjectRepository.selectDtoBySemesterAndDeptAndName(allSubjectSearchFormDto);
+		
+		return subDtoList;
+	}
+	
+	/**
+	 * 페이징 처리
+	 */
+	@Transactional
+	public List<SubjectDto> readSubjectListSearchPage(AllSubjectSearchFormDto allSubjectSearchFormDto, Integer page) {
+		
+		allSubjectSearchFormDto.setPage(page);
+		
+		List<SubjectDto> subDtoList = subjectRepository.selectDtoBySemesterAndDeptAndNameLimit(allSubjectSearchFormDto);
 		
 		return subDtoList;
 	}
