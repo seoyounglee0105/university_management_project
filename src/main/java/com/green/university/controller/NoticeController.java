@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.green.university.dto.NoticeFormDto;
+import com.green.university.dto.NoticePageFormDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.Notice;
 import com.green.university.service.AdminService;
@@ -42,7 +44,12 @@ public class NoticeController {
 	@GetMapping("")
 	public String notice(Model model, @RequestParam(defaultValue = "select") String crud) {
 		model.addAttribute("crud", crud);
-		List<Notice> noticeList = noticeService.findNotice();
+		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
+		noticePageFormDto.setPage(0);
+		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
+		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
+		
+		model.addAttribute("listCount", Math.ceil(amount/10.0));
 		if (noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {
@@ -80,8 +87,8 @@ public class NoticeController {
 			e.printStackTrace();
 			}
 		}
-		noticeService.insertNotice(noticeFormDto);
-		return "redirect:/board/notice";
+		noticeService.readNotice(noticeFormDto);
+		return "redirect:/notice";
 	}
 
 	/**
@@ -89,15 +96,51 @@ public class NoticeController {
 	 * @return 공지사항 상세 조회 기능
 	 */
 	@GetMapping("/read")
-	public String findByIdNotice(Model model, @RequestParam Integer id) {
-		model.addAttribute("crud", "selectDetail");
+	public String selectByIdNotice(Model model, @RequestParam Integer id) {
+		model.addAttribute("crud", "read");
 		model.addAttribute("id", id);
 		
-		Notice notice = noticeService.findByIdNotice(id);
+		Notice notice = noticeService.readByIdNotice(id);
 		if (notice == null) {
 			model.addAttribute("notice", null);
 		} else {
 			model.addAttribute("notice", notice);
+		}
+		notice.setContent(notice.getContent().replace("\r\n", "<br>"));
+		return "/board/notice";
+	}
+	
+	/**
+	 * 공지사항 페이지 이동
+	 */
+	@GetMapping("/list/{page}")
+	public String showNoticeListByPage(Model model, @RequestParam(defaultValue = "select") String crud, @PathVariable Integer page) {
+		model.addAttribute("crud", crud);
+		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
+		noticePageFormDto.setPage((page - 1) * 10);
+		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
+		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
+		model.addAttribute("listCount", Math.ceil(amount/10.0));
+		if (noticeList.isEmpty()) {
+			model.addAttribute("noticeList", null);
+		} else {
+			model.addAttribute("noticeList", noticeList);
+		}
+		return "/board/notice";
+	}
+	
+	/**
+	 *  공지사항 검색 기능
+	 */
+	@GetMapping("/search")
+	public String showNoticeByKeyword(Model model, String keyword) {
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("crud", "selectKeyword");
+		List<Notice> noticeList = noticeService.readNoticeByKeyword(keyword);
+		if (noticeList.isEmpty()) {
+			model.addAttribute("noticeList", null);
+		} else {
+			model.addAttribute("noticeList", noticeList);
 		}
 		return "/board/notice";
 	}
@@ -111,7 +154,7 @@ public class NoticeController {
 		model.addAttribute("crud", "update");
 		model.addAttribute("id", id);
 
-		Notice notice = noticeService.findByIdNotice(id);
+		Notice notice = noticeService.readByIdNotice(id);
 		model.addAttribute("notice", notice);
 		return "/board/notice";
 	}
@@ -122,9 +165,8 @@ public class NoticeController {
 	 */
 	@PutMapping("/update")
 	public String update(@Validated NoticeFormDto noticeFormDto) {
-		System.out.println(noticeFormDto);
 		noticeService.updateNotice(noticeFormDto);
-		return "redirect:/board/notice";
+		return "redirect:/notice";
 	}
 
 	/**
@@ -135,7 +177,10 @@ public class NoticeController {
 	public String delete(Model model, @RequestParam Integer id) {
 		model.addAttribute("id", id);
 		noticeService.deleteNotice(id);
-		return "redirect:/board/notice";
+		return "redirect:/notice";
 	}
+	
+	
+	
 
 }

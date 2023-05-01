@@ -1,6 +1,10 @@
+
+
 -- 공과대학 
 INSERT INTO college_tb (name)
 VALUES ('공과대학');
+
+SELECT * FROM college_tb;
 
 -- 학과 입력
 INSERT INTO department_tb (name, college_id)
@@ -11,6 +15,8 @@ VALUES
 ('기계공학과', 1),
 ('신소재공학과', 1);
 
+SELECT * FROM department_tb;
+SELECT * FROM professor_tb;
 -- 교수 입력
 INSERT INTO professor_tb(name, birth_date, gender, address, tel, email, dept_id)
 VALUES
@@ -25,20 +31,23 @@ VALUES
 ('이현서', '1983-02-27', '남성', '부산시 영도구', '010-2025-5748', 'lhs@green.com', 105),
 ('이지운', '1957-01-18', '여성', '부산시 사하구', '010-1566-9486', 'ljw@green.com', 105);
 
+SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS = 1;
+
 SELECT * FROM room_tb;
 -- 강의실 
 INSERT INTO room_tb (id, college_id)
 VALUES 
 ('C601',1),
 ('C602',1),
-('C701',2),
-('C702',2),
-('C801',3),
-('C802',3),
-('C901',4),
-('C902',4),
-('C904',5),
-('C905',5);
+('C701',1),
+('C702',1),
+('C801',1),
+('C802',1),
+('C901',1),
+('C902',1),
+('C904',1),
+('C905',1);
 
 -- 강의 입력
 INSERT INTO subject_tb (name, professor_id, room_id, dept_id, type, sub_year, semester, sub_day, start_time, end_time, grades, capacity)
@@ -50,7 +59,7 @@ VALUES
 ('공학설계 입문', 23000003, 'C701', 102, '전공', 2023, 1, '목', 9, 12, 3, 20),
 ('반도체 공학', 23000003, 'C701', 102, '전공', 2023, 1, '목', 14, 17, 3, 20),
 ('융합전자연구', 23000004, 'C702', 102, '전공', 2023, 1, '금', 14, 17, 3, 20),
-('기초 전기실험', 23000004, 'C702', 102, '전공', 2023, 1, '월', 14, 17, 3, 20),
+('기초 전기실험', 23000005, 'C702', 102, '전공', 2023, 1, '월', 14, 17, 3, 20),
 ('물리화학', 23000005, 'C801', 103, '전공', 2023, 1, '목', 12, 15, 3, 20),
 ('반응공학', 23000005, 'C801', 103, '전공', 2023, 1, '수', 12, 15, 3, 20),
 ('사고와 표현', 23000006, 'C802', 103, '교양', 2023, 1, '화', 11, 13, 2, 30),
@@ -69,7 +78,6 @@ ALTER TABLE staff_tb MODIFY gender VARCHAR(2);
 INSERT INTO staff_tb (name, birth_date, gender, address, tel, email)
 VALUES
 ('박성희', '1995-09-03', '여성', '부산시 부산진구', '010-9930-2889', 'sungheepppp@gmail.com');
-
 
 INSERT INTO student_tb (name, birth_date, gender, address, tel, email, dept_id, grade, semester, entrance_date)
 VALUES
@@ -137,3 +145,72 @@ VALUES
 ('이한결', '2004-07-19', '남성', '부산시 사하구', '010-1928-0104', 'lhg@green.com', 105, 1, 1, '2023-03-02'),
 ('김서진', '2003-04-14', '여성', '부산시 사하구', '010-0215-0062', 'ksj12@green.com', 105, 1, 1, '2023-03-02'),
 ('김다빈', '2003-09-24', '여성', '부산시 영도구', '010-0042-4015', 'kdb@green.com', 105, 1, 1, '2023-03-02');
+
+INSERT INTO user_tb
+VALUES 
+	(2023000001, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000002, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000003, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000004, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000005, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000006, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000007, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000008, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000009, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000010, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000011, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000012, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000013, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000014, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000015, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000016, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000017, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000018, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000019, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000020, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000021, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000022, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000023, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000024, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000025, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000026, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000027, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000028, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000029, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000030, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000031, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000032, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000033, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000034, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000035, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000036, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000037, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000038, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000039, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000040, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000041, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000042, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000043, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000044, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000045, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000046, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000047, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000048, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000049, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student'),
+	(2023000050, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'student');
+	
+INSERT INTO user_tb
+	VALUES 
+		(23000001, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'professor'),
+		(23000002, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'professor'),
+		(23000003, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'professor'),
+		(23000004, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'professor'),
+		(23000005, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'professor'),
+		(23000006, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'professor'),
+		(23000007, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'professor'),
+		(23000008, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'professor'),
+		(23000009, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'professor'),
+		(23000010, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'professor');
+		
+INSERT INTO user_tb
+VALUES (230001, '$2a$10$hEYFZOe.PbFbVRcPZymRKuCGMU2MilAn64ZGnIqPgfwWL7JyGeKKW', 'staff');

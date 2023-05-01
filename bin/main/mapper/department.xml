@@ -11,13 +11,13 @@
 		SELECT * FROM department_tb WHERE id = #{id}
 	</select>
 
-	<select id="findAll" resultType="com.green.university.repository.model.Department">
-		select * from department_tb
+	<select id="selectByDepartmentDto" resultType="com.green.university.repository.model.Department">
+		SELECT * FROM department_tb
 	</select>
-	<delete id="delete">
+	<delete id="deleteById">
 		delete from department_tb where id = #{id}
 	</delete>
-	<update id="update">
+	<update id="updateByDepartmentDto">
 		UPDATE department_tb
 		SET name = #{name}
 		WHERE id =

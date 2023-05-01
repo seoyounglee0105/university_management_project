@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.green.university.dto.DepartmentFormDto;
 import com.green.university.repository.interfaces.CollegeRepository;
 import com.green.university.repository.interfaces.DepartmentRepository;
 import com.green.university.repository.model.College;
@@ -31,7 +32,7 @@ public class CollegeService {
 	 */
 	public College readCollById(Integer id) {
 		
-		College collEntity = collegeRepository.findById(id);
+		College collEntity = collegeRepository.selectCollegeDtoById(id);
 		return collEntity;
 	}
 	
@@ -50,7 +51,7 @@ public class CollegeService {
 	 */
 	public List<Department> readDeptAll() {
 		
-		List<Department> deptEntityList = departmentRepository.findAll();
+		List<Department> deptEntityList = departmentRepository.selectByDepartmentDto();
 		return deptEntityList;
 	}
 	

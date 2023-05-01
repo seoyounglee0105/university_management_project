@@ -18,8 +18,8 @@ public interface DepartmentRepository {
 	public int insert(DepartmentFormDto departmentFormDto);
 	
 	public Department selectById(Integer id);
-	public List<Department> findAll();
-	public int delete(Integer id);
-	public int update(DepartmentFormDto departmentFormDto);
+	public List<Department> selectByDepartmentDto();
+	public int deleteById(Integer id);
+	public int updateByDepartmentDto(DepartmentFormDto departmentFormDto);
 	
 }

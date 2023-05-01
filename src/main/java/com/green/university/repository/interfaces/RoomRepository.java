@@ -16,6 +16,6 @@ import com.green.university.repository.model.Room;
 @Mapper
 public interface RoomRepository {
 	public int insert(RoomFormDto roomFormDto);
-	public List<Room> findAll();
-	public int delete(String id);
+	public List<Room> selectByRoomDto();
+	public int deleteById(String id);
 }
