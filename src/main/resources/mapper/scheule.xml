@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.green.university.repository.interfaces.ScheuleRepository">
+
+
+
+
+<insert id="insertSchoeduleFormDto">
+INSERT INTO schedule_tb
+(staff_id, year, mouth, day, content)
+VALUES
+(#{staffId}, #{year}, #{mouth}, #{day}, #{content});
+</insert>
+
+<!-- 전체 조회 -->
+<select id="selectSchodule" resultType="com.green.university.repository.model.Schedule">
+SELECT * FROM schedule_tb;
+</select>
+
+<!-- 월마다 일정 몇개인지 조회 -->
+<select id="selectSchoduleMouth" resultType="com.green.university.dto.ScheduleDto">
+SELECT mouth, count(mouth) AS sum
+FROM schedule_tb
+GROUP BY mouth
+HAVING COUNT(mouth) > 1;
+</select>
+
+
+<update id="updateSchoeduleFormDtoByStaffId">
+UPDATE schedule_tb 
+SET id = #{id}, year = #{year}, mouth = #{mouth}, day = #{day}, content = #{content}
+WHERE staff_id = #{staff_id};
+</update>
+
+<delete id="deleteSchoeduleFormDtoByStaffIdAndId">
+DELETE FROM schedule_tb 
+WHERE staff_id = #{staffId} AND id = #{id};
+</delete>
+
+
+
+</mapper>
