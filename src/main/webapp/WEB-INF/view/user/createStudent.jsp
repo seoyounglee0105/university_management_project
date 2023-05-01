@@ -40,6 +40,9 @@ button {
 					<td><a href="/user/studentList">학생 명단 조회</a></td>
 				</tr>
 				<tr>
+					<td><a href="/user/professorList">교수 명단 조회</a></td>
+				</tr>
+				<tr>
 					<td><a href="/user/student" class="selected--menu">학생 등록</a></td>
 				</tr>
 				<tr>

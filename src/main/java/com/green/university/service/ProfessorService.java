@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
+import com.green.university.dto.ProfessorListForm;
+import com.green.university.dto.StudentListForm;
 import com.green.university.dto.SyllaBusFormDto;
 import com.green.university.dto.UpdateStudentGradeDto;
 import com.green.university.dto.response.ReadSyllabusDto;
@@ -16,10 +18,12 @@ import com.green.university.dto.response.SubjectForProfessorDto;
 import com.green.university.dto.response.SubjectPeriodForProfessorDto;
 import com.green.university.handler.MyRestFullExceptionHandler;
 import com.green.university.handler.exception.CustomRestfullException;
+import com.green.university.repository.interfaces.ProfessorRepository;
 import com.green.university.repository.interfaces.StuSubDetailRepository;
 import com.green.university.repository.interfaces.StuSubRepository;
 import com.green.university.repository.interfaces.SubjectRepository;
 import com.green.university.repository.interfaces.SyllaBusRepository;
+import com.green.university.repository.model.Professor;
 import com.green.university.repository.model.Subject;
 /**
  *  
@@ -36,6 +40,8 @@ public class ProfessorService {
 	private StuSubDetailRepository stuSubDetailRepository;
 	@Autowired
 	private SyllaBusRepository syllaBusRepository;
+	@Autowired
+	private ProfessorRepository professorRepository;
 	/**
 	 * 교수가 맡은 과목들의 학기 검색
 	 * @param professorId
@@ -116,6 +122,10 @@ public class ProfessorService {
 		return readSyllabusDto;
 	}
 	
+	/**
+	 * 강의 계획서 업데이트
+	 * @param syllaBusFormDto
+	 */
 	@Transactional
 	public void updateSyllabus(SyllaBusFormDto syllaBusFormDto) {
 		
@@ -124,6 +134,41 @@ public class ProfessorService {
 			throw new CustomRestfullException("제출 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
+	}
+	/**
+	 * @param professorListForm
+	 * @return 교수 리스트 조회
+	 */
+	@Transactional
+	public List<Professor> readProfessorList(ProfessorListForm professorListForm){
+		List<Professor> list = null;
+		if(professorListForm.getProfessorId() != null) {
+			list = professorRepository.selectByProfessorId(professorListForm);
+		} else if (professorListForm.getDeptId() != null) {
+			list = professorRepository.selectByDepartmentId(professorListForm);
+		} else {
+			list = professorRepository.selectProfessorList(professorListForm);
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 
+	 * @param studentListForm
+	 * @return 교수 수
+	 */
+	@Transactional
+	public Integer readProfessorAmount(ProfessorListForm professorListForm) {
+		
+		Integer amount = null;
+		if (professorListForm.getDeptId() != null) {
+			amount = professorRepository.selectProfessorAmountByDeptId(professorListForm.getDeptId());
+		} else {
+			amount = professorRepository.selectProfessorAmount();
+		}
+		
+		return amount;
 	}
 
 }

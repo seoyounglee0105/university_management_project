@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.green.university.dto.CreateProfessorDto;
 import com.green.university.dto.CreateStaffDto;
 import com.green.university.dto.CreateStudentDto;
+import com.green.university.dto.ProfessorListForm;
 import com.green.university.dto.StudentListForm;
+import com.green.university.repository.model.Professor;
 import com.green.university.repository.model.Student;
+import com.green.university.service.ProfessorService;
 import com.green.university.service.StudentService;
 import com.green.university.service.UserService;
 
@@ -34,6 +37,8 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private ProfessorService professorService;
 
 	/**
 	 * @return staff 입력 페이지
@@ -106,6 +111,55 @@ public class UserController {
 	}
 	
 	/**
+	 * 교수 조회
+	 * @param model
+	 * @return 교수 조회 페이지
+	 */
+	@GetMapping("/professorList")
+	public String showProfessorList(Model model, @RequestParam(required = false) Integer professorId, @RequestParam(required = false) Integer deptId) {
+		
+		ProfessorListForm professorListForm = new ProfessorListForm();
+		professorListForm.setPage(0);
+		if(professorId != null) {
+			professorListForm.setProfessorId(professorId);
+		} else if (deptId != null) {
+			professorListForm.setDeptId(deptId);
+		}
+		Integer amount = professorService.readProfessorAmount(professorListForm);
+		if(professorId != null) {
+			amount = 1;
+		}
+		List<Professor> list = professorService.readProfessorList(professorListForm);
+		
+		model.addAttribute("listCount", Math.ceil(amount/20.0));
+		model.addAttribute("professorList", list);
+		model.addAttribute("deptId", deptId);
+		
+		return "/user/professorList";
+	}
+	
+	/**
+	 * 교수 조회
+	 * @param model
+	 * @return 교수 조회 페이지
+	 */
+	@GetMapping("/professorList/{page}")
+	public String showProfessorListByPage(Model model, @PathVariable Integer page, @RequestParam(required = false) Integer deptId) {
+		
+		ProfessorListForm professorListForm = new ProfessorListForm();
+		if (deptId != null) {
+			professorListForm.setDeptId(deptId);
+		}
+		professorListForm.setPage((page - 1) * 20);
+		Integer amount = professorService.readProfessorAmount(professorListForm);
+		List<Professor> list = professorService.readProfessorList(professorListForm);
+		
+		model.addAttribute("listCount", Math.ceil(amount/20.0));
+		model.addAttribute("professorList", list);
+		
+		return "/user/professorList";
+	}
+	/**
 	 * 학생 조회
 	 * @param model
 	 * @return 학생 조회 페이지
@@ -124,8 +178,6 @@ public class UserController {
 		if(studentId != null) {
 			amount = 1;
 		}
-		System.out.println("amount: " + amount);
-		System.out.println("listCount: " + Math.ceil(amount/20.0));
 		List<Student> list = studentService.readStudentList(studentListForm);
 		
 		model.addAttribute("listCount", Math.ceil(amount/20.0));
@@ -149,8 +201,6 @@ public class UserController {
 		}
 		studentListForm.setPage((page - 1) * 20);
 		Integer amount = studentService.readStudentAmount(studentListForm);
-		System.out.println("amount: " + amount);
-		System.out.println("listCount: " + Math.ceil(amount/20.0));
 		List<Student> list = studentService.readStudentList(studentListForm);
 		
 		model.addAttribute("listCount", Math.ceil(amount/20.0));
@@ -159,6 +209,10 @@ public class UserController {
 		return "/user/studentList";
 	}
 	
+	/**
+	 * 학생의 학년, 학기 업데이트
+	 * @return 학생 리스트 조회 페이지
+	 */
 	@GetMapping("/student/update")
 	public String updateStudentGradeAndSemester() {
 		studentService.updateStudentGradeAndSemester();

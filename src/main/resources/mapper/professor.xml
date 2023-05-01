@@ -49,19 +49,44 @@
 		WHERE p.id = #{id};
 	</select>
 
+	<select id="selectByProfessorId" resultType="com.green.university.repository.model.Professor">
+		SELECT * FROM professor_tb WHERE id = #{professorId}
+	</select>
+
 	<select id="selectIdByNameAndEmail" resultType="integer">
 		SELECT id
 		FROM professor_tb
 		WHERE name = #{name}
 		AND email = #{email}
 	</select>
-	
+
 	<select id="selectProfessorByIdAndNameAndEmail" resultType="integer">
 		SELECT id
 		FROM professor_tb
-		WHERE id = #{id} 
+		WHERE id = #{id}
 		AND name = #{name}
 		AND email = #{email}
 	</select>
+
+	<select id="selectProfessorAmount" resultType="integer">
+		SELECT count(id) FROM professor_tb
+	</select>
+
+	<select id="selectProfessorAmountByDeptId" resultType="integer">
+		SELECT count(id) FROM professor_tb
+		WHERE dept_id = #{deptId}
+	</select>
+
+	<select id="selectProfessorList" resultType="com.green.university.repository.model.Professor">
+		SELECT * FROM professor_tb
+		LIMIT #{page}, 20
+	</select>
+
+	<select id="selectByDepartmentId" resultType="com.green.university.repository.model.Professor">
+		SELECT * FROM professor_tb
+		WHERE dept_id = #{deptId}
+		LIMIT #{page}, 20
+	</select>
+	
 
 </mapper>

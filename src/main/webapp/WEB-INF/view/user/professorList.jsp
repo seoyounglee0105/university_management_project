@@ -112,10 +112,10 @@
 
 		<!-- 필터 및 검색 -->
 		<div class="sub--filter">
-			<form action="/user/studentList" method="get">
+			<form action="/user/professorList" method="get">
 				<div>
 					<!-- 개설연도 숫자 -->
-					<label for="deptId">과 번호</label> <input type="text" name="deptId" id="deptId"> <label for="studentId">학번</label> <input type="text" name="studentId" list="studentId">
+					<label for="deptId">과ID 검색</label> <input type="text" name="deptId" id="deptId"> <label for="professorId">ID검색</label> <input type="text" name="professorId" list="professorId">
 					<!-- 검색 버튼 -->
 					<button type="submit">
 						<ul class="d-flex justify-content-center" style="margin: 0;">
@@ -123,23 +123,18 @@
 							<li style="height: 24px;"><span class="material-symbols-outlined" style="font-size: 18px; padding-top: 4px;">search</span>
 						</ul>
 					</button>
-					<button type="button" onclick="location.href='/user/student/update'">
-						<ul>
-							<li style="height: 24px;">새학기 적용
-						</ul>
-					</button>
 				</div>
 			</form>
 		</div>
 		<c:choose>
-			<c:when test="${!studentList.isEmpty()}">
+			<c:when test="${!professorList.isEmpty()}">
 				<h4>
-					<span style="font-weight: 600;">학생 목록</span>
+					<span style="font-weight: 600;">교수 목록</span>
 				</h4>
 				<table border="1" class="sub--list--table">
 					<thead>
 						<tr>
-							<th>학번</th>
+							<th>ID</th>
 							<th>이름</th>
 							<th>생년월일</th>
 							<th>성별</th>
@@ -147,26 +142,22 @@
 							<th>전화번호</th>
 							<th>이메일</th>
 							<th>학과번호</th>
-							<th>학년</th>
-							<th>입학일</th>
-							<th>졸업일(졸업예정일)</th>
+							<th>고용일</th>
 						</tr>
 					</thead>
 
 					<tbody>
-						<c:forEach var="student" items="${studentList}">
+						<c:forEach var="professor" items="${professorList}">
 							<tr>
-								<td>${student.id}</td>
-								<td>${student.name}</td>
-								<td>${student.birthDate}</td>
-								<td>${student.gender}</td>
-								<td>${student.address}</td>
-								<td>${student.tel}</td>
-								<td>${student.email}</td>
-								<td>${student.deptId}</td>
-								<td>${student.grade}</td>
-								<td>${student.entranceDate}</td>
-								<td>${student.graduationDate}</td>
+								<td>${professor.id}</td>
+								<td>${professor.name}</td>
+								<td>${professor.birthDate}</td>
+								<td>${professor.gender}</td>
+								<td>${professor.address}</td>
+								<td>${professor.tel}</td>
+								<td>${professor.email}</td>
+								<td>${professor.deptId}</td>
+								<td>${professor.hireDate}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -175,10 +166,10 @@
 					<c:forEach var="index" begin="1" end="${listCount}">
 						<c:choose>
 							<c:when test="${deptId != null }">
-								<a href="/user/studentList/${index}?deptId=${deptId}"> ${index}</a> &nbsp;&nbsp;
+								<a href="/user/professorList/${index}?deptId=${deptId}"> ${index}</a> &nbsp;&nbsp;
 							</c:when>
 							<c:otherwise>
-								<a href="/user/studentList/${index}"> ${index}</a> &nbsp;&nbsp;
+								<a href="/user/professorList/${index}"> ${index}</a> &nbsp;&nbsp;
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
