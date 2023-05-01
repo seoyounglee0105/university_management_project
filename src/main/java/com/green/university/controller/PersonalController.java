@@ -75,7 +75,7 @@ public class PersonalController {
 			Cookie[] cookies = request.getCookies();
 			if(cookies != null){
 				for(Cookie c : cookies){
-					if(c.getName().equals("email")){
+					if(c.getName().equals("id")){
 						c.setMaxAge(0);
 						response.addCookie(c);
 						break;
