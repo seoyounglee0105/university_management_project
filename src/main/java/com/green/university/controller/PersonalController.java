@@ -1,5 +1,8 @@
 package com.green.university.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -41,9 +44,19 @@ public class PersonalController {
 	private HttpSession session;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	/**
+	 * @author 서영
+	 * 메인 홈페이지
+	 */
+	@GetMapping("")
+	public String home() {
+		
+		return "/main";
+	}
 
 	/**
-	 * 로그인 폼, 메인페이지
+	 * 로그인 폼
 	 * 
 	 * @return login.jsp
 	 */
@@ -61,12 +74,28 @@ public class PersonalController {
 	 * @return 메인 페이지 이동(수정 예정)
 	 */
 	@PostMapping("/login")
-	public String signInProc(@Valid LoginDto loginDto) {
+	public String signInProc(@Valid LoginDto loginDto, HttpServletResponse response, HttpServletRequest request) {
 
 		PrincipalDto principal = userService.login(loginDto);
+		if("on".equals(loginDto.getRememberId())) {
+			Cookie cookie = new Cookie("id", loginDto.getId() + "");
+			cookie.setMaxAge(60 * 60 * 24 * 7);
+			response.addCookie(cookie);
+		} else {
+			Cookie[] cookies = request.getCookies();
+			if(cookies != null){
+				for(Cookie c : cookies){
+					if(c.getName().equals("id")){
+						c.setMaxAge(0);
+						response.addCookie(c);
+						break;
+					}
+				}
+			}
+		}
 		session.setAttribute(Define.PRINCIPAL, principal);
 
-		return "redirect:/info/student";
+		return "redirect:/";
 	}
 
 	/**
@@ -229,21 +258,15 @@ public class PersonalController {
 	/**
 	 * 아이디 찾기 포스트
 	 * @param findIdFormDto
-	 * @return 아이디 표시 페이지
+	 * @return 찾은 아이디 표시 페이지
 	 */
 	@PostMapping("/find/id")
-	public String findIdProc(FindIdFormDto findIdFormDto) {
+	public String findIdProc(Model model, FindIdFormDto findIdFormDto) {
 		
-		
-		return "redirect:/find/id/complete";
-	}
-	
-	/**
-	 * 찾은 아이디 표시
-	 * @return 아이디 찾기 완료 페이지
-	 */
-	@GetMapping("/find/id/complete")
-	public String findIdComplete(Model model) {
+		Integer findId = userService.readIdByNameAndEmail(findIdFormDto);
+		System.out.println(findId);
+		model.addAttribute("id", findId);
+		model.addAttribute("name", findIdFormDto.getName());
 		
 		return "/user/findIdComplete";
 	}
@@ -264,20 +287,15 @@ public class PersonalController {
 	 * @return 비밀번호 표시 페이지
 	 */
 	@PostMapping("/find/password")
-	public String findPasswordProc(FindPasswordFormDto findPasswordFormDto) {
+	public String findPasswordProc(Model model, FindPasswordFormDto findPasswordFormDto) {
 		
-		return "redirect:/find/password/complete";
-	}
-	
-	/**
-	 * 찾은 비밀번호 표시
-	 * @return 비밀번호 찾기 완료 페이지
-	 */
-	@GetMapping("/find/password/complete")
-	public String findPassword(Model model) {
+		String password = userService.updateTempPassword(findPasswordFormDto);
+		model.addAttribute("name", findPasswordFormDto.getName());
+		model.addAttribute("password", password);
 		
 		return "/user/findPasswordComplete";
 	}
+	
 	
 	
 	@GetMapping("/error")

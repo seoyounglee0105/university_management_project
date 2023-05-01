@@ -30,7 +30,7 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/info/student" class="selected--menu">내 정보 조회</a></td>
+					<td><a href="/info/student">내 정보 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/password">비밀번호 변경</a></td>
@@ -39,7 +39,7 @@
 					<td><a href="/break/application">휴학 신청</a></td>
 				</tr>
 				<tr>
-					<td><a href="/break/list">휴학 내역 조회</a></td>
+					<td><a href="/break/list" class="selected--menu">휴학 내역 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/tuition/list">등록금 내역 조회</a></td>
@@ -77,8 +77,8 @@
 								<tr>
 									<td>${breakApp.appDate}</td>
 									<td>${breakApp.type}휴학</td>
-									<td>${breakApp.fromYear}년도 ${breakApp.fromSemester}학기</td>
-									<td>${breakApp.toYear}년도 ${breakApp.toSemester}학기</td>
+									<td>${breakApp.fromYear}년도&nbsp;${breakApp.fromSemester}학기</td>
+									<td>${breakApp.toYear}년도&nbsp;${breakApp.toSemester}학기</td>
 									<td><a href="/break/detail/${breakApp.id}">Click</a></td>
 									<td><c:choose>
 											<c:when test="${breakApp.status.equals(\"처리중\")}">
@@ -98,7 +98,7 @@
 				</c:when>
 
 				<c:otherwise>
-					<p>휴학 신청 내역이 없습니다.</p>
+					<p class="no--list--p">휴학 신청 내역이 없습니다.</p>
 				</c:otherwise>
 			</c:choose>
 		</div>

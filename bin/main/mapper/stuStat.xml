@@ -8,7 +8,7 @@
 </select>
 
 <insert id="insert">
-	INSERT INTO stu_stat_tb (student_id, status, from_date, to_date) VALUES (#{studentId}, #{status}, now(), #{toDate})
+	INSERT INTO stu_stat_tb (student_id, status, from_date, to_date, break_app_id) VALUES (#{studentId}, #{status}, now(), #{toDate}, #{breakAppId})
 </insert>
 
 <update id="updateOldStatus">

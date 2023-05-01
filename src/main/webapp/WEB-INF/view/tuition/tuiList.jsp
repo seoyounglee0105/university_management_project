@@ -55,7 +55,7 @@
 					<td><a href="/break/list">휴학 내역 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/tuition/list">등록금 내역 조회</a></td>
+					<td><a href="/tuition/list" class="selected--menu">등록금 내역 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
@@ -116,7 +116,7 @@
 				</c:when>
 	
 				<c:otherwise>
-					<p>등록금 납부 내역이 없습니다.</p>
+					<p class="no--list--p">등록금 납부 내역이 없습니다.</p>
 				</c:otherwise>
 			</c:choose>
 		</div>

@@ -10,6 +10,8 @@ import com.green.university.dto.ChangePasswordDto;
 import com.green.university.dto.CreateProfessorDto;
 import com.green.university.dto.CreateStaffDto;
 import com.green.university.dto.CreateStudentDto;
+import com.green.university.dto.FindIdFormDto;
+import com.green.university.dto.FindPasswordFormDto;
 import com.green.university.dto.LoginDto;
 import com.green.university.dto.UserUpdateDto;
 import com.green.university.dto.response.PrincipalDto;
@@ -26,6 +28,7 @@ import com.green.university.repository.model.Staff;
 import com.green.university.repository.model.Student;
 import com.green.university.repository.model.User;
 import com.green.university.utils.Define;
+import com.green.university.utils.TempPassword;
 
 /**
  * 유저 서비스
@@ -140,8 +143,8 @@ public class UserService {
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		if(!passwordEncoder.matches(loginDto.getPassword(), userEntity.getPassword())) {
-			throw new CustomRestfullException(Define.WRONG_PASSWORD , HttpStatus.BAD_REQUEST);
+		if (!passwordEncoder.matches(loginDto.getPassword(), userEntity.getPassword())) {
+			throw new CustomRestfullException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
 
 
@@ -287,6 +290,70 @@ public class UserService {
 	public StudentInfoDto readStudentInfo(Integer id) {
 		StudentInfoDto studentEntity = studentRepository.selectStudentInfoById(id);
 		return studentEntity;
+	}
+	
+	/**
+	 * 아이디 찾기
+	 * @param findIdFormDto
+	 * @return
+	 */
+	@Transactional
+	public Integer readIdByNameAndEmail(FindIdFormDto findIdFormDto) {
+		
+		Integer findId = null;
+		if(findIdFormDto.getUserRole().equals("student")) {
+			findId = studentRepository.selectIdByNameAndEmail(findIdFormDto);
+		} else if(findIdFormDto.getUserRole().equals("professor")) {
+			findId = professorRepository.selectIdByNameAndEmail(findIdFormDto);
+		} else if(findIdFormDto.getUserRole().equals("staff")) {
+			findId = staffRepository.selectIdByNameAndEmail(findIdFormDto);
+		}
+		
+		if(findId == null) {
+			throw new CustomRestfullException("아이디를 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return findId;
+		
+	}
+	/**
+	 * 아이디 찾기
+	 * @param findIdFormDto
+	 * @return
+	 */
+	@Transactional
+	public String updateTempPassword(FindPasswordFormDto findPasswordFormDto) {
+		
+		String password = null;
+		
+		Integer findId = 0;
+		
+		if(findPasswordFormDto.getUserRole().equals("student")) {
+			findId = studentRepository.selectStudentByIdAndNameAndEmail(findPasswordFormDto);
+			if(findId == null) {
+				throw new CustomRestfullException("조건에 맞는 정보를 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} else if(findPasswordFormDto.getUserRole().equals("professor")) {
+			findId = professorRepository.selectProfessorByIdAndNameAndEmail(findPasswordFormDto);
+			if(findId == null) {
+				throw new CustomRestfullException("조건에 맞는 정보를 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} else if(findPasswordFormDto.getUserRole().equals("staff")) {
+			findId = staffRepository.selectStaffByIdAndNameAndEmail(findPasswordFormDto);
+			if(findId == null) {
+				throw new CustomRestfullException("조건에 맞는 정보를 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}
+		
+		password = new TempPassword().returnTempPassword();
+		System.out.println(password);
+		ChangePasswordDto changePasswordDto = new ChangePasswordDto();
+		changePasswordDto.setAfterPassword(passwordEncoder.encode(password));
+		changePasswordDto.setId(findPasswordFormDto.getId());
+		userRepository.updatePassword(changePasswordDto);
+		
+		return password;
+		
 	}
 
 }

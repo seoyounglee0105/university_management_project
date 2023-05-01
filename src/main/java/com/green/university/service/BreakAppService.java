@@ -58,7 +58,7 @@ public class BreakAppService {
 	@Transactional
 	public List<BreakApp> readByStudentId(Integer studentId) {
 		
-		List<BreakApp> breakAppEntityList = breakAppRepository.findByStudentId(studentId);
+		List<BreakApp> breakAppEntityList = breakAppRepository.selectByStudentId(studentId);
 		
 		return breakAppEntityList;
 	}
@@ -70,7 +70,7 @@ public class BreakAppService {
 	@Transactional
 	public List<BreakApp> readByStatus(String status) {
 		
-		List<BreakApp> breakAppEntityList = breakAppRepository.findByStatus(status);
+		List<BreakApp> breakAppEntityList = breakAppRepository.selectByStatus(status);
 		
 		return breakAppEntityList;
 	}
@@ -82,7 +82,7 @@ public class BreakAppService {
 	@Transactional
 	public BreakApp readById(Integer id) {
 		
-		BreakApp breakAppEntity = breakAppRepository.findById(id);
+		BreakApp breakAppEntity = breakAppRepository.selectById(id);
 		
 		return breakAppEntity;
 	}
@@ -116,7 +116,7 @@ public class BreakAppService {
 		
 		// 승인 시 학적 상태를 휴학으로 변경하기
 		if (status.equals("승인")) {
-			BreakApp breakAppEntity = breakAppRepository.findById(id);
+			BreakApp breakAppEntity = breakAppRepository.selectById(id);
 			
 			String newToDate = null;
 			if (breakAppEntity.getToSemester() == 1) {
@@ -125,7 +125,7 @@ public class BreakAppService {
 				newToDate = (breakAppEntity.getToYear() + 1) + "-02-28";
 			}
 			
-			stuStatService.updateStatus(breakAppEntity.getStudentId(), "휴학", newToDate);
+			stuStatService.updateStatus(breakAppEntity.getStudentId(), "휴학", newToDate, id);
 		}
 		
 		

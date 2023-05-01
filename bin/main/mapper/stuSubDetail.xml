@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- student_tb용 쿼리 -->
 
 <mapper namespace="com.green.university.repository.interfaces.StuSubDetailRepository">
 	<update id="updateGrade">
@@ -16,5 +15,10 @@
 		student_id = #{studentId}
 		AND subject_id = #{subjectId}
 	</update>
+	
+	<insert id="insert">
+		INSERT INTO stu_sub_detail_tb (id, student_id, subject_id)
+		VALUES (#{id}, #{studentId}, #{subjectId})
+	</insert>
 
 </mapper>

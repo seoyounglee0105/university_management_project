@@ -239,7 +239,7 @@ public class AdminService {
 	 * 강의 조회 서비스
 	 */
 	public List<Subject> readSubject() {
-		List<Subject> subjectList = subjectRepository.findAll();
+		List<Subject> subjectList = subjectRepository.selectAll();
 		return subjectList;
 	}
 

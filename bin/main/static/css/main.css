@@ -86,13 +86,24 @@ header {
 }
 
 .main--menu ul li {
-	margin: 0 20px;
+	margin: 0 10px;
+	width: 210px;
+	text-align: center;
+	position: relative;
 }
 
 .main--menu ul li a {
-	padding: 20px 50px;
+	display: inline-block;
+	width: 100%;
 	font-size: 27px;
 	font-weight: 600;
+	line-height: 100px;
+}
+
+.main--menu ul li a:hover {
+	border-bottom: 4px solid #075AA4;
+	color: #075AA4;
+	font-size: 28px;
 }
 
 .sub--menu {
@@ -146,7 +157,6 @@ header {
 
 main {
 	min-width: 1100px; 
-	height: 900px; 
 	padding: 20px;
 	margin-bottom: 50px;
 }
@@ -165,5 +175,11 @@ main h1:first-of-type {
 .selected--menu,
 .sub--menu--table td a:hover {
 	color: #075AA4;
+	font-weight: 600;
+}
+
+.no--list--p {
+	font-size: 20px;
+	color: #6c6a6a;
 	font-weight: 600;
 }
