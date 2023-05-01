@@ -20,8 +20,7 @@
 	<update id="updateByDepartmentDto">
 		UPDATE department_tb
 		SET name = #{name}
-		WHERE id =
-		#{id};
+		WHERE id = #{id};
 	</update>
 
 </mapper>

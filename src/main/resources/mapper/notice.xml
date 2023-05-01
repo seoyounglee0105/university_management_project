@@ -37,7 +37,20 @@
 	<select id="selectNoticeCount" resultType="Integer">
 		select count(id) from notice_tb
 	</select>
+	<select id="selectNoticeCountByKeyword" resultType="Integer">
+		select count(id) from notice_tb WHERE title LIKE CONCAT('%',#{keyword},'%') OR content LIKE CONCAT('%',#{keyword},'%')
+	</select>
+	<select id="selectNoticeCountByTitle" resultType="Integer">
+		select count(id) from notice_tb WHERE title LIKE CONCAT('%',#{keyword},'%')
+	</select>
+	<select id="selectNoticeByTitle" resultType="com.green.university.dto.NoticeFormDto">
+		SELECT * FROM notice_tb WHERE title LIKE CONCAT('%',#{keyword},'%')
+		ORDER BY id DESC 
+		LIMIT #{page}, 10
+	</select>
 	<select id="selectNoticeByKeyword" resultType="com.green.university.dto.NoticeFormDto">
 		SELECT * FROM notice_tb WHERE title LIKE CONCAT('%',#{keyword},'%') OR content LIKE CONCAT('%',#{keyword},'%')
+		ORDER BY id DESC 
+		LIMIT #{page}, 10
 	</select>
 </mapper>
