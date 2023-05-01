@@ -43,10 +43,8 @@ public class GradeService {
 	// 금학기 누계성적 조회
 	@Transactional
 	public MyGradeDto readMyGradeByStudentId(Integer studentId) {
-		System.out.println(studentId);
 		MyGradeDto mygradeEntity = gradeRespository.selectMyGradeDtoBySemester(studentId, Define.CURRENT_YEAR,
 				Define.CURRENT_SEMESTER);
-		System.out.println(mygradeEntity.toString());
 
 		return mygradeEntity;
 	}

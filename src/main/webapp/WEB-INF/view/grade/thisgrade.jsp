@@ -112,7 +112,7 @@
 				</div>
 				</c:when>
 				<c:otherwise>
-				<h3>강의 신청 및 수강 이력 확인 바랍니다.</h3>
+				<p>강의 신청 및 수강 이력 확인 바랍니다.</p>
 				</c:otherwise>
 				</c:choose>
 			
