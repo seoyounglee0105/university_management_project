@@ -2,22 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<link rel="stylesheet" href="/css/admin.css">
 <style>
-.container {
-	width: 700px;
-}
-.first--tr {
-	background-color: #f7f6f6;
-	font-weight: bolder;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-#submit {
-	background-color: #031734;
-	color: #ccc;
-	text-decoration: none;
-	margin-left: 100px;
-}
 </style>
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -53,28 +39,22 @@
 	<main>
 		<h1>학과</h1>
 		<div class="split--div"></div>
-			<div class="select--button">
-				<a href="/admin/department?crud=insert">등록</a>
-				<a href="/admin/department?crud=update">수정</a> 
-				<a href="/admin/department?crud=delete">삭제</a>
-			</div>
-			
 			
 			<!-- 학과 입력 -->
 			<c:if test="${crud.equals(\"insert\")}">
-				<form action="/admin/department-proc" method="post" id="insert--form">
-					<h5>등록할 학과명을 입력해주세요</h5>
-						학과명 <input type="text" class="form-control form-control-sm" name="name" value="전자과"> 
-						단과대학 
-							<select name="collegeId" class="form-control form-control-sm">
+			<div class="container">
+				<form action="/admin/department-proc" method="post" class="form-container">
+					<span class="material-symbols-outlined symbol">school</span><span class="insert">등록하기</span><br>
+						<input type="text" class="input--box" name="name" placeholder="학과를 입력해주세요"> 
+							<select name="collegeId" class="input--box">
 								<c:forEach var="college" items="${collegeList}">
 									<option value="${college.id}">${college.name}</option>
 								</c:forEach>
 							</select> 
-							<input type="submit" class="btn btn-link" id="submit" value="입력">
+							<input type="submit" class="button" value="입력">
 				</form>
-				<div class="container">
-					<table class="table table-bordered">
+				<div class="total--container">
+					<table class="table--container">
 						<tr class="first--tr">
 							<td>ID</td>
 							<td>학과명</td>
@@ -89,26 +69,27 @@
 						</c:forEach>
 					</table>
 				</div>
+			</div>
 			</c:if>
 
 
 			<!-- 학과 수정  -->
 			<c:if test="${crud.equals(\"update\")}">
+			<div class="container">
 				<form action="/updAdmin/upDepartment" method="post" id="insert--form">
-					 <input type="hidden" name="_method" value="put"/>
-						<h5>변경할 학과명을 입력해주세요</h5>
-							학과명 
-								<select name="id">
+					 <input type="hidden" class="form--container" name="_method" value="put"/>
+						<span class="material-symbols-outlined symbol">school</span><span class="insert">수정하기</span><br>
+								<select name="id" class="form--container">
 									<c:forEach var="department" items="${departmentList}">
 										<option value="${department.id}">${department.name}</option>
 									</c:forEach>
 								</select>
 							변경 학과명 
-							<input type="text" name="name" value="전자과"> 
-							<input type="submit" value="수정">
+							<input type="text" class="form-control form-control-sm insert" name="name" value="전자과"> 
+							<input type="submit" value="수정" class="button">
 				</form>
 
-				<table class="department--table">
+				<table class="table--container">
 					<tr class="first--tr">
 						<td>ID</td>
 						<td>학과명</td>
@@ -122,13 +103,15 @@
 						</tr>
 					</c:forEach>
 				</table>
+			</div>
 			</c:if>
 
 
 			<!-- 학과 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
 			<h5>삭제할 학과 이름을 클릭해주세요</h5>
-				<table class="department--table" border="1">
+			<div class="total--container">
+				<table class="table--container">
 					<tr class="first--tr">
 						<td>ID</td>
 						<td>학과명</td>
@@ -142,12 +125,14 @@
 						</tr>
 					</c:forEach>
 				</table>
+			</div>
 			</c:if>
 
 			
 			<!-- 학과 조회 -->
 			<c:if test="${crud.equals(\"select\")}">
-				<table class="form-control form-control-sm">
+				<div class="total--container">
+				<table class="table--container">
 					<tr class="first--tr">
 						<td>ID</td>
 						<td>학과명</td>
@@ -160,7 +145,13 @@
 							<td>${department.collegeId}</td>
 						</tr>
 					</c:forEach>
-				</table>
+					</table>
+				</div>
+				<div class="select--button">
+					<a href="/admin/department?crud=insert" class="button">등록</a>
+					<a href="/admin/department?crud=update" class="button">수정</a> 
+					<a href="/admin/department?crud=delete" class="button">삭제</a>
+				</div>
 			</c:if>
 	</main>
 

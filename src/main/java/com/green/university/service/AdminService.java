@@ -98,7 +98,6 @@ public class AdminService {
 				throw new CustomRestfullException("이미 존재하는 학과입니다", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		
 		int resultRowCount = departmentRepository.insert(departmentFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("학과 입력 서비스 오류");
@@ -110,6 +109,9 @@ public class AdminService {
 	 */
 	public List<Department> readDepartment() {
 		List<Department> departmentList = departmentRepository.selectByDepartmentDto();
+		for (int i = 0; i < departmentList.size(); i++) {
+			System.out.println(departmentList.get(i));            
+		}
 		return departmentList;
 	}
 

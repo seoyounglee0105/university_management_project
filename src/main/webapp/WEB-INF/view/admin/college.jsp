@@ -2,22 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<link rel="stylesheet" href="/css/admin.css">
 <style>
-.container {
-	width: 700px;
-}
-.first--tr {
-	background-color: #f7f6f6;
-	font-weight: bolder;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-#submit {
-	background-color: #031734;
-	color: #ccc;
-	text-decoration: none;
-	margin-left: 100px;
-}
 </style>
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -56,14 +42,12 @@
 
 			<!-- 단과대학 조회 -->
 			<c:if test="${crud.equals(\"select\")}">
-			<div class="container">
-				<table class="table table-bordered table-sm">
-				<thead class="thead-dark">
+			<div class="total--container">
+				<table class="table--container">
 					<tr class="first--tr">
 						<td>ID</td>
 						<td>이름</td>
 					</tr>
-					</thead>
 					<c:forEach var="college" items="${collegeList}">
 						<tr>
 							<td>${college.id}</td>
@@ -74,8 +58,8 @@
 			</div>
 			<c:if test="${principal.userRole.equals(\"staff\")}">
 				<div class="select--button">
-				<a href="/admin/college?crud=insert" class="btn btn-link" id="submit">등록</a> 
-				<a href="/admin/college?crud=delete" class="btn btn-link" id="submit">삭제</a>
+				<a href="/admin/college?crud=insert" class="button">등록</a> 
+				<a href="/admin/college?crud=delete" class="button">삭제</a>
 				</div>
 			</c:if>
 			</c:if>
@@ -83,14 +67,14 @@
 
 			<!-- 단과대학 입력 -->
 			<c:if test="${crud.equals(\"insert\")}">
-				<form action="/admin/college" method="post" id="insert--form">
-					<h5>단과대학을 등록해주세요</h5>
-					이름 <input type="text" class="form-control form-control-sm" name="name" value="인문대학"> 
-					<input type="submit" value="입력">
+				<form action="/admin/college" method="post" class="form--container">
+				<span class="material-symbols-outlined symbol">school</span><span class="insert">등록하기</span><br>
+				<input type="text" id="name" class="input--box" name="name" placeholder="단과대학을 입력해주세요"> 
+					<input type="submit" value="입력" class="button">
 				</form>
 				
-				<div class="container">
-					<table class="table table-bordered table-sm">
+				<div class="tatal--container">
+					<table class="table--container">
 						<tr class="first--tr">
 							<td>ID</td>
 							<td>이름</td>
@@ -107,9 +91,9 @@
 
 			<!-- 단과대학 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
-				<h5>삭제할 단과대학 이름을 클릭해주세요</h5>
-				<div class="container">
-					<table class="table table-bordered table-sm">
+				<span class="insert">삭제할 단과대학 이름을 클릭해주세요</span>
+			<div class="total--container">
+				<table class="table--container">
 						<tr class="first--tr">
 							<td>ID</td>
 							<td>이름</td>

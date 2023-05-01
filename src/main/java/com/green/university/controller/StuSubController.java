@@ -1,6 +1,7 @@
 package com.green.university.controller;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,11 +15,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.green.university.dto.AllSubjectSearchFormDto;
 import com.green.university.dto.CurrentSemesterSubjectSearchFormDto;
 import com.green.university.dto.response.PrincipalDto;
 import com.green.university.dto.response.StuSubAppDto;

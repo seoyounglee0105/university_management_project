@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.green.university.dto.NoticeFormDto;
+import com.green.university.dto.NoticePageFormDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.Notice;
 import com.green.university.service.AdminService;
@@ -43,7 +44,12 @@ public class NoticeController {
 	@GetMapping("")
 	public String notice(Model model, @RequestParam(defaultValue = "select") String crud) {
 		model.addAttribute("crud", crud);
-		List<Notice> noticeList = noticeService.findNotice();
+		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
+		noticePageFormDto.setPage(0);
+		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
+		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
+		
+		model.addAttribute("listCount", Math.ceil(amount/10.0));
 		if (noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {
@@ -81,7 +87,7 @@ public class NoticeController {
 			e.printStackTrace();
 			}
 		}
-		noticeService.insertNotice(noticeFormDto);
+		noticeService.readNotice(noticeFormDto);
 		return "redirect:/notice";
 	}
 
@@ -94,11 +100,51 @@ public class NoticeController {
 		model.addAttribute("crud", "read");
 		model.addAttribute("id", id);
 		
-		Notice notice = noticeService.findByIdNotice(id);
+		Notice notice = noticeService.readByIdNotice(id);
 		if (notice == null) {
 			model.addAttribute("notice", null);
 		} else {
 			model.addAttribute("notice", notice);
+		}
+		notice.setContent(notice.getContent().replace("\r\n", "<br>"));
+		return "/board/notice";
+	}
+	
+	/**
+	 * 공지사항 페이지 이동
+	 */
+	@GetMapping("/list/{page}")
+	public String showNoticeListByPage(Model model, @RequestParam(defaultValue = "select") String crud, @PathVariable Integer page) {
+		model.addAttribute("crud", crud);
+		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
+		noticePageFormDto.setPage((page - 1) * 10);
+		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
+		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
+		model.addAttribute("listCount", Math.ceil(amount/10.0));
+		if (noticeList.isEmpty()) {
+			model.addAttribute("noticeList", null);
+		} else {
+			model.addAttribute("noticeList", noticeList);
+		}
+		return "/board/notice";
+	}
+	
+	/**
+	 *  공지사항 검색 기능
+	 */
+	@PostMapping("/search")
+	public String showNoticeByKeyword(Model model, @RequestParam String keyword) {
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("crud", "selectKeyword");
+		List<Notice> noticeList = noticeService.readNoticeByKeyword(keyword);
+		System.out.println(keyword);
+		for (int i = 0; i < noticeList.size(); i++) {
+			System.out.println(noticeList.get(i));
+		}
+		if (noticeList.isEmpty()) {
+			model.addAttribute("noticeList", null);
+		} else {
+			model.addAttribute("noticeList", noticeList);
 		}
 		return "/board/notice";
 	}
@@ -112,7 +158,7 @@ public class NoticeController {
 		model.addAttribute("crud", "update");
 		model.addAttribute("id", id);
 
-		Notice notice = noticeService.findByIdNotice(id);
+		Notice notice = noticeService.readByIdNotice(id);
 		model.addAttribute("notice", notice);
 		return "/board/notice";
 	}
@@ -137,5 +183,8 @@ public class NoticeController {
 		noticeService.deleteNotice(id);
 		return "redirect:/notice";
 	}
+	
+	
+	
 
 }

@@ -2,36 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<link rel="stylesheet" href="/css/admin.css">
 <style>
 
-h5 {
-	font-weight: bold;
-}
-.insert--container {
-	display: flex;
-	flex-direction: column;
-	background-color: #f7f6f6;
-}
-.form--container {
-	display: flex;
-}
-.first--tr {
-	background-color: #f7f6f6;
-	font-weight: bold;
-}
-.form-control {
-	width: 200px;
-}
-.button {
-	display: flex;
-	justify-content: center;
-}
-#submit {
-	background-color: #031734;
-	color: #ccc;
-	text-decoration: none;
-	margin-left: 20px !important;
-}
 </style>
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -157,16 +130,16 @@ h5 {
 				<form action="/updAdmin/upSubject" method="post" id="insert--form">
 					 <input type="hidden" name="_method" value="put"/>
 						<h5>강의 변경 내용을 입력해주세요</h5>
-							ID<select name="id">
+							ID<select name="id" class="form-control">
 								<c:forEach var="subject" items="${subjectList}">
 									<option>${subject.id}</option>
 								</c:forEach>
 							</select> 
-							변경 학과명 <input type="text" name="name"> 
-							변경 강의실 <input type="text" name="roomId">
+							변경 학과명 <input type="text" class="form-control" name="name"> 
+							변경 강의실 <input type="text" class="form-control" name="roomId">
 							<div></div>
 							변경 요일
-								<select name="subDay">
+								<select name="subDay" class="form-control">
 									<option value="월">월</option>
 									<option value="화">화</option>
 									<option value="수">수</option>
@@ -174,19 +147,19 @@ h5 {
 									<option value="금">금</option>
 								</select> 
 							변경 시작시간 
-								<select name="startTime">
+								<select name="startTime" class="form-control">
 									<c:forEach var="time" begin="9" end="16">
 										<option value="${time}">${time}</option>
 									</c:forEach>
 								</select>
 							변경 종료시간
-								<select name="endTime">
+								<select name="endTime" class="form-control">
 									<c:forEach var="time" begin="11" end="18">
 										<option value="${time}">${time}</option>
 									</c:forEach> 
 								</select>
-							변경 정원 <input type="text" name="capacity"> 
-							<input type="submit" value="수정">
+							변경 정원 <input type="text" class="form-control" name="capacity"> 
+							<input type="submit" value="수정" class="btn btn-link submit" id="submit">
 					<div class="container">
 					<table class="table table-bordered table-sm">
 							<tr class="first--tr">

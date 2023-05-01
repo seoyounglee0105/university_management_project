@@ -3,16 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 <style>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-size: 20px;
-}
 .write--div {
-	margin: 10px;
-	padding: 10px;
 	background-color: #f7f6f6;
+	padding: 20px;
 }
 .title--container {
 	display: flex;
@@ -34,7 +27,7 @@
 	text-decoration: none;
 	margin-left: 100px;
 }
-.notice--table {
+.table {
 	width: 1000px;
 	margin-bottom: 20px;
 	cursor: pointer;
@@ -61,13 +54,16 @@
 	display: flex;
 	justify-content: center;
 }
+.second--tr:hover{
+	font-weight: bold;
+}
 </style>
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>학사정보</h2>
+			<h2>공지</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
@@ -86,12 +82,50 @@
 		<div class="split--div"></div>
 		
 		
-		<!-- 공지 조회 -->
-			<c:if test="${crud.equals(\"select\")}">
+		<!-- 공지 검색 -->
+			<c:if test="${crud.equals(\"selectKeyword\")}">
 				<table class="table">
 					<c:choose>
 						<c:when test="${fn:length(noticeList) != 0}">
-									<tr class="first--tr">
+								<tr class="first--tr">
+										<td>번호</td>
+										<td>말머리</td>
+										<td>제목</td>
+										<td>작성일</td>
+									</tr>
+								<c:forEach var="notice" items="${noticeList}">
+									<tr class="second--tr" onclick="location.href='/notice/read?id=${notice.id}';">
+										<td>${notice.id}</td>
+										<td>${notice.category}</td>
+										<td>${notice.title}</td>
+										<td>${notice.timeFormat()}</td>
+									</tr>
+								</c:forEach>						
+						</c:when>		
+							<c:otherwise>
+								해당 키워드로 작성된 공지글이 없습니다.
+							</c:otherwise>	
+						</c:choose>
+				</table>
+				<c:forEach var="index" begin="1" end="${listCount}">
+					<a href="/notice/list/${index}"> ${index}</a> &nbsp;&nbsp;
+					</c:forEach>
+				<c:if test="${principal.userRole.equals(\"staff\")}">
+					<a href="/notice?crud=write" class="button" id="submit">등록</a>
+				</c:if>
+			</c:if>
+			
+			
+			<!-- 공지 조회 -->
+			<c:if test="${crud.equals(\"select\")}">
+			<form action="/notice/search" method="post" class="form--container">
+				<input type="text" name="keyword">
+				<input type="submit" class="button" value="검색">
+			</form>
+				<table class="table">
+					<c:choose>
+						<c:when test="${fn:length(noticeList) != 0}">
+								<tr class="first--tr">
 										<td>번호</td>
 										<td>말머리</td>
 										<td>제목</td>
@@ -105,14 +139,17 @@
 										<td>${notice.timeFormat()}</td>
 									</tr>
 								</c:forEach>	
-						</c:when>
+						</c:when>		
 							<c:otherwise>
 								공지사항이 없습니다. 작성해주세요
 							</c:otherwise>	
 						</c:choose>
 				</table>
+				<c:forEach var="index" begin="1" end="${listCount}">
+					<a href="/notice/list/${index}"> ${index}</a> &nbsp;&nbsp;
+					</c:forEach>
 				<c:if test="${principal.userRole.equals(\"staff\")}">
-					<a href="/notice?crud=write" class="btn btn-link" id="submit">등록</a>
+					<a href="/notice?crud=write" class="button" id="submit">등록</a>
 				</c:if>
 			</c:if>
 			
@@ -132,11 +169,7 @@
 						</tr>
 						<tr class="content--container">
 							<td class="table-active">내용</td>
-							<td>${notice.content}</td>
-						</tr>
-						<tr class="image">
-							<td></td>
-							<td><img alt="" src="${notice.setUpImage()}"></td>
+							<td>${notice.content} <img alt="" src="${notice.setUpImage()}" width="300" height="300"></td>
 						</tr>
 						</table>
 
@@ -172,7 +205,7 @@
 				<div class="title--container">
 						<div class="category">
 							말머리 
-							<select name="category" class="form-control form-control-sm">
+							<select name="category" class="input--box">
 								<option value="[일반]">[일반]</option>
 								<option value="[학사]">[학사]</option>
 								<option value="[장학]">[장학]</option>

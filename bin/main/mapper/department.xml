@@ -12,7 +12,7 @@
 	</select>
 
 	<select id="selectByDepartmentDto" resultType="com.green.university.repository.model.Department">
-		select * from department_tb
+		SELECT * FROM department_tb
 	</select>
 	<delete id="deleteById">
 		delete from department_tb where id = #{id}

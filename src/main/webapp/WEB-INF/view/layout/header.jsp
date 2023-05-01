@@ -51,7 +51,7 @@
 						<li><a href="/">홈</a>
 						<li><a href="/info/professor">MY</a>
 						<li><a href="/subject/list">수업</a>
-						<li><a href="/notice">학사정보</a>
+						<li><a href="/notice">공지</a>
 					</ul>
 				</c:when>
 

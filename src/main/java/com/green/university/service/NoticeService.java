@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.green.university.dto.NoticeFormDto;
+import com.green.university.dto.NoticePageFormDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.NoticeRepository;
 import com.green.university.repository.model.Notice;
@@ -27,16 +28,7 @@ public class NoticeService {
 	/**
 	 * 공지 입력 서비스
 	 */
-	public void insertNotice(@Validated NoticeFormDto noticeFormDto) {
-//		List<Notice> noticeList = noticeRepository.selectByNoticeDto();
-//		if(noticeList.size() != 0) {
-//			for (int i = 0; i < noticeList.size(); i++) {
-//				if(noticeList.get(i).getTitle().equals(noticeFormDto.getTitle()) &&
-//					noticeList.get(i).getContent().equals(noticeFormDto.getContent())) {
-//						throw new CustomRestfullException("이미 입력된 공지입니다", HttpStatus.BAD_REQUEST);
-//				}
-//			}			
-//		}
+	public void readNotice(@Validated NoticeFormDto noticeFormDto) {
 		int resultRowCount = noticeRepository.insert(noticeFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("공지 입력 서비스 오류");
@@ -51,17 +43,34 @@ public class NoticeService {
 	/**
 	 * 공지 조회 서비스
 	 */
-	public List<Notice> findNotice() {
-		List<Notice> noticeList = noticeRepository.selectByNoticeDto();
+	public List<Notice> readNotice(NoticePageFormDto noticePageFormDto) {
+		List<Notice> noticeList = noticeRepository.selectByNoticeDto(noticePageFormDto);
 		return noticeList;
 	}
 	
+	/**
+	 * 
+	 * @param noticePageFormDto
+	 * @return 공지 갯수 확인 서비스
+	 */
+	public Integer readNoticeAmount(NoticePageFormDto noticePageFormDto) {
+		Integer amount = noticeRepository.selectNoticeCount(noticePageFormDto);
+		return amount;		
+	}
+	
+	/**
+	 *  공지 검색 서비스
+	 */
+	public List<Notice> readNoticeByKeyword(String keyword) {
+		List<Notice> noticeList = noticeRepository.selectNoticeByKeyword(keyword);
+		return noticeList;
+	}
 	
 	
 	/**
 	 * 공지 상세 조회 서비스
 	 */
-	public Notice findByIdNotice(Integer id) {
+	public Notice readByIdNotice(Integer id) {
 		Notice notice = noticeRepository.selectById(id);
 		return notice;
 	}
