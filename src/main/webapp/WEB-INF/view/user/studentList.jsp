@@ -77,6 +77,9 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
+					<td><a href="/user/studentList">학생 명단 조회</a></td>
+				</tr>
+				<tr>
 					<td><a href="/user/student">학생 등록</a></td>
 				</tr>
 				<tr>
@@ -117,7 +120,7 @@
 							<li style="height: 24px;"><span class="material-symbols-outlined" style="font-size: 18px; padding-top: 4px;">search</span>
 						</ul>
 					</button>
-					<button type="button">
+					<button type="button" onclick="location.href='/user/student/update'">
 						<ul>
 							<li style="height: 24px;">새학기 적용
 						</ul>

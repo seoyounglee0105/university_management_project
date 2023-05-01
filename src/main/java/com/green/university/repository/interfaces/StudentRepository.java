@@ -66,8 +66,17 @@ public interface StudentRepository {
 	// 페이징 처리 위한 전체 학생 수 조회
 	public Integer selectStudentAmount();
 	
+	// 페이징 처리 위한 과 학생 수 조회
 	public Integer selectStudentAmountByDeptId(Integer deptId);
 	
+	// 학생 grade, semester 업데이트
+	public int updateStudentGradeAndSemester1_2();
+	public int updateStudentGradeAndSemester2_1();
+	public int updateStudentGradeAndSemester2_2();
+	public int updateStudentGradeAndSemester3_1();
+	public int updateStudentGradeAndSemester3_2();
+	public int updateStudentGradeAndSemester4_1();
+	public int updateStudentGradeAndSemester4_2();
 	
 	
 	

@@ -159,6 +159,11 @@ public class UserController {
 		return "/user/studentList";
 	}
 	
+	@GetMapping("/student/update")
+	public String updateStudentGradeAndSemester() {
+		studentService.updateStudentGradeAndSemester();
+		return "redirect:/user/studentList";
+	}
 	
 
 }

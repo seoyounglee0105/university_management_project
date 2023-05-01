@@ -46,12 +46,12 @@
 	</update>
 	<!-- 페이지로부터 학생 전체 조회 -->
 	<select id="selectStudentList" resultType="com.green.university.repository.model.Student">
-		SELECT * FROM student_tb 
+		SELECT * FROM student_tb
 		LIMIT #{page}, 20
 	</select>
 	<!-- 페이지로부터 학생 과별 조회 -->
 	<select id="selectByDepartmentId" resultType="com.green.university.repository.model.Student">
-		SELECT * FROM student_tb 
+		SELECT * FROM student_tb
 		WHERE dept_id = #{deptId}
 		LIMIT #{page}, 20
 	</select>
@@ -85,7 +85,7 @@
 		WHERE name = #{name}
 		AND email = #{email}
 	</select>
-	
+
 	<select id="selectStudentByIdAndNameAndEmail" resultType="integer">
 		SELECT id
 		FROM student_tb
@@ -93,5 +93,104 @@
 		AND name = #{name}
 		AND email = #{email}
 	</select>
+
+	<update id="updateStudentGradeAndSemester1_2">
+		UPDATE student_tb SET
+		grade = 1,
+		semester = 2
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM tuition_tb
+				GROUP BY student_id
+				) AS a
+			WHERE count = 2
+		)
+	</update>
+	<update id="updateStudentGradeAndSemester2_1">
+		UPDATE student_tb SET
+		grade = 2,
+		semester = 1
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM tuition_tb
+				GROUP BY student_id
+				) AS a
+			WHERE count = 3
+		)
+	</update>
+	<update id="updateStudentGradeAndSemester2_2">
+		UPDATE student_tb SET
+		grade = 2,
+		semester = 2
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM tuition_tb
+				GROUP BY student_id
+				) AS a
+			WHERE count = 4
+		)
+	</update>
+	<update id="updateStudentGradeAndSemester3_1">
+		UPDATE student_tb SET
+		grade = 3,
+		semester = 1
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM tuition_tb
+				GROUP BY student_id
+				) AS a
+			WHERE count = 5
+		)
+	</update>
+	<update id="updateStudentGradeAndSemester3_2">
+		UPDATE student_tb SET
+		grade = 3,
+		semester = 2
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM tuition_tb
+				GROUP BY student_id
+				) AS a
+			WHERE count = 6
+		)
+	</update>
+	<update id="updateStudentGradeAndSemester4_1">
+		UPDATE student_tb SET
+		grade = 4,
+		semester = 1
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM tuition_tb
+				GROUP BY student_id
+				) AS a
+			WHERE count = 7
+		)
+	</update>
+	<update id="updateStudentGradeAndSemester4_2">
+		UPDATE student_tb SET
+		grade = 4,
+		semester = 2
+		WHERE id IN
+		(
+			SELECT student_id FROM
+				(
+				SELECT student_id, count(tui_year)AS count FROM tuition_tb
+				GROUP BY student_id
+				) AS a
+			WHERE count = 8
+		)
+	</update>
 
 </mapper>

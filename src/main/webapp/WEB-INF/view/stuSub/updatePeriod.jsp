@@ -16,6 +16,9 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
+					<td><a href="/user/studentList">학생 명단 조회</a></td>
+				</tr>
+				<tr>
 					<td><a href="/user/student">학생 등록</a></td>
 				</tr>
 				<tr>
@@ -41,21 +44,27 @@
 	<main>
 		<h1>수강 신청 기간 설정</h1>
 		<div class="split--div"></div>
-		<% if (StuSubController.SUGANG_PERIOD == 0) { %>
-			<p class="no--list--p">현재 예비 수강 신청 기간입니다.</p> 
-			<br>
-			<a href="/sugang/updatePeriod1"><button type="submit" class="btn btn-primary create--tui">수강 신청 기간 시작</button></a>
-			
-		<% } else if (StuSubController.SUGANG_PERIOD == 1) { %>
-			<p class="no--list--p">현재 수강 신청 기간입니다.</p> 
-			<br>
-			<a href="/sugang/updatePeriod2"><button type="submit" class="btn btn-primary create--tui">수강 신청 기간 종료</button></a>
-			
-		<% } else { %>
-			<p class="no--list--p">이번 학기 수강 신청 기간이 종료되었습니다.</p>
-			
-		<% } %>
-		
+		<%
+		if (StuSubController.SUGANG_PERIOD == 0) {
+		%>
+		<p class="no--list--p">현재 예비 수강 신청 기간입니다.</p>
+		<br> <a href="/sugang/updatePeriod1"><button type="submit" class="btn btn-primary create--tui">수강 신청 기간 시작</button></a>
+
+		<%
+		} else if (StuSubController.SUGANG_PERIOD == 1) {
+		%>
+		<p class="no--list--p">현재 수강 신청 기간입니다.</p>
+		<br> <a href="/sugang/updatePeriod2"><button type="submit" class="btn btn-primary create--tui">수강 신청 기간 종료</button></a>
+
+		<%
+		} else {
+		%>
+		<p class="no--list--p">이번 학기 수강 신청 기간이 종료되었습니다.</p>
+
+		<%
+		}
+		%>
+
 	</main>
 </div>
 

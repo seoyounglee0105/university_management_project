@@ -270,7 +270,6 @@ public class PersonalController {
 	public String findIdProc(Model model, FindIdFormDto findIdFormDto) {
 		
 		Integer findId = userService.readIdByNameAndEmail(findIdFormDto);
-		System.out.println(findId);
 		model.addAttribute("id", findId);
 		model.addAttribute("name", findIdFormDto.getName());
 		
@@ -303,7 +302,9 @@ public class PersonalController {
 	}
 	
 	
-	
+	/**
+	 * @return 에러페이지
+	 */
 	@GetMapping("/error")
 	public String handleError() {
 		return "/error/errorPage";
