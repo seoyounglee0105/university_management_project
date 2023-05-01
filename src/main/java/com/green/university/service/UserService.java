@@ -1,5 +1,7 @@
 package com.green.university.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,10 +19,12 @@ import com.green.university.dto.UserUpdateDto;
 import com.green.university.dto.response.PrincipalDto;
 import com.green.university.dto.response.ProfessorInfoDto;
 import com.green.university.dto.response.StudentInfoDto;
+import com.green.university.dto.response.StudentInfoStatListDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.ProfessorRepository;
 import com.green.university.repository.interfaces.StaffRepository;
+import com.green.university.repository.interfaces.StuStatRepository;
 import com.green.university.repository.interfaces.StudentRepository;
 import com.green.university.repository.interfaces.UserRepository;
 import com.green.university.repository.model.Professor;
@@ -50,6 +54,8 @@ public class UserService {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private StuStatService stuStatService;
+	@Autowired
+	private StuStatRepository stuStatRepository;
 
 	/**
 	 * staff 생성 서비스로 먼저 staff_tb에 insert한 후 staff_tb에 생긴 id를 끌고와 user_tb에 생성함
@@ -354,6 +360,13 @@ public class UserService {
 		
 		return password;
 		
+	}
+	
+	public List<StudentInfoStatListDto> readStudentInfoStatListByStudentId(Integer studentId){
+		
+		List<StudentInfoStatListDto> list = stuStatRepository.selectStuStatListBystudentId(studentId);
+		
+		return list;
 	}
 
 }

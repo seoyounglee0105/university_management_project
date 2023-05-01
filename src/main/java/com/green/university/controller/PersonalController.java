@@ -1,5 +1,7 @@
 package com.green.university.controller;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +26,7 @@ import com.green.university.dto.UserUpdateDto;
 import com.green.university.dto.response.PrincipalDto;
 import com.green.university.dto.response.ProfessorInfoDto;
 import com.green.university.dto.response.StudentInfoDto;
+import com.green.university.dto.response.StudentInfoStatListDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
 import com.green.university.handler.exception.UnAuthorizedException;
 import com.green.university.repository.model.Staff;
@@ -215,6 +218,9 @@ public class PersonalController {
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		StudentInfoDto student = userService.readStudentInfo(principal.getId());
 		model.addAttribute("student", student);
+		List<StudentInfoStatListDto> list = userService.
+				readStudentInfoStatListByStudentId(principal.getId());
+		model.addAttribute("stustatList", list);
 		
 		return "/user/studentInfo";
 	}
