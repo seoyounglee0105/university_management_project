@@ -20,7 +20,7 @@ spring:
       max-file-size: 20MB
       max-request-size: 20MB      
   datasource: 
-    url: jdbc:mysql://localhost:3306/temp2?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/university_management?serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: asd1234

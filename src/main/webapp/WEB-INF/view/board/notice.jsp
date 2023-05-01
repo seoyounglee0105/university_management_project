@@ -45,7 +45,7 @@ form {
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/board/notice">공지사항</a></td>
+					<td><a href="/notice" class="selected--menu">공지사항</a></td>
 				</tr>
 			</table>
 		</div>

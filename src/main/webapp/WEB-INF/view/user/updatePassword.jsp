@@ -41,22 +41,22 @@ button{
 			 <c:choose>
 			 	<c:when test="${principal.userRole.equals(\"student\")}">
 					<tr>
-						<td><a href="/info/student" class="selected--menu">내 정보 조회</a></td>
+						<td><a href="/info/student">내 정보 조회</a></td>
 					</tr>
 				</c:when>
 			 	<c:when test="${principal.userRole.equals(\"professor\")}">
 					<tr>
-						<td><a href="/info/professor" class="selected--menu">내 정보 조회</a></td>
+						<td><a href="/info/professor">내 정보 조회</a></td>
 					</tr>
 				</c:when>
 			 	<c:otherwise>
 					<tr>
-						<td><a href="/info/staff" class="selected--menu">내 정보 조회</a></td>
+						<td><a href="/info/staff">내 정보 조회</a></td>
 					</tr>
 				</c:otherwise>
 			 </c:choose>
 				<tr>
-					<td><a href="/password">비밀번호 변경</a></td>
+					<td><a href="/password" class="selected--menu">비밀번호 변경</a></td>
 				</tr>
 				<c:if test="${principal.userRole.equals(\"student\")}">
 					<tr>

@@ -77,7 +77,7 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/user/studentList">학생 명단 조회</a></td>
+					<td><a href="/user/studentList" class="selected--menu">학생 명단 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/user/professorList">교수 명단 조회</a></td>

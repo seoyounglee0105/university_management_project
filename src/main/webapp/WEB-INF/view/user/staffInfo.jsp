@@ -57,7 +57,7 @@ form{
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/info/staff">내 정보 조회</a></td>
+					<td><a href="/info/staff" class="selected--menu">내 정보 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/password">비밀번호 변경</a></td>
