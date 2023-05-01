@@ -1,5 +1,10 @@
 package com.green.university.handler;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -17,6 +22,28 @@ public class MyRestFullExceptionHandler {
 		System.out.println(e.getMessage());
 	}
 	
+//	@ExceptionHandler(BindException.class)
+//	public String bindingException(BindException e) {
+//		System.out.println("111111111111111111111");
+//		StringBuilder sb = new StringBuilder();
+//		BindingResult bindingResult = e.getBindingResult();
+//		sb.append("<script>");
+//		sb.append("alert('"); 
+//		for (FieldError fieldError : bindingResult.getFieldErrors()) {
+//			sb.append("[");
+//			sb.append(fieldError.getField());
+//			sb.append("](은)는 ");
+//			sb.append(fieldError.getDefaultMessage());
+//			sb.append(" 입력된 값: [");
+//			sb.append(fieldError.getRejectedValue());
+//			sb.append("]");
+//        }
+//		sb.append("');"); 
+//		sb.append("history.back();");
+//		sb.append("</script>");
+//		
+//		return sb.toString();
+//	}
 
 	
 	// 사용자 정의 예외 클래스 활용

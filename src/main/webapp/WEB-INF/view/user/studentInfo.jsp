@@ -143,16 +143,19 @@ form{
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${stustatList}" var="stat">
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${stat.fromDate}</td>
+						<td>${stat.status}</td>
+						<td>${stat.detail}</td>
+						<td>${stat.adopt}</td>
+						<td>${stat.toYear}</td>
+						<td>${stat.toSemester}</td>
 					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
+			<button type="button" onclick="location.href='/update'">수정하기</button>
 			
 	</main>
 </div>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.green.university.dto.NoticeFormDto;
+import com.green.university.dto.NoticePageFormDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.NoticeRepository;
 import com.green.university.repository.model.Notice;
@@ -27,12 +28,12 @@ public class NoticeService {
 	/**
 	 * 공지 입력 서비스
 	 */
-	public void insertNotice(@Validated NoticeFormDto noticeFormDto) {
+	public void readNotice(@Validated NoticeFormDto noticeFormDto) {
 		int resultRowCount = noticeRepository.insert(noticeFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("공지 입력 서비스 오류");
 		}
-		int noticeId = noticeRepository.findByLimit(noticeFormDto);
+		int noticeId = noticeRepository.selectLimit(noticeFormDto);
 		noticeFormDto.setNoticeId(noticeId);
 		if(noticeFormDto.getOriginFilename() != null) {
 			noticeRepository.insertFile(noticeFormDto);
@@ -42,18 +43,35 @@ public class NoticeService {
 	/**
 	 * 공지 조회 서비스
 	 */
-	public List<Notice> findNotice() {
-		List<Notice> noticeList = noticeRepository.findAll();
+	public List<Notice> readNotice(NoticePageFormDto noticePageFormDto) {
+		List<Notice> noticeList = noticeRepository.selectByNoticeDto(noticePageFormDto);
 		return noticeList;
 	}
 	
+	/**
+	 * 
+	 * @param noticePageFormDto
+	 * @return 공지 갯수 확인 서비스
+	 */
+	public Integer readNoticeAmount(NoticePageFormDto noticePageFormDto) {
+		Integer amount = noticeRepository.selectNoticeCount(noticePageFormDto);
+		return amount;		
+	}
+	
+	/**
+	 *  공지 검색 서비스
+	 */
+	public List<Notice> readNoticeByKeyword(String keyword) {
+		List<Notice> noticeList = noticeRepository.selectNoticeByKeyword(keyword);
+		return noticeList;
+	}
 	
 	
 	/**
 	 * 공지 상세 조회 서비스
 	 */
-	public Notice findByIdNotice(Integer id) {
-		Notice notice = noticeRepository.findById(id);
+	public Notice readByIdNotice(Integer id) {
+		Notice notice = noticeRepository.selectById(id);
 		return notice;
 	}
 	
@@ -61,7 +79,7 @@ public class NoticeService {
 	 * 공지 수정 서비스
 	 */
 	public int updateNotice(NoticeFormDto noticeFormDto) {
-		int resultRowCount = noticeRepository.update(noticeFormDto);
+		int resultRowCount = noticeRepository.updateByNoticeDto(noticeFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("공지 수정 서비스 오류");
 		}
@@ -72,7 +90,7 @@ public class NoticeService {
 	 * 공지 삭제 서비스
 	 */
 	public int deleteNotice(Integer id) {
-		int resultRowCount = noticeRepository.delete(id);
+		int resultRowCount = noticeRepository.deleteById(id);
 		return resultRowCount;
 	}
 }

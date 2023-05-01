@@ -3,6 +3,8 @@ package com.green.university.repository.interfaces;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.green.university.dto.CreateStaffDto;
+import com.green.university.dto.FindIdFormDto;
+import com.green.university.dto.FindPasswordFormDto;
 import com.green.university.dto.UserUpdateDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
 import com.green.university.repository.model.Staff;
@@ -30,5 +32,11 @@ public interface StaffRepository {
 	
 	// id로 staff 모델 불러오기
 	public Staff selectStaffById(Integer Id);
+	
+	// id 찾기
+	public Integer selectIdByNameAndEmail(FindIdFormDto findIdFormDto);
+	
+	// password 발급용 model 확인
+	public Integer selectStaffByIdAndNameAndEmail(FindPasswordFormDto findPasswordFormDto);
 
 }

@@ -1,5 +1,9 @@
 package com.green.university.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 import lombok.Data;
 
 /**
@@ -10,8 +14,11 @@ import lombok.Data;
 @Data
 public class FindPasswordFormDto {
 
+	@NotBlank
 	private String name;
+	@Min(100000)
 	private Integer id;
+	@Email
 	private String email;
 	private String userRole;
 	

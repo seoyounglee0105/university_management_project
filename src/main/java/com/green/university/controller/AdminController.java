@@ -3,12 +3,9 @@ package com.green.university.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,17 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.green.university.dto.CollTuitFormDto;
 import com.green.university.dto.CollegeFormDto;
 import com.green.university.dto.DepartmentFormDto;
-import com.green.university.dto.NoticeFormDto;
 import com.green.university.dto.RoomFormDto;
 import com.green.university.dto.SubjectFormDto;
-import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.CollTuit;
 import com.green.university.repository.model.College;
 import com.green.university.repository.model.Department;
 import com.green.university.repository.model.Room;
 import com.green.university.repository.model.Subject;
 import com.green.university.service.AdminService;
-import com.green.university.utils.SubjectUtil;
 
 /**
  * 
@@ -46,7 +40,7 @@ public class AdminController {
 	@GetMapping("/college")
 	public String college(Model model, @RequestParam(defaultValue = "select") String crud) {
 		model.addAttribute("crud", crud);
-		List<College> collegeList = adminService.findCollege();
+		List<College> collegeList = adminService.readCollege();
 		if (collegeList.isEmpty()) {
 			model.addAttribute("collegeList", null);
 		} else {
@@ -61,7 +55,7 @@ public class AdminController {
 	 */
 	@PostMapping("/college")
 	public String collegeProc(CollegeFormDto collegeFormDto) {
-		adminService.insertCollege(collegeFormDto);
+		adminService.createCollege(collegeFormDto);
 		return "redirect:/admin/college";
 	}
 	
@@ -85,8 +79,8 @@ public class AdminController {
 	@GetMapping("/department")
 	public String department(Model model, @RequestParam(defaultValue = "select") String crud) {
 		model.addAttribute("crud", crud);
-		List<Department> departmentList = adminService.findDepartment();
-		List<College> collegeList = adminService.findCollege();
+		List<Department> departmentList = adminService.readDepartment();
+		List<College> collegeList = adminService.readCollege();
 		if (collegeList.isEmpty()) {
 			model.addAttribute("collegeList", null);
 		} else {
@@ -106,7 +100,7 @@ public class AdminController {
 	 */
 	@PostMapping("/department")
 	public String departmentProc(DepartmentFormDto departmentFormDto) {
-		adminService.insertDepartment(departmentFormDto);
+		adminService.createDepartment(departmentFormDto);
 		return "redirect:/admin/department";
 	}
 	
@@ -140,8 +134,8 @@ public class AdminController {
 	@GetMapping("/room")
 	public String room(Model model, @RequestParam(defaultValue = "select") String crud) {
 		model.addAttribute("crud", crud);
-		List<Room> roomList = adminService.findRoom();
-		List<College> collegeList = adminService.findCollege();
+		List<Room> roomList = adminService.readRoom();
+		List<College> collegeList = adminService.readCollege();
 		if (collegeList.isEmpty()) {
 			model.addAttribute("collegeList", null);
 		} else {
@@ -161,7 +155,7 @@ public class AdminController {
 	 */
 	@PostMapping("/room")
 	public String roomProc(RoomFormDto roomFormDto) {
-		adminService.insertRoom(roomFormDto);
+		adminService.createRoom(roomFormDto);
 		return "redirect:/admin/room";
 	}
 	
@@ -184,8 +178,8 @@ public class AdminController {
 	@GetMapping("/subject")
 	public String subject(Model model, @RequestParam(defaultValue = "select") String crud) {
 		model.addAttribute("crud", crud);
-		List<Subject> subjectList = adminService.findSubject();
-		List<College> collegeList = adminService.findCollege();
+		List<Subject> subjectList = adminService.readSubject();
+		List<College> collegeList = adminService.readCollege();
 		if (collegeList.isEmpty()) {
 			model.addAttribute("collegeList", null);
 		} else {
@@ -205,7 +199,7 @@ public class AdminController {
 	 */
 	@PostMapping("/subject")
 	public String insertSubject(SubjectFormDto subjectFormDto) {
-		adminService.insertSubject(subjectFormDto);
+		adminService.createSubjectAndSyllabus(subjectFormDto);
 		return "redirect:/admin/subject";
 	}
 	
@@ -242,8 +236,8 @@ public class AdminController {
 	@GetMapping("/tuition")
 	public String collTuit(Model model, @RequestParam(defaultValue = "select") String crud) {
 		model.addAttribute("crud", crud);
-		List<CollTuit> collTuitList = adminService.findCollTuit();
-		List<College> collegeList = adminService.findCollege();
+		List<CollTuit> collTuitList = adminService.readCollTuit();
+		List<College> collegeList = adminService.readCollege();
 		if (collegeList.isEmpty()) {
 			model.addAttribute("collegeList", null);
 		} else {
@@ -263,7 +257,7 @@ public class AdminController {
 	 */
 	@PostMapping("/tuition")
 	public String insertcollTuit(CollTuitFormDto collTuitFormDto) {
-		adminService.insertCollTuit(collTuitFormDto);
+		adminService.createCollTuit(collTuitFormDto);
 		return "redirect:/admin/collTuit";
 	}
 	

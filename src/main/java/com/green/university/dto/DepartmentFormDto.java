@@ -23,5 +23,5 @@ public class DepartmentFormDto {
 	private String name;
 	@NotNull
 	private Integer collegeId;
-
+	private String collegeName;
 }

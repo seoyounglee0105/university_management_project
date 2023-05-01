@@ -90,9 +90,14 @@ header {
 }
 
 .main--menu ul li a {
-	padding: 20px 50px;
+	padding: 27px 50px;
 	font-size: 27px;
 	font-weight: 600;
+}
+
+.main--menu ul li a:hover {
+	border-bottom: 4px solid #075AA4;
+	color: #075AA4;
 }
 
 .sub--menu {

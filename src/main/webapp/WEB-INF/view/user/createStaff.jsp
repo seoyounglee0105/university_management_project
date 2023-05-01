@@ -4,25 +4,23 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <style>
-form{
+form {
 	margin-left: 30px;
-	
 }
-
 
 .input--table td {
 	padding: 5px 10px;
 }
 
-button{
+button {
 	padding: 8px 20px;
 	border: none;
 	border-radius: 5px;
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 	margin-top: 20px;
-} 
+}
 
-.button-td{
+.button-td {
 	text-align: center;
 }
 </style>
@@ -38,6 +36,12 @@ button{
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
+				<tr>
+					<td><a href="/user/studentList">학생 명단 조회</a></td>
+				</tr>
+				<tr>
+					<td><a href="/user/professorList">교수 명단 조회</a></td>
+				</tr>
 				<tr>
 					<td><a href="/user/student">학생 등록</a></td>
 				</tr>
@@ -77,7 +81,8 @@ button{
 				</tr>
 				<tr>
 					<td style="padding-top: 7px"><label>성별</label></td>
-					<td style="padding-top: 7px"><label for="male">남성</label> <input type="radio" value="M" name="gender" id="male" checked="checked"> &nbsp;<label for="female">여성</label> <input type="radio" value="F" name="gender" id="female"></td>
+					<td style="padding-top: 7px"><label for="male">남성</label> <input type="radio" value="M" name="gender" id="male" checked="checked"> &nbsp;<label for="female">여성</label> <input
+						type="radio" value="F" name="gender" id="female"></td>
 				</tr>
 				<tr>
 					<td><label for="address">주소</label></td>

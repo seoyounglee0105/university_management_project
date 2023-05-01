@@ -41,6 +41,11 @@ form {
 				<tr>
 					<td><a href="/professor/subject">내 강의 조회</a></td>
 				</tr>
+				<c:if test="${principal.userRole.equals(\"professor\") }">
+					<tr>
+						<td><a href="/evaluation/read"> 내 강의 평가</a></td>
+					</tr>
+				</c:if>
 			</table>
 		</div>
 	</div>

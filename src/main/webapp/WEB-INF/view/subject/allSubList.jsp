@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
@@ -66,7 +67,8 @@
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
-<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
+<div class="d-flex justify-content-center align-items-start"
+	style="min-width: 100em;">
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
@@ -84,6 +86,11 @@
 						<td><a href="/professor/subject">내 강의 조회</a></td>
 					</tr>
 				</c:if>
+				<c:if test="${principal.userRole.equals(\"professor\") }">
+					<tr>
+						<td><a href="/evaluation/read"> 내 강의 평가</a></td>
+					</tr>
+				</c:if>
 			</table>
 		</div>
 	</div>
@@ -99,9 +106,12 @@
 			<form action="/subject/list/search" method="get">
 				<div>
 					<!-- 개설연도 숫자 -->
-					<label for="subYear">연도 </label> <input type="number" value="<%=Define.CURRENT_YEAR%>" name="subYear" id="subYear" min="2005" max="2023">
+					<label for="subYear">연도 </label> <input type="number"
+						value="<%=Define.CURRENT_YEAR%>" name="subYear" id="subYear"
+						min="2005" max="2023">
 					<!-- 개설학기 콤보박스-->
-					<label for="subSemester">학기 </label> <select name="semester" id="subSemester">
+					<label for="subSemester">학기 </label> <select name="semester"
+						id="subSemester">
 						<option value="1">1학기</option>
 						<option value="2">2학기</option>
 					</select>
@@ -113,7 +123,8 @@
 						</c:forEach>
 					</select>
 					<!-- 강의 검색 -->
-					<label for="subName">강의명</label> <input type="text" name="name" list="subName">
+					<label for="subName">강의명</label> <input type="text" name="name"
+						list="subName">
 					<datalist id="subName">
 						<c:forEach var="subName" items="${subNameList}">
 							<option value="${subName}">
@@ -123,7 +134,9 @@
 					<button type="submit">
 						<ul class="d-flex justify-content-center" style="margin: 0;">
 							<li style="height: 24px; margin-right: 2px;">조회
-							<li style="height: 24px;"><span class="material-symbols-outlined" style="font-size: 18px; padding-top: 4px;">search</span>
+							<li style="height: 24px;"><span
+								class="material-symbols-outlined"
+								style="font-size: 18px; padding-top: 4px;">search</span>
 						</ul>
 					</button>
 				</div>

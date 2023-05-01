@@ -74,10 +74,11 @@ public class BreakAppController {
 		}
 		
 		List<BreakApp> breakList = breakAppService.readByStudentId(principal.getId());	
-		// 이미 이번 학기 신청 내역이 있다면 신청 불가능
+		// 이미 이번 학기 신청 내역이 있다면 신청 불가능 (반려되지 않았다면)
 		if (breakList.isEmpty() == false) {
 			if (breakList.get(0).getFromYear() == Define.CURRENT_YEAR
-					&& breakList.get(0).getFromSemester() == Define.CURRENT_SEMESTER) {
+					&& breakList.get(0).getFromSemester() == Define.CURRENT_SEMESTER
+					&& breakList.get(0).getStatus().equals("반려") == false) {
 				throw new CustomRestfullException("이미 휴학 신청 내역이 존재합니다.", HttpStatus.BAD_REQUEST);
 			}
 		}

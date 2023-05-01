@@ -23,8 +23,8 @@ import com.green.university.repository.model.Subject;
 public interface SubjectRepository {
 	// 과목 insert
 	public Integer insert(SubjectFormDto subjectFormDto);
-	public int delete(Integer id);
-	public int update(SubjectFormDto subjectFormDto);
+	public int deleteById(Integer id);
+	public int updateBySubjectDto(SubjectFormDto subjectFormDto);
 	
 	/**
 	 * 성희 
