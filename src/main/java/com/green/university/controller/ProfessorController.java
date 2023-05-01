@@ -144,10 +144,15 @@ public class ProfessorController {
 	@GetMapping("/syllabus/{subjectId}")
 	public String readSyllabus(Model model, @PathVariable Integer subjectId) {
 		ReadSyllabusDto readSyllabusDto = professorService.readSyllabus(subjectId);
-		readSyllabusDto.setOverview(readSyllabusDto.getOverview().replace("\\r\\n", "<br>"));
-		readSyllabusDto.setObjective(readSyllabusDto.getObjective().replace("\\r\\n", "<br>"));
-		readSyllabusDto.setProgram(readSyllabusDto.getProgram().replace("\\r\\n", "<br>"));
-		System.out.println(readSyllabusDto.getProgram().replace("\\r\\n", "<br>"));
+		if(readSyllabusDto.getOverview() != null) {
+			readSyllabusDto.setOverview(readSyllabusDto.getOverview().replace("\r\n", "<br>"));
+		}
+		if(readSyllabusDto.getObjective() != null) {
+			readSyllabusDto.setObjective(readSyllabusDto.getObjective().replace("\r\n", "<br>"));
+		}
+		if(readSyllabusDto.getProgram() != null) {
+			readSyllabusDto.setProgram(readSyllabusDto.getProgram().replace("\r\n", "<br>"));
+		}
 		model.addAttribute("syllabus", readSyllabusDto);
 		
 		return "/professor/readSyllabus";
@@ -161,9 +166,6 @@ public class ProfessorController {
 	@GetMapping("/syllabus/update/{subjectId}")
 	public String createSyllabus(Model model, @PathVariable Integer subjectId) {
 		ReadSyllabusDto readSyllabusDto = professorService.readSyllabus(subjectId);
-		readSyllabusDto.setOverview(readSyllabusDto.getOverview().replace("\r\n", "<br>"));
-		readSyllabusDto.setObjective(readSyllabusDto.getObjective().replace("\r\n", "<br>"));
-		readSyllabusDto.setProgram(readSyllabusDto.getProgram().replace("\r\n", "<br>"));
 		
 		model.addAttribute("syllabus", readSyllabusDto);
 		

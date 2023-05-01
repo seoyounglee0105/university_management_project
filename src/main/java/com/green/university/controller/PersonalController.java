@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,6 +29,7 @@ import com.green.university.dto.response.ProfessorInfoDto;
 import com.green.university.dto.response.StudentInfoDto;
 import com.green.university.dto.response.StudentInfoStatListDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
+import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.handler.exception.UnAuthorizedException;
 import com.green.university.repository.model.BreakApp;
 import com.green.university.repository.model.Staff;
@@ -105,7 +107,15 @@ public class PersonalController {
 	 * @return 메인 페이지 이동(수정 예정)
 	 */
 	@PostMapping("/login")
-	public String signInProc(@Valid LoginDto loginDto, HttpServletResponse response, HttpServletRequest request) {
+	public String signInProc(@Valid LoginDto loginDto, BindingResult bindingResult, HttpServletResponse response, HttpServletRequest request) {
+		
+		if(bindingResult.hasErrors()) {
+			StringBuilder sb = new StringBuilder();
+			bindingResult.getAllErrors().forEach(error -> {
+				sb.append(error.getDefaultMessage()).append("\\n"); 
+			});
+			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
+		}
 
 		PrincipalDto principal = userService.login(loginDto);
 		if("on".equals(loginDto.getRememberId())) {
@@ -161,7 +171,15 @@ public class PersonalController {
 	 * @return updateUser.jsp
 	 */
 	@PutMapping("/update")
-	public String updateUserProc(@Valid UserInfoForUpdateDto userInfoForUpdateDto, @RequestParam String password) {
+	public String updateUserProc(@Valid UserInfoForUpdateDto userInfoForUpdateDto, BindingResult bindingResult, @RequestParam String password) {
+		
+		if(bindingResult.hasErrors()) {
+			StringBuilder sb = new StringBuilder();
+			bindingResult.getAllErrors().forEach(error -> {
+				sb.append(error.getDefaultMessage()).append("\\n"); 
+			});
+			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
+		}
 		
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		// 패스워드 인코더 적용 후
@@ -196,7 +214,6 @@ public class PersonalController {
 	@GetMapping("/password")
 	public String updatePassword() {
 
-
 		return "/user/updatePassword";
 	}
 
@@ -207,8 +224,16 @@ public class PersonalController {
 	 * @return updateUser.jsp
 	 */
 	@PutMapping("/password")
-	public String updatePasswordProc(@Valid ChangePasswordDto changePasswordDto) {
+	public String updatePasswordProc(@Valid ChangePasswordDto changePasswordDto, BindingResult bindingResult) {
 
+		if(bindingResult.hasErrors()) {
+			StringBuilder sb = new StringBuilder();
+			bindingResult.getAllErrors().forEach(error -> {
+				sb.append(error.getDefaultMessage()).append("\\n"); 
+			});
+			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
+		}
+		
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		// 패스워드 인코더 적용 후
 		if(!passwordEncoder.matches(changePasswordDto.getBeforePassword(), principal.getPassword())) {
@@ -295,8 +320,14 @@ public class PersonalController {
 	 * @return 찾은 아이디 표시 페이지
 	 */
 	@PostMapping("/find/id")
-	public String findIdProc(Model model, FindIdFormDto findIdFormDto) {
-		
+	public String findIdProc(Model model, @Valid FindIdFormDto findIdFormDto, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			StringBuilder sb = new StringBuilder();
+			bindingResult.getAllErrors().forEach(error -> {
+				sb.append(error.getDefaultMessage()).append("\\n"); 
+			});
+			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
+		}
 		Integer findId = userService.readIdByNameAndEmail(findIdFormDto);
 		model.addAttribute("id", findId);
 		model.addAttribute("name", findIdFormDto.getName());
@@ -320,8 +351,14 @@ public class PersonalController {
 	 * @return 비밀번호 표시 페이지
 	 */
 	@PostMapping("/find/password")
-	public String findPasswordProc(Model model, FindPasswordFormDto findPasswordFormDto) {
-		
+	public String findPasswordProc(Model model, @Valid FindPasswordFormDto findPasswordFormDto, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			StringBuilder sb = new StringBuilder();
+			bindingResult.getAllErrors().forEach(error -> {
+				sb.append(error.getDefaultMessage()).append("\\n"); 
+			});
+			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
+		}
 		String password = userService.updateTempPassword(findPasswordFormDto);
 		model.addAttribute("name", findPasswordFormDto.getName());
 		model.addAttribute("password", password);
