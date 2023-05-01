@@ -118,7 +118,7 @@
 			
 			<!-- 공지 조회 -->
 			<c:if test="${crud.equals(\"select\")}">
-			<form action="/notice/search" method="post" class="form--container">
+			<form action="/notice/search" method="get" class="form--container">
 				<input type="text" name="keyword">
 				<input type="submit" class="button" value="검색">
 			</form>

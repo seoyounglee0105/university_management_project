@@ -132,15 +132,11 @@ public class NoticeController {
 	/**
 	 *  공지사항 검색 기능
 	 */
-	@PostMapping("/search")
-	public String showNoticeByKeyword(Model model, @RequestParam String keyword) {
+	@GetMapping("/search")
+	public String showNoticeByKeyword(Model model, String keyword) {
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("crud", "selectKeyword");
 		List<Notice> noticeList = noticeService.readNoticeByKeyword(keyword);
-		System.out.println(keyword);
-		for (int i = 0; i < noticeList.size(); i++) {
-			System.out.println(noticeList.get(i));
-		}
 		if (noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {
