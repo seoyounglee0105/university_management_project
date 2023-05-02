@@ -83,7 +83,7 @@
 				</table>
 			</c:when>
 			<c:otherwise>
-				<p class="no--list--p">조회할 강의 평가가 없습니다.</p>
+				<p class="no--list--p">조회할 강의 평가가 존재하지 않습니다.</p>
 			</c:otherwise>
 		</c:choose>
 
