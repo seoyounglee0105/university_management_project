@@ -43,12 +43,14 @@ public interface SubjectRepository {
 	 * @return 수강 신청에 사용할 강의 정보
 	 */
 	public List<SubjectDto> selectDtoBySemester(@Param("subYear") Integer subYear, @Param("semester") Integer semester);
+	public List<SubjectDto> selectDtoBySemesterLimit(@Param("subYear") Integer subYear, @Param("semester") Integer semester, @Param("page") Integer page);
 	
 	/**
 	 * @author 서영
 	 * @return 전체 강의 정보
 	 */
 	public List<SubjectDto> selectDtoAll();
+	public List<SubjectDto> selectDtoAllLimit(Integer page);
 	
 	/**
 	 * @author 김지현

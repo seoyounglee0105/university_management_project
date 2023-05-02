@@ -177,3 +177,12 @@ main h1:first-of-type {
 	color: #6c6a6a;
 	font-weight: 600;
 }
+
+.page--list {
+	display: flex;
+	justify-content: center;
+}
+
+.page--list li {
+	margin: 30px 20px;
+}

@@ -17,7 +17,6 @@
 
 .sub--list--name {
 	text-align: left !important;
-	padding-right: 20px !important;
 }
 
 .sub--filter {
@@ -64,6 +63,8 @@
 .sub--plan--view li a:hover {
 	color: black;
 }
+
+
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -79,7 +80,7 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/subject/list" class="selected--menu">전체 강의 조회</a></td>
+					<td><a href="/subject/list/1" class="selected--menu">전체 강의 조회</a></td>
 				</tr>
 				<c:if test="${principal.userRole.equals(\"professor\") }">
 					<tr>
@@ -145,7 +146,7 @@
 		<c:choose>
 			<c:when test="${subjectList.isEmpty() == false}">
 				<h4>
-					<span style="font-weight: 600;">강의 목록</span>&nbsp; <span style="color: gray; font-size: 18px;">[총 ${subjectList.size()}건]</span>
+					<span style="font-weight: 600;">강의 목록</span>&nbsp; <span style="color: gray; font-size: 18px;">[총 ${subjectCount}건]</span>
 				</h4>
 				<table border="1" class="sub--list--table">
 					<thead>
@@ -155,7 +156,7 @@
 							<th>개설학과</th>
 							<th>학수번호</th>
 							<th>강의구분</th>
-							<th style="width: 250px;">강의명</th>
+							<th style="width: 200px;">강의명</th>
 							<th>담당교수</th>
 							<th>학점</th>
 							<th>수강인원</th>
@@ -169,7 +170,7 @@
 							<tr>
 								<td>${subject.subYear}-${subject.semester}학기</td>
 								<td>${subject.collName}</td>
-								<td class="sub--list--dept--name">${subject.deptName}</td>
+								<td>${subject.deptName}</td>
 								<td>${subject.id}</td>
 								<td>${subject.type}</td>
 								<td class="sub--list--name">${subject.name}</td>
@@ -187,6 +188,20 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<c:if test="${pageCount != null}">
+					<ul class="page--list">
+						<c:forEach var="i" begin="1" end="${pageCount}" step="1">
+							<c:choose>
+								<c:when test="${i == page}">
+									<li><a href="/subject/list/${i}" style="font-weight: 700; color: #007bff">${i}</a>									
+								</c:when>
+								<c:otherwise>
+									<li><a href="/subject/list/${i}">${i}</a>									
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</ul>
+				</c:if>
 			</c:when>
 			<c:otherwise>
 				<p class="no--list--p">검색 결과가 없습니다.</p>
