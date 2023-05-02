@@ -103,12 +103,22 @@ public class StuSubController {
 	
 	
 	// 과목 조회 (현재 학기)
-	@GetMapping("/subjectList")
-	public String readSubjectList(Model model) {
+	@GetMapping("/subjectList/{page}")
+	public String readSubjectList(Model model, @PathVariable Integer page) {
 
 		// 강의 리스트
 		List<SubjectDto> subjectList = subjectService.readSubjectListByCurrentSemester();
-		model.addAttribute("subjectList", subjectList);
+		
+		int subjectCount = subjectList.size();		
+		model.addAttribute("subjectCount", subjectCount);
+		// 총 페이지 수
+		int pageCount = (int) Math.ceil(subjectCount/20.0);
+		model.addAttribute("pageCount", pageCount);
+		// 현재 페이지
+		model.addAttribute("page", page);
+		
+		List<SubjectDto> subjectListLimit = subjectService.readSubjectListByCurrentSemesterPage((page-1) * 20);
+		model.addAttribute("subjectList", subjectListLimit);
 		
 		// 필터에 사용할 전체 학과 정보
 		List<Department> deptList = collegeService.readDeptAll();
@@ -126,13 +136,16 @@ public class StuSubController {
 		return "/stuSub/subList";
 	}
 	
-	// 전체 강의 목록에서 필터링
+	// 과목 조회 (현재 학기)에서 필터링
 	@GetMapping("/subjectList/search")
 	public String readSubjectListSearch(Model model, @Validated CurrentSemesterSubjectSearchFormDto currentSemesterSubjectSearchFormDto) {
 		
 		// 강의 리스트
 		List<SubjectDto> subjectList = subjectService.readSubjectListSearchByCurrentSemester(currentSemesterSubjectSearchFormDto);
 		model.addAttribute("subjectList", subjectList);
+		
+		int subjectCount = subjectList.size();		
+		model.addAttribute("subjectCount", subjectCount);
 		
 		// 필터에 사용할 전체 학과 정보
 		List<Department> deptList = collegeService.readDeptAll();
@@ -154,8 +167,8 @@ public class StuSubController {
 	/**
 	 * @return 예비 수강 신청
 	 */
-	@GetMapping("/pre")
-	public String preStuSubApplication(Model model) {
+	@GetMapping("/pre/{page}")
+	public String preStuSubApplication(Model model, @PathVariable Integer page) {
 		
 		// 예비 수강 신청 기간이 아니라면
 		if (SUGANG_PERIOD != 0) {
@@ -183,7 +196,17 @@ public class StuSubController {
 				sub.setStatus(false);
 			}
 		}
-		model.addAttribute("subjectList", subjectList);
+		
+		int subjectCount = subjectList.size();		
+		model.addAttribute("subjectCount", subjectCount);
+		// 총 페이지 수
+		int pageCount = (int) Math.ceil(subjectCount/20.0);
+		model.addAttribute("pageCount", pageCount);
+		// 현재 페이지
+		model.addAttribute("page", page);
+		
+		List<SubjectDto> subjectListLimit = subjectService.readSubjectListByCurrentSemesterPage((page-1) * 20);
+		model.addAttribute("subjectList", subjectListLimit);
 		
 		// 필터에 사용할 전체 학과 정보
 		List<Department> deptList = collegeService.readDeptAll();
@@ -268,6 +291,9 @@ public class StuSubController {
 				sub.setStatus(false);
 			}
 		}
+		
+		int subjectCount = subjectList.size();		
+		model.addAttribute("subjectCount", subjectCount);
 		model.addAttribute("subjectList", subjectList);
 		
 		// 필터에 사용할 전체 학과 정보
@@ -291,8 +317,8 @@ public class StuSubController {
 	/**
 	 * @return 수강 신청
 	 */
-	@GetMapping("/application")
-	public String stuSubApplication(Model model) {
+	@GetMapping("/application/{page}")
+	public String stuSubApplication(Model model, @PathVariable Integer page) {
 		
 		// 수강 신청 기간이 아니라면
 		if (SUGANG_PERIOD != 1) {
@@ -318,7 +344,17 @@ public class StuSubController {
 				sub.setStatus(false);
 			}
 		}
-		model.addAttribute("subjectList", subjectList);
+		
+		int subjectCount = subjectList.size();		
+		model.addAttribute("subjectCount", subjectCount);
+		// 총 페이지 수
+		int pageCount = (int) Math.ceil(subjectCount/20.0);
+		model.addAttribute("pageCount", pageCount);
+		// 현재 페이지
+		model.addAttribute("page", page);
+		
+		List<SubjectDto> subjectListLimit = subjectService.readSubjectListByCurrentSemesterPage((page-1) * 20);
+		model.addAttribute("subjectList", subjectListLimit);
 		
 		// 필터에 사용할 전체 학과 정보
 		List<Department> deptList = collegeService.readDeptAll();
@@ -359,6 +395,9 @@ public class StuSubController {
 				sub.setStatus(false);
 			}
 		}
+		
+		int subjectCount = subjectList.size();		
+		model.addAttribute("subjectCount", subjectCount);
 		model.addAttribute("subjectList", subjectList);
 		
 		// 필터에 사용할 전체 학과 정보

@@ -1,5 +1,7 @@
 package com.green.university.dto;
 
+import javax.validation.constraints.NotBlank;
+
 import com.green.university.utils.Define;
 
 import lombok.Data;
@@ -13,5 +15,7 @@ public class CurrentSemesterSubjectSearchFormDto {
 	
 	private Integer subYear = Define.CURRENT_YEAR;
 	private Integer semester = Define.CURRENT_SEMESTER;
+	
+	private Integer page;
 	
 }

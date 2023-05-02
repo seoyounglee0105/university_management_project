@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,12 +35,22 @@ public class SubjectController {
 	
 	
 	// 모든 강의 조회 (모든 연도-학기에 대해서)
-	@GetMapping("/list")
-	public String readSubjectList(Model model) {
+	@GetMapping("/list/{page}")
+	public String readSubjectList(Model model, @PathVariable Integer page) {
 		
-		// 강의 리스트
+		// 강의 리스트 (전체)
 		List<SubjectDto> subjectList = subjectService.readSubjectList();
-		model.addAttribute("subjectList", subjectList);
+		
+		int subjectCount = subjectList.size();		
+		model.addAttribute("subjectCount", subjectCount);
+		// 총 페이지 수
+		int pageCount = (int) Math.ceil(subjectCount/20.0);
+		model.addAttribute("pageCount", pageCount);
+		// 현재 페이지
+		model.addAttribute("page", page);
+		
+		List<SubjectDto> subjectListLimit = subjectService.readSubjectListPage((page-1) * 20);
+		model.addAttribute("subjectList", subjectListLimit);
 		
 		// 필터에 사용할 전체 학과 정보
 		List<Department> deptList = collegeService.readDeptAll();
@@ -63,6 +74,8 @@ public class SubjectController {
 		
 		// 강의 리스트
 		List<SubjectDto> subjectList = subjectService.readSubjectListSearch(allSubjectSearchFormDto);
+		int subjectCount = subjectList.size();		
+		model.addAttribute("subjectCount", subjectCount);
 		model.addAttribute("subjectList", subjectList);
 		
 		// 필터에 사용할 전체 학과 정보

@@ -2,6 +2,7 @@ package com.green.university.dto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -13,20 +14,14 @@ import lombok.Data;
 @Data
 public class AllSubjectSearchFormDto {
 
-	@Min(2005)
-	@Max(2023)
-	@NotNull
 	private Integer subYear;
 	
-	@Min(1)
-	@Max(2)
-	@NotNull
 	private Integer semester;
 	
-	@NotNull
 	private Integer deptId;
 	
-	@NotNull
 	private String name;
+	
+	private Integer page;
 	
 }

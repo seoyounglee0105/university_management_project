@@ -137,6 +137,7 @@ footer {
 
 </style>
 
+<<<<<<< HEAD
 <script>
 <%
 PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
@@ -152,11 +153,11 @@ function pop()
 <body onLoad="javascript:pop()">
 
 <!-- 세부 메뉴 + 메인 -->
+=======
+>>>>>>> feature/sugang
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 
-	<!-- 메인 div -->
 	<div>
-		<!-- 들어갈 내용 : 주요 서비스, 공지사항, 프로필, 알림 -->
 		<img alt="" src="/images/main_photo.jpg" class="main--page--img">
 		<div class="d-flex justify-content-center align-items-start">
 			<div class="main--page--div">
@@ -220,14 +221,6 @@ function pop()
 
 					</div>
 				</div>
-				<!-- 주요 서비스 자리 (보류) -->
-<!-- 				<div class="main--page--service">
-					<h3>
-						<a href="#">주요 서비스</a>
-					</h3>
-					<div class="main--page--split"></div>
-					
-				</div> -->
 			</div>
 			<div>
 				<!-- 사용자 간단한 프로필 -->
@@ -301,7 +294,7 @@ function pop()
 					<c:when test="${breakAppSize > 0}">
 						<div class="main--page--info">
 							<ul class="d-flex align-items-start" style="margin: 0;">
-								<li><span class="material-symbols-rounded" style="margin-top: 2px;">notifications_active</span>&nbsp;&nbsp;
+								<li><span class="material-symbols-rounded" style="margin-top: 2px; color:#fccb03;">notifications_active</span>&nbsp;&nbsp;
 								<li style="font-weight: 600; font-size: 18px;">업무 알림
 							</ul>
 							<p><a href="/break/list/staff">처리되지 않은 휴학 신청이 존재합니다.</a></p>

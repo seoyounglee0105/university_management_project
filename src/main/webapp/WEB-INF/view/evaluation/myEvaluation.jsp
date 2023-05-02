@@ -79,7 +79,7 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/subject/list">전체 강의 조회</a></td>
+					<td><a href="/subject/list/1">전체 강의 조회</a></td>
 				</tr>
 				<c:if test="${principal.userRole.equals(\"professor\") }">
 					<tr>
