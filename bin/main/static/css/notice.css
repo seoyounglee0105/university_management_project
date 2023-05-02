@@ -29,7 +29,6 @@
 .table {
 	width: 1000px;
 	margin-bottom: 20px;
-	cursor: pointer;
 }
 
 .first--tr {
@@ -59,7 +58,9 @@
 
 .second--tr:hover {
 	font-weight: bold;
+	cursor: pointer;
 }
+
 .button {
 	border: 1px solid #031734;
 	border-radius: 3px;
