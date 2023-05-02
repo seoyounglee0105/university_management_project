@@ -58,7 +58,7 @@ public class AdminController {
 		adminService.createCollege(collegeFormDto);
 		return "redirect:/admin/college";
 	}
-	
+
 	/**
 	 * 
 	 * @return 단과대학 삭제 기능
@@ -69,8 +69,6 @@ public class AdminController {
 		adminService.deleteCollege(id);
 		return "redirect:/admin/college";
 	}
-	
-	
 
 	/**
 	 * 
@@ -103,7 +101,7 @@ public class AdminController {
 		adminService.createDepartment(departmentFormDto);
 		return "redirect:/admin/department";
 	}
-	
+
 	/**
 	 * 
 	 * @return 학과 삭제 기능
@@ -114,7 +112,7 @@ public class AdminController {
 		adminService.deleteDepartment(id);
 		return "redirect:/admin/department";
 	}
-	
+
 	/**
 	 * 
 	 * @return 학과 수정 기능
@@ -125,8 +123,6 @@ public class AdminController {
 		return "redirect:/admin/department";
 	}
 
-	
-	
 	/**
 	 * 
 	 * @return 강의실 페이지
@@ -158,7 +154,7 @@ public class AdminController {
 		adminService.createRoom(roomFormDto);
 		return "redirect:/admin/room";
 	}
-	
+
 	/**
 	 * 
 	 * @return 강의실 삭제 기능
@@ -169,7 +165,6 @@ public class AdminController {
 		adminService.deleteRoom(id);
 		return "redirect:/admin/room";
 	}
-	
 
 	/**
 	 * 
@@ -202,8 +197,7 @@ public class AdminController {
 		adminService.createSubjectAndSyllabus(subjectFormDto);
 		return "redirect:/admin/subject";
 	}
-	
-	
+
 	/**
 	 * 
 	 * @return 강의 삭제 기능
@@ -214,7 +208,7 @@ public class AdminController {
 		adminService.deleteSubject(id);
 		return "redirect:/admin/subject";
 	}
-	
+
 	/**
 	 * 
 	 * @return 강의 수정 기능
@@ -225,9 +219,6 @@ public class AdminController {
 		adminService.updateSubject(subjectFormDto);
 		return "redirect:/admin/subject";
 	}
-	
-	
-	
 
 	/**
 	 * 
@@ -260,7 +251,7 @@ public class AdminController {
 		adminService.createCollTuit(collTuitFormDto);
 		return "redirect:/admin/tuition";
 	}
-	
+
 	/**
 	 * 
 	 * @return 단과대 등록금 삭제 기능
@@ -271,7 +262,7 @@ public class AdminController {
 		adminService.deleteCollTuit(collegeId);
 		return "redirect:/admin/tuition";
 	}
-	
+
 	/**
 	 * 
 	 * @return 단과대 등록금 수정 기능
