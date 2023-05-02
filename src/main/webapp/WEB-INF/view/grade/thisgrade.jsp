@@ -78,7 +78,7 @@
 											<td></td>
 										</c:otherwise>
 									</c:choose>
-									<td><a href="/evaluation?subjectId=${grade.subjectId}" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">Click</a></td>
+									<td><a href="/evaluation?subjectId=${grade.subjectId}" onclick="window.open(this.href, '_blank', 'width=720, height=1000'); return false;">Click</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
