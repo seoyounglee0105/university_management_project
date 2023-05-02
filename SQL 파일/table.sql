@@ -303,3 +303,13 @@ question6 VARCHAR(100) NOT NULL,
 question7 VARCHAR(100) NOT NULL,
 sug_content VARCHAR(255) NOT NULL
 );
+
+-- 학사일정
+CREATE TABLE schedule_tb(
+id INT PRIMARY KEY AUTO_INCREMENT,
+staff_id INT,
+start_day DATE NOT NULL,
+end_day DATE NOT NULL,
+title VARCHAR(50) NOT NULL,
+FOREIGN KEY (staff_id) REFERENCES staff_tb(id) 
+);
