@@ -87,9 +87,7 @@
 				</c:choose>
 				</c:forEach>
 			</div>
-			<c:if test="${principal.userRole.equals(\"staff\")}">
-				<a href="/notice?crud=write" class="button">등록</a>
-			</c:if>
+			
 		</c:if>
 
 
@@ -124,11 +122,7 @@
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-<<<<<<< HEAD
 								<p class="no--list--p">공지사항이 없습니다. 작성해주세요.</p>
-=======
-								공지사항이 없습니다. 작성해주세요
->>>>>>> feature/notice3
 					</c:otherwise>
 				</c:choose>
 			</table>
@@ -136,7 +130,9 @@
 			<c:forEach var="index" begin="1" end="${listCount}">
 				<a href="/notice/list/${index}"> ${index}</a> &nbsp;&nbsp;
 			</c:forEach>
-				<a href="/notice?crud=write" class="button">등록</a>
+				<c:if test="${principal.userRole.equals(\"staff\")}">
+					<a href="/notice?crud=write" class="button">등록</a>
+				</c:if>
 			</div>
 		</c:if>
 
@@ -158,8 +154,10 @@
 
 				<div class="select--button">
 					<a href="/notice" class="button">목록</a> 
-					<a href="/notice/update?id=${notice.id}" class="button">수정</a> 
-					<a href="/notice/delete?id=${notice.id}" class="button">삭제</a>
+					<c:if test="${principal.userRole.equals(\"staff\")}">
+						<a href="/notice/update?id=${notice.id}" class="button">수정</a> 
+						<a href="/notice/delete?id=${notice.id}" class="button">삭제</a>
+					</c:if>
 				</div>
 			</div>
 		</c:if>
