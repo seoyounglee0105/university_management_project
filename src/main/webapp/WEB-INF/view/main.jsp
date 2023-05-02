@@ -1,3 +1,4 @@
+<%@page import="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -135,6 +136,20 @@ footer {
 }
 
 </style>
+
+<script>
+<%
+PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+if(new BCryptPasswordEncoder().matches(principal.getId().toString(), principal.getPassword())){%>
+function pop()
+{
+	window.open("/guide", "비밀번호 변경 안내", "width=400,height=300,history=no,resizable=no,status=no,scrollbars=yes,menubar=no");
+}
+<%}%>
+</script>
+
+</head>
+<body onLoad="javascript:pop()">
 
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">

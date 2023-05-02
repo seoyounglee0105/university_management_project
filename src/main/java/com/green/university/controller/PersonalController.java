@@ -366,6 +366,12 @@ public class PersonalController {
 		return "/user/findPasswordComplete";
 	}
 	
+	@GetMapping("/guide")
+	public String pop() {
+		
+		return "/user/passwordPop";
+	}
+	
 	
 	/**
 	 * @return 에러페이지
