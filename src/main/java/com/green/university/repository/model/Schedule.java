@@ -5,10 +5,12 @@ import lombok.Data;
 @Data
 public class Schedule {
 
+	private Integer id;
 	private Integer staffId;
-	private Integer year;
-	private Integer mouth;
-	private String day;
+	private String startDay;
+	private String endDay;
+	private String title;
 	private String content;
-	
+	private String year;
+	private String month;
 }

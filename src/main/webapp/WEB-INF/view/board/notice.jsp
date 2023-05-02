@@ -102,8 +102,13 @@
 					<td><a href="/notice" class="selected--menu">공지사항</a></td>
 				</tr>
 				<tr>
-					<td><a href="/scheule/main">학사일정</a></td>				
+					<td><a href="/schedule">학사일정</a></td>				
 				</tr>
+				<c:if test="${principal.userRole.equals(\"staff\") }">
+					<tr>
+						<td><a href="/schedule/list"> 학사일정 등록</a></td>
+					</tr>
+				</c:if>
 			</table>
 		</div>
 	</div>

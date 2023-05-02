@@ -24,29 +24,47 @@ public class ScheuleService {
 		List<Schedule> schedule = scheuleRepository.selectSchodule();
 		return schedule;
 	}
+	
+	// 학사일정 조회 (디테일)
+	public Schedule readScheduleById(Integer id) {
+		Schedule schedule = scheuleRepository.selectScheduleById(id);
+		return schedule;
+	}
+	
 	// 학사일정 추가
 	@Transactional
-	public ScheduleFormDto createSchedule(ScheduleFormDto dto) {
+	public void createSchedule(Integer staffId, ScheduleFormDto dto) {
+		Schedule schedule = new Schedule();
+		schedule.setStaffId(staffId);
+		schedule.setTitle(dto.getTitle());
+		schedule.setStartDay(dto.getStartDay());
+		schedule.setEndDay(dto.getEndDay());
+		schedule.setContent(dto.getContent());
 		
-		ScheduleFormDto schedule = scheuleRepository.insertSchoeduleFormDto(dto);
-		
-		return schedule;
+		int resultRowCount = scheuleRepository.insertSchoeduleFormDto(schedule);
 	}
 	
 	// 학사일정 업데이트
 	@Transactional
-	public ScheduleFormDto updateSchedule(Integer staffId) {
+	public int updateSchedule(Integer staffId, String title, String content) {
+		ScheduleFormDto scheduleFormDto = new ScheduleFormDto();
+		scheduleFormDto.setId(staffId);
+		scheduleFormDto.setTitle(title);
+		scheduleFormDto.setContent(content);
 		
-		ScheduleFormDto schedule = scheuleRepository.updateSchoeduleFormDtoByStaffId(staffId);
-		return schedule;
+		int resultRowCount = scheuleRepository.updateSchoeduleFormDtoBycontent(scheduleFormDto);
+		 
+		return resultRowCount;
 	}
 	
 	//학사일정 삭제
+	
 	@Transactional
-	public ScheduleFormDto deleteSchedule(Integer id) {
+	public int deleteSchedule(Integer id) {
 		
-		ScheduleFormDto schedule = scheuleRepository.deleteSchoeduleFormDtoByStaffIdAndId(id);
-		return schedule;
+		int resultRowCount = scheuleRepository.deleteSchoeduleFormDtoByStaffIdAndId(id);
+		
+		return resultRowCount;
 	}
 	
 	// 학사일정 월에 있는 일정 조회

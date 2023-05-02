@@ -3,25 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-	
-	$(".mouth").each(function(){
-		var tempString = $(this).text();
-		var mouth_rows = $(".mouth").filter(function(){
-			return $(this).text() == tempString;
-		});
-		if(mouth_rows.length > 1){
-			mouth_rows.eq(0).attr("rowspan", mouth_rows.length);
-			mouth_rows.not(":eq(0)").remove();
-		}
-	});
-	
-
-});
-</script>
-
 
 <style>
 .room--table {
@@ -38,10 +19,8 @@ $(document).ready(function(){
 }
 .mouth{
   background-color: #f5f5f5;
-  border-bottom: 1px solid #666;
 }
 .line{
-  border-bottom: 1px solid #666;	
 }
 .container{
 margin-top: 100px;
@@ -52,7 +31,7 @@ margin-top: 100px;
 	style="min-width: 100em;">
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>학사정보</h2>
+			<h2>강의실</h2>
 		</div>
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
@@ -60,37 +39,51 @@ margin-top: 100px;
 					<td><a href="/notice">공지사항</a></td>
 				</tr>
 				<tr>
-					<td><a href="/scheule/main">학사일정</a></td>				
+					<td><a href="/schedule" >학사일정</a></td>				
 				</tr>
+				<c:if test="${principal.userRole.equals(\"staff\") }">
+					<tr>
+						<td><a href="/schedule/list" class="selected--menu"> 학사일정 등록</a></td>
+					</tr>
+				</c:if>
 			</table>
 		</div>
 	</div>
 
 	<main>
-	<h1>학사일정</h1>
-	<div class="container">
-	<div></div>
-		
-	<table  class="room--table">
-	<tbody>
-	<c:forEach var ="schedule" items ="${schedule}">
-	<tr>
-	<td class ="mouth" width ="100px;"><h3>${schedule.mouth}월</h3></td>
-	 <td class = "line">${schedule.day}</td>
-	 <td class = "line">${schedule.content}</td>
-	</tr>
-	</c:forEach>
-	</tbody>
-	</table>
-	</div>
-	</main>
-
+	
+	
+	<c:if test="${crud.equals(\"read\") }">
+	<p>졔목 : ${schedule.title}</p>
+	<p>내용 : ${schedule.content}</p>
+	<c:if test="${principal.userRole.equals(\"staff\") }">
+	<a href="/schedule/detail?crud=update&id=${schedule.id}">수정</a>
+	<a href="/schedule/delete?id=${schedule.id}">삭제</a>
+	</c:if>
+	</c:if>
+	
+	<c:if test="${crud.equals(\"update\") }">
+	<form action="/schedule/update?id=${schedule.id}" method="post">
+	<label>
+	제목 :
+	<input type="textarea" value="${schedule.title}" name="title">
+	</label>
+	<label>
+	내용 :
+	<input type="textarea" value="${schedule.content}" name="content">
+	</label>
+	<button>수정</button>
+	</form>
+	</c:if>
+    </main>
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
 </div>
 
 </body>
 </html>
+
+
 
 
 
