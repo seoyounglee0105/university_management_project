@@ -135,28 +135,7 @@ public class ProfessorController {
 		return "redirect:/professor/detail/ " + subjectId + "/" + studentId;
 	}
 	
-	/**
-	 * 
-	 * @param model
-	 * @param subjectId
-	 * @return 강의계획서 조회
-	 */
-	@GetMapping("/syllabus/{subjectId}")
-	public String readSyllabus(Model model, @PathVariable Integer subjectId) {
-		ReadSyllabusDto readSyllabusDto = professorService.readSyllabus(subjectId);
-		if(readSyllabusDto.getOverview() != null) {
-			readSyllabusDto.setOverview(readSyllabusDto.getOverview().replace("\r\n", "<br>"));
-		}
-		if(readSyllabusDto.getObjective() != null) {
-			readSyllabusDto.setObjective(readSyllabusDto.getObjective().replace("\r\n", "<br>"));
-		}
-		if(readSyllabusDto.getProgram() != null) {
-			readSyllabusDto.setProgram(readSyllabusDto.getProgram().replace("\r\n", "<br>"));
-		}
-		model.addAttribute("syllabus", readSyllabusDto);
-		
-		return "/professor/readSyllabus";
-	}
+
 	
 	/**
 	 * 

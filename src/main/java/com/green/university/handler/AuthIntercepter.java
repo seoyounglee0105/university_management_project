@@ -24,7 +24,7 @@ public class AuthIntercepter implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 		
 		if (session.getAttribute(Define.PRINCIPAL) == null) {
-			throw new UnAuthorizedException("접근 권한이 없습니다. 로그인이 필요합니다.", HttpStatus.UNAUTHORIZED);
+			throw new UnAuthorizedException("접근 권한이 없습니다. 로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/login");
 			// return false;
 		}
 		return true;

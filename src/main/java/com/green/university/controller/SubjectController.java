@@ -9,13 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.green.university.dto.AllSubjectSearchFormDto;
+import com.green.university.dto.response.ReadSyllabusDto;
 import com.green.university.dto.response.SubjectDto;
 import com.green.university.repository.model.Department;
 import com.green.university.service.CollegeService;
+import com.green.university.service.ProfessorService;
 import com.green.university.service.SubjectService;
 
 /**
@@ -32,6 +33,9 @@ public class SubjectController {
 	
 	@Autowired
 	private CollegeService collegeService;
+	
+	@Autowired
+	private ProfessorService professorService;
 	
 	
 	// 모든 강의 조회 (모든 연도-학기에 대해서)
@@ -93,6 +97,29 @@ public class SubjectController {
 		
 		
 		return "/subject/allSubList";
+	}
+	
+	/**
+	 * @author 김지현
+	 * @param model
+	 * @param subjectId
+	 * @return 강의계획서 조회
+	 */
+	@GetMapping("/syllabus/{subjectId}")
+	public String readSyllabus(Model model, @PathVariable Integer subjectId) {
+		ReadSyllabusDto readSyllabusDto = professorService.readSyllabus(subjectId);
+		if(readSyllabusDto.getOverview() != null) {
+			readSyllabusDto.setOverview(readSyllabusDto.getOverview().replace("\r\n", "<br>"));
+		}
+		if(readSyllabusDto.getObjective() != null) {
+			readSyllabusDto.setObjective(readSyllabusDto.getObjective().replace("\r\n", "<br>"));
+		}
+		if(readSyllabusDto.getProgram() != null) {
+			readSyllabusDto.setProgram(readSyllabusDto.getProgram().replace("\r\n", "<br>"));
+		}
+		model.addAttribute("syllabus", readSyllabusDto);
+		
+		return "/professor/readSyllabus";
 	}
 	
 	

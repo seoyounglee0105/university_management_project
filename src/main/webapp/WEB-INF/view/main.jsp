@@ -137,7 +137,6 @@ footer {
 
 </style>
 
-<<<<<<< HEAD
 <script>
 <%
 PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
@@ -153,8 +152,6 @@ function pop()
 <body onLoad="javascript:pop()">
 
 <!-- 세부 메뉴 + 메인 -->
-=======
->>>>>>> feature/sugang
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 
 	<div>

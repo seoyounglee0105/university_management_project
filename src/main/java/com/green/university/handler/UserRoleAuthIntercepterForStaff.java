@@ -26,7 +26,7 @@ public class UserRoleAuthIntercepterForStaff implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		if (!"staff".equals(principal.getUserRole())) {
-			throw new UnAuthorizedException("접근 권한이 없습니다. 관리자 전용 페이지", HttpStatus.UNAUTHORIZED);
+			throw new UnAuthorizedException("접근 권한이 없습니다. 관리자 전용 페이지", HttpStatus.UNAUTHORIZED, "/");
 		}
 		return true;
 	}

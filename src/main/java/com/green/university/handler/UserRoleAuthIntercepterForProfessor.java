@@ -25,7 +25,7 @@ public class UserRoleAuthIntercepterForProfessor implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		if (!"professor".equals(principal.getUserRole())) {
-			throw new UnAuthorizedException("접근 권한이 없습니다. 교수 전용 페이지", HttpStatus.UNAUTHORIZED);
+			throw new UnAuthorizedException("접근 권한이 없습니다. 교수 전용 페이지", HttpStatus.UNAUTHORIZED, "/");
 			// return false;
 		}
 		return true;

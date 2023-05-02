@@ -184,7 +184,7 @@ public class PersonalController {
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		// 패스워드 인코더 적용 후
 		if(!passwordEncoder.matches(password, principal.getPassword())) {
-			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
 		
 		UserUpdateDto updateDto = new UserUpdateDto();
@@ -237,10 +237,10 @@ public class PersonalController {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		// 패스워드 인코더 적용 후
 		if(!passwordEncoder.matches(changePasswordDto.getBeforePassword(), principal.getPassword())) {
-			throw new UnAuthorizedException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
 		if(!changePasswordDto.getAfterPassword().equals(changePasswordDto.getPasswordCheck())) {
-			throw new UnAuthorizedException("변경할 비밀번호와 비밀번호 확인은 같아야합니다.", HttpStatus.BAD_REQUEST);
+			throw new CustomRestfullException("변경할 비밀번호와 비밀번호 확인은 같아야합니다.", HttpStatus.BAD_REQUEST);
 		}
 		changePasswordDto.setId(principal.getId());
 		changePasswordDto.setAfterPassword(passwordEncoder.encode(changePasswordDto.getAfterPassword()));

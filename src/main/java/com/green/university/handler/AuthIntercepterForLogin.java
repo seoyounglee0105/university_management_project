@@ -25,7 +25,7 @@ public class AuthIntercepterForLogin implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 		
 		if (session.getAttribute(Define.PRINCIPAL) != null) {
-			throw new UnAuthorizedException("이미 로그인되어있습니다.", HttpStatus.UNAUTHORIZED);
+			throw new UnAuthorizedException("이미 로그인되어있습니다.", HttpStatus.UNAUTHORIZED, "/");
 		}
 		return true;
 	}
