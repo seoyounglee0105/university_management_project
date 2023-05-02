@@ -53,4 +53,7 @@
 		ORDER BY id DESC 
 		LIMIT #{page}, 10
 	</select>
+	<update id="updateViews">
+		UPDATE notice_tb SET views = views + 1 WHERE id = #{id}
+	</update>
 </mapper>

@@ -86,6 +86,8 @@ public class NoticeService {
 	 */
 	public Notice readByIdNotice(Integer id) {
 		Notice notice = noticeRepository.selectById(id);
+		Integer views = noticeRepository.updateViews(id);
+		notice.setViews(views);
 		return notice;
 	}
 

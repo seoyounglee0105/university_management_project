@@ -124,6 +124,7 @@
 							<td>말머리</td>
 							<td>제목</td>
 							<td>작성일</td>
+							<td>조회수</td>
 						</tr>
 						<c:forEach var="notice" items="${noticeList}">
 							<tr class="second--tr" onclick="location.href='/notice/read?id=${notice.id}';">
@@ -131,6 +132,7 @@
 								<td>${notice.category}</td>
 								<td>${notice.title}</td>
 								<td>${notice.timeFormat()}</td>
+								<td>${notice.views}</td>
 							</tr>
 						</c:forEach>
 					</c:when>
@@ -175,6 +177,7 @@
 							<td>말머리</td>
 							<td>제목</td>
 							<td>작성일</td>
+							<td>조회수</td>
 						</tr>
 						<c:forEach var="notice" items="${noticeList}">
 							<tr class="second--tr" onclick="location.href='/notice/read?id=${notice.id}';">
@@ -182,6 +185,7 @@
 								<td>${notice.category}</td>
 								<td>${notice.title}</td>
 								<td>${notice.timeFormat()}</td>
+								<td>${notice.views}</td>
 							</tr>
 						</c:forEach>
 					</c:when>

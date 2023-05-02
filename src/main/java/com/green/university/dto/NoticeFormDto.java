@@ -25,6 +25,7 @@ public class NoticeFormDto {
 	private String title;
 	@NotEmpty
 	private String content;
+	private Integer views;
 	private Timestamp createdTime;
 	private MultipartFile file;	
 	private String originFilename;
