@@ -16,7 +16,6 @@
 
 .sub--list--name {
 	text-align: left !important;
-	padding-right: 20px !important;
 }
 
 .sub--filter {
@@ -90,10 +89,10 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/sugang/subjectList">강의 시간표 조회</a></td>
+					<td><a href="/sugang/subjectList/1">강의 시간표 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/sugang/pre">예비 수강 신청</a></td>
+					<td><a href="/sugang/pre/1">예비 수강 신청</a></td>
 				</tr>
 				<tr>
 					<td><a href="/sugang/preAppList?type=1">수강 신청</a></td>

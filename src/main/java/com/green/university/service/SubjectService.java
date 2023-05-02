@@ -60,20 +60,6 @@ public class SubjectService {
 	}
 	
 	/**
-	 * 페이징 처리
-	 */
-	@Transactional
-	public List<SubjectDto> readSubjectListSearchPage(AllSubjectSearchFormDto allSubjectSearchFormDto, Integer page) {
-		
-		allSubjectSearchFormDto.setPage(page);
-		
-		List<SubjectDto> subDtoList = subjectRepository.selectDtoBySemesterAndDeptAndNameLimit(allSubjectSearchFormDto);
-		
-		return subDtoList;
-	}
-	
-	
-	/**
 	 * @return 수강 신청에 사용할 강의 정보 (학생용)
 	 * 현재 연도-학기에 해당하는 강의만 출력됨
 	 */
@@ -81,6 +67,17 @@ public class SubjectService {
 	public List<SubjectDto> readSubjectListByCurrentSemester() {
 		
 		List<SubjectDto> subDtoList = subjectRepository.selectDtoBySemester(Define.CURRENT_YEAR, Define.CURRENT_SEMESTER);
+		
+		return subDtoList;
+	}
+	
+	/**
+	 * 페이징 처리
+	 */
+	@Transactional
+	public List<SubjectDto> readSubjectListByCurrentSemesterPage(Integer page) {
+		
+		List<SubjectDto> subDtoList = subjectRepository.selectDtoBySemesterLimit(Define.CURRENT_YEAR, Define.CURRENT_SEMESTER, page);
 		
 		return subDtoList;
 	}

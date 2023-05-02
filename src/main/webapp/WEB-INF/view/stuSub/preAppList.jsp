@@ -16,7 +16,6 @@
 
 .sub--list--name {
 	text-align: left !important;
-	padding-right: 20px !important;
 }
 
 .sub--filter {
@@ -100,15 +99,15 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/sugang/subjectList">강의 시간표 조회</a></td>
+					<td><a href="/sugang/subjectList/1">강의 시간표 조회</a></td>
 				</tr>
 				<tr>
 					<c:choose>
 						<c:when test="${type == 0}">
-							<td><a href="/sugang/pre" class="selected--menu">예비 수강 신청</a></td>
+							<td><a href="/sugang/pre/1" class="selected--menu">예비 수강 신청</a></td>
 						</c:when>
 						<c:otherwise>
-							<td><a href="/sugang/pre">예비 수강 신청</a></td>
+							<td><a href="/sugang/pre/1">예비 수강 신청</a></td>
 						</c:otherwise>
 					</c:choose>
 				</tr>
@@ -275,11 +274,11 @@
 			<c:choose>
 				<%-- 예비 수강 신청 --%>
 				<c:when test="${type == 0}">
-					<a href="/sugang/pre"><button class="preStuSubList--button">강의 검색</button></a>
+					<a href="/sugang/pre/1"><button class="preStuSubList--button">강의 검색</button></a>
 				</c:when>
 				<%-- 수강 신청 --%>
 				<c:otherwise>
-					<a href="/sugang/application"><button class="preStuSubList--button">강의 검색</button></a>
+					<a href="/sugang/application/1"><button class="preStuSubList--button">강의 검색</button></a>
 				</c:otherwise>
 			</c:choose>
 		</div>

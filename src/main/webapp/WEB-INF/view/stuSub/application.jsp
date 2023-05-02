@@ -16,7 +16,6 @@
 
 .sub--list--name {
 	text-align: left !important;
-	padding-right: 20px !important;
 }
 
 .sub--filter form {
@@ -92,10 +91,10 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/sugang/subjectList">강의 시간표 조회</a></td>
+					<td><a href="/sugang/subjectList/1">강의 시간표 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/sugang/pre">예비 수강 신청</a></td>
+					<td><a href="/sugang/pre/1">예비 수강 신청</a></td>
 				</tr>
 				<tr>
 					<td><a href="/sugang/preAppList?type=1" class="selected--menu">수강 신청</a></td>
@@ -154,7 +153,7 @@
 		<c:choose>
 			<c:when test="${subjectList.isEmpty() == false}">
 				<h4>
-					<span style="font-weight: 600;">강의 목록</span>&nbsp; <span style="color: gray; font-size: 18px;">[총 ${subjectList.size()}건]</span>
+					<span style="font-weight: 600;">강의 목록</span>&nbsp; <span style="color: gray; font-size: 18px;">[총 ${subjectCount}건]</span>
 				</h4>
 				<table border="1" class="sub--list--table">
 					<thead>
@@ -163,7 +162,7 @@
 							<th>개설학과</th>
 							<th>학수번호</th>
 							<th>강의구분</th>
-							<th style="width: 250px;">강의명</th>
+							<th style="width: 200px;">강의명</th>
 							<th>담당교수</th>
 							<th>학점</th>
 							<th>요일시간 (강의실)</th>
@@ -220,6 +219,20 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<c:if test="${pageCount != null}">
+				<ul class="page--list">
+					<c:forEach var="i" begin="1" end="${pageCount}" step="1">
+						<c:choose>
+							<c:when test="${i == page}">
+								<li><a href="/sugang/application/${i}" style="font-weight: 700; color: #007bff">${i}</a>									
+							</c:when>
+							<c:otherwise>
+								<li><a href="/sugang/application/${i}">${i}</a>									
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</ul>
+				</c:if>
 			</c:when>
 			<c:otherwise>
 				<p class="no--list--p">검색 결과가 없습니다.</p>

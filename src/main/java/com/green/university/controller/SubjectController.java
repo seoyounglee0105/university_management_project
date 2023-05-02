@@ -43,8 +43,11 @@ public class SubjectController {
 		
 		int subjectCount = subjectList.size();		
 		model.addAttribute("subjectCount", subjectCount);
+		// 총 페이지 수
 		int pageCount = (int) Math.ceil(subjectCount/20.0);
 		model.addAttribute("pageCount", pageCount);
+		// 현재 페이지
+		model.addAttribute("page", page);
 		
 		List<SubjectDto> subjectListLimit = subjectService.readSubjectListPage((page-1) * 20);
 		model.addAttribute("subjectList", subjectListLimit);
@@ -66,19 +69,14 @@ public class SubjectController {
 	}
 	
 	// 전체 강의 목록에서 필터링
-	@GetMapping("/list/search/{page}")
-	public String readSubjectListSearch(Model model, @Validated AllSubjectSearchFormDto allSubjectSearchFormDto, @PathVariable Integer page) {
+	@GetMapping("/list/search")
+	public String readSubjectListSearch(Model model, @Validated AllSubjectSearchFormDto allSubjectSearchFormDto) {
 		
-		// 강의 리스트 (전체)
+		// 강의 리스트
 		List<SubjectDto> subjectList = subjectService.readSubjectListSearch(allSubjectSearchFormDto);
-		
 		int subjectCount = subjectList.size();		
 		model.addAttribute("subjectCount", subjectCount);
-		int pageCount = (int) Math.ceil(subjectCount/20.0);
-		model.addAttribute("pageCount", pageCount);
-		
-		List<SubjectDto> subjectListLimit = subjectService.readSubjectListSearchPage(allSubjectSearchFormDto, (page-1) * 20);
-		model.addAttribute("subjectList", subjectListLimit);
+		model.addAttribute("subjectList", subjectList);
 		
 		// 필터에 사용할 전체 학과 정보
 		List<Department> deptList = collegeService.readDeptAll();

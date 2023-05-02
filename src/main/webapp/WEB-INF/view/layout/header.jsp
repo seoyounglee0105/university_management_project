@@ -21,8 +21,6 @@
 	<header class="d-flex flex-column">
 		<div class="header--top">
 			<ul>
-				<!-- todo 삭제 -->
-				<li style="margin-right: 20px;"><a href="/login">임시 로그인</a>
 				<li class="material--li"><span class="material-symbols-outlined">account_circle</span>
 				<li>${principal.name}님 (${principal.id})
 				<li style="margin: 0 15px;">ㅣ
@@ -40,7 +38,7 @@
 						<li><a href="/">홈</a>
 						<li><a href="/info/student">MY</a>
 						<li><a href="/subject/list/1">수업</a>
-						<li><a href="/sugang/subjectList">수강신청</a>
+						<li><a href="/sugang/subjectList/1">수강신청</a>
 						<li><a href="/grade/thisSemester">성적</a>
 						<li><a href="/notice">학사정보</a>
 					</ul>
@@ -50,7 +48,7 @@
 					<ul>
 						<li><a href="/">홈</a>
 						<li><a href="/info/professor">MY</a>
-						<li><a href="/subject/list">수업</a>
+						<li><a href="/subject/list/1">수업</a>
 						<li><a href="/notice">공지</a>
 					</ul>
 				</c:when>

@@ -17,7 +17,6 @@
 
 .sub--list--name {
 	text-align: left !important;
-	padding-right: 20px !important;
 }
 
 .sub--filter {
@@ -65,14 +64,6 @@
 	color: black;
 }
 
-.page--list {
-	display: flex;
-	justify-content: center;
-}
-
-.page--list li {
-	margin: 30px 20px;
-}
 
 </style>
 
@@ -113,7 +104,7 @@
 
 		<!-- 필터 및 검색 -->
 		<div class="sub--filter">
-			<form action="/subject/list/search/1" method="get">
+			<form action="/subject/list/search" method="get">
 				<div>
 					<!-- 개설연도 숫자 -->
 					<label for="subYear">연도 </label> <input type="number"
@@ -165,7 +156,7 @@
 							<th>개설학과</th>
 							<th>학수번호</th>
 							<th>강의구분</th>
-							<th style="width: 250px;">강의명</th>
+							<th style="width: 200px;">강의명</th>
 							<th>담당교수</th>
 							<th>학점</th>
 							<th>수강인원</th>
@@ -179,7 +170,7 @@
 							<tr>
 								<td>${subject.subYear}-${subject.semester}학기</td>
 								<td>${subject.collName}</td>
-								<td class="sub--list--dept--name">${subject.deptName}</td>
+								<td>${subject.deptName}</td>
 								<td>${subject.id}</td>
 								<td>${subject.type}</td>
 								<td class="sub--list--name">${subject.name}</td>
@@ -197,11 +188,20 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<ul class="page--list">
-					<c:forEach var="i" begin="1" end="${pageCount}" step="1">
-						<li><a href="/subject/list/${i}">${i}</a>			
-					</c:forEach>
-				</ul>
+				<c:if test="${pageCount != null}">
+					<ul class="page--list">
+						<c:forEach var="i" begin="1" end="${pageCount}" step="1">
+							<c:choose>
+								<c:when test="${i == page}">
+									<li><a href="/subject/list/${i}" style="font-weight: 700; color: #007bff">${i}</a>									
+								</c:when>
+								<c:otherwise>
+									<li><a href="/subject/list/${i}">${i}</a>									
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</ul>
+				</c:if>
 			</c:when>
 			<c:otherwise>
 				<p class="no--list--p">검색 결과가 없습니다.</p>

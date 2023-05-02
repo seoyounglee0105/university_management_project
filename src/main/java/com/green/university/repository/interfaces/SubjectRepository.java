@@ -43,13 +43,13 @@ public interface SubjectRepository {
 	 * @return 수강 신청에 사용할 강의 정보
 	 */
 	public List<SubjectDto> selectDtoBySemester(@Param("subYear") Integer subYear, @Param("semester") Integer semester);
+	public List<SubjectDto> selectDtoBySemesterLimit(@Param("subYear") Integer subYear, @Param("semester") Integer semester, @Param("page") Integer page);
 	
 	/**
 	 * @author 서영
 	 * @return 전체 강의 정보
 	 */
 	public List<SubjectDto> selectDtoAll();
-	
 	public List<SubjectDto> selectDtoAllLimit(Integer page);
 	
 	/**
@@ -70,8 +70,6 @@ public interface SubjectRepository {
 	 * @return 연도-학기-개설학과-강의명 검색을 조건으로 한 강의 정보
 	 */
 	public List<SubjectDto> selectDtoBySemesterAndDeptAndName(AllSubjectSearchFormDto allSubjectSearchFormDto);
-	
-	public List<SubjectDto> selectDtoBySemesterAndDeptAndNameLimit(AllSubjectSearchFormDto allSubjectSearchFormDto);
 	
 	/**
 	 * @param currentSemesterSubjectSearchFormDto
