@@ -143,7 +143,7 @@ PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 if(new BCryptPasswordEncoder().matches(principal.getId().toString(), principal.getPassword())){%>
 function pop()
 {
-	window.open("/guide", "비밀번호 변경 안내", "width=400,height=300,history=no,resizable=no,status=no,scrollbars=yes,menubar=no");
+	window.open("/guide", "비밀번호 변경 안내", "width=450,height=300,history=no,resizable=no,status=no,scrollbars=yes,menubar=no");
 }
 <%}%>
 </script>
