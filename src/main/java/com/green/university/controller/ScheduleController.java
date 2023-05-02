@@ -44,6 +44,7 @@ public class ScheduleController {
 	 */
 	@GetMapping("")
 	public String schedule(Model model) {
+
 		// 전체조회
 		List<Schedule> schedule = scheuleService.readSchedule();
 		// 월에 일정 수 조회
@@ -63,12 +64,37 @@ public class ScheduleController {
 	
 	@PostMapping("/write")
 	public String ScheduleProc(Model model, ScheduleFormDto scheduleFormDto) {
-		System.out.println(scheduleFormDto);
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		scheuleService.createSchedule(principal.getId(), scheduleFormDto);
 		
-		return "/schedule/scheduleList";
+		return "redirect:/schedule/list";
 	}
+	
+	@GetMapping("/delete")
+	public String deleteSchedule(Model model, @RequestParam Integer id) {
+		model.addAttribute("id", id);
+		int result = scheuleService.deleteSchedule(id);
+		
+		return "redirect:/schedule/list";
+	}
+	
+	
+	@GetMapping("/detail")
+	public String detailSchedule(Model model, Integer id, @RequestParam(defaultValue = "read") String crud) {
+		Schedule schedule = scheuleService.readScheduleById(id);
+		model.addAttribute("crud",crud);
+		model.addAttribute("schedule", schedule);
+		return "/schedule/detail";
+	}
+	
+	@PostMapping("/update")
+	public String updateSchedule(Model model, Integer id, String title, String content) {
+	
+		scheuleService.updateSchedule(id, title, content);
+		
+		return "redirect:/schedule/list";
+	}
+	
 	
 	
 }

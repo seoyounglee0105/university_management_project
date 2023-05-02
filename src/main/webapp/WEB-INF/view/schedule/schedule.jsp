@@ -7,14 +7,14 @@
 <script>
 $(document).ready(function(){
 	
-	$(".mouth").each(function(){
+	$(".month").each(function(){
 		var tempString = $(this).text();
-		var mouth_rows = $(".mouth").filter(function(){
+		var month_rows = $(".month").filter(function(){
 			return $(this).text() == tempString;
 		});
-		if(mouth_rows.length > 1){
-			mouth_rows.eq(0).attr("rowspan", mouth_rows.length);
-			mouth_rows.not(":eq(0)").remove();
+		if(month_rows.length > 1){
+			month_rows.eq(0).attr("rowspan", month_rows.length);
+			month_rows.not(":eq(0)").remove();
 		}
 	});
 });
@@ -34,7 +34,7 @@ $(document).ready(function(){
 .first--tr {
 	font-weight: bold;
 }
-.mouth{
+.month{
   background-color: #f5f5f5;
   border-bottom: 1px solid #666;
 }
@@ -78,9 +78,9 @@ margin-top: 100px;
 	<tbody>
 	<c:forEach var ="schedule" items ="${schedule}">
 	<tr>
-	<td class ="mouth" width ="100px;"></td>
+	<td class ="month" width ="100px;">${schedule.month}월</td>
 	 <td class = "line">${schedule.startDay}~${schedule.endDay}</td>
-	 <td class = "line">${schedule.content}</td>
+	 <td class = "line" onclick="location.href='/schedule/detail?id=${schedule.id}';">${schedule.title}</td>
 	</tr>
 	</c:forEach>
 	</tbody>
