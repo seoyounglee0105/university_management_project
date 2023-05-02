@@ -63,6 +63,10 @@
 .sub--plan--view li a:hover {
 	color: black;
 }
+.paging--container {
+	display: flex;
+	justify-content: center;
+}
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -171,7 +175,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<div>
+				<div class="paging--container">
 					<c:forEach var="index" begin="1" end="${listCount}">
 						<c:choose>
 							<c:when test="${deptId != null }">

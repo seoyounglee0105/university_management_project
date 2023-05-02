@@ -38,7 +38,11 @@
 	<!-- 메인 div -->
 	<main>
 		<h1>단과대학</h1>
-		<div class="split--div"></div>	
+		<div class="split--div"></div>
+		<div class="select--button">
+			<a href="/admin/college?crud=insert" class="button">등록</a> 
+			<a href="/admin/college?crud=delete" class="button">삭제</a>
+		</div>	
 
 			<!-- 단과대학 조회 -->
 			<c:if test="${crud.equals(\"select\")}">
@@ -56,12 +60,6 @@
 					</c:forEach>
 				</table>
 			</div>
-			<c:if test="${principal.userRole.equals(\"staff\")}">
-				<div class="select--button">
-				<a href="/admin/college?crud=insert" class="button">등록</a> 
-				<a href="/admin/college?crud=delete" class="button">삭제</a>
-				</div>
-			</c:if>
 			</c:if>
 
 
@@ -93,7 +91,7 @@
 
 			<!-- 단과대학 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
-				<span class="insert">삭제할 단과대학 이름을 클릭해주세요</span>
+				<span class="delete">삭제할 단과대학 이름을 클릭해주세요</span>
 			<div class="total--container">
 				<table class="table--container">
 						<tr class="first--tr">
@@ -103,7 +101,7 @@
 						<c:forEach var="college" items="${collegeList}">
 							<tr>
 								<td>${college.id}</td>
-								<td><a href="/updAdmin/deCollege?id=${college.id}">${college.name}</a></td>
+								<td><a href="/admin/collegeDelete?id=${college.id}">${college.name}</a></td>
 							</tr>
 						</c:forEach>
 					</table>

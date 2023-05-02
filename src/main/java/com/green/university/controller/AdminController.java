@@ -221,7 +221,6 @@ public class AdminController {
 	 */
 	@PutMapping("/subject")
 	public String updateSubject(SubjectFormDto subjectFormDto) {
-		System.out.println(subjectFormDto);
 		adminService.updateSubject(subjectFormDto);
 		return "redirect:/admin/subject";
 	}

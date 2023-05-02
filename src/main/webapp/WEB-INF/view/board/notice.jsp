@@ -2,89 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<link rel="stylesheet" href="/css/notice.css">
 <style>
-.write--div {
-	background-color: #f7f6f6;
-	padding: 20px;
-}
-
-.title--container {
-	display: flex;
-	margin-bottom: 20px;
-}
-
-.title {
-	margin-left: 20px;
-}
-
-.content--container {
-	width: 1000px;
-	margin-bottom: 20px;
-}
-
-.custom-file {
-	width: 500px;
-}
-
-.table {
-	width: 1000px;
-	margin-bottom: 20px;
-	cursor: pointer;
-}
-
-
-
-.first--tr {
-	background-color: #f7f6f6;
-	font-weight: bolder;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.second--tr {
-	border-bottom: 1px solid #031734;
-}
-
-.read--container {
-	display: flex;
-	flex-direction: column;
-}
-
-.table-active {
-	width: 80px;
-	font-size: 15px;
-	font-weight: bold;
-}
-
-.second--tr:hover {
-	font-weight: bold;
-}
-.button {
-	border: 1px solid #031734;
-	border-radius: 3px;
-	background-color: #031734;
-	color: #ccc;
-	text-decoration: none;
-	margin: 5px;
-	padding: 3px;
-}
-.button:hover {
-	color: #ccc;
-
-}
 .select--button {
-	margin-left: 200px;
-}
-.input--box {
-	border: 1px solid #D2D1D1;
-	border-radius: 3px;
-	height: 35px;
-	margin-right: 20px;
-}
-.form--container {
-	display: flex;
-	justify-content: flex-end;
-	margin-right: 90px;
+	margin-left: 350px;
 }
 </style>
 <!-- 세부 메뉴 + 메인 -->
@@ -116,6 +37,14 @@
 
 		<!-- 공지 검색 -->
 		<c:if test="${crud.equals(\"selectKeyword\")}">
+		<form action="/notice/search" method="get" class="form--container">
+				<select class="input--box" name="type">
+					<option value="title">제목</option>
+					<option value="keyword">제목+내용</option>
+				</select>
+				<input type="text" name="keyword" class="input--box" placeholder="검색어를 입력하세요"> 
+				<input type="submit" class="button" value="검색">
+			</form>
 			<table class="table">
 				<c:choose>
 					<c:when test="${fn:length(noticeList) != 0}">
@@ -191,15 +120,15 @@
 					</c:when>
 					<c:otherwise>
 								공지사항이 없습니다. 작성해주세요
-							</c:otherwise>
+					</c:otherwise>
 				</c:choose>
 			</table>
+			<div class="paging--container">
 			<c:forEach var="index" begin="1" end="${listCount}">
 				<a href="/notice/list/${index}"> ${index}</a> &nbsp;&nbsp;
-					</c:forEach>
-			<c:if test="${principal.userRole.equals(\"staff\")}">
-				<a href="/notice?crud=write" class="button" id="submit">등록</a>
-			</c:if>
+			</c:forEach>
+				<a href="/notice?crud=write" class="button">등록</a>
+			</div>
 		</c:if>
 
 
@@ -207,24 +136,21 @@
 		<!-- 공지 상세 조회 -->
 		<c:if test="${crud.equals(\"read\")}">
 			<div class="container">
-				<table class="table table-bordered table-sm">
-					<tr class="category">
-						<td class="table-active">말머리</td>
-						<td>${notice.category}</td>
-					</tr>
+				<table class="table">
 					<tr class="title">
-						<td class="table-active">제목</td>
-						<td>${notice.title}</td>
+						<td class="type">제목</td>
+						<td>${notice.category} ${notice.title}</td>
 					</tr>
 					<tr class="content--container">
-						<td class="table-active">내용</td>
-						<td>${notice.content}<img alt="" src="${notice.setUpImage()}" width="300" height="300"></td>
+						<td class="type">내용</td>
+						<td>${notice.content}<br><br><img alt="" src="${notice.setUpImage()}" width="600" height="800" onerror="this.style.display='none'"></td>
 					</tr>
 				</table>
 
-				<div class="button">
-					<a href="/notice" class="btn btn-link" id="submit">목록</a> <a href="/notice/update?id=${notice.id}" class="btn btn-link" id="submit">수정</a> <a href="/notice/delete?id=${notice.id}"
-						class="btn btn-link" id="submit">삭제</a>
+				<div class="select--button">
+					<a href="/notice" class="button">목록</a> 
+					<a href="/notice/update?id=${notice.id}" class="button">수정</a> 
+					<a href="/notice/delete?id=${notice.id}" class="button">삭제</a>
 				</div>
 			</div>
 		</c:if>
@@ -232,15 +158,26 @@
 
 		<!-- 공지 수정 -->
 		<c:if test="${crud.equals(\"update\")}">
+		<div class="container">
 			<form action="/notice/update" method="post">
-				<input type="hidden" name="_method" value="put" /> <input type="hidden" name="id" value="${notice.id}"> ${notice.id} 말머리 ${notice.category}
-				<div class="title">
-					제목 <input type="text" name="title" value="${notice.title}">
+				<input type="hidden" name="_method" value="put" />
+				<input type="hidden" name="id" value="${notice.id}">
+					<table class="table">
+						<tr class="title">
+							<td class="type">제목</td>
+							<td>${notice.category} <input type="text" name="title" class="update--box" value="${notice.title}"></td>
+						</tr>
+						<tr class="content--container">
+							<td class="type">내용</td>
+							<td><textarea rows="20" cols="100" class="textarea" name="content">${notice.content}</textarea></td>
+						</tr>
+						
+					</table>
+				<div class="select--button">
+					<input type="submit" value="수정" class="button">
 				</div>
-				내용
-				<textarea rows="20" cols="60" name="content">${notice.content}</textarea>
-				<input type="submit" value="수정">
 			</form>
+		</div>
 		</c:if>
 
 
@@ -250,24 +187,24 @@
 				<form action="/notice/write" method="post" enctype="multipart/form-data">
 					<div class="title--container">
 						<div class="category">
-							말머리 <select name="category" class="input--box">
+							<select name="category" class="input--box">
 								<option value="[일반]">[일반]</option>
 								<option value="[학사]">[학사]</option>
 								<option value="[장학]">[장학]</option>
 							</select>
 						</div>
 						<div class="title">
-							제목 <input type="text" class="form-control form-control-sm" name="title" value="등록금 납부기한 연장안내" required="required" style="width: 900px;">
+							<input type="text" class="form-control form-control-sm" name="title" placeholder="제목을 입력하세요" required="required" style="width: 900px;">
 						</div>
 					</div>
 					<div class="content--container">
-						내용
-						<textarea name="content" class="form-control" cols="100" rows="20">등록금 납부기한 22일까지입니다</textarea>
+						<textarea name="content" class="form-control" cols="100" rows="20" placeholder="내용을 입력하세요"></textarea>
 					</div>
 					<div class="custom-file">
 						<input type="file" class="custom-file-input" id="customFile" name="file" accept=".jpg, .jpeg, .png"> <label class="custom-file-label" for="customFile">Choose file</label>
 					</div>
-					<a href="/notice" class="button">목록</a> <input type="submit" class="button" value="등록">
+					<a href="/notice" class="button">목록</a> 
+					<input type="submit" class="button" value="등록">
 				</form>
 				<script>
 					$(".custom-file-input").on(

@@ -2,27 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
-
+<link rel="stylesheet" href="/css/admin.css">
 <style>
-form {
-	margin-left: 30px;
-}
 
-.input--table td {
-	padding: 5px 10px;
-}
-
-button {
-	padding: 8px 20px;
-	border: none;
-	border-radius: 5px;
-	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-	margin-top: 20px;
-}
-
-.button-td {
-	text-align: center;
-}
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -69,42 +51,42 @@ button {
 		<h1>교수 입력창</h1>
 		<div class="split--div"></div>
 		<form action="/user/professor" method="post">
-			<table class="input--table">
+			<table class="table--container">
 				<tr>
 					<td><label for="name">이름</label></td>
-					<td><input type="text" name="name" id="name" value="가가가"></td>
+					<td><input type="text" name="name" id="name" class="input--box" ></td>
 				</tr>
 				<tr>
 					<td><label for="birthDate">생년월일</label></td>
-					<td><input type="date" name="birthDate" id="birthDate" value="1990-07-26"></td>
+					<td><input type="date" name="birthDate" id="birthDate" class="input--box"></td>
 				</tr>
 				<tr>
 					<td style="padding-top: 7px"><label>성별</label></td>
-					<td style="padding-top: 7px"><label for="male">남성</label> <input type="radio" value="M" name="gender" id="male" checked="checked"> &nbsp;<label for="female">여성</label> <input
-						type="radio" value="F" name="gender" id="female"></td>
+					<td style="padding-top: 7px"><label for="male">남성</label> 
+					<input type="radio"  name="gender" value="M" id="male" checked="checked"> &nbsp;
+					<label for="female">여성</label> 
+					<input type="radio"  name="gender" value="F" id="female"></td>
 				</tr>
 				<tr>
 					<td><label for="address">주소</label></td>
-					<td><input type="text" name="address" id="address" value="부산시"></td>
+					<td><input type="text" name="address" id="address" class="input--box" ></td>
 				</tr>
 				<tr>
 					<td><label for="tel">전화번호</label></td>
-					<td><input type="text" name="tel" id="tel" value="010-4545-4545"></td>
+					<td><input type="text" name="tel" id="tel" class="input--box" ></td>
 				</tr>
 				<tr>
 					<td><label for="email">이메일</label></td>
-					<td><input type="text" name="email" id="email" value="abc@test.com"></td>
+					<td><input type="text" name="email" id="email" class="input--box" ></td>
 				</tr>
 				<tr>
 					<td><label for="deptId">과 ID</label></td>
-					<td><input type="text" name="deptId" id="deptId" value="101"></td>
-				</tr>
-				<tr>
-					<td colspan="2" class="button-td">
-						<button type="submit">입력</button>
-					</td>
+					<td><input type="text" name="deptId" id="deptId" class="input--box" ></td>
 				</tr>
 			</table>
+					<div class="button--container">
+							<input type="submit" value="입력">
+						</div>
 		</form>
 	</main>
 </div>

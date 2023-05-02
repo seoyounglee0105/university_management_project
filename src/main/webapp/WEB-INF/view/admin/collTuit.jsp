@@ -40,7 +40,11 @@
 	<main>
 		<h1>단대별 등록금</h1>
 		<div class="split--div"></div>
-		
+		<div class="select--button">
+			<a href="/admin/tuition?crud=insert" class="button">등록</a> 
+			<a href="/admin/tuition?crud=update" class="button">수정</a> 
+			<a href="/admin/tuition?crud=delete" class="button">삭제</a>
+		</div>
 
 
 		<!-- 등록금 입력 -->
@@ -54,7 +58,7 @@
 							</c:forEach>
 						</select>
 				<input type="text" id="name" class="input--box" name="amount" placeholder="등록금을 입력해주세요"> 
-					<input type="submit" value="입력" class="button">
+					<input type="submit" value="입력">
 				</div>
 			</form>
 			<table class="table--container">
@@ -106,7 +110,7 @@
 
 		<!-- 등록금 삭제 -->
 		<c:if test="${crud.equals(\"delete\")}">
-			<h5>등록금을 삭제할 단과대학을 클릭해주세요</h5>
+			<span class="delete">등록금을 삭제할 단과대학을 클릭해주세요</span>
 			<table class="table--container">
 				<tr class="first--tr">
 					<td>ID</td>
@@ -142,11 +146,6 @@
 				</c:forEach>
 			</table>
 			</div>
-			<div>
-			<a href="/admin/tuition?crud=insert" class="button">등록</a> 
-			<a href="/admin/tuition?crud=update" class="button">수정</a> 
-			<a href="/admin/tuition?crud=delete" class="button">삭제</a>
-		</div>
 		</c:if>
 	</main>
 
