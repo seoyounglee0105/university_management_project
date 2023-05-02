@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>강의계획서</title>
+<title>아이디 찾기</title>
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
@@ -44,7 +44,15 @@
 .submit--button {
 	margin-top: 20px;
 	margin-left: 200px;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 10px;
+	color: white;
+	background-color: #142845;
+	cursor: pointer;
 }
+
+
 </style>
 </head>
 
@@ -72,15 +80,10 @@
 					<td><input type="text" name="email" id="email"></td>
 				</tr>
 				<tr>
-					<td colspan="2">
-						<label for="student">학생</label> <input type="radio" name="userRole" value="student" id="student">
-						&nbsp;&nbsp;
-						<label for="professor">교수</label> <input type="radio" name="userRole" value="professor" id="professor">
-						&nbsp;&nbsp;
-						<label for="staff">직원</label> <input type="radio" name="userRole" value="staff" id="staff">
-					</td>
+					<td colspan="2"><label for="student">학생</label> <input type="radio" name="userRole" value="student" id="student"> &nbsp;&nbsp; <label for="professor">교수</label> <input type="radio"
+						name="userRole" value="professor" id="professor"> &nbsp;&nbsp; <label for="staff">직원</label> <input type="radio" name="userRole" value="staff" id="staff"></td>
 				</tr>
-				
+
 			</table>
 			<div class="button--container">
 				<button type="submit" class="submit--button">아이디 찾기</button>

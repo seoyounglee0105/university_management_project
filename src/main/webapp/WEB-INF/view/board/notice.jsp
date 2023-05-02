@@ -124,11 +124,7 @@
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-<<<<<<< HEAD
 								<p class="no--list--p">공지사항이 없습니다. 작성해주세요.</p>
-=======
-								공지사항이 없습니다. 작성해주세요
->>>>>>> feature/notice3
 					</c:otherwise>
 				</c:choose>
 			</table>

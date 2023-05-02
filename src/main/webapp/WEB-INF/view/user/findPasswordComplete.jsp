@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>강의계획서</title>
+<title>비밀번호 찾기</title>
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
@@ -45,6 +45,11 @@
 	margin-top: 20px;
 	margin-left: 200px;
 }
+
+.section--content{
+	margin: 20px 50px;
+	text-align: center;
+}
 </style>
 </head>
 
@@ -57,7 +62,7 @@
 			<h2>비밀번호 찾기</h2>
 			<br>
 		</div>
-		<div>
+		<div class="section--content">
 			${name}님의 임시 비밀번호는<br> 
 			<span style="font-weight: bold;">${password}</span><br>
 			입니다. 보안을 위해 로그인 후 비밀번호를 변경해주세요.
