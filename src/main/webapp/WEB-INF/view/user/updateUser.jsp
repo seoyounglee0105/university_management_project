@@ -4,25 +4,23 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 
 <style>
-
-form{
+form {
 	margin-left: 30px;
-	
 }
 
 .input--table td {
 	padding: 5px 10px;
 }
 
-button{
+button {
 	padding: 8px 20px;
 	border: none;
 	border-radius: 5px;
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 	margin-top: 20px;
-} 
+}
 
-.button-td{
+.button-td {
 	text-align: center;
 }
 </style>
@@ -38,33 +36,40 @@ button{
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
+				<c:choose>
+					<c:when test="${principal.userRole.equals(\"student\")}">
+						<tr>
+							<td><a href="/info/student">내 정보 조회</a></td>
+						</tr>
+					</c:when>
+					<c:when test="${principal.userRole.equals(\"professor\")}">
+						<tr>
+							<td><a href="/info/professor">내 정보 조회</a></td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td><a href="/info/staff">내 정보 조회</a></td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
 				<tr>
-					<td><a href="/user/student">학생 ID 생성</a></td>
+					<td><a href="/password" class="selected--menu">비밀번호 변경</a></td>
 				</tr>
-				<tr>
-					<td><a href="/user/professor">교수 ID 생성</a></td>
-				</tr>
-				<tr>
-					<td><a href="/user/staff">직원 ID 생성</a></td>
-				</tr>
-				<tr>
-					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
-				</tr>
-				<tr>
-					<td><a href="/password">비밀번호 변경</a></td>
-				</tr>
-				<tr>
-					<td><a href="/professor/subject">교수 자기 강의 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/info/student">학생 Info</a></td>
-				</tr>
-				<tr>
-					<td><a href="/info/staff">직원 Info</a></td>
-				</tr>
-				<tr>
-					<td><a href="/info/professor">교수 Info</a></td>
-				</tr>
+				<c:if test="${principal.userRole.equals(\"student\")}">
+					<tr>
+						<td><a href="/break/application">휴학 신청</a></td>
+					</tr>
+					<tr>
+						<td><a href="/break/list">휴학 내역 조회</a></td>
+					</tr>
+					<tr>
+						<td><a href="/tuition/list">등록금 내역 조회</a></td>
+					</tr>
+					<tr>
+						<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
+					</tr>
+				</c:if>
 			</table>
 		</div>
 	</div>
@@ -74,7 +79,7 @@ button{
 		<h1>개인 정보 수정</h1>
 		<div class="split--div"></div>
 		<form action="/update" method="post">
-			<input type="hidden" name="_method" value="put"/>
+			<input type="hidden" name="_method" value="put" />
 			<table class="input--table">
 				<tr>
 					<td><label for="address">주소</label></td>
