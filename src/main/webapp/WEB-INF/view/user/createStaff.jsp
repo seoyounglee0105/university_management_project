@@ -2,27 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
-
+<link rel="stylesheet" href="/css/admin.css">
 <style>
-form {
-	margin-left: 30px;
-}
 
-.input--table td {
-	padding: 5px 10px;
-}
-
-button {
-	padding: 8px 20px;
-	border: none;
-	border-radius: 5px;
-	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-	margin-top: 20px;
-}
-
-.button-td {
-	text-align: center;
-}
 </style>
 
 <!-- 세부 메뉴 + 메인 -->
@@ -70,14 +52,14 @@ button {
 		<div class="split--div"></div>
 		<!-- 여기에 내용 넣기 -->
 		<form action="/user/staff" method="post">
-			<table class="input--table">
+			<table class="table--container">
 				<tr>
 					<td><label for="name">이름</label></td>
-					<td><input type="text" name="name" id="name" value="나나나"></td>
+					<td><input type="text" name="name" id="name" class="input--box"></td>
 				</tr>
 				<tr>
 					<td><label for="birthDate">생년월일</label></td>
-					<td><input type="date" name="birthDate" id="birthDate" value="1999-09-09"></td>
+					<td><input type="date" name="birthDate" id="birthDate" class="input--box"></td>
 				</tr>
 				<tr>
 					<td style="padding-top: 7px"><label>성별</label></td>
@@ -86,22 +68,20 @@ button {
 				</tr>
 				<tr>
 					<td><label for="address">주소</label></td>
-					<td><input type="text" name="address" id="address" value="부산시"></td>
+					<td><input type="text" name="address" id="address" class="input--box"></td>
 				</tr>
 				<tr>
 					<td><label for="tel">전화번호</label></td>
-					<td><input type="text" name="tel" id="tel" value="010-4525-4545"></td>
+					<td><input type="text" name="tel" id="tel" class="input--box"></td>
 				</tr>
 				<tr>
 					<td><label for="email">이메일</label></td>
-					<td><input type="text" name="email" id="email" value="zxc@test.com"></td>
-				</tr>
-				<tr>
-					<td colspan="2" class="button-td">
-						<button type="submit">입력</button>
-					</td>
+					<td><input type="text" name="email" id="email" class="input--box"></td>
 				</tr>
 			</table>
+			<div class="button--container">
+				<input type="submit" value="입력">
+			</div>
 		</form>
 	</main>
 </div>

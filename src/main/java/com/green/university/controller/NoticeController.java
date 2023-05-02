@@ -97,7 +97,6 @@ public class NoticeController {
 	public String selectByIdNotice(Model model, @RequestParam Integer id) {
 		model.addAttribute("crud", "read");
 		model.addAttribute("id", id);
-
 		Notice notice = noticeService.readByIdNotice(id);
 		if (notice == null) {
 			model.addAttribute("notice", null);
@@ -105,6 +104,7 @@ public class NoticeController {
 			model.addAttribute("notice", notice);
 		}
 		notice.setContent(notice.getContent().replace("\r\n", "<br>"));
+		
 		return "/board/notice";
 	}
 

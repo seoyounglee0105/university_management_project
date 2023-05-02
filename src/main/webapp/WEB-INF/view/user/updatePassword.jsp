@@ -2,8 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
-<link rel="stylesheet" href="/css/student.css">
+<link rel="stylesheet" href="/css/admin.css">
+<style>
 
+</style>
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<!-- 세부 메뉴 div-->
@@ -57,30 +59,25 @@
 	<main>
 		<h1>비밀번호 변경</h1>
 		<div class="split--div"></div>
-		<form action="/password" method="post" class="info--update--form">
+		<form action="/password" method="post" class="form--container">
 			<input type="hidden" name="_method" value="put"/>
-			<table class="update--table">
-				
+			<table class="table--container">
 				<tr>
 					<td><label for="beforePassword">현재 비밀번호</label></td>
-					<td><input type="password" name="beforePassword" id="beforePassword"></td>
+					<td><input type="password" name="beforePassword" class="input--box" id="beforePassword"></td>
 				</tr>
-				<tr><td style="height: 15px;"></td></tr>
 				<tr>
 					<td><label for="afterPassword">변경할 비밀번호</label></td>
-					<td><input type="password" name="afterPassword" id="afterPassword"></td>
+					<td><input type="password" name="afterPassword" class="input--box" id="afterPassword"></td>
 				</tr>
 				<tr>
 					<td><label for="passwordCheck">변경할 비밀번호 확인</label></td>
-					<td><input type="password" name="passwordCheck" id="passwordCheck"></td>
-				</tr>
-				<tr><td style="height: 15px;"></td></tr>
-				<tr>
-					<td colspan="2" class="button--td">
-						<button type="submit" class="btn btn-dark update--button">수정하기</button>
-					</td>
+					<td><input type="password" name="passwordCheck" class="input--box" id="passwordCheck"></td>
 				</tr>
 			</table>
+			<div class="button--container">
+				<input type="submit" value="입력">
+			</div>
 		</form>
 	</main>
 </div>
