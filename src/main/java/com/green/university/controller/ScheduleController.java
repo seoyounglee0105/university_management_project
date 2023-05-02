@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.green.university.dto.ScheduleDto;
 import com.green.university.dto.ScheduleFormDto;
 import com.green.university.dto.response.PrincipalDto;
 import com.green.university.repository.model.Schedule;
@@ -60,6 +61,9 @@ public class ScheduleController {
 		return "/schedule/scheduleList";
 	}
 
+	
+	//일정 추가
+	
 	@PostMapping("/write")
 	public String ScheduleProc(Model model, ScheduleFormDto scheduleFormDto) {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
@@ -78,17 +82,17 @@ public class ScheduleController {
 
 	@GetMapping("/detail")
 	public String detailSchedule(Model model, Integer id, @RequestParam(defaultValue = "read") String crud) {
-		Schedule schedule = scheuleService.readScheduleById(id);
-		model.addAttribute("crud", crud);
+		ScheduleDto schedule = scheuleService.readScheduleById(id);
+		model.addAttribute("crud",crud);
 		model.addAttribute("schedule", schedule);
 		return "/schedule/detail";
 	}
 
 	@PostMapping("/update")
-	public String updateSchedule(Model model, Integer id, String title, String content) {
-
-		scheuleService.updateSchedule(id, title, content);
-
+	public String updateSchedule(ScheduleFormDto scheduleFormDto) {
+		
+		 scheuleService.updateSchedule(scheduleFormDto);
+		
 		return "redirect:/schedule/list";
 	}
 

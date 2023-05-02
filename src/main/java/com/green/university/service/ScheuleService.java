@@ -26,8 +26,8 @@ public class ScheuleService { // todo ScheduleService로 변경
 	}
 
 	// 학사일정 조회 (디테일)
-	public Schedule readScheduleById(Integer id) {
-		Schedule schedule = scheuleRepository.selectScheduleById(id);
+	public ScheduleDto readScheduleById(Integer id) {
+		ScheduleDto schedule = scheuleRepository.selectScheduleById(id);
 		return schedule;
 	}
 
@@ -36,28 +36,25 @@ public class ScheuleService { // todo ScheduleService로 변경
 	public void createSchedule(Integer staffId, ScheduleFormDto dto) {
 		Schedule schedule = new Schedule();
 		schedule.setStaffId(staffId);
-		schedule.setTitle(dto.getTitle());
 		schedule.setStartDay(dto.getStartDay());
 		schedule.setEndDay(dto.getEndDay());
-		schedule.setContent(dto.getContent());
+		schedule.setInformation(dto.getInformation());
 
 		int resultRowCount = scheuleRepository.insertSchoeduleFormDto(schedule);
 		if(resultRowCount != 1) {
 			throw new CustomRestfullException("요청을 처리하지 못했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		}		
 	}
 
 	// 학사일정 업데이트
 	@Transactional
-	public int updateSchedule(Integer staffId, String title, String content) {
-		ScheduleFormDto scheduleFormDto = new ScheduleFormDto();
-		scheduleFormDto.setId(staffId);
-		scheduleFormDto.setTitle(title);
-		scheduleFormDto.setContent(content);
+	public int updateSchedule(ScheduleFormDto scheduleFormDto) {
+		
 
 		int resultRowCount = scheuleRepository.updateSchoeduleFormDtoBycontent(scheduleFormDto);
-
+		
 		return resultRowCount;
+
 	}
 
 	// 학사일정 삭제
