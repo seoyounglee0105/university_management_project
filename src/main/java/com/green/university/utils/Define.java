@@ -29,9 +29,9 @@ public class Define {
 	 * 
 	 * @author 김지현
 	 */
-	public final static String[] PATHS = { "/update", "/password", "info/**", "/guide", "", "notice/**" };
+	public final static String[] PATHS = { "/update", "/password", "info/**", "/guide", "notice/**" };
 	public final static String[] PROFESSOR_PATHS = { "/professor/**" };
-	public final static String[] STUDENT_PATHS = {};
+	public final static String[] STUDENT_PATHS = {"/grade/**"};
 	public final static String[] STAFF_PATHS = { "/user/**" };
 
 	// 수강 가능한 최대 학점

@@ -22,7 +22,7 @@ public class AuthIntercepter implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		
+		System.out.println("11111111111111");
 		if (session.getAttribute(Define.PRINCIPAL) == null) {
 			throw new UnAuthorizedException("접근 권한이 없습니다. 로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/login");
 			// return false;
