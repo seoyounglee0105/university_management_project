@@ -1,6 +1,5 @@
 package com.green.university.controller;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -56,11 +55,14 @@ public class ScheduleController {
 	@GetMapping("/list")
 	public String ScheduleList(Model model, @RequestParam(defaultValue = "select") String crud) {
 		model.addAttribute("crud", crud);
+		System.out.println(crud);
 		List<Schedule> schedule = scheuleService.readSchedule();
 		model.addAttribute("schedule", schedule);
 		
 		return "/schedule/scheduleList";
 	}
+	
+	//일정 추가
 	
 	@PostMapping("/write")
 	public String ScheduleProc(Model model, ScheduleFormDto scheduleFormDto) {
@@ -81,16 +83,17 @@ public class ScheduleController {
 	
 	@GetMapping("/detail")
 	public String detailSchedule(Model model, Integer id, @RequestParam(defaultValue = "read") String crud) {
-		Schedule schedule = scheuleService.readScheduleById(id);
+		ScheduleDto schedule = scheuleService.readScheduleById(id);
+		System.out.println(schedule);
 		model.addAttribute("crud",crud);
 		model.addAttribute("schedule", schedule);
 		return "/schedule/detail";
 	}
 	
 	@PostMapping("/update")
-	public String updateSchedule(Model model, Integer id, String title, String content) {
-	
-		scheuleService.updateSchedule(id, title, content);
+	public String updateSchedule(ScheduleFormDto scheduleFormDto) {
+		
+		scheuleService.updateSchedule(scheduleFormDto);
 		
 		return "redirect:/schedule/list";
 	}

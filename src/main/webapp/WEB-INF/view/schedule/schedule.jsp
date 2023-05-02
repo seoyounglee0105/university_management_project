@@ -80,7 +80,7 @@ margin-top: 100px;
 	<tr>
 	<td class ="month" width ="100px;">${schedule.month}월</td>
 	 <td class = "line">${schedule.startDay}~${schedule.endDay}</td>
-	 <td class = "line" onclick="location.href='/schedule/detail?id=${schedule.id}';">${schedule.title}</td>
+	 <td class = "line" >${schedule.information}</td>
 	</tr>
 	</c:forEach>
 	</tbody>

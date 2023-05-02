@@ -20,7 +20,7 @@ public List<ScheduleDto> selectSchoduleMouth();
 
 
 // 학사일정 조회 (디테일)
-public Schedule selectScheduleById(Integer id);
+public ScheduleDto selectScheduleById(Integer id);
 
 
 }

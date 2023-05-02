@@ -26,12 +26,32 @@
 margin-top: 100px;
 }
 
+.table{
+width: 800px;
+}
+
+.first--tr {
+	background-color: #f7f6f6;
+	font-weight: bolder;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.button {
+	padding: 5px;
+	border: 1px solid #031734;
+	border-radius: 3px;
+	background-color: #031734;
+	color: #ccc;
+	text-decoration: none;
+	margin-left: 770px;
+}
 </style>
 <div class="d-flex justify-content-center align-items-start"
 	style="min-width: 100em;">
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>강의실</h2>
+			<h2>학사정보</h2>
 		</div>
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
@@ -51,15 +71,15 @@ margin-top: 100px;
 	</div>
 
 	<main>
-	<h1>학사 일정</h1>
+	<h1>학사일정</h1>
+	
 	<c:if test="${crud.equals(\"select\") }">
 	<div class="container">
-	<table border="1" class="tuition--table">	
+	<table class="table">	
 	<thead>
-	<tr>
+	<tr class="first--tr">
 	<th>ID</th>
 	<th>날짜</th>
-	<th>제목</th>
 	<th>내용</th>
 	</tr>
 	</thead>
@@ -68,57 +88,40 @@ margin-top: 100px;
 	<tr onclick="location.href='/schedule/detail?id=${schedule.id}';">
 	<td>${schedule.id}</td>
 	 <td>${schedule.startDay}~${schedule.endDay}</td>
-	 <td>${schedule.title}</td>
-	 <td>${schedule.content}</td>
+	 <td>${schedule.information}</td>
 	</tr>
 	</c:forEach>
 	</tbody>
 	</table>
 	</div>
-	<a href="/schedule/list?crud=insert">등록</a> 
+	<a href="/schedule/list?crud=insert" class="button">등록</a>
 	</c:if>
     <c:if test="${crud.equals(\"insert\") }">
     <br>
     <form action="/schedule/write" method="post">
-    <label>시작일자 : <input type="date" name ="startDay"></label>
-    <label>종료일자 : <input type="date" name = "endDay"></label>
-    <label>제목<input type = "text" name="title"></label>
-    <label>내용<input type = "textarea" name = "content"></label>
-    <button>등록</button>
+    <table class="table">
+	<thead>
+	<tr class="first--tr">
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+	<td>시작날짜</td>
+	<td><input type="date" name ="startDay"></td>
+	</tr>
+	<tr>
+	<td>종료날짜</td>
+	<td><input type="date" name = "endDay"></td>
+	</tr>
+	<tr>
+	<td class="td">내용</td>
+	<td class="info"><input type="text" name = "information" class="textbox"></td>
+	</tr>
+	</tbody>
+	</table>
+    <a class="button">등록</a>
     </form>
     </c:if>
-    
-    <c:if test="${crud.equals(\"delete\") }">
-    <table border="1" class="tuition--table">
-    <thead>
-    <tr>
-    <th>ID</th>
-    <th>날짜</th>
-    <th>제목</th>
-    <th colspan="2">내용</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <c:forEach var ="schedule" items ="${schedule}">
-	<tr>
-	<td>${schedule.id}</td>
-	 <td>${schedule.startDay}~${schedule.endDay}</td>
-	 <td>${schedule.title}</td>
-	 <td>${schedule.content}</td>
-	 <td><a href="/schedule/delete?id=${schedule.id}">삭제</a></td>
-	</tr>
-	</c:forEach>
-    </tr>
-        </tbody>
-    </table>
-    </c:if>
-    
-    <c:if test="${crud.equals(\"detail\") }">
-  	<h1>수정 삭제 페이지</h1>
-    </c:if>
-    
-    
     </main>
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
 
