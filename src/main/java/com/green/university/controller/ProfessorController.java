@@ -116,27 +116,23 @@ public class ProfessorController {
 	 */
 	@GetMapping("/subject/{subjectId}/{studentId}")
 	public String updateStudentDetail(Model model, @PathVariable Integer subjectId, @PathVariable Integer studentId) {
-		
+
 		Student student = userService.readStudent(studentId);
 		model.addAttribute("student", student);
 		model.addAttribute("subjectId", subjectId);
-		
-		
+
 		return "/professor/updateStudentDetail";
 	}
-	
-	
+
 	@PutMapping("/subject/{subjectId}/{studentId}")
-	public String updateStudentDetailProc(Model model, @PathVariable Integer subjectId, @PathVariable Integer studentId, UpdateStudentGradeDto updateStudentGradeDto) {
-		
-		
+	public String updateStudentDetailProc(Model model, @PathVariable Integer subjectId, @PathVariable Integer studentId,
+			UpdateStudentGradeDto updateStudentGradeDto) {
+
 		professorService.updateGrade(updateStudentGradeDto);
-		
+
 		return "redirect:/professor/detail/ " + subjectId + "/" + studentId;
 	}
-	
 
-	
 	/**
 	 * 
 	 * @param model
@@ -145,12 +141,12 @@ public class ProfessorController {
 	@GetMapping("/syllabus/update/{subjectId}")
 	public String createSyllabus(Model model, @PathVariable Integer subjectId) {
 		ReadSyllabusDto readSyllabusDto = professorService.readSyllabus(subjectId);
-		
+
 		model.addAttribute("syllabus", readSyllabusDto);
-		
+
 		return "/professor/updateSyllabus";
 	}
-	
+
 	/**
 	 * 
 	 * @param syllaBusFormDto
@@ -160,8 +156,8 @@ public class ProfessorController {
 	public String createSyllabusProc(SyllaBusFormDto syllaBusFormDto) {
 		System.out.println(syllaBusFormDto);
 		professorService.updateSyllabus(syllaBusFormDto);
-		
-		return "redirect:/professor/syllabus/" + syllaBusFormDto.getSubjectId();
+
+		return "redirect:/subject/syllabus/" + syllaBusFormDto.getSubjectId();
 	}
 
 }

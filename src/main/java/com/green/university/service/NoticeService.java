@@ -3,13 +3,11 @@ package com.green.university.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.green.university.dto.NoticeFormDto;
 import com.green.university.dto.NoticePageFormDto;
-import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.NoticeRepository;
 import com.green.university.repository.model.Notice;
 
@@ -58,8 +56,8 @@ public class NoticeService {
 		if (noticePageFormDto.getKeyword() == null) {
 			amount = noticeRepository.selectNoticeCount(noticePageFormDto);
 		} else {
-			if("title".equals(noticePageFormDto.getType())) {
-				amount = noticeRepository.selectNoticeCountByTitle(noticePageFormDto);				
+			if ("title".equals(noticePageFormDto.getType())) {
+				amount = noticeRepository.selectNoticeCountByTitle(noticePageFormDto);
 			} else {
 				amount = noticeRepository.selectNoticeCountByKeyword(noticePageFormDto);
 			}
@@ -72,9 +70,9 @@ public class NoticeService {
 	 */
 	public List<Notice> readNoticeByKeyword(NoticePageFormDto noticePageFormDto) {
 		List<Notice> noticeList = null;
-		
-		if("title".equals(noticePageFormDto.getType())) {
-			noticeList = noticeRepository.selectNoticeByTitle(noticePageFormDto);		
+
+		if ("title".equals(noticePageFormDto.getType())) {
+			noticeList = noticeRepository.selectNoticeByTitle(noticePageFormDto);
 		} else {
 			noticeList = noticeRepository.selectNoticeByKeyword(noticePageFormDto);
 		}
@@ -86,6 +84,8 @@ public class NoticeService {
 	 */
 	public Notice readByIdNotice(Integer id) {
 		Notice notice = noticeRepository.selectById(id);
+		Integer views = noticeRepository.updateViews(id);
+		notice.setViews(views);
 		return notice;
 	}
 

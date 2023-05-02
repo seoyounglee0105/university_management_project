@@ -4,7 +4,9 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 <link rel="stylesheet" href="/css/admin.css">
 <style>
-
+.table--container {
+	width: 300px;
+}
 </style>
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -40,12 +42,16 @@
 	<main>
 		<h1>강의실</h1>
 		<div class="split--div"></div>
+		<div class="select--button">
+			<a href="/admin/room?crud=insert" class="button">등록</a> 
+			<a href="/admin/room?crud=delete" class="button">삭제</a>
+		</div>
 
 
 			<!-- 강의 입력 -->
 			<c:if test="${crud.equals(\"insert\")}">
 			<div class="form--container">
-				<form action="/admin/room-proc" method="post" class="insert--form">
+				<form action="/admin/room" method="post" class="insert--form">
 					<div class="insert--form">
 						<span class="material-symbols-outlined symbol">school</span><span class="insert">등록하기</span><br>
 							<input type="text" name="id" class="input--box" placeholder="등록할 강의실을 입력하세요"> 
@@ -71,7 +77,7 @@
 
 			<!-- 강의 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
-				<h5>삭제할 강의실을 클릭해주세요</h5>
+				<span class="delete">삭제할 강의실을 클릭해주세요</span>
 					<table class="table--container">
 						<tr class="first--tr">
 							<td>강의실</td>
@@ -79,7 +85,7 @@
 						</tr>
 					<c:forEach var="room" items="${roomList}">
 						<tr>
-							<td><a href="/updAdmin/deRoom?id=${room.id}">${room.id}</a></td>
+							<td><a href="/admin/roomDelete?id=${room.id}">${room.id}</a></td>
 							<td>${room.collegeId}</td>
 						</tr>
 					</c:forEach>
@@ -103,10 +109,6 @@
 					</c:forEach>
 					</table>
 				</div>
-				<div>
-				<a href="/admin/room?crud=insert" class="button">등록</a> 
-				<a href="/admin/room?crud=delete" class="button">삭제</a>
-			</div>
 			</c:if>
 	</main>
 

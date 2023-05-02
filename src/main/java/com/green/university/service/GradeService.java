@@ -71,8 +71,9 @@ public class GradeService {
 
 	// 전체일때 조회
 	@Transactional
-	public List<GradeDto> readGradeByStudentId (Integer studentId, Integer subYear, Integer semester) {
-		List<GradeDto> selectgradeList = gradeRespository.selectGradeDtoByStudentIdAndSubYear(studentId, subYear, semester);
+	public List<GradeDto> readGradeByStudentId(Integer studentId, Integer subYear, Integer semester) {
+		List<GradeDto> selectgradeList = gradeRespository.selectGradeDtoByStudentIdAndSubYear(studentId, subYear,
+				semester);
 		return selectgradeList;
 	}
 
@@ -80,7 +81,8 @@ public class GradeService {
 	 * @author 서영 성적 평균 가져오기
 	 */
 	public GradeForScholarshipDto readAvgGrade(Integer studentId, Integer subYear, Integer semester) {
-		GradeForScholarshipDto gradeEntity = gradeRespository.findAvgGradeByStudentIdAndSemester(studentId, subYear, semester);
+		GradeForScholarshipDto gradeEntity = gradeRespository.findAvgGradeByStudentIdAndSemester(studentId, subYear,
+				semester);
 		return gradeEntity;
 	}
 

@@ -63,6 +63,10 @@
 .sub--plan--view li a:hover {
 	color: black;
 }
+.paging--container {
+	display: flex;
+	justify-content: center;
+}
 </style>
 
 <!-- 세부 메뉴 + 메인 -->

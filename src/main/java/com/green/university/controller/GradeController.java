@@ -22,7 +22,7 @@ import com.green.university.utils.Define;
  * 
  * @author 편용림
  * 
- * 금학기,학기별 성적, 누계성적 조회
+ *         금학기,학기별 성적, 누계성적 조회
  * 
  */
 
@@ -63,7 +63,7 @@ public class GradeController {
 			model.addAttribute("mygrade", mygrade);
 
 		}
-		
+
 		return "grade/thisgrade";
 	}
 
@@ -109,7 +109,7 @@ public class GradeController {
 
 		// 학생이 수강 신청한 학기 조회
 		List<GradeDto> semesterList = gradeService.readGradeSemesterByStudentId(principal.getId());
-		
+
 		// 조회 할때 값을 들고옴
 		String type = httpServletRequest.getParameter("type");
 		int subYear = Integer.parseInt(httpServletRequest.getParameter("subYear"));
@@ -122,16 +122,16 @@ public class GradeController {
 			List<GradeDto> gradeList = gradeService.readGradeByType(principal.getId(), subYear, sesmeter, type);
 			model.addAttribute("gradeList", gradeList);
 		}
-		
+
 		model.addAttribute("yearList", yearList);
 		model.addAttribute("semesterList", semesterList);
-		
+
 		return "grade/semester";
 	};
 
 	/**
-	 *  총 누계성적
-	 *  
+	 * 총 누계성적
+	 * 
 	 * @param model
 	 * @return
 	 */
@@ -146,7 +146,7 @@ public class GradeController {
 
 		model.addAttribute("yearList", yearList);
 		model.addAttribute("mygradeList", mygradeList);
-		
+
 		return "grade/totalgrade";
 	}
 

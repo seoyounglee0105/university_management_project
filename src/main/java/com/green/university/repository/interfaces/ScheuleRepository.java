@@ -10,10 +10,17 @@ import com.green.university.repository.model.Schedule;
 
 @Mapper
 public interface ScheuleRepository {
-	
-public ScheduleFormDto insertSchoeduleFormDto(ScheduleFormDto dto);
-public ScheduleFormDto updateSchoeduleFormDtoByStaffId(Integer staffId);
-public ScheduleFormDto deleteSchoeduleFormDtoByStaffIdAndId(Integer id);
+
+//기본 기능
+public int insertSchoeduleFormDto(Schedule schedule);
+public int updateSchoeduleFormDtoBycontent(ScheduleFormDto scheduleFormDto);
+public int deleteSchoeduleFormDtoByStaffIdAndId(Integer id);
 public List<Schedule> selectSchodule();
 public List<ScheduleDto> selectSchoduleMouth();
+
+
+// 학사일정 조회 (디테일)
+public Schedule selectScheduleById(Integer id);
+
+
 }

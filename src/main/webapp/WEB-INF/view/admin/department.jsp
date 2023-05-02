@@ -39,11 +39,16 @@
 	<main>
 		<h1>학과</h1>
 		<div class="split--div"></div>
+		<div class="select--button">
+			<a href="/admin/department?crud=insert" class="button">등록</a>
+			<a href="/admin/department?crud=update" class="button">수정</a> 
+			<a href="/admin/department?crud=delete" class="button">삭제</a>
+		</div>
 			
 			<!-- 학과 입력 -->
 			<c:if test="${crud.equals(\"insert\")}">
 			<div class="container">
-				<form action="/admin/department-proc" method="post" class="form--container">
+				<form action="/admin/department" method="post" class="form--container">
 					<span class="material-symbols-outlined symbol">school</span><span class="insert">등록하기</span><br>
 						<input type="text" class="input--box" name="name" placeholder="학과를 입력해주세요"> 
 							<select name="collegeId" class="input--box">
@@ -76,7 +81,7 @@
 			<!-- 학과 수정  -->
 			<c:if test="${crud.equals(\"update\")}">
 			<div class="container">
-				<form action="/updAdmin/upDepartment" method="post" id="form--container">
+				<form action="/admin/department" method="post" id="form--container">
 					 <input type="hidden" name="_method" value="put"/>
 						<span class="material-symbols-outlined symbol">school</span><span class="insert">수정하기</span><br>
 								<select name="id" class="input--box">
@@ -108,7 +113,7 @@
 
 			<!-- 학과 삭제 -->
 			<c:if test="${crud.equals(\"delete\")}">
-			<h5>삭제할 학과 이름을 클릭해주세요</h5>
+			<span class="delete">삭제할 학과 이름을 클릭해주세요</span>
 			<div class="total--container">
 				<table class="table--container">
 					<tr class="first--tr">
@@ -119,7 +124,7 @@
 					<c:forEach var="department" items="${departmentList}">
 						<tr>
 							<td>${department.id}</td>
-							<td><a href="/updAdmin/deDepartment?id=${department.id}">${department.name}</a></td>
+							<td><a href="/admin/departmentDelete?id=${department.id}">${department.name}</a></td>
 							<td>${department.collegeId}</td>
 						</tr>
 					</c:forEach>
@@ -145,11 +150,6 @@
 						</tr>
 					</c:forEach>
 					</table>
-				</div>
-				<div class="select--button">
-					<a href="/admin/department?crud=insert" class="button">등록</a>
-					<a href="/admin/department?crud=update" class="button">수정</a> 
-					<a href="/admin/department?crud=delete" class="button">삭제</a>
 				</div>
 			</c:if>
 	</main>

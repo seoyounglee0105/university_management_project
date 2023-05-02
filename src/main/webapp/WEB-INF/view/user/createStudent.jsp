@@ -63,9 +63,9 @@
 				<tr>
 					<td style="padding-top: 7px"><label>성별</label></td>
 					<td style="padding-top: 7px"><label for="male">남성</label> 
-					<input type="radio" value="M" name="gender" id="male" checked="checked" class="input--box"> &nbsp;
+					<input type="radio" value="M" name="gender" id="male" checked="checked"> &nbsp;
 					<label for="female">여성</label> 
-					<input type="radio" value="F" name="gender" id="female" class="input--box"></td>
+					<input type="radio" value="F" name="gender" id="female"></td>
 				</tr>
 				<tr>
 					<td><label for="address">주소</label></td>
@@ -88,7 +88,9 @@
 					<td><input type="text" name="entranceDate" id="entranceDate" class="input--box"></td>
 				</tr>
 			</table>
-				<input type="submit" value="입력" class="button">
+				<div class="button--container">
+					<input type="submit" value="입력">
+				</div>
 		</form>
 	</main>
 </div>

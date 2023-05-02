@@ -62,7 +62,7 @@ public class MyRestFullExceptionHandler {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script>");
 		sb.append("alert('"+ e.getMessage() +"');"); 
-		sb.append("history.back();");
+		sb.append("location.href='" + e.getPath() + "';");
 		sb.append("</script>");
 		return sb.toString();
 	}
@@ -72,7 +72,7 @@ public class MyRestFullExceptionHandler {
 	 * 경로를 지정해서 던지는 예외 클래스 활용
 	 */
 	@ExceptionHandler(CustomPathException.class)
-	public String unAuthorizedException(CustomPathException e) {
+	public String customPathException(CustomPathException e) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script>");
 		sb.append("alert('"+ e.getMessage() +"');");

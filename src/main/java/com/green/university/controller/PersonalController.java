@@ -57,16 +57,15 @@ public class PersonalController {
 	private StuStatService stuStatService;
 	@Autowired
 	private BreakAppService breakAppService;
-	
+
 	/**
-	 * @author 서영
-	 * 메인 홈페이지
+	 * @author 서영 메인 홈페이지
 	 */
 	@GetMapping("")
 	public String home(Model model) {
-		
+
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
-		
+
 		if (principal.getUserRole().equals("student")) {
 			StudentInfoDto studentInfo = userService.readStudentInfo(principal.getId());
 			StuStat stuStat = stuStatService.readCurrentStatus(principal.getId());
@@ -75,16 +74,15 @@ public class PersonalController {
 		} else if (principal.getUserRole().equals("staff")) {
 			Staff staffInfo = userService.readStaff(principal.getId());
 			model.addAttribute("userInfo", staffInfo);
-			
+
 			List<BreakApp> breakAppList = breakAppService.readByStatus("처리중");
 			model.addAttribute("breakAppSize", breakAppList.size());
-			
+
 		} else {
 			ProfessorInfoDto professorInfo = userService.readProfessorInfo(principal.getId());
 			model.addAttribute("userInfo", professorInfo);
 		}
-		
-		
+
 		return "/main";
 	}
 
@@ -107,26 +105,27 @@ public class PersonalController {
 	 * @return 메인 페이지 이동(수정 예정)
 	 */
 	@PostMapping("/login")
-	public String signInProc(@Valid LoginDto loginDto, BindingResult bindingResult, HttpServletResponse response, HttpServletRequest request) {
-		
-		if(bindingResult.hasErrors()) {
+	public String signInProc(@Valid LoginDto loginDto, BindingResult bindingResult, HttpServletResponse response,
+			HttpServletRequest request) {
+
+		if (bindingResult.hasErrors()) {
 			StringBuilder sb = new StringBuilder();
 			bindingResult.getAllErrors().forEach(error -> {
-				sb.append(error.getDefaultMessage()).append("\\n"); 
+				sb.append(error.getDefaultMessage()).append("\\n");
 			});
 			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
 		}
 
 		PrincipalDto principal = userService.login(loginDto);
-		if("on".equals(loginDto.getRememberId())) {
+		if ("on".equals(loginDto.getRememberId())) {
 			Cookie cookie = new Cookie("id", loginDto.getId() + "");
 			cookie.setMaxAge(60 * 60 * 24 * 7);
 			response.addCookie(cookie);
 		} else {
 			Cookie[] cookies = request.getCookies();
-			if(cookies != null){
-				for(Cookie c : cookies){
-					if(c.getName().equals("id")){
+			if (cookies != null) {
+				for (Cookie c : cookies) {
+					if (c.getName().equals("id")) {
 						c.setMaxAge(0);
 						response.addCookie(c);
 						break;
@@ -171,22 +170,23 @@ public class PersonalController {
 	 * @return updateUser.jsp
 	 */
 	@PutMapping("/update")
-	public String updateUserProc(@Valid UserInfoForUpdateDto userInfoForUpdateDto, BindingResult bindingResult, @RequestParam String password) {
-		
-		if(bindingResult.hasErrors()) {
+	public String updateUserProc(@Valid UserInfoForUpdateDto userInfoForUpdateDto, BindingResult bindingResult,
+			@RequestParam String password) {
+
+		if (bindingResult.hasErrors()) {
 			StringBuilder sb = new StringBuilder();
 			bindingResult.getAllErrors().forEach(error -> {
-				sb.append(error.getDefaultMessage()).append("\\n"); 
+				sb.append(error.getDefaultMessage()).append("\\n");
 			});
 			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
 		}
-		
-		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		// 패스워드 인코더 적용 후
-		if(!passwordEncoder.matches(password, principal.getPassword())) {
+		if (!passwordEncoder.matches(password, principal.getPassword())) {
 			throw new CustomRestfullException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
-		
+
 		UserUpdateDto updateDto = new UserUpdateDto();
 		updateDto.setUserId(principal.getId());
 		updateDto.setAddress(userInfoForUpdateDto.getAddress());
@@ -194,15 +194,18 @@ public class PersonalController {
 		updateDto.setTel(userInfoForUpdateDto.getTel());
 		if ("staff".equals(principal.getUserRole())) {
 			userService.updateStaff(updateDto);
+			return "redirect:/info/staff";
 		}
 		if ("student".equals(principal.getUserRole())) {
 			userService.updateStudent(updateDto);
+			return "redirect:/info/student";
 		}
 		if ("professor".equals(principal.getUserRole())) {
 			userService.updateProfessor(updateDto);
+			return "redirect:/info/professor";
 		}
-		
-		return "redirect:/update";
+
+		return "redirect:/";
 	}
 
 	/**
@@ -226,20 +229,20 @@ public class PersonalController {
 	@PutMapping("/password")
 	public String updatePasswordProc(@Valid ChangePasswordDto changePasswordDto, BindingResult bindingResult) {
 
-		if(bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			StringBuilder sb = new StringBuilder();
 			bindingResult.getAllErrors().forEach(error -> {
-				sb.append(error.getDefaultMessage()).append("\\n"); 
+				sb.append(error.getDefaultMessage()).append("\\n");
 			});
 			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
 		}
-		
+
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		// 패스워드 인코더 적용 후
-		if(!passwordEncoder.matches(changePasswordDto.getBeforePassword(), principal.getPassword())) {
+		if (!passwordEncoder.matches(changePasswordDto.getBeforePassword(), principal.getPassword())) {
 			throw new CustomRestfullException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
-		if(!changePasswordDto.getAfterPassword().equals(changePasswordDto.getPasswordCheck())) {
+		if (!changePasswordDto.getAfterPassword().equals(changePasswordDto.getPasswordCheck())) {
 			throw new CustomRestfullException("변경할 비밀번호와 비밀번호 확인은 같아야합니다.", HttpStatus.BAD_REQUEST);
 		}
 		changePasswordDto.setId(principal.getId());
@@ -248,130 +251,140 @@ public class PersonalController {
 
 		return "redirect:/password";
 	}
-	
+
 	/**
 	 * 로그아웃
+	 * 
 	 * @return 로그인 페이지
 	 */
 	@GetMapping("/logout")
 	public String logout() {
 		session.invalidate();
-		
+
 		return "redirect:/login";
 	}
-	
+
 	/**
 	 * 학생 정보 조회
+	 * 
 	 * @param model
 	 * @return 학생 정보 조회 페이지
 	 */
 	@GetMapping("/info/student")
 	public String readStudentInfo(Model model) {
-		
-		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		StudentInfoDto student = userService.readStudentInfo(principal.getId());
 		model.addAttribute("student", student);
 		List<StudentInfoStatListDto> list = userService.readStudentInfoStatListByStudentId(principal.getId());
 		model.addAttribute("stustatList", list);
-		
+
 		return "/user/studentInfo";
 	}
+
 	/**
 	 * 직원 정보 조회
+	 * 
 	 * @param model
 	 * @return 직원 정보조회 페이지
 	 */
 	@GetMapping("/info/staff")
 	public String readStaffInfo(Model model) {
-		
-		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		Staff staff = userService.readStaff(principal.getId());
 		model.addAttribute("staff", staff);
-		
+
 		return "/user/staffInfo";
 	}
+
 	/**
 	 * 교수 정보 조회
+	 * 
 	 * @param model
 	 * @return 교수 정보 조회 페이지
 	 */
 	@GetMapping("/info/professor")
 	public String readProfessorInfo(Model model) {
-		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 		ProfessorInfoDto professor = userService.readProfessorInfo(principal.getId());
 		model.addAttribute("professor", professor);
 		return "/user/professorInfo";
 	}
-	
+
 	/**
 	 * 아이디 찾기
+	 * 
 	 * @return 아이디 찾기 페이지
 	 */
 	@GetMapping("/find/id")
 	public String findId() {
-		
+
 		return "/user/findId";
 	}
-	
+
 	/**
 	 * 아이디 찾기 포스트
+	 * 
 	 * @param findIdFormDto
 	 * @return 찾은 아이디 표시 페이지
 	 */
 	@PostMapping("/find/id")
 	public String findIdProc(Model model, @Valid FindIdFormDto findIdFormDto, BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			StringBuilder sb = new StringBuilder();
 			bindingResult.getAllErrors().forEach(error -> {
-				sb.append(error.getDefaultMessage()).append("\\n"); 
+				sb.append(error.getDefaultMessage()).append("\\n");
 			});
 			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
 		}
 		Integer findId = userService.readIdByNameAndEmail(findIdFormDto);
 		model.addAttribute("id", findId);
 		model.addAttribute("name", findIdFormDto.getName());
-		
+
 		return "/user/findIdComplete";
 	}
-	
+
 	/**
 	 * 비밀번호 찾기
+	 * 
 	 * @return 아이디 찾기 페이지
 	 */
 	@GetMapping("/find/password")
 	public String findPassword() {
-		
+
 		return "/user/findPassword";
 	}
-	
+
 	/**
 	 * 비밀번호 찾기 포스트
+	 * 
 	 * @param findIdFormDto
 	 * @return 비밀번호 표시 페이지
 	 */
 	@PostMapping("/find/password")
-	public String findPasswordProc(Model model, @Valid FindPasswordFormDto findPasswordFormDto, BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
+	public String findPasswordProc(Model model, @Valid FindPasswordFormDto findPasswordFormDto,
+			BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
 			StringBuilder sb = new StringBuilder();
 			bindingResult.getAllErrors().forEach(error -> {
-				sb.append(error.getDefaultMessage()).append("\\n"); 
+				sb.append(error.getDefaultMessage()).append("\\n");
 			});
 			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
 		}
 		String password = userService.updateTempPassword(findPasswordFormDto);
 		model.addAttribute("name", findPasswordFormDto.getName());
 		model.addAttribute("password", password);
-		
+
 		return "/user/findPasswordComplete";
 	}
-	
+
 	@GetMapping("/guide")
 	public String pop() {
-		
+
 		return "/user/passwordPop";
 	}
-	
-	
+
 	/**
 	 * @return 에러페이지
 	 */

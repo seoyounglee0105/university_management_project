@@ -35,4 +35,7 @@ public interface NoticeRepository {
 	public List<Notice> selectNoticeByTitle(NoticePageFormDto noticePageFormDto);
 	public Integer selectNoticeCountByTitle(NoticePageFormDto noticePageFormDto);
 	public Integer selectNoticeCountByKeyword(NoticePageFormDto noticePageFormDto);
+	
+	//조회수
+	public Integer updateViews(Integer id);
 }

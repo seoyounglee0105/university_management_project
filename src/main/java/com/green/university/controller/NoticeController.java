@@ -26,7 +26,8 @@ import com.green.university.utils.Define;
 
 /**
  * 
- * @author 박성희 Notice Controller
+ * @author 박성희 
+ * Notice Controller
  *
  */
 @Controller
@@ -46,8 +47,8 @@ public class NoticeController {
 		noticePageFormDto.setPage(0);
 		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
 		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
-		
-		model.addAttribute("listCount", Math.ceil(amount/10.0));
+
+		model.addAttribute("listCount", Math.ceil(amount / 10.0));
 		if (noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {
@@ -68,21 +69,21 @@ public class NoticeController {
 			if (file.getSize() > Define.MAX_FILE_SIZE) {
 				throw new CustomRestfullException("파일 크기는 20MB 이상 클 수 없습니다.", HttpStatus.BAD_REQUEST);
 			}
-		try {
-			String saveDirectory = Define.UPLOAD_DIRECTORY;
-			File dir = new File(saveDirectory);
-			if (dir.exists() == false) {
-				dir.mkdirs();
-			}
-			UUID uuid = UUID.randomUUID();
-			String fileName = uuid + "_" + file.getOriginalFilename();
-			String uploadPath = Define.UPLOAD_DIRECTORY + File.separator + fileName;
-			File destination = new File(uploadPath);
-			file.transferTo(destination);
-			noticeFormDto.setOriginFilename(file.getOriginalFilename());
-			noticeFormDto.setUuidFilename(fileName);
-		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				String saveDirectory = Define.UPLOAD_DIRECTORY;
+				File dir = new File(saveDirectory);
+				if (dir.exists() == false) {
+					dir.mkdirs();
+				}
+				UUID uuid = UUID.randomUUID();
+				String fileName = uuid + "_" + file.getOriginalFilename();
+				String uploadPath = Define.UPLOAD_DIRECTORY + File.separator + fileName;
+				File destination = new File(uploadPath);
+				file.transferTo(destination);
+				noticeFormDto.setOriginFilename(file.getOriginalFilename());
+				noticeFormDto.setUuidFilename(fileName);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 		noticeService.readNotice(noticeFormDto);
@@ -97,7 +98,6 @@ public class NoticeController {
 	public String selectByIdNotice(Model model, @RequestParam Integer id) {
 		model.addAttribute("crud", "read");
 		model.addAttribute("id", id);
-		
 		Notice notice = noticeService.readByIdNotice(id);
 		if (notice == null) {
 			model.addAttribute("notice", null);
@@ -105,20 +105,22 @@ public class NoticeController {
 			model.addAttribute("notice", notice);
 		}
 		notice.setContent(notice.getContent().replace("\r\n", "<br>"));
+
 		return "/board/notice";
 	}
-	
+
 	/**
 	 * 공지사항 페이지 이동
 	 */
 	@GetMapping("/list/{page}")
-	public String showNoticeListByPage(Model model, @RequestParam(defaultValue = "select") String crud, @PathVariable Integer page) {
+	public String showNoticeListByPage(Model model, @RequestParam(defaultValue = "select") String crud,
+			@PathVariable Integer page) {
 		model.addAttribute("crud", crud);
 		NoticePageFormDto noticePageFormDto = new NoticePageFormDto();
 		noticePageFormDto.setPage((page - 1) * 10);
 		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
 		List<Notice> noticeList = noticeService.readNotice(noticePageFormDto);
-		model.addAttribute("listCount", Math.ceil(amount/10.0));
+		model.addAttribute("listCount", Math.ceil(amount / 10.0));
 		if (noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {
@@ -126,18 +128,18 @@ public class NoticeController {
 		}
 		return "/board/notice";
 	}
-	
+
 	/**
-	 *  공지사항 검색 기능
+	 * 공지사항 검색 기능
 	 */
 	@GetMapping("/search")
 	public String showNoticeByKeyword(Model model, NoticePageFormDto noticePageFormDto) {
 		model.addAttribute("keyword", noticePageFormDto.getKeyword());
 		model.addAttribute("crud", "selectKeyword");
 		noticePageFormDto.setPage(0);
-		List<Notice> noticeList  = noticeService.readNoticeByKeyword(noticePageFormDto);
+		List<Notice> noticeList = noticeService.readNoticeByKeyword(noticePageFormDto);
 		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
-		model.addAttribute("listCount", Math.ceil(amount/10.0));
+		model.addAttribute("listCount", Math.ceil(amount / 10.0));
 		if (noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {
@@ -145,19 +147,20 @@ public class NoticeController {
 		}
 		return "/board/notice";
 	}
-	
+
 	/**
-	 *  공지사항 검색 기능 (키워드 검색 페이징 처리)
+	 * 공지사항 검색 기능 (키워드 검색 페이징 처리)
 	 */
 	@GetMapping("/search/{page}")
-	public String showNoticeByKeywordAndPage(Model model, NoticePageFormDto noticePageFormDto, @PathVariable Integer page, @RequestParam String keyword) {
+	public String showNoticeByKeywordAndPage(Model model, NoticePageFormDto noticePageFormDto,
+			@PathVariable Integer page, @RequestParam String keyword) {
 		model.addAttribute("keyword", noticePageFormDto.getKeyword());
 		model.addAttribute("crud", "selectKeyword");
 		noticePageFormDto.setPage((page - 1) * 10);
 		List<Notice> noticeList = noticeService.readNoticeByKeyword(noticePageFormDto);
 		Integer amount = noticeService.readNoticeAmount(noticePageFormDto);
-		
-		model.addAttribute("listCount", Math.ceil(amount/10.0));
+
+		model.addAttribute("listCount", Math.ceil(amount / 10.0));
 		if (noticeList.isEmpty()) {
 			model.addAttribute("noticeList", null);
 		} else {

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
-<link rel="stylesheet" href="/css/student.css">
+<link rel="stylesheet" href="/css/admin.css">
 
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -62,27 +62,24 @@
 			<table class="update--table">
 				<tr>
 					<td><label for="address">주소</label></td>
-					<td><input type="text" name="address" id="address" value="${userInfo.address}"></td>
+					<td><input type="text" name="address" id="address" class="input--box" value="${userInfo.address}"></td>
 				</tr>
 				<tr>
 					<td><label for="tel">전화번호</label></td>
-					<td><input type="text" name="tel" id="tel" value="${userInfo.tel}"></td>
+					<td><input type="text" name="tel" id="tel" class="input--box" value="${userInfo.tel}"></td>
 				</tr>
 				<tr>
 					<td><label for="email">이메일</label></td>
-					<td><input type="text" name="email" id="email" value="${userInfo.email}"></td>
+					<td><input type="text" name="email" id="email" class="input--box" value="${userInfo.email}"></td>
 				</tr>
 				<tr>
 					<td><label for="password">비밀번호 확인</label></td>
-					<td><input type="password" name="password" id="password"></td>
-				</tr>
-				<tr><td style="height: 15px;"></td></tr>
-				<tr>
-					<td colspan="2" class="button--td">
-						<button type="submit" class="btn btn-dark update--button">수정하기</button>
-					</td>
+					<td><input type="password" name="password" class="input--box" id="password"></td>
 				</tr>
 			</table>
+			<div class="button--container">
+				<input type="submit" value="입력">
+			</div>
 		</form>
 	</main>
 </div>
