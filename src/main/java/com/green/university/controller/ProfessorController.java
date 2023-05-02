@@ -157,7 +157,7 @@ public class ProfessorController {
 		System.out.println(syllaBusFormDto);
 		professorService.updateSyllabus(syllaBusFormDto);
 
-		return "redirect:/professor/syllabus/" + syllaBusFormDto.getSubjectId();
+		return "redirect:/subject/syllabus/" + syllaBusFormDto.getSubjectId();
 	}
 
 }
