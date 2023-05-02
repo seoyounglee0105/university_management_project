@@ -19,6 +19,11 @@
 	<select id="selectByNoticeDto" resultType="com.green.university.dto.NoticeFormDto">
 		select * from notice_tb order by id DESC limit #{page}, 10
 	</select>
+	
+	<select id="selectLimit5" resultType="com.green.university.dto.NoticeFormDto">
+		SELECT * FROM notice_tb ORDER BY id DESC LIMIT 5
+	</select>
+	
 	<select id="selectById" resultType="com.green.university.repository.model.Notice">
 		SELECT n.*, f.uuid_filename, f.origin_filename
 		FROM notice_tb AS n

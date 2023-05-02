@@ -9,9 +9,9 @@ import com.green.university.dto.ScheduleFormDto;
 import com.green.university.repository.model.Schedule;
 
 @Mapper
-public interface ScheuleRepository {
+public interface ScheuleRepository { // todo ScheduleRepository로 변경
 
-//기본 기능
+// 기본 기능
 public int insertSchoeduleFormDto(Schedule schedule);
 public int updateSchoeduleFormDtoBycontent(ScheduleFormDto scheduleFormDto);
 public int deleteSchoeduleFormDtoByStaffIdAndId(Integer id);
@@ -22,5 +22,7 @@ public List<ScheduleDto> selectSchoduleMouth();
 // 학사일정 조회 (디테일)
 public Schedule selectScheduleById(Integer id);
 
+// 월별 학사일정 조회
+public List<Schedule> selectListByMonth(Integer month);
 
 }

@@ -1,24 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="stylesheet" href="/css/subject.css">
 
 <style>
-.tuition--table th {
-	padding: 3px 12px;
-	width: 150px;
-}
-
-.tuition--table td {
-	padding: 1px 5px;
-}
-
-.select_box {
-	display: flex;
-}
-
-.select_box select {
-	margin-top: 50px;
-	margin-left: 20px;
+.sub--list--table th {
+	padding: 1px 25px;
 }
 </style>
 
@@ -32,7 +19,7 @@
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>MY</h2>
+			<h2>성적</h2>
 		</div>
 		<!-- 메뉴 -->
 		<div class="sub--menu--mid">
@@ -56,7 +43,8 @@
 		<div class="split--div"></div>
 		<c:choose>
 			<c:when test="${yearList.size() != 0}">
-				<table border="1" class="tuition--table">
+				<h4 style="font-weight: 600">평점 평균</h4>
+				<table border="1" class="sub--list--table">
 					<thead>
 						<tr>
 							<th>연도</th>

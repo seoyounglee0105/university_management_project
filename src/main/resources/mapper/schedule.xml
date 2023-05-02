@@ -45,6 +45,8 @@ WHERE id = #{id};
 DELETE FROM schedule_tb where id = #{id};
 </delete>
 
-
+<select id="selectListByMonth" resultType="com.green.university.repository.model.Schedule">
+SELECT * FROM schedule_tb WHERE MONTH(start_day) = #{month} OR MONTH(end_day) = #{month};
+</select>
 
 </mapper>

@@ -7,14 +7,14 @@
 <link rel="stylesheet" href="/css/mainPage.css">
 
 <script>
-<%
-PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
-if(new BCryptPasswordEncoder().matches(principal.getId().toString(), principal.getPassword())){%>
-function pop()
-{
-	window.open("/guide", "비밀번호 변경 안내", "width=450,height=300,history=no,resizable=no,status=no,scrollbars=yes,menubar=no");
-}
-<%}%>
+	<%
+	PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
+	if(new BCryptPasswordEncoder().matches(principal.getId().toString(), principal.getPassword())){%>
+	function pop()
+	{
+		window.open("/guide", "비밀번호 변경 안내", "width=450,height=300,history=no,resizable=no,status=no,scrollbars=yes,menubar=no");
+	}
+	<%}%>
 </script>
 
 </head>
@@ -35,54 +35,26 @@ function pop()
 						</h3>
 						<div class="main--page--split"></div>
 						<table>
-							<tr>
-								<td><a href="#">[일반] 2023년 8월 학부 1차 졸업예비사정 실시 안내</a></td>
-								<td>2023-05-01</td>
-							</tr>
-							<tr>
-								<td><a href="#">[일반] 5월 학생상담센터 심리검사</a></td>
-								<td>2023-05-01</td>
-							</tr>
-							<tr>
-								<td><a href="#">[일반] 2023년 신입생 입학식 행사 안내</a></td>
-								<td>2023-05-01</td>
-							</tr>
-							<tr>
-								<td><a href="#">[일반] 2023년 1학기 학부 수강신청 취소 기간 및 방법 안내</a></td>
-								<td>2023-05-01</td>
-							</tr>
-							<tr>
-								<td><a href="#">[일반] 2023년 1학기 본수강신청 안내</a></td>
-								<td>2023-05-01</td>
-							</tr>
+							<c:forEach var="notice" items="${noticeList}">
+								<tr>
+									<td><a href="/notice/read?id=${notice.id}">${notice.category}&nbsp;${notice.title}</a></td>
+									<td>${notice.dateFormat()}
+								</tr>
+							</c:forEach>
 						</table>
 					</div>
 					<div class="main--page--calander">
 						<h3>
-							<a href="#">학사일정</a>
+							<a href="/schedule">학사일정</a>
 						</h3>
 						<div class="main--page--split"></div>
 						<table>
-							<tr>
-								<td>01-30 ~ 02-01
-								<td>2023-1학기 예비수강신청
-							</tr>
-							<tr>
-								<td><span>02-01 ~ 02-28</span>
-								<td>휴학 및 복학 신청
-							</tr>
-							<tr>
-								<td><span>02-06 ~ 02-10</span>
-								<td>2023-1학기 수강신청
-							</tr>
-							<tr>
-								<td><span>02-21 ~ 02-24</span>
-								<td>2023-1학기 재학생 등록금 납부
-							</tr>
-							<tr>
-								<td><span>02-28</span>
-								<td>2023학년도 신입생 입학식
-							</tr>
+							<c:forEach var="schedule" items="${scheduleList}">
+								<tr>
+									<td>${schedule.startDay.substring(5)}&nbsp;-&nbsp;${schedule.endDay.substring(5)}</td>
+									<td>${schedule.title}</td>
+								</tr>
+							</c:forEach>
 						</table>
 
 					</div>

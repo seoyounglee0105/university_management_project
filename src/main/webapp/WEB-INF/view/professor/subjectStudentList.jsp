@@ -62,7 +62,7 @@
 								<td>${student.midExam}</td>
 								<td>${student.finalExam}</td>
 								<td>${student.convertedMark}</td>
-								<td><a href="/professor/detail/${subject.id}/${student.studentId}">기입</a></td>
+								<td><a href="/professor/subject/${subject.id}/${student.studentId}">기입</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
