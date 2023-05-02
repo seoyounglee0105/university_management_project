@@ -18,7 +18,8 @@ VALUES
 <select id="selectSchodule" resultType="com.green.university.repository.model.Schedule">
 SELECT id, staff_id, date_format(start_day,'%m-%d') AS start_day, date_format(end_day,'%m-%d') AS  end_day,
 title, content, YEAR(start_day) as year, MONTH(end_day) AS month
-FROM schedule_tb;
+FROM schedule_tb
+ORDER BY start_day;
 </select>
 
 <select id="selectScheduleById" resultType="com.green.university.repository.model.Schedule">
