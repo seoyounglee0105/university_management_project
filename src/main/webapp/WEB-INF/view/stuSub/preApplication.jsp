@@ -2,86 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
-
-<style>
-.sub--list--table th {
-	padding: 3px 9px;
-	text-align: center;
-}
-
-.sub--list--table td {
-	padding: 1px 9px;
-	text-align: center;
-}
-
-.sub--list--name {
-	text-align: left !important;
-}
-
-.sub--filter form {
-	display: flex;
-}
-
-.sub--filter form div {
-	background-color: buttonshadow;
-	padding: 13px 13px 7px 10px;
-}
-
-.sub--filter input[type="number"] {
-	width: 57px;
-	padding-left: 3px;
-}
-
-.sub--filter select[name="deptId"] {
-	width: 173px;
-}
-
-.sub--filter label {
-	margin-right: 5px;
-}
-
-.sub--filter input, .sub--filter select {
-	margin-right: 10px;
-	border-radius: 5px;
-	border-width: 1px;
-}
-
-.sub--filter button {
-	background-color: gray;
-	padding: 2px 6px;
-	border: none;
-	border-radius: 5px;
-	color: white;
-	height: 28px;
-}
-
-.sub--plan--view li a:hover {
-	color: black;
-}
-
-.sub--list--table td form button {
-	padding: 0px 4px;
-	border: none;
-	border-radius: 4px;
-	width: 100%;
-	color: white;
-	height: 26px;
-}
-
-.sub--list--button--row {
-	padding: 2px 2px !important;
-}
-
-.preStuSubList--button {
-	padding: 5px 10px;
-	border: none;
-	border-radius: 4px;
-	color: white;
-	background-color: gray;
-	font-size: 20px;
-	margin-right: 20px;
-}
-</style>
+<link rel="stylesheet" href="/css/subject.css">
 
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -114,8 +35,7 @@
 	<main>
 		<h1>예비 수강 신청</h1>
 		<div class="split--div"></div>
-		<!-- 여기에 내용 넣기 -->
-		<div class="d-flex justify-content-between align-items-start" style="margin-bottom: 50px;">
+		<div class="d-flex justify-content-between align-items-start">
 			<!-- 필터 및 검색 -->
 			<div class="sub--filter">
 				<form action="/sugang/pre/search" method="get">

@@ -2,16 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<link rel="stylesheet" href="/css/student.css">
+
 <style>
-.list--table th {
-	padding: 3px 12px;
-	width: 150px;
-}
-
-.list--table td {
-	padding: 1px 5px;
-}
-
 .list--table thead tr th, 
 .list--table tbody tr td:nth-of-type(1),
 .list--table tbody tr td:nth-of-type(2), 
@@ -27,8 +21,6 @@
 }
 </style>
 
-<%@ include file="/WEB-INF/view/layout/header.jsp"%>
-
 <!-- 등록금 내역 조회 -->
 
 <!-- 세부 메뉴 + 메인 -->
@@ -37,13 +29,13 @@
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>등록</h2>
+			<h2>MY</h2>
 		</div>
 		<!-- 메뉴 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/info/student" class="selected--menu">내 정보 조회</a></td>
+					<td><a href="/info/student">내 정보 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/password">비밀번호 변경</a></td>
@@ -68,10 +60,8 @@
 	<main>
 		<h1>등록금 내역 조회</h1>
 		<div class="split--div"></div>
-		<div class="d-flex flex-column align-items-center" style="width: 100%">
-			<c:choose>
+		<c:choose>
 				<c:when test="${tuitionList.size() > 0}">
-	
 					<table border="1" class="list--table">
 						<thead>
 							<tr>
@@ -83,7 +73,7 @@
 								<th>납입금</th>
 							</tr>
 						</thead>
-	
+
 						<tbody>
 							<c:forEach var="tuition" items="${tuitionList}">
 								<tr>
@@ -113,13 +103,11 @@
 							</c:forEach>
 						</tbody>
 					</table>
-				</c:when>
-	
-				<c:otherwise>
-					<p class="no--list--p">등록금 납부 내역이 없습니다.</p>
-				</c:otherwise>
-			</c:choose>
-		</div>
+			</c:when>
+			<c:otherwise>
+				<p class="no--list--p">등록금 납부 내역이 없습니다.</p>
+			</c:otherwise>
+		</c:choose>
 	</main>
 </div>
 

@@ -92,7 +92,7 @@
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>공지</h2>
+			<h2>학사정보</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
@@ -186,8 +186,8 @@
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-								공지사항이 없습니다. 작성해주세요
-							</c:otherwise>
+								<p class="no--list--p">공지사항이 없습니다. 작성해주세요.</p>
+					</c:otherwise>
 				</c:choose>
 			</table>
 			<c:forEach var="index" begin="1" end="${listCount}">

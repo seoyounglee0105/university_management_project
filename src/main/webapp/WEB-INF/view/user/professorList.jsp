@@ -86,7 +86,7 @@
 					<td><a href="/user/student">학생 등록</a></td>
 				</tr>
 				<tr>
-					<td><a href="/user/professor" class="selected--menu">교수 등록</a></td>
+					<td><a href="/user/professor">교수 등록</a></td>
 				</tr>
 				<tr>
 					<td><a href="/user/staff">직원 등록</a></td>
@@ -106,7 +106,7 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>전체 학생 조회</h1>
+		<h1>교수 명단 조회</h1>
 		<div class="split--div"></div>
 		<!-- 여기에 내용 넣기 -->
 
@@ -115,7 +115,7 @@
 			<form action="/user/professorList" method="get">
 				<div>
 					<!-- 개설연도 숫자 -->
-					<label for="deptId">과ID 검색</label> <input type="text" name="deptId" id="deptId"> <label for="professorId">ID검색</label> <input type="text" name="professorId" list="professorId">
+					<label for="deptId">학과 번호</label> <input type="text" name="deptId" id="deptId"> <label for="professorId">사번</label> <input type="text" name="professorId" list="professorId">
 					<!-- 검색 버튼 -->
 					<button type="submit">
 						<ul class="d-flex justify-content-center" style="margin: 0;">
@@ -134,7 +134,7 @@
 				<table border="1" class="sub--list--table">
 					<thead>
 						<tr>
-							<th>ID</th>
+							<th>사번</th>
 							<th>이름</th>
 							<th>생년월일</th>
 							<th>성별</th>
@@ -162,18 +162,24 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<div>
+				<ul class="page--list">
 					<c:forEach var="index" begin="1" end="${listCount}">
 						<c:choose>
-							<c:when test="${deptId != null }">
-								<a href="/user/professorList/${index}?deptId=${deptId}"> ${index}</a> &nbsp;&nbsp;
+							<c:when test="${deptId != null && index != page}">
+								<li><a href="/user/professorList/${index}?deptId=${deptId}"> ${index}</a> &nbsp;&nbsp;
+							</c:when>
+							<c:when test="${deptId != null && index == page}">
+								<li><a href="/user/professorList/${index}?deptId=${deptId}" class="selected--page"> ${index}</a> &nbsp;&nbsp;
+							</c:when>
+							<c:when test="${deptId == null && index == page}">
+								<li><a href="/user/professorList/${index}" class="selected--page"> ${index}</a> &nbsp;&nbsp;
 							</c:when>
 							<c:otherwise>
-								<a href="/user/professorList/${index}"> ${index}</a> &nbsp;&nbsp;
+								<li><a href="/user/professorList/${index}"> ${index}</a> &nbsp;&nbsp;
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</div>
+				</ul>
 			</c:when>
 			<c:otherwise>
 				<p class="no--list--p">검색 결과가 없습니다.</p>

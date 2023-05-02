@@ -2,44 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
-
-<style>
-
-form{
-	margin-left: 30px;
-	
-}
-
-.input--table {
-	margin: 10px;
-	width: 900px;
-}
-.input--table th {
-	text-align: center;
-}
-
-.col1{
-	width: 15%;
-}
-.col2{
-	width: 35%;
-}
-.col3{
-	width: 15%;
-}
-.col4{
-	width: 35%;
-}
-
-.input--table td {
-	padding: 5px 10px;
-}
-
-.stat--table {
-	width: 1000px;
-}
-
-</style>
+<link rel="stylesheet" href="/css/myInfo.css">
 
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -49,7 +12,6 @@ form{
 			<h2>MY</h2>
 		</div>
 		<!-- 메뉴 -->
-		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
@@ -76,7 +38,7 @@ form{
 
 	<!-- 메인 div -->
 	<main>
-		<h1>My Info</h1>
+		<h1>내 정보 조회</h1>
 		<div class="split--div"></div>
 			<table border="1" class="input--table" >
 			<colgroup>
@@ -89,7 +51,7 @@ form{
 					<th>학번</th>
 					<td>${student.id}</td>
 					<th>소속</th>
-					<td>${student.collegeName} ${student.deptName}</td>
+					<td>${student.collegeName}&nbsp;${student.deptName}</td>
 				</tr>
 				<tr>
 					<th>학년</th>
@@ -130,7 +92,11 @@ form{
 					<td>${student.email}</td>
 				</tr>
 			</table>
-			<h3>학적 변동 상태</h3>
+			<button type="button" onclick="location.href='/update'" class="btn btn-dark update--button">수정하기</button>
+			<hr>
+			<h4>
+				<span style="font-weight: 600;">학적 변동 내역</span>
+			</h4>
 			<table border="1" class="stat--table">
 				<thead>
 					<tr>
@@ -138,8 +104,7 @@ form{
 						<th>변동 구분</th>
 						<th>세부</th>
 						<th>승인 여부</th>
-						<th>복학 예정 년도</th>
-						<th>복학 예정 학기</th>
+						<th>복학 예정 연도/학기</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -148,14 +113,19 @@ form{
 						<td>${stat.fromDate}</td>
 						<td>${stat.status}</td>
 						<td>${stat.detail}</td>
-						<td>${stat.adopt}</td>
-						<td>${stat.toYear}</td>
-						<td>${stat.toSemester}</td>
+						<td>승인</td>
+						<c:choose>
+							<c:when test="${stat.toYear != null}">
+								<td>${stat.toYear}-${stat.toSemester}학기</td>
+							</c:when>
+							<c:otherwise>
+								<td></td>
+							</c:otherwise>
+						</c:choose>
 					</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			<button type="button" onclick="location.href='/update'">수정하기</button>
 			
 	</main>
 </div>

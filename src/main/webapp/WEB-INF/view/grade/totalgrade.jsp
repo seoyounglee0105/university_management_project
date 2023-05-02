@@ -38,11 +38,10 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/grade/thisSemester" >금학기
-							성적조회</a></td>
+					<td><a href="/grade/thisSemester" >금학기 성적 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/grade/semester">학기별 성적조회</a></td>
+					<td><a href="/grade/semester">학기별 성적 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/grade/total" class="selected--menu">누계 성적</a></td>
@@ -81,7 +80,7 @@
 				</table>
 			</c:when>
 			<c:otherwise>
-				<p>강의 신청 및 수강 이력 확인 바랍니다.</p>
+				<p class="no--list--p">강의 신청 및 수강 이력 확인 바랍니다.</p>
 			</c:otherwise>
 		</c:choose>
 		<br> <br>

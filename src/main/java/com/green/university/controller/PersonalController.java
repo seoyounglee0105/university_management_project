@@ -271,8 +271,7 @@ public class PersonalController {
 		PrincipalDto principal = (PrincipalDto)session.getAttribute(Define.PRINCIPAL);
 		StudentInfoDto student = userService.readStudentInfo(principal.getId());
 		model.addAttribute("student", student);
-		List<StudentInfoStatListDto> list = userService.
-				readStudentInfoStatListByStudentId(principal.getId());
+		List<StudentInfoStatListDto> list = userService.readStudentInfoStatListByStudentId(principal.getId());
 		model.addAttribute("stustatList", list);
 		
 		return "/user/studentInfo";

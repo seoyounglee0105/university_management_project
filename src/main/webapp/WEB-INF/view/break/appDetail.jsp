@@ -4,36 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!-- 휴복학 신청 내역에서 신청서 확인 버튼을 누르면 들어오는 상세 페이지 -->
-
-<style>
-.document--layout {
-	border: 1px solid #4c4b4b;
-	padding: 50px 30px 30px 30px;
-	text-align: center;
-	margin-bottom: 30px;
-}
-
-.document--layout h3 {
-	font-weight: 600;
-	margin-bottom: 30px;
-}
-
-.document--layout th {
-	text-align: center;
-	padding: 2px 20px;
-}
-
-.document--layout td {
-	text-align: right;
-	padding: 2px 8px 2px 50px;
-}
-
-.document--layout tr:last-of-type td {
-	padding: 18px 8px 2px;
-}
-</style>
-
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<link rel="stylesheet" href="/css/document.css">
 
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">

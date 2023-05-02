@@ -17,11 +17,12 @@
 	</update>
 
 	<select id="selectStuStatListBystudentId" resultType="com.green.university.dto.response.StudentInfoStatListDto">
-		SELECT ss.status, ss.from_date, ba.type AS detail, ba.status AS adopt, ba.to_year, ba.to_semester
+		SELECT ss.id, ss.status, ss.from_date, ba.type AS detail, ba.status AS adopt, ba.to_year, ba.to_semester
 		FROM stu_stat_tb AS ss
 		LEFT JOIN break_app_tb AS ba
 		ON ss.break_app_id = ba.id
 		WHERE ss.student_id = #{studentId}
+		ORDER BY ss.id DESC
 	</select>
 
 

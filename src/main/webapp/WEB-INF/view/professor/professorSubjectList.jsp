@@ -29,7 +29,7 @@ form {
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>MY</h2>
+			<h2>수업</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
@@ -52,7 +52,7 @@ form {
 
 	<!-- 메인 div -->
 	<main>
-		<h1>과목 조회</h1>
+		<h1>내 강의 조회</h1>
 		<div class="split--div"></div>
 		<form action="/professor/subject" method="post">
 			<select name="period">

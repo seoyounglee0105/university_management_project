@@ -159,6 +159,11 @@ public class UserController {
 		model.addAttribute("listCount", Math.ceil(amount/20.0));
 		model.addAttribute("professorList", list);
 		model.addAttribute("deptId", deptId);
+		/**
+		 * @author 서영
+		 * 1페이지가 선택되어 있음을 보여주기 위함
+		 */
+		model.addAttribute("page", 1);
 		
 		return "/user/professorList";
 	}
@@ -181,6 +186,7 @@ public class UserController {
 		
 		model.addAttribute("listCount", Math.ceil(amount/20.0));
 		model.addAttribute("professorList", list);
+		model.addAttribute("page", page);
 		
 		return "/user/professorList";
 	}
@@ -208,6 +214,11 @@ public class UserController {
 		model.addAttribute("listCount", Math.ceil(amount/20.0));
 		model.addAttribute("studentList", list);
 		model.addAttribute("deptId", deptId);
+		/**
+		 * @author 서영
+		 * 1페이지가 선택되어 있음을 보여주기 위함
+		 */
+		model.addAttribute("page", 1);
 		
 		return "/user/studentList";
 	}
@@ -230,6 +241,7 @@ public class UserController {
 		
 		model.addAttribute("listCount", Math.ceil(amount/20.0));
 		model.addAttribute("studentList", list);
+		model.addAttribute("page", page);
 		
 		return "/user/studentList";
 	}

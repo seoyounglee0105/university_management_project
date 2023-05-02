@@ -187,16 +187,6 @@ public class StuSubController {
 		// 강의 리스트
 		List<SubjectDto> subjectList = subjectService.readSubjectListByCurrentSemester();
 		
-		for (SubjectDto sub : subjectList) {
-			// 현재 담겨 있는지 확인
-			PreStuSub preStuSub = preStuSubService.readPreStuSub(principal.getId(), sub.getId());
-			if (preStuSub != null) {
-				sub.setStatus(true);
-			} else {
-				sub.setStatus(false);
-			}
-		}
-		
 		int subjectCount = subjectList.size();		
 		model.addAttribute("subjectCount", subjectCount);
 		// 총 페이지 수
@@ -206,6 +196,15 @@ public class StuSubController {
 		model.addAttribute("page", page);
 		
 		List<SubjectDto> subjectListLimit = subjectService.readSubjectListByCurrentSemesterPage((page-1) * 20);
+		for (SubjectDto sub : subjectListLimit) {
+			// 현재 담겨 있는지 확인
+			PreStuSub preStuSub = preStuSubService.readPreStuSub(principal.getId(), sub.getId());
+			if (preStuSub != null) {
+				sub.setStatus(true);
+			} else {
+				sub.setStatus(false);
+			}
+		}
 		model.addAttribute("subjectList", subjectListLimit);
 		
 		// 필터에 사용할 전체 학과 정보
@@ -241,7 +240,7 @@ public class StuSubController {
 		preStuSubService.createPreStuSub(studentId, subjectId);
 		
 		// 강의 검색 페이지에서 신청 시
-		return "redirect:/sugang/pre";
+		return "redirect:/sugang/pre/1";
 	}
 	
 	/**
@@ -261,7 +260,7 @@ public class StuSubController {
 		
 		// 강의 검색 페이지에서 취소 시
 		if (type == 0) {
-			return "redirect:/sugang/pre";
+			return "redirect:/sugang/pre/1";
 		// 수강 신청 내역 페이지에서 취소 시
 		} else {
 			return "redirect:/sugang/preAppList?type=0";
@@ -335,15 +334,6 @@ public class StuSubController {
 		
 		// 강의 리스트
 		List<SubjectDto> subjectList = subjectService.readSubjectListByCurrentSemester();
-		for (SubjectDto sub : subjectList) {
-			// 현재 담겨 있는지 확인
-			StuSub stuSub = stuSubService.readStuSub(principal.getId(), sub.getId());
-			if (stuSub != null) {
-				sub.setStatus(true);
-			} else {
-				sub.setStatus(false);
-			}
-		}
 		
 		int subjectCount = subjectList.size();		
 		model.addAttribute("subjectCount", subjectCount);
@@ -354,6 +344,15 @@ public class StuSubController {
 		model.addAttribute("page", page);
 		
 		List<SubjectDto> subjectListLimit = subjectService.readSubjectListByCurrentSemesterPage((page-1) * 20);
+		for (SubjectDto sub : subjectListLimit) {
+			// 현재 담겨 있는지 확인
+			StuSub stuSub = stuSubService.readStuSub(principal.getId(), sub.getId());
+			if (stuSub != null) {
+				sub.setStatus(true);
+			} else {
+				sub.setStatus(false);
+			}
+		}
 		model.addAttribute("subjectList", subjectListLimit);
 		
 		// 필터에 사용할 전체 학과 정보
@@ -432,7 +431,7 @@ public class StuSubController {
 		
 		// 강의 검색 페이지에서 신청 시
 		if (type == 0) {
-			return "redirect:/sugang/application";
+			return "redirect:/sugang/application/1";
 		// 예비 수강 신청 내역 페이지에서 신청 시
 		} else {
 			return "redirect:/sugang/preAppList?type=1";
@@ -455,7 +454,7 @@ public class StuSubController {
 		
 		// 강의 검색 페이지에서 취소 시
 		if (type == 0) {
-			return "redirect:/sugang/application";
+			return "redirect:/sugang/application/1";
 		// 예비 수강 신청 내역 페이지에서 취소 시
 		} else {
 			return "redirect:/sugang/preAppList?type=1";
@@ -478,7 +477,6 @@ public class StuSubController {
 		
 		model.addAttribute("type", type);
 		
-
 		// 예비 수강 신청 기간에 조회 시
 		if (type == 0) {
 			List<StuSubAppDto> preStuSubList = preStuSubService.readPreStuSubList(principal.getId());
