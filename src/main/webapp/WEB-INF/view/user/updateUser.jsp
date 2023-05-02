@@ -12,7 +12,6 @@
 			<h2>MY</h2>
 		</div>
 		<!-- 메뉴 -->
-		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<c:choose>
@@ -56,7 +55,7 @@
 	<!-- 메인 div -->
 	<main>
 		<h1>개인 정보 수정</h1>
-		<div class="split--div"></div>
+		<div class="split--div" style="margin-bottom: 50px;"></div>
 		<form action="/update" method="post" class="info--update--form">
 			<input type="hidden" name="_method" value="put" />
 			<table class="update--table">
@@ -77,9 +76,17 @@
 					<td><input type="password" name="password" class="input--box" id="password"></td>
 				</tr>
 			</table>
-			<div class="button--container">
-				<input type="submit" value="입력">
-			</div>
+			<c:choose>
+				<c:when test="${principal.getUserRole().equals(\"staff\")}">
+					<div class="button--container">
+						<input type="submit" value="입력">
+					</div>
+				</c:when>
+				<c:otherwise>
+					<br>
+					<button type="submit" class="btn btn-dark update--button">수정하기</button>
+				</c:otherwise>
+			</c:choose>
 		</form>
 	</main>
 </div>

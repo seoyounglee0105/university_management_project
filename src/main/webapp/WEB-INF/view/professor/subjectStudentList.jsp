@@ -30,30 +30,22 @@ form {
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>MY</h2>
+			<h2>수업</h2>
 		</div>
 		<!-- 메뉴 -->
-		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/user/student">학생 ID 생성</a></td>
+					<td><a href="/subject/list/1">전체 강의 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/user/professor">교수 ID 생성</a></td>
+					<td><a href="/professor/subject" class="selected--menu">내 강의 조회</a></td>
 				</tr>
-				<tr>
-					<td><a href="/user/staff">직원 ID 생성</a></td>
-				</tr>
-				<tr>
-					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
-				</tr>
-				<tr>
-					<td><a href="/password">비밀번호 변경</a></td>
-				</tr>
-				<tr>
-					<td><a href="/professor/subject">교수 자기 강의 조회</a></td>
-				</tr>
+				<c:if test="${principal.userRole.equals(\"professor\") }">
+					<tr>
+						<td><a href="/evaluation/read"> 내 강의 평가</a></td>
+					</tr>
+				</c:if>
 			</table>
 		</div>
 	</div>
@@ -61,6 +53,7 @@ form {
 	<!-- 메인 div -->
 	<main>
 		<h1> [${subject.name}] 학생 리스트 조회</h1>
+		<div class="split--div"></div>
 		<table border="1">
 			<thead>
 				<tr>

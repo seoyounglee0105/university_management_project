@@ -2,25 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<link rel="stylesheet" href="/css/subject.css">
 
 <style>
-form {
-	margin-left: 30px;
-}
-
-.input--table th, td {
-	padding: 5px 10px;
-}
-
-/* button {
-	padding: 8px 20px;
-	border: none;
-	border-radius: 5px;
-	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-	margin-top: 20px;
-} */
-.button-td {
-	text-align: center;
+.sub--filter form div {
+	background-color: buttonshadow;
+	padding: 13px 10px;
 }
 </style>
 
@@ -39,7 +26,7 @@ form {
 					<td><a href="/subject/list/1">전체 강의 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/professor/subject">내 강의 조회</a></td>
+					<td><a href="/professor/subject" class="selected--menu">내 강의 조회</a></td>
 				</tr>
 				<c:if test="${principal.userRole.equals(\"professor\") }">
 					<tr>
@@ -54,22 +41,37 @@ form {
 	<main>
 		<h1>내 강의 조회</h1>
 		<div class="split--div"></div>
+		<div class="sub--filter">
 		<form action="/professor/subject" method="post">
+			<div>
 			<select name="period">
 				<c:forEach items="${semesterList}" var="yearSemester">
-					<option value="${yearSemester.subYear}year${yearSemester.semester}">${yearSemester.subYear}년도${yearSemester.semester}학기</option>
-				</c:forEach>
+					<option value="${yearSemester.subYear}year${yearSemester.semester}">${yearSemester.subYear}년도&nbsp;${yearSemester.semester}학기</option>
+			</c:forEach>
 			</select>
-			<button type="submit">조회</button>
+			<!-- 검색 버튼 -->
+			<button type="submit">
+				<ul class="d-flex justify-content-center" style="margin: 0;">
+					<li style="height: 24px; margin-right: 2px;">조회
+					<li style="height: 24px;"><span
+						class="material-symbols-outlined"
+						style="font-size: 18px; padding-top: 4px;">search</span>
+				</ul>
+			</button>
+			</div>
 		</form>
-		<table border="1">
+		</div>
+		<h4>
+			<span style="font-weight: 600;">강의 목록</span>
+		</h4>
+		<table border="1" class="sub--list--table">
 			<thead>
 				<tr>
-					<th>과목id</th>
-					<th>과목명</th>
+					<th>학수번호</th>
+					<th>강의명</th>
 					<th>강의시간</th>
-					<th>강의 상세보기</th>
-					<th>학생 성적 기입</th>
+					<th>강의계획서</th>
+					<th>학생 목록</th>
 				</tr>
 			</thead>
 			<c:forEach items="${subjectList}" var="subject">
@@ -77,9 +79,28 @@ form {
 					<tr>
 						<td>${subject.id}</td>
 						<td>${subject.name}</td>
-						<td>${subject.time}</td>
-						<td><a href="/subject/syllabus/${subject.id}" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">강의 계획서</a></td>
-						<td><a href="subject/${subject.id}">학생 리스트 보기</a></td>
+						<td>
+							<c:choose>
+								<c:when test="${subject.startTime < 10}">
+									${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})								
+								</c:when>
+								<c:otherwise>
+									${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})							
+								</c:otherwise>
+							</c:choose>
+						</td>
+						<td>									
+							<ul class="d-flex justify-content-center sub--plan--view" style="margin: 0;">
+								<li style="height: 24px;"><a href="/subject/syllabus/${subject.id}" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;">조회</a>
+								<li style="height: 24px;"><a href="/subject/syllabus/${subject.id}" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;"><span class="material-symbols-outlined">content_paste_search</span></a>
+							</ul>
+						</td>
+						<td>
+							<ul class="d-flex justify-content-center sub--plan--view" style="margin: 0;">
+								<li style="height: 24px;"><a href="/professor/subject/${subject.id}">조회</a>
+								<li style="height: 24px;"><a href="/professor/subject/${subject.id}"><span class="material-symbols-outlined">content_paste_search</span></a>
+							</ul>
+						</td>
 					</tr>
 				</tbody>
 			</c:forEach>

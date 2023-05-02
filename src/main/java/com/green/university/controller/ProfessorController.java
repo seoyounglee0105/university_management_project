@@ -82,9 +82,7 @@ public class ProfessorController {
 		subjectPeriodForProfessorDto.setSubYear(Integer.parseInt(strs[0]));
 		subjectPeriodForProfessorDto.setSemester(Integer.parseInt(strs[1]));
 		subjectPeriodForProfessorDto.setId(principal.getId());
-		List<SubjectForProfessorDto> subjectList = professorService
-				.selectSubjectBySemester(subjectPeriodForProfessorDto);
-		System.out.println(subjectList.get(0));
+		List<SubjectForProfessorDto> subjectList = professorService.selectSubjectBySemester(subjectPeriodForProfessorDto);
 		model.addAttribute("semesterList", semesterList);
 		model.addAttribute("subjectList", subjectList);
 
