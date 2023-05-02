@@ -36,6 +36,9 @@ public interface NoticeRepository {
 	public Integer selectNoticeCountByTitle(NoticePageFormDto noticePageFormDto);
 	public Integer selectNoticeCountByKeyword(NoticePageFormDto noticePageFormDto);
 	
-	//조회수
+	// 조회수
 	public Integer updateViews(Integer id);
+	
+	// 메인 페이지에 사용할 최신글 5개
+	public List<NoticeFormDto> selectLimit5();
 }

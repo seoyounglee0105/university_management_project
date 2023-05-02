@@ -24,6 +24,8 @@ import com.green.university.dto.response.SubjectPeriodForProfessorDto;
 import com.green.university.repository.model.Student;
 import com.green.university.repository.model.Subject;
 import com.green.university.service.ProfessorService;
+import com.green.university.service.StuSubService;
+import com.green.university.service.SubjectService;
 import com.green.university.service.UserService;
 import com.green.university.utils.Define;
 
@@ -42,7 +44,11 @@ public class ProfessorController {
 	private HttpSession session;
 	@Autowired
 	private UserService userService;
-
+	@Autowired
+	private StuSubService stuSubService;
+	@Autowired
+	private SubjectService subjectService;
+	
 	/**
 	 * 본인의 강의가 있는 년도 학기 조회하는 기능 조회한 년도 학기의 강의 리스트 출력(처음값은 현재학기)
 	 * 
@@ -126,9 +132,18 @@ public class ProfessorController {
 	public String updateStudentDetailProc(Model model, @PathVariable Integer subjectId, @PathVariable Integer studentId,
 			UpdateStudentGradeDto updateStudentGradeDto) {
 
+		// 점수 입력
 		professorService.updateGrade(updateStudentGradeDto);
-
-		return "redirect:/professor/detail/ " + subjectId + "/" + studentId;
+		
+		// 취득학점 입력
+		if (updateStudentGradeDto.getGrade().equals("F")) {
+			stuSubService.updateCompleteGrade(studentId, subjectId, 0);
+		} else {
+			Integer subjectGrade = subjectService.readBySubjectId(subjectId).getGrades();
+			stuSubService.updateCompleteGrade(studentId, subjectId, subjectGrade);
+		}
+		
+		return "redirect:/professor/subject/ " + subjectId;
 	}
 
 	/**

@@ -14,7 +14,7 @@ import com.green.university.repository.interfaces.ScheuleRepository;
 import com.green.university.repository.model.Schedule;
 
 @Service
-public class ScheuleService {
+public class ScheuleService { // todo ScheduleService로 변경
 
 	@Autowired
 	private ScheuleRepository scheuleRepository;
@@ -61,7 +61,6 @@ public class ScheuleService {
 	}
 
 	// 학사일정 삭제
-
 	@Transactional
 	public int deleteSchedule(Integer id) {
 
@@ -71,11 +70,18 @@ public class ScheuleService {
 	}
 
 	// 학사일정 월에 있는 일정 조회
-
 	@Transactional
 	public List<ScheduleDto> readScheduleDto() {
 
 		List<ScheduleDto> scheduleDto = scheuleRepository.selectSchoduleMouth();
 		return scheduleDto;
+	}
+	
+	// 월별 학사일정 조회
+	@Transactional
+	public List<Schedule> readScheduleListByMonth(Integer month) {
+		
+		List<Schedule> scheduleList = scheuleRepository.selectListByMonth(month);
+		return scheduleList;
 	}
 }

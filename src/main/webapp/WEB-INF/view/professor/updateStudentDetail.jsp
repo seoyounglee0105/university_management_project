@@ -2,25 +2,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<link rel="stylesheet" href="/css/subject.css">
 
 <style>
-form {
-	margin-left: 30px;
+.form--table tr td:first-of-type {
+	width: 80px;
 }
 
-.input--table th, td {
-	padding: 5px 10px;
+.form--table tr:first-of-type td:last-of-type {
+	padding-left: 15px;
 }
 
-/* button {
-	padding: 8px 20px;
-	border: none;
-	border-radius: 5px;
-	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-	margin-top: 20px;
-} */
-.button-td {
-	text-align: center;
+.form--table label {
+	margin: 0;
+}
+
+.form--table tr td {
+	padding-bottom: 5px;
+}
+
+.form--table tr:last-of-type td {
+	padding-top: 15px;
 }
 </style>
 
@@ -29,30 +31,23 @@ form {
 	<!-- 세부 메뉴 div-->
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>MY</h2>
+			<h2>수업</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/user/student">학생 ID 생성</a></td>
+					<td><a href="/subject/list/1">전체 강의 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/user/professor">교수 ID 생성</a></td>
+					<td><a href="/professor/subject" class="selected--menu">내 강의 조회</a></td>
 				</tr>
-				<tr>
-					<td><a href="/user/staff">직원 ID 생성</a></td>
-				</tr>
-				<tr>
-					<td><a href="/update" class="selected--menu">개인 정보 수정</a></td>
-				</tr>
-				<tr>
-					<td><a href="/password">비밀번호 변경</a></td>
-				</tr>
-				<tr>
-					<td><a href="/professor/subject">교수 자기 강의 조회</a></td>
-				</tr>
+				<c:if test="${principal.userRole.equals(\"professor\") }">
+					<tr>
+						<td><a href="/evaluation/read"> 내 강의 평가</a></td>
+					</tr>
+				</c:if>
 			</table>
 		</div>
 	</div>
@@ -60,7 +55,8 @@ form {
 	<!-- 메인 div -->
 	<main>
 		<h1>학생 성적 기입</h1>
-		<table border="1">
+		<div class="split--div"></div>
+		<table border="1" class="sub--list--table">
 			<thead>
 				<tr>
 					<th>학생 번호</th>
@@ -74,33 +70,34 @@ form {
 				</tr>
 			</tbody>
 		</table>
-		<form action="/professor/detail/${subjectId}/${student.id}" method="post">
+		<br>
+		<form action="/professor/subject/${subjectId}/${student.id}" method="post">
 		<input type="hidden" name="_method" value="put"/>
-			<table>
+			<table class="form--table">
 				<tr>
 					<td><label>결석</label></td>
-					<td><input type="number" name="absent" id="absent" value="1"></td>
-					<td><span style="color:#888">※결석 5회 이상시 F학점입니다.</span></td>
+					<td><input type="number" name="absent" id="absent"></td>
+					<td><span style="color:#888">※ 결석 5회 이상시 F학점입니다.</span></td>
 				</tr>
 				<tr>
 					<td><label>지각</label></td>
-					<td><input type="number" name="lateness" id="lateness" value="1"></td>
+					<td><input type="number" name="lateness" id="lateness"></td>
 				</tr>
 				<tr>
 					<td><label>과제점수</label></td>
-					<td><input type="number" name="homework" id="homework" value="8"></td>
+					<td><input type="number" name="homework" id="homework"></td>
 				</tr>
 				<tr>
 					<td><label>중간시험</label></td>
-					<td><input type="number" name="midExam" id="midExam" value="25"></td>
+					<td><input type="number" name="midExam" id="midExam"></td>
 				</tr>
 				<tr>
 					<td><label>기말시험</label></td>
-					<td><input type="number" name="finalExam" id="finalExam" value="35"></td>
+					<td><input type="number" name="finalExam" id="finalExam"></td>
 				</tr>
 				<tr>
 					<td><label>환산점수</label></td>
-					<td><input type="number" name="convertedMark" id="convertedMark" value="68"></td>
+					<td><input type="number" name="convertedMark" id="convertedMark"></td>
 				</tr>
 				<tr>
 					<td><label>등급</label></td>
@@ -114,10 +111,11 @@ form {
 							<option value="D+">D+</option>
 							<option value="D0">D0</option>
 							<option value="F">F</option>
-					</select></td>
+					</select>
+					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><button type="submit">제출</button> </td>
+					<td colspan="2"><button type="submit" class="btn btn-dark update--button">제출하기</button> </td>
 				</tr>
 
 			</table>

@@ -58,4 +58,7 @@ public interface StuSubRepository {
 	// type == 1 : 수강 신청, 예비 수강 신청에 둘 다 존재
 	// type == 0 : 예비 수강 신청에만 존재
 	List<StuSubAppDto> selectJoinListByStudentId(Integer studentId);
+	
+	// 성적 입력 시 취득 학점 컬럼도 추가
+	int updateCompleteGradeByStudentIdAndSubjectId(@Param("studentId") Integer studentId, @Param("subjectId") Integer subjectId, @Param("completeGrade") Integer completeGrade);
 }	
