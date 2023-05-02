@@ -1,23 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
-<link rel="stylesheet" href="/css/admin.css">
+
 <style>
-.container {
-	margin-bottom: 20px;
+.room--table {
+	text-align: center;
+	margin-top: 20px;
+	margin: 10px;
 }
-.select--button {
-	margin-left: 200px;
+.room--table td {
+	padding: 10px;
+	width: 300px;
 }
-.input--box {
-	margin-left: 10px;
+.first--tr {
+	font-weight: bold;
 }
-table th:hover {
-	cursor: pointer;
+.mouth{
+  background-color: #f5f5f5;
 }
-.textarea {
-	border: 1px solid #D2D1D1;
+.line{
 }
 .container{
 margin-top: 100px;
@@ -44,7 +47,8 @@ width: 800px;
 	margin-left: 770px;
 }
 </style>
-<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
+<div class="d-flex justify-content-center align-items-start"
+	style="min-width: 100em;">
 	<div class="sub--menu">
 		<div class="sub--menu--top">
 			<h2>학사정보</h2>
@@ -55,7 +59,7 @@ width: 800px;
 					<td><a href="/notice">공지사항</a></td>
 				</tr>
 				<tr>
-					<td><a href="/schedule">학사일정</a></td>
+					<td><a href="/schedule" >학사일정</a></td>				
 				</tr>
 				<c:if test="${principal.userRole.equals(\"staff\") }">
 					<tr>
@@ -115,7 +119,7 @@ width: 800px;
 	</tr>
 	</tbody>
 	</table>
-    <a class="button">등록</a>
+    <button class="button">등록</button>
     </form>
     </c:if>
     </main>
@@ -125,9 +129,4 @@ width: 800px;
 
 </body>
 </html>
-
-
-
-
-
 

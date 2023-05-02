@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
   servlet: 
     encoding:
       charset: utf-8 
@@ -28,7 +28,7 @@ spring:
     url: jdbc:mysql://localhost:3306/university_management?serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: asd1234
+    password: 1234
   sql: 
     init: # 초기 sql 파일 읽기 222222222222222222
       schema-locations: # 스키마 (테이블 생성 등)

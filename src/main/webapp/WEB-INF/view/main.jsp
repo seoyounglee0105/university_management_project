@@ -52,7 +52,7 @@
 							<c:forEach var="schedule" items="${scheduleList}">
 								<tr>
 									<td>${schedule.startDay.substring(5)}&nbsp;-&nbsp;${schedule.endDay.substring(5)}</td>
-									<td>${schedule.title}</td>
+									<td>${schedule.information}</td>
 								</tr>
 							</c:forEach>
 						</table>

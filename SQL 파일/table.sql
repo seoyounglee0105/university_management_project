@@ -310,6 +310,6 @@ id INT PRIMARY KEY AUTO_INCREMENT,
 staff_id INT,
 start_day DATE NOT NULL,
 end_day DATE NOT NULL,
-title VARCHAR(50) NOT NULL,
+information VARCHAR(50) NOT NULL,
 FOREIGN KEY (staff_id) REFERENCES staff_tb(id) 
 );

@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
-<link rel="stylesheet" href="/css/admin.css">
+
 <style>
 .room--table {
 	text-align: center;
@@ -53,7 +54,8 @@ justify-content: flex-end;
 }
 
 </style>
-<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
+<div class="d-flex justify-content-center align-items-start"
+	style="min-width: 100em;">
 	<div class="sub--menu">
 		<div class="sub--menu--top">
 			<h2>학사정보</h2>
@@ -64,7 +66,7 @@ justify-content: flex-end;
 					<td><a href="/notice">공지사항</a></td>
 				</tr>
 				<tr>
-					<td><a href="/schedule">학사일정</a></td>
+					<td><a href="/schedule" >학사일정</a></td>				
 				</tr>
 				<c:if test="${principal.userRole.equals(\"staff\") }">
 					<tr>
@@ -76,7 +78,6 @@ justify-content: flex-end;
 	</div>
 
 	<main>
-
 	
 	
 	<c:if test="${crud.equals(\"read\") }">
@@ -137,7 +138,7 @@ justify-content: flex-end;
 	</tbody>
 	</table>
 	<div class="checkbox">
-	<a class="button">수정</a>
+	<button class="button">수정</button>
 	</div>
 	</form>
 	</c:if>
@@ -148,9 +149,3 @@ justify-content: flex-end;
 
 </body>
 </html>
-
-
-
-
-
-
