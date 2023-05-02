@@ -2,28 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
-
-<style>
-form {
-	margin-left: 30px;
-}
-
-.input--table td {
-	padding: 5px 10px;
-}
-
-button {
-	padding: 8px 20px;
-	border: none;
-	border-radius: 5px;
-	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-	margin-top: 20px;
-}
-
-.button-td {
-	text-align: center;
-}
-</style>
+<link rel="stylesheet" href="/css/student.css">
 
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -54,7 +33,7 @@ button {
 					</c:otherwise>
 				</c:choose>
 				<tr>
-					<td><a href="/password" class="selected--menu">비밀번호 변경</a></td>
+					<td><a href="/password">비밀번호 변경</a></td>
 				</tr>
 				<c:if test="${principal.userRole.equals(\"student\")}">
 					<tr>
@@ -78,9 +57,9 @@ button {
 	<main>
 		<h1>개인 정보 수정</h1>
 		<div class="split--div"></div>
-		<form action="/update" method="post">
+		<form action="/update" method="post" class="info--update--form">
 			<input type="hidden" name="_method" value="put" />
-			<table class="input--table">
+			<table class="update--table">
 				<tr>
 					<td><label for="address">주소</label></td>
 					<td><input type="text" name="address" id="address" value="${userInfo.address}"></td>
@@ -94,12 +73,13 @@ button {
 					<td><input type="text" name="email" id="email" value="${userInfo.email}"></td>
 				</tr>
 				<tr>
-					<td><label for="password">비밀번호 입력</label></td>
+					<td><label for="password">비밀번호 확인</label></td>
 					<td><input type="password" name="password" id="password"></td>
 				</tr>
+				<tr><td style="height: 15px;"></td></tr>
 				<tr>
-					<td colspan="2" class="button-td">
-						<button type="submit">입력</button>
+					<td colspan="2" class="button--td">
+						<button type="submit" class="btn btn-dark update--button">수정하기</button>
 					</td>
 				</tr>
 			</table>

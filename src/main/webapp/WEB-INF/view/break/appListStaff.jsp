@@ -57,12 +57,12 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>휴학 신청 처리</h1>
+		<h1>휴학 처리</h1>
 		<div class="split--div"></div>
 
-		<div class="d-flex flex-column align-items-center" style="width: 100%">
 			<c:choose>
 				<c:when test="${breakAppList.size() > 0}">
+				<div class="d-flex flex-column align-items-center" style="width: 100%">
 
 					<table border="1" class="list--table">
 						<thead>
@@ -89,13 +89,13 @@
 							</c:forEach>
 						</tbody>
 					</table>
-				</c:when>
+				</div>
+			</c:when>
 
 				<c:otherwise>
 					<p class="no--list--p">대기 중인 신청 내역이 없습니다.</p>
 				</c:otherwise>
 			</c:choose>
-		</div>
 	</main>
 </div>
 

@@ -66,7 +66,7 @@ button {
 
 	<!-- 메인 div -->
 	<main>
-		<h1>교수 입력창</h1>
+		<h1>교수 등록</h1>
 		<div class="split--div"></div>
 		<form action="/user/professor" method="post">
 			<table class="input--table">

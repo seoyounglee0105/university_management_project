@@ -52,7 +52,7 @@ margin-top: 100px;
 	style="min-width: 100em;">
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>강의실</h2>
+			<h2>학사정보</h2>
 		</div>
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
@@ -67,7 +67,7 @@ margin-top: 100px;
 	</div>
 
 	<main>
-	<h1>학사 일정</h1>
+	<h1>학사일정</h1>
 	<div class="container">
 	<div></div>
 		

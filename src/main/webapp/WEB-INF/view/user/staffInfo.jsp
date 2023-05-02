@@ -2,48 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
-
-<style>
-
-form{
-	margin-left: 30px;
-	
-}
-
-.input--table {
-	margin: 10px;
-	width: 900px;
-}
-.input--table th {
-	text-align: center;
-}
-
-.half--table {
-	width: 450px;
-}
-
-.col1{
-	width: 15%;
-}
-.col2{
-	width: 35%;
-}
-.col3{
-	width: 15%;
-}
-.col4{
-	width: 35%;
-}
-
-.input--table td {
-	padding: 5px 10px;
-}
-
-.stat--table {
-	width: 1000px;
-}
-
-</style>
+<link rel="stylesheet" href="/css/myInfo.css">
 
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -68,7 +27,7 @@ form{
 
 	<!-- 메인 div -->
 	<main>
-		<h1>My Info</h1>
+		<h1>내 정보 조회</h1>
 		<div class="split--div"></div>
 			<table border="1" class="input--table" >
 			<colgroup>
@@ -110,7 +69,7 @@ form{
 					<td>${staff.email}</td>
 				</tr>
 			</table>
-			<button type="button" onclick="location.href='/update'">수정하기</button>
+			<button type="button" onclick="location.href='/update'" class="btn btn-dark update--button">수정하기</button>
 	</main>
 </div>
 

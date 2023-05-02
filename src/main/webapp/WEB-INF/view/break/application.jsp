@@ -3,51 +3,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<link rel="stylesheet" href="/css/document.css">
 
 <style>
-.document--layout {
-	border: 1px solid #4c4b4b;
-	padding: 50px 30px 30px 30px;
-	text-align: center;
-	margin-bottom: 30px;
-}
-
 .document--layout h3 {
 	font-weight: 600;
 	margin-bottom: 30px;
 }
 
-.document--layout th {
-	text-align: center;
-	padding: 2px 20px;
-}
-
-.document--layout td {
-	text-align: right;
-	padding: 2px 8px 2px 50px;
-}
-
 .document--layout tr:last-of-type td {
 	padding: 18px 8px 2px;
 }
-
 </style>
 
-		<%@ include file="/WEB-INF/view/layout/header.jsp"%>
 		
 		<!-- 세부 메뉴 + 메인 -->
 		<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 			<!-- 세부 메뉴 div-->
 			<div class="sub--menu">
 				<div class="sub--menu--top">
-					<h2>등록</h2>
+					<h2>MY</h2>
 				</div>
 				<!-- 메뉴 -->
 				<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 				<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/info/student" class="selected--menu">내 정보 조회</a></td>
+					<td><a href="/info/student">내 정보 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/password">비밀번호 변경</a></td>

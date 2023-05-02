@@ -49,7 +49,7 @@
 						<li><a href="/">홈</a>
 						<li><a href="/info/professor">MY</a>
 						<li><a href="/subject/list/1">수업</a>
-						<li><a href="/notice">공지</a>
+						<li><a href="/notice">학사정보</a>
 					</ul>
 				</c:when>
 
@@ -58,7 +58,7 @@
 						<li><a href="/">홈</a>
 						<li><a href="/info/staff">MY</a>
 						<li><a href="/user/student">학사관리</a>
-						<li><a href="/admin/college">등록</a>
+						<li><a href="/user/studentList">등록</a>
 						<li><a href="/notice">학사정보</a>
 					</ul>
 				</c:otherwise>

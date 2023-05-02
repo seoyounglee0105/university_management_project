@@ -66,7 +66,7 @@ button {
 
 	<!-- 메인 div -->
 	<main>
-		<h1>직원 입력창</h1>
+		<h1>직원 등록</h1>
 		<div class="split--div"></div>
 		<!-- 여기에 내용 넣기 -->
 		<form action="/user/staff" method="post">

@@ -48,7 +48,7 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>학생 입력창</h1>
+		<h1>학생 등록</h1>
 		<div class="split--div"></div>
 		<form action="/user/student" method="post">
 			<table class="table--container">

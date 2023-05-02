@@ -43,11 +43,10 @@ margin-left: 20px;
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/grade/thisSemester">금학기 성적조회</a></td>
+					<td><a href="/grade/thisSemester">금학기 성적 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/grade/semester" class="selected--menu">학기별
-							성적조회</a></td>
+					<td><a href="/grade/semester" class="selected--menu">학기별 성적 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/grade/total">누계 성적</a></td>
@@ -57,7 +56,7 @@ margin-left: 20px;
 	</div>
 	<!-- 메인 div -->
 	<main>
-		<h1>학기 별 조회</h1>
+		<h1>학기별 성적 조회</h1>
 		<div class="split--div"></div>
 		<c:choose>
 			<%-- 수강연도 조회해서 검사 --%>
@@ -112,7 +111,7 @@ margin-left: 20px;
 				</table>
 			</c:when>
 			<c:otherwise>
-				<p>강의 신청 및 수강 이력 확인 바랍니다.</p>
+				<p class="no--list--p">강의 신청 및 수강 이력 확인 바랍니다.</p>
 			</c:otherwise>
 		</c:choose>
 		<br> <br>

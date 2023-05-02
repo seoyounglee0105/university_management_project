@@ -2,90 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
+<link rel="stylesheet" href="/css/subject.css">
 
-<style>
-.sub--list--table th {
-	padding: 3px 9px;
-	text-align: center;
-}
-
-.sub--list--table td {
-	padding: 1px 9px;
-	text-align: center;
-}
-
-.sub--list--name {
-	text-align: left !important;
-}
-
-.sub--filter {
-	margin-bottom: 50px;
-}
-
-.sub--filter form {
-	display: flex;
-}
-
-.sub--filter form div {
-	background-color: buttonshadow;
-	padding: 13px 13px 7px 10px;
-}
-
-.sub--filter input[type="number"] {
-	width: 57px;
-	padding-left: 3px;
-}
-
-.sub--filter select[name="deptId"] {
-	width: 173px;
-}
-
-.sub--filter label {
-	margin-right: 5px;
-}
-
-.sub--filter input, .sub--filter select {
-	margin-right: 10px;
-	border-radius: 5px;
-	border-width: 1px;
-}
-
-.sub--filter button {
-	background-color: gray;
-	padding: 2px 6px;
-	border: none;
-	border-radius: 5px;
-	color: white;
-	height: 28px;
-}
-
-.sub--plan--view li a:hover {
-	color: black;
-}
-
-.sub--list--table td button {
-	padding: 0px 4px;
-	border: none;
-	border-radius: 4px;
-	width: 100%;
-	color: white;
-	height: 26px;
-}
-
-.sub--list--button--row {
-	padding: 2px 2px !important;
-}
-
-.preStuSubList--button {
-	padding: 5px 10px;
-	border: none;
-	border-radius: 4px;
-	color: white;
-	background-color: gray;
-	font-size: 20px;
-	margin-right: 20px;
-}
-</style>
 
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -151,7 +69,8 @@
 								<span style="font-weight: 600;">
 									<c:choose>
 										<c:when test="${type == 0}">
-											예비 수강 신청 내역						
+											신청 내역&nbsp;
+											<span style="color:gray; font-size:18px;">[총 ${sumGrades}학점]</span>
 										</c:when>
 										<c:otherwise>
 											신청 미완료 강의 목록
