@@ -27,10 +27,10 @@
 					<td><a href="/admin/department">학과</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/subject" class="selected--menu">강의</a></td>
+					<td><a href="/admin/room">강의실</a></td>
 				</tr>
 				<tr>
-					<td><a href="/admin/room">강의실</a></td>
+					<td><a href="/admin/subject" class="selected--menu">강의</a></td>
 				</tr>
 				<tr>
 					<td><a href="/admin/tuition">단대별 등록금</a></td>
