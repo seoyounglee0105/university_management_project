@@ -26,7 +26,8 @@ import com.green.university.service.UserService;
 import com.green.university.utils.Define;
 
 /**
- * @author 서영 휴학 신청 관련 컨트롤러
+ * @author 서영 
+ * 휴학 신청 관련 컨트롤러
  */
 @Controller
 @RequestMapping("/break")

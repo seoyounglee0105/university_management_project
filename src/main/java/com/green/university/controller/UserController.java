@@ -61,10 +61,10 @@ public class UserController {
 	@PostMapping("/staff")
 	public String createStaffProc(@Valid CreateStaffDto createStaffDto, BindingResult bindingResult) {
 
-		if(bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			StringBuilder sb = new StringBuilder();
 			bindingResult.getAllErrors().forEach(error -> {
-				sb.append(error.getDefaultMessage()).append("\\n"); 
+				sb.append(error.getDefaultMessage()).append("\\n");
 			});
 			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
 		}
@@ -91,14 +91,14 @@ public class UserController {
 	@PostMapping("/professor")
 	public String createProfessorProc(@Valid CreateProfessorDto createProfessorDto, BindingResult bindingResult) {
 
-		if(bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			StringBuilder sb = new StringBuilder();
 			bindingResult.getAllErrors().forEach(error -> {
-				sb.append(error.getDefaultMessage()).append("\\n"); 
+				sb.append(error.getDefaultMessage()).append("\\n");
 			});
 			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
 		}
-		
+
 		userService.createProfessorToProfessorAndUser(createProfessorDto);
 
 		return "redirect:/user/professor";
@@ -122,60 +122,63 @@ public class UserController {
 	@PostMapping("/student")
 	public String createStudentProc(@Valid CreateStudentDto createStudentDto, BindingResult bindingResult) {
 
-		if(bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			StringBuilder sb = new StringBuilder();
 			bindingResult.getAllErrors().forEach(error -> {
-				sb.append(error.getDefaultMessage()).append("\\n"); 
+				sb.append(error.getDefaultMessage()).append("\\n");
 			});
 			throw new CustomRestfullException(sb.toString(), HttpStatus.BAD_REQUEST);
 		}
-		
+
 		userService.createStudentToStudentAndUser(createStudentDto);
 
 		return "redirect:/user/student";
 	}
-	
+
 	/**
 	 * 교수 조회
+	 * 
 	 * @param model
 	 * @return 교수 조회 페이지
 	 */
 	@GetMapping("/professorList")
-	public String showProfessorList(Model model, @RequestParam(required = false) Integer professorId, @RequestParam(required = false) Integer deptId) {
-		
+	public String showProfessorList(Model model, @RequestParam(required = false) Integer professorId,
+			@RequestParam(required = false) Integer deptId) {
+
 		ProfessorListForm professorListForm = new ProfessorListForm();
 		professorListForm.setPage(0);
-		if(professorId != null) {
+		if (professorId != null) {
 			professorListForm.setProfessorId(professorId);
 		} else if (deptId != null) {
 			professorListForm.setDeptId(deptId);
 		}
 		Integer amount = professorService.readProfessorAmount(professorListForm);
-		if(professorId != null) {
+		if (professorId != null) {
 			amount = 1;
 		}
 		List<Professor> list = professorService.readProfessorList(professorListForm);
-		
-		model.addAttribute("listCount", Math.ceil(amount/20.0));
+
+		model.addAttribute("listCount", Math.ceil(amount / 20.0));
 		model.addAttribute("professorList", list);
 		model.addAttribute("deptId", deptId);
 		/**
-		 * @author 서영
-		 * 1페이지가 선택되어 있음을 보여주기 위함
+		 * @author 서영 1페이지가 선택되어 있음을 보여주기 위함
 		 */
 		model.addAttribute("page", 1);
-		
+
 		return "/user/professorList";
 	}
-	
+
 	/**
 	 * 교수 조회
+	 * 
 	 * @param model
 	 * @return 교수 조회 페이지
 	 */
 	@GetMapping("/professorList/{page}")
-	public String showProfessorListByPage(Model model, @PathVariable Integer page, @RequestParam(required = false) Integer deptId) {
-		
+	public String showProfessorListByPage(Model model, @PathVariable Integer page,
+			@RequestParam(required = false) Integer deptId) {
+
 		ProfessorListForm professorListForm = new ProfessorListForm();
 		if (deptId != null) {
 			professorListForm.setDeptId(deptId);
@@ -183,54 +186,58 @@ public class UserController {
 		professorListForm.setPage((page - 1) * 20);
 		Integer amount = professorService.readProfessorAmount(professorListForm);
 		List<Professor> list = professorService.readProfessorList(professorListForm);
-		
-		model.addAttribute("listCount", Math.ceil(amount/20.0));
+
+		model.addAttribute("listCount", Math.ceil(amount / 20.0));
 		model.addAttribute("professorList", list);
 		model.addAttribute("page", page);
-		
+
 		return "/user/professorList";
 	}
+
 	/**
 	 * 학생 조회
+	 * 
 	 * @param model
 	 * @return 학생 조회 페이지
 	 */
 	@GetMapping("/studentList")
-	public String showStudentList(Model model, @RequestParam(required = false) Integer studentId, @RequestParam(required = false) Integer deptId) {
-		
+	public String showStudentList(Model model, @RequestParam(required = false) Integer studentId,
+			@RequestParam(required = false) Integer deptId) {
+
 		StudentListForm studentListForm = new StudentListForm();
 		studentListForm.setPage(0);
-		if(studentId != null) {
+		if (studentId != null) {
 			studentListForm.setStudentId(studentId);
 		} else if (deptId != null) {
 			studentListForm.setDeptId(deptId);
 		}
 		Integer amount = studentService.readStudentAmount(studentListForm);
-		if(studentId != null) {
+		if (studentId != null) {
 			amount = 1;
 		}
 		List<Student> list = studentService.readStudentList(studentListForm);
-		
-		model.addAttribute("listCount", Math.ceil(amount/20.0));
+
+		model.addAttribute("listCount", Math.ceil(amount / 20.0));
 		model.addAttribute("studentList", list);
 		model.addAttribute("deptId", deptId);
 		/**
-		 * @author 서영
-		 * 1페이지가 선택되어 있음을 보여주기 위함
+		 * @author 서영 1페이지가 선택되어 있음을 보여주기 위함
 		 */
 		model.addAttribute("page", 1);
-		
+
 		return "/user/studentList";
 	}
-	
+
 	/**
 	 * 학생 조회
+	 * 
 	 * @param model
 	 * @return 학생 조회 페이지
 	 */
 	@GetMapping("/studentList/{page}")
-	public String showStudentListByPage(Model model, @PathVariable Integer page, @RequestParam(required = false) Integer deptId) {
-		
+	public String showStudentListByPage(Model model, @PathVariable Integer page,
+			@RequestParam(required = false) Integer deptId) {
+
 		StudentListForm studentListForm = new StudentListForm();
 		if (deptId != null) {
 			studentListForm.setDeptId(deptId);
@@ -238,16 +245,17 @@ public class UserController {
 		studentListForm.setPage((page - 1) * 20);
 		Integer amount = studentService.readStudentAmount(studentListForm);
 		List<Student> list = studentService.readStudentList(studentListForm);
-		
-		model.addAttribute("listCount", Math.ceil(amount/20.0));
+
+		model.addAttribute("listCount", Math.ceil(amount / 20.0));
 		model.addAttribute("studentList", list);
 		model.addAttribute("page", page);
-		
+
 		return "/user/studentList";
 	}
-	
+
 	/**
 	 * 학생의 학년, 학기 업데이트
+	 * 
 	 * @return 학생 리스트 조회 페이지
 	 */
 	@GetMapping("/student/update")
@@ -255,6 +263,5 @@ public class UserController {
 		studentService.updateStudentGradeAndSemester();
 		return "redirect:/user/studentList";
 	}
-	
 
 }

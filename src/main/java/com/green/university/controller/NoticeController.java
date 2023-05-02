@@ -26,7 +26,8 @@ import com.green.university.utils.Define;
 
 /**
  * 
- * @author 박성희 Notice Controller
+ * @author 박성희 
+ * Notice Controller
  *
  */
 @Controller
@@ -104,7 +105,7 @@ public class NoticeController {
 			model.addAttribute("notice", notice);
 		}
 		notice.setContent(notice.getContent().replace("\r\n", "<br>"));
-		
+
 		return "/board/notice";
 	}
 

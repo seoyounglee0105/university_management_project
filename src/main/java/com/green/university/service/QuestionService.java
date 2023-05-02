@@ -12,7 +12,7 @@ public class QuestionService {
 
 	@Autowired
 	private QuestionRepository questionRepository;
-	
+
 	@Transactional
 	public QuestionDto readQuestion() {
 		QuestionDto dto = questionRepository.findAll();

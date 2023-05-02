@@ -11,18 +11,15 @@ import org.springframework.validation.annotation.Validated;
 import com.green.university.dto.CollTuitFormDto;
 import com.green.university.dto.CollegeFormDto;
 import com.green.university.dto.DepartmentFormDto;
-import com.green.university.dto.NoticeFormDto;
 import com.green.university.dto.RoomFormDto;
 import com.green.university.dto.SubjectFormDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.CollTuitRepository;
 import com.green.university.repository.interfaces.CollegeRepository;
 import com.green.university.repository.interfaces.DepartmentRepository;
-import com.green.university.repository.interfaces.NoticeRepository;
 import com.green.university.repository.interfaces.RoomRepository;
 import com.green.university.repository.interfaces.SubjectRepository;
 import com.green.university.repository.interfaces.SyllaBusRepository;
-import com.green.university.repository.model.CollTuit;
 import com.green.university.repository.model.College;
 import com.green.university.repository.model.Department;
 import com.green.university.repository.model.Room;
@@ -58,11 +55,11 @@ public class AdminService {
 		// 같은 이름 중복 검사
 		List<College> collegeList = collegeRepository.selectCollegeDto();
 		for (int i = 0; i < collegeList.size(); i++) {
-			if(collegeList.get(i).getName().equals(collegeFormDto.getName())) {
+			if (collegeList.get(i).getName().equals(collegeFormDto.getName())) {
 				throw new CustomRestfullException("이미 존재하는 단과대입니다", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		
+
 		int resultRowCount = collegeRepository.insert(collegeFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("단과대 입력 서비스 오류");
@@ -94,7 +91,7 @@ public class AdminService {
 		// 같은 학과 이름 중복 검사
 		List<Department> departmentList = departmentRepository.selectByDepartmentDto();
 		for (int i = 0; i < departmentList.size(); i++) {
-			if(departmentList.get(i).getName().equals(departmentFormDto.getName())) {
+			if (departmentList.get(i).getName().equals(departmentFormDto.getName())) {
 				throw new CustomRestfullException("이미 존재하는 학과입니다", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
@@ -110,7 +107,7 @@ public class AdminService {
 	public List<Department> readDepartment() {
 		List<Department> departmentList = departmentRepository.selectByDepartmentDto();
 		for (int i = 0; i < departmentList.size(); i++) {
-			System.out.println(departmentList.get(i));            
+			System.out.println(departmentList.get(i));
 		}
 		return departmentList;
 	}
@@ -142,11 +139,11 @@ public class AdminService {
 		// 등록금 중복 입력 검사
 		List<CollTuitFormDto> collTuitList = collTuitRepository.selectByCollTuitDto();
 		for (int i = 0; i < collTuitList.size(); i++) {
-			if(collTuitList.get(i).getCollegeId() == (collTuitFormDto.getCollegeId())) {
+			if (collTuitList.get(i).getCollegeId() == (collTuitFormDto.getCollegeId())) {
 				throw new CustomRestfullException("이미 등록금이 입력된 학과입니다", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		
+
 		int resultRowCount = collTuitRepository.insert(collTuitFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("단과대 등록금 입력 서비스 오류");
@@ -188,11 +185,11 @@ public class AdminService {
 		// 강의실 중복 입력 검사
 		List<Room> roomList = roomRepository.selectByRoomDto();
 		for (int i = 0; i < roomList.size(); i++) {
-			if(roomList.get(i).getId().equals((roomFormDto.getId()))) {
+			if (roomList.get(i).getId().equals((roomFormDto.getId()))) {
 				throw new CustomRestfullException("이미 존재하는 강의실입니다", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		
+
 		int resultRowCount = roomRepository.insert(roomFormDto);
 		if (resultRowCount != 1) {
 			System.out.println("강의실 입력 서비스 오류");

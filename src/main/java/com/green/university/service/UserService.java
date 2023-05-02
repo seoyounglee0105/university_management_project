@@ -27,7 +27,6 @@ import com.green.university.repository.interfaces.StaffRepository;
 import com.green.university.repository.interfaces.StuStatRepository;
 import com.green.university.repository.interfaces.StudentRepository;
 import com.green.university.repository.interfaces.UserRepository;
-import com.green.university.repository.model.Professor;
 import com.green.university.repository.model.Staff;
 import com.green.university.repository.model.Student;
 import com.green.university.repository.model.User;
@@ -153,7 +152,6 @@ public class UserService {
 			throw new CustomRestfullException(Define.WRONG_PASSWORD, HttpStatus.BAD_REQUEST);
 		}
 
-
 		return userEntity;
 	}
 
@@ -256,6 +254,7 @@ public class UserService {
 
 	/**
 	 * 학생 조회
+	 * 
 	 * @param studentId
 	 * @return studentEntity
 	 */
@@ -276,8 +275,10 @@ public class UserService {
 		Staff staffEntity = staffRepository.selectStaffById(id);
 		return staffEntity;
 	}
+
 	/**
 	 * 교수 정보 조회
+	 * 
 	 * @param id
 	 * @return professorEntity
 	 */
@@ -286,9 +287,10 @@ public class UserService {
 		ProfessorInfoDto professorEntity = professorRepository.selectProfessorInfoById(id);
 		return professorEntity;
 	}
-	
+
 	/**
 	 * 학생 정보 조회
+	 * 
 	 * @param id
 	 * @return StudentEntity
 	 */
@@ -297,75 +299,78 @@ public class UserService {
 		StudentInfoDto studentEntity = studentRepository.selectStudentInfoById(id);
 		return studentEntity;
 	}
-	
+
 	/**
 	 * 아이디 찾기
+	 * 
 	 * @param findIdFormDto
 	 * @return
 	 */
 	@Transactional
 	public Integer readIdByNameAndEmail(FindIdFormDto findIdFormDto) {
-		
+
 		Integer findId = null;
-		if(findIdFormDto.getUserRole().equals("student")) {
+		if (findIdFormDto.getUserRole().equals("student")) {
 			findId = studentRepository.selectIdByNameAndEmail(findIdFormDto);
-		} else if(findIdFormDto.getUserRole().equals("professor")) {
+		} else if (findIdFormDto.getUserRole().equals("professor")) {
 			findId = professorRepository.selectIdByNameAndEmail(findIdFormDto);
-		} else if(findIdFormDto.getUserRole().equals("staff")) {
+		} else if (findIdFormDto.getUserRole().equals("staff")) {
 			findId = staffRepository.selectIdByNameAndEmail(findIdFormDto);
 		}
-		
-		if(findId == null) {
+
+		if (findId == null) {
 			throw new CustomRestfullException("아이디를 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 		return findId;
-		
+
 	}
+
 	/**
 	 * 아이디 찾기
+	 * 
 	 * @param findIdFormDto
 	 * @return
 	 */
 	@Transactional
 	public String updateTempPassword(FindPasswordFormDto findPasswordFormDto) {
-		
+
 		String password = null;
-		
+
 		Integer findId = 0;
-		
-		if(findPasswordFormDto.getUserRole().equals("student")) {
+
+		if (findPasswordFormDto.getUserRole().equals("student")) {
 			findId = studentRepository.selectStudentByIdAndNameAndEmail(findPasswordFormDto);
-			if(findId == null) {
+			if (findId == null) {
 				throw new CustomRestfullException("조건에 맞는 정보를 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-		} else if(findPasswordFormDto.getUserRole().equals("professor")) {
+		} else if (findPasswordFormDto.getUserRole().equals("professor")) {
 			findId = professorRepository.selectProfessorByIdAndNameAndEmail(findPasswordFormDto);
-			if(findId == null) {
+			if (findId == null) {
 				throw new CustomRestfullException("조건에 맞는 정보를 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-		} else if(findPasswordFormDto.getUserRole().equals("staff")) {
+		} else if (findPasswordFormDto.getUserRole().equals("staff")) {
 			findId = staffRepository.selectStaffByIdAndNameAndEmail(findPasswordFormDto);
-			if(findId == null) {
+			if (findId == null) {
 				throw new CustomRestfullException("조건에 맞는 정보를 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		
+
 		password = new TempPassword().returnTempPassword();
 		System.out.println(password);
 		ChangePasswordDto changePasswordDto = new ChangePasswordDto();
 		changePasswordDto.setAfterPassword(passwordEncoder.encode(password));
 		changePasswordDto.setId(findPasswordFormDto.getId());
 		userRepository.updatePassword(changePasswordDto);
-		
+
 		return password;
-		
+
 	}
-	
-	public List<StudentInfoStatListDto> readStudentInfoStatListByStudentId(Integer studentId){
-		
+
+	public List<StudentInfoStatListDto> readStudentInfoStatListByStudentId(Integer studentId) {
+
 		List<StudentInfoStatListDto> list = stuStatRepository.selectStuStatListBystudentId(studentId);
-		
+
 		return list;
 	}
 

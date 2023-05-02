@@ -16,7 +16,6 @@ import com.green.university.dto.CollegeFormDto;
 import com.green.university.dto.DepartmentFormDto;
 import com.green.university.dto.RoomFormDto;
 import com.green.university.dto.SubjectFormDto;
-import com.green.university.repository.model.CollTuit;
 import com.green.university.repository.model.College;
 import com.green.university.repository.model.Department;
 import com.green.university.repository.model.Room;
@@ -25,7 +24,8 @@ import com.green.university.service.AdminService;
 
 /**
  * 
- * @author 박성희 Admin 수업 조회/입력 관련 Controller
+ * @author 박성희 
+ * Admin 수업 조회/입력 관련 Controller
  */
 @Controller
 @RequestMapping("/admin")
