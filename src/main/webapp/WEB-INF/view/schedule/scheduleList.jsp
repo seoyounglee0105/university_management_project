@@ -60,6 +60,7 @@ margin-top: 100px;
 	<th>ID</th>
 	<th>날짜</th>
 	<th>제목</th>
+	<th>내용</th>
 	</tr>
 	</thead>
 	<tbody>

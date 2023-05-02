@@ -15,6 +15,11 @@ group by su.sub_year
 ORDER BY su.sub_year DESC;
 </select>
 
+<!-- 취득점수 받았는지 조회 -->
+<select id="selectCompleteGradeByStudentId" resultType="com.green.university.dto.response.GradeDto">
+SELECT complete_grade FROM stu_sub_tb WHERE student_id = #{studentId};
+</select>
+
 <!-- 학생이 수강한 학기 조회 -->
 <select id="selectSemesterByStudentId" resultType="com.green.university.dto.response.GradeDto">
 select su.semester
