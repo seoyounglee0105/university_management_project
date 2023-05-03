@@ -9,10 +9,11 @@ public class Student {
 	
 	private Integer id;
 	private String name;
-	private String birthDate;
+	private Date birthDate;
 	private String gender;
 	private String address;
 	private String tel;
+	private String email;
 	private Integer deptId;
 	private Integer grade;
 	private Integer semester;
