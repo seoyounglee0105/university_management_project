@@ -124,7 +124,7 @@ public class ProfessorService {
 	public ReadSyllabusDto readSyllabus(Integer subjectId) {
 
 		ReadSyllabusDto readSyllabusDto = subjectRepository.selectSyllabusBySubjectId(subjectId);
-
+		System.out.println(readSyllabusDto.toString());
 		return readSyllabusDto;
 	}
 

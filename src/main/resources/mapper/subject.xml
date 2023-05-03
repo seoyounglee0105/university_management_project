@@ -307,7 +307,7 @@
 
 	<select id="selectSyllabusBySubjectId" resultType="com.green.university.dto.response.ReadSyllabusDto">
 		SELECT sy.subject_id, s.name, s.sub_year, s.semester, s.grades, s.type, s.sub_day, s.start_time, s.end_time, s.room_id, 
-		c.name college_name, p.name as professer_name, d.name as dept_name, p.tel, p.email, sy.overview, sy.objective, sy.textbook, sy.program
+		c.name college_name, p.name as professor_name, d.name as dept_name, p.tel, p.email, sy.overview, sy.objective, sy.textbook, sy.program
 		FROM subject_tb AS s
 		LEFT JOIN professor_tb AS p
 		ON s.professor_id = p.id
