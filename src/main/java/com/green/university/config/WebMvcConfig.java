@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.green.university.handler.AuthIntercepter;
 import com.green.university.handler.AuthIntercepterForLogin;
+import com.green.university.handler.AuthIntercepterForMainPage;
 import com.green.university.handler.UserRoleAuthIntercepterForProfessor;
 import com.green.university.handler.UserRoleAuthIntercepterForStaff;
 import com.green.university.handler.UserRoleAuthIntercepterForStudent;
@@ -29,6 +30,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	private UserRoleAuthIntercepterForStudent authIntercepterForStudent;
 	@Autowired
 	private AuthIntercepterForLogin authIntercepterForLogin;
+	@Autowired
+	private AuthIntercepterForMainPage authIntercepterForMainPage;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -37,6 +40,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		registry.addInterceptor(authIntercepterForStaff).addPathPatterns(Define.STAFF_PATHS);
 		registry.addInterceptor(authIntercepterForStudent).addPathPatterns(Define.STUDENT_PATHS);
 		registry.addInterceptor(authIntercepterForLogin).addPathPatterns("/login");
+		registry.addInterceptor(authIntercepterForMainPage).addPathPatterns("/");
 	}
 
 	// 파일 리소스 등록

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.green.university.handler.exception.UnAuthorizedException;
+import com.green.university.handler.exception.UnAuthorizedExceptionForMainPage;
 import com.green.university.utils.Define;
 
 /**
@@ -16,14 +17,14 @@ import com.green.university.utils.Define;
  * @author 김지현
  */
 @Component
-public class AuthIntercepter implements HandlerInterceptor {
+public class AuthIntercepterForMainPage implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
 		if (session.getAttribute(Define.PRINCIPAL) == null) {
-			throw new UnAuthorizedException("접근 권한이 없습니다. 로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/login");
+			throw new UnAuthorizedExceptionForMainPage(HttpStatus.UNAUTHORIZED, "/login");
 			// return false;
 		}
 		return true;
