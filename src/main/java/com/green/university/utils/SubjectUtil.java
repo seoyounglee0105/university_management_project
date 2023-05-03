@@ -18,7 +18,7 @@ public class SubjectUtil {
 			if ((subjectList.get(i).getStartTime() <= subjectFormDto.getStartTime()
 					&& subjectFormDto.getStartTime() < subjectList.get(i).getEndTime())
 					|| (subjectList.get(i).getStartTime() < subjectFormDto.getEndTime()
-							&& subjectFormDto.getEndTime() < subjectList.get(i).getEndTime())) {
+							&& subjectFormDto.getEndTime() <= subjectList.get(i).getEndTime())) {
 				return false;
 			}
 		}
