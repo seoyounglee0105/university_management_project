@@ -55,8 +55,8 @@ public class GradeController {
 		if (yearList.size() != 0) {
 
 			// 금학기 성적조회 기능
-			List<GradeDto> thisiSemester = gradeService.readThisSemesterByStudentId(principal.getId());
-			model.addAttribute("gradeList", thisiSemester);
+			List<GradeDto> thisSemester = gradeService.readThisSemesterByStudentId(principal.getId());
+			model.addAttribute("gradeList", thisSemester);
 
 			// 누계 성적 조회
 			MyGradeDto mygrade = gradeService.readMyGradeByStudentId(principal.getId());

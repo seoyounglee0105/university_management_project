@@ -136,5 +136,4 @@ WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND su.semester 
 	WHERE sub_year = #{subYear} AND semester = #{semester} AND ss.student_id = #{studentId}
 	GROUP BY student_id;
 </select>
-
 </mapper>

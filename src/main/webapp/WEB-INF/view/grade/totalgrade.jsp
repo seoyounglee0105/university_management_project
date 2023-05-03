@@ -42,7 +42,7 @@
 		<h1>총 누계 성적</h1>
 		<div class="split--div"></div>
 		<c:choose>
-			<c:when test="${yearList.size() != 0}">
+			<c:when test="${mygradeList.isEmpty() == false}">
 				<h4 style="font-weight: 600">평점 평균</h4>
 				<table border="1" class="sub--list--table">
 					<thead>

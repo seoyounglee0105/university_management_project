@@ -44,8 +44,7 @@
 		<div class="split--div"></div>
 
 		<c:choose>
-			<%-- 수강연도 조회해서 검사 --%>
-			<c:when test="${yearList.size() != 0}">
+			<c:when test="${gradeList.isEmpty() == false}">
 				<div>
 					<h4 style="font-weight: 600">과목별 성적</h4>
 					<table border="1" class="sub--list--table">
