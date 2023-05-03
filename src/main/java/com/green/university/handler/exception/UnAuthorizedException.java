@@ -18,5 +18,6 @@ public class UnAuthorizedException extends RuntimeException {
 		this.path = path;
 		
 	}
+
 	
 }

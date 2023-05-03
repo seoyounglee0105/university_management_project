@@ -12,6 +12,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import com.green.university.handler.exception.CustomPathException;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.handler.exception.UnAuthorizedException;
+import com.green.university.handler.exception.UnAuthorizedExceptionForMainPage;
 
 @RestControllerAdvice // IoC 대상 + AoP 기반
 public class MyRestFullExceptionHandler {
@@ -62,6 +63,15 @@ public class MyRestFullExceptionHandler {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<script>");
 		sb.append("alert('"+ e.getMessage() +"');"); 
+		sb.append("location.href='" + e.getPath() + "';");
+		sb.append("</script>");
+		return sb.toString();
+	}
+	
+	@ExceptionHandler(UnAuthorizedExceptionForMainPage.class)
+	public String unAuthorizedException(UnAuthorizedExceptionForMainPage e) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<script>");
 		sb.append("location.href='" + e.getPath() + "';");
 		sb.append("</script>");
 		return sb.toString();
