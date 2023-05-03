@@ -32,9 +32,18 @@ input[type="text"]{
 textarea {
 	font-size: 16px;
 	padding: 5px;
+	resize: none;
 }
 
-label{
+.submit--button {
+	margin-top: 20px;
+	margin-left: 200px;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 10px;
+	color: white;
+	background-color: #142845;
+	cursor: pointer;
 }
 </style>
 </head>
@@ -55,7 +64,7 @@ label{
 			<label>주별 계획</label> <br> 
 			<textarea rows="10" cols="50" name="program">${syllabus.program}</textarea>
 			<br>
-			<button type="submit">제출</button>
+			<button type="submit" class="submit--button">제출</button>
 		</form>
 	</section>
 

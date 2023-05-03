@@ -56,6 +56,15 @@
 .align--left{
 	text-align: left;
 }
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: gray;
+}
 </style>
 </head>
 
