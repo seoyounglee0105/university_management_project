@@ -51,7 +51,10 @@
 		<c:if test="${crud.equals(\"insert\")}">
 			<form action="/admin/tuition" method="post" class="form--container">
 				<div class="insert--form">
-					<span class="material-symbols-outlined symbol">school</span><span class="insert">등록하기</span><br>
+					<ul class="d-flex" style="margin: 0;">
+						<li style="height: 24px; margin-right: 2px;"><span class="material-symbols-outlined">school</span>
+						<li style="height: 24px;"><span class="insert">등록하기</span>
+					</ul>
 						<select name="collegeId" class="input--box">
 							<c:forEach var="college" items="${collegeList}">
 								<option value="${college.id}">${college.name}</option>
@@ -71,7 +74,7 @@
 					<tr>
 						<td>${collTuit.collegeId}</td>
 						<td>${collTuit.name}</td>
-						<td>${collTuit.amount}</td>
+						<td>${collTuit.amountFormat()}</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -82,7 +85,10 @@
 		<c:if test="${crud.equals(\"update\")}">
 			<form action="/admin/tuitionUpdate" method="post" class="insert--form">
 			<input type="hidden" name="_method" value="put" />
-				<span class="material-symbols-outlined symbol">school</span><span class="insert">수정하기</span><br>
+					<ul class="d-flex" style="margin: 0;">
+						<li style="height: 24px; margin-right: 2px;"><span class="material-symbols-outlined">school</span>
+						<li style="height: 24px;"><span class="insert">수정하기</span>
+					</ul>
 					<select name="collegeId" class="input--box">
 						<c:forEach var="college" items="${collegeList}">
 							<option value="${college.id}">${college.name}</option>
@@ -101,7 +107,7 @@
 					<tr>
 						<td>${collTuit.collegeId}</td>
 						<td>${collTuit.name}</td>
-						<td>${collTuit.amount}</td>
+						<td>${collTuit.amountFormat()}</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -121,7 +127,7 @@
 					<tr>
 						<td>${collTuit.collegeId}</td>
 						<td><a href="/admin/tuitionDelete?collegeId=${collTuit.collegeId}">${collTuit.name}</a></td>
-						<td>${collTuit.amount}</td>
+						<td>${collTuit.amountFormat()}</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -141,7 +147,7 @@
 					<tr>
 						<td>${collTuit.collegeId}</td>
 						<td>${collTuit.name}</td>
-						<td>${collTuit.amount}</td>
+						<td>${collTuit.amountFormat()}</td>
 					</tr>
 				</c:forEach>
 			</table>

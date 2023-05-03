@@ -63,8 +63,8 @@
 				</tr>
 				<tr>
 					<td style="padding-top: 7px"><label>성별</label></td>
-					<td style="padding-top: 7px"><label for="male">남성</label> <input type="radio" value="M" name="gender" id="male" checked="checked"> &nbsp;<label for="female">여성</label> <input
-						type="radio" value="F" name="gender" id="female"></td>
+					<td style="padding-top: 7px"><label for="male">남성</label> <input type="radio" value="남성" name="gender" id="male" checked="checked"> &nbsp;<label for="female">여성</label> <input
+						type="radio" value="여성" name="gender" id="female"></td>
 				</tr>
 				<tr>
 					<td><label for="address">주소</label></td>

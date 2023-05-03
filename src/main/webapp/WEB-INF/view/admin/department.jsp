@@ -49,7 +49,10 @@
 			<c:if test="${crud.equals(\"insert\")}">
 			<div class="container">
 				<form action="/admin/department" method="post" class="form--container">
-					<span class="material-symbols-outlined symbol">school</span><span class="insert">등록하기</span><br>
+					<ul class="d-flex" style="margin: 0;">
+						<li style="height: 24px; margin-right: 2px;"><span class="material-symbols-outlined">school</span>
+						<li style="height: 24px;"><span class="insert">등록하기</span>
+					</ul>
 						<input type="text" class="input--box" name="name" placeholder="학과를 입력해주세요"> 
 							<select name="collegeId" class="input--box">
 								<c:forEach var="college" items="${collegeList}">
@@ -83,7 +86,10 @@
 			<div class="container">
 				<form action="/admin/department" method="post" id="form--container">
 					 <input type="hidden" name="_method" value="put"/>
-						<span class="material-symbols-outlined symbol">school</span><span class="insert">수정하기</span><br>
+					<ul class="d-flex" style="margin: 0;">
+						<li style="height: 24px; margin-right: 2px;"><span class="material-symbols-outlined">school</span>
+						<li style="height: 24px;"><span class="insert">수정하기</span>
+					</ul>
 								<select name="id" class="input--box">
 									<c:forEach var="department" items="${departmentList}">
 										<option value="${department.id}">${department.name}</option>

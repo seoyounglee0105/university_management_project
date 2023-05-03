@@ -67,7 +67,10 @@
 			<c:if test="${crud.equals(\"insert\")}">
 				<form action="/admin/college" method="post" class="form--container">
 				<div class="insert--form">
-					<span class="material-symbols-outlined symbol">school</span><span class="insert">등록하기</span><br>
+					<ul class="d-flex" style="margin: 0;">
+						<li style="height: 24px; margin-right: 2px;"><span class="material-symbols-outlined">school</span>
+						<li style="height: 24px;"><span class="insert">등록하기</span>
+					</ul>
 					<input type="text" id="name" class="input--box" name="name" placeholder="단과대학을 입력해주세요">
 					<input type="submit" value="입력" class="button">
 				</div>

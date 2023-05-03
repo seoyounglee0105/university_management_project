@@ -56,7 +56,10 @@
 			<!-- 강의 입력 -->
 			<c:if test="${crud.equals(\"insert\")}">
 				<form action="/admin/subject" method="post" class="form--container">
-					<span class="material-symbols-outlined symbol">school</span><span class="insert">등록하기</span>
+					<ul class="d-flex" style="margin: 0;">
+						<li style="height: 24px; margin-right: 2px;"><span class="material-symbols-outlined">school</span>
+						<li style="height: 24px;"><span class="insert">등록하기</span>
+					</ul>
 						<div class="subject--form">
 						<input type="text" class="input--box" id="name" name="name" placeholder="강의명을 입력하세요"><br>
 						<input type="text" class="input--box" id="professorId" name="professorId" placeholder="교수ID를 입력하세요"><br>
@@ -108,7 +111,16 @@
 							<td>${subject.type}</td>
 							<td>${subject.subYear}</td>
 							<td>${subject.semester}</td>
-							<td>${subject.subDay} ${subject.startTime}:00 - ${subject.endTime}:00</td>
+							<td>
+								<c:choose>
+									<c:when test="${subject.startTime < 10}">
+										${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})								
+									</c:when>
+									<c:otherwise>
+										${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})							
+									</c:otherwise>
+								</c:choose>
+							</td>
 							<td>${subject.grades}</td>
 							<td>${subject.capacity}</td>
 							<td>${subject.numOfStudent}</td>
@@ -121,7 +133,10 @@
 			<c:if test="${crud.equals(\"update\")}">
 				<form action="/admin/subject" method="post" class="form--container">
 					 <input type="hidden" name="_method" value="put"/>
-						<span class="material-symbols-outlined symbol">school</span><span class="insert">수정하기</span><br>
+					<ul class="d-flex" style="margin: 0;">
+						<li style="height: 24px; margin-right: 2px;"><span class="material-symbols-outlined">school</span>
+						<li style="height: 24px;"><span class="insert">수정하기</span>
+					</ul>
 							<select name="id" class="input--box">
 								<c:forEach var="subject" items="${subjectList}">
 									<option>${subject.id}</option>
@@ -176,7 +191,16 @@
 								<td>${subject.type}</td>
 								<td>${subject.subYear}</td>
 								<td>${subject.semester}</td>
-								<td>${subject.subDay} ${subject.startTime}:00 - ${subject.endTime}:00</td>
+								<td>
+									<c:choose>
+										<c:when test="${subject.startTime < 10}">
+											${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})								
+										</c:when>
+										<c:otherwise>
+											${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})							
+										</c:otherwise>
+									</c:choose>
+								</td>
 								<td>${subject.grades}</td>
 								<td>${subject.capacity}</td>
 								<td>${subject.numOfStudent}</td>
@@ -218,7 +242,16 @@
 							<td>${subject.type}</td>
 							<td>${subject.subYear}</td>
 							<td>${subject.semester}</td>
-							<td>${subject.subDay} ${subject.startTime}:00 - ${subject.endTime}:00</td>
+							<td>
+								<c:choose>
+									<c:when test="${subject.startTime < 10}">
+										${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})								
+									</c:when>
+									<c:otherwise>
+										${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})							
+									</c:otherwise>
+								</c:choose>
+							</td>
 							<td>${subject.grades}</td>
 							<td>${subject.capacity}</td>
 						</tr>
@@ -256,7 +289,16 @@
 								<td>${subject.type}</td>
 								<td>${subject.subYear}</td>
 								<td>${subject.semester}</td>
-								<td>${subject.subDay} ${subject.startTime}:00 - ${subject.endTime}:00</td>
+								<td>
+									<c:choose>
+										<c:when test="${subject.startTime < 10}">
+											${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})								
+										</c:when>
+										<c:otherwise>
+											${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})							
+										</c:otherwise>
+									</c:choose>
+								</td>
 								<td>${subject.grades}</td>
 								<td>${subject.capacity}</td>
 								<td>${subject.numOfStudent}</td>
