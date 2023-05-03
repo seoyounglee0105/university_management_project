@@ -1,5 +1,4 @@
-# university_management Project
-# 대학 학사정보시스템
+# 대학 학사정보시스템  university_management Project
 
 ## 🖥️ 프로젝트 소개
 대학교에서 사용하는 학사정보시스템을 
