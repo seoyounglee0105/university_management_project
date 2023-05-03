@@ -23,6 +23,7 @@ import com.green.university.dto.ChangePasswordDto;
 import com.green.university.dto.FindIdFormDto;
 import com.green.university.dto.FindPasswordFormDto;
 import com.green.university.dto.LoginDto;
+import com.green.university.dto.NoticeFormDto;
 import com.green.university.dto.UserUpdateDto;
 import com.green.university.dto.response.PrincipalDto;
 import com.green.university.dto.response.ProfessorInfoDto;
@@ -31,9 +32,12 @@ import com.green.university.dto.response.StudentInfoStatListDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.BreakApp;
+import com.green.university.repository.model.Schedule;
 import com.green.university.repository.model.Staff;
 import com.green.university.repository.model.StuStat;
 import com.green.university.service.BreakAppService;
+import com.green.university.service.NoticeService;
+import com.green.university.service.ScheuleService;
 import com.green.university.service.StuStatService;
 import com.green.university.service.UserService;
 import com.green.university.utils.Define;
@@ -56,7 +60,11 @@ public class PersonalController {
 	private StuStatService stuStatService;
 	@Autowired
 	private BreakAppService breakAppService;
-
+	@Autowired
+	private NoticeService noticeService;
+	@Autowired
+	private ScheuleService scheuleService;
+	
 	/**
 	 * @author 서영 메인 홈페이지
 	 */
@@ -65,6 +73,15 @@ public class PersonalController {
 
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
 
+		// 공지사항 최신 글 5개
+		List<NoticeFormDto> noticeList = noticeService.readCurrentNotice();
+		model.addAttribute("noticeList", noticeList);
+		
+		// 학사일정
+		// 샘플이므로, 2월달로 고정함
+		List<Schedule> scheduleList = scheuleService.readScheduleListByMonth(2);
+		model.addAttribute("scheduleList", scheduleList);
+		
 		if (principal.getUserRole().equals("student")) {
 			StudentInfoDto studentInfo = userService.readStudentInfo(principal.getId());
 			StuStat stuStat = stuStatService.readCurrentStatus(principal.getId());

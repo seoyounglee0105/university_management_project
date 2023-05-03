@@ -50,6 +50,7 @@
 				<input type="text" name="keyword" class="input--box" placeholder="검색어를 입력하세요"> 
 				<input type="submit" class="button" value="검색">
 			</form>
+			
 			<table class="table">
 				<c:choose>
 					<c:when test="${fn:length(noticeList) != 0}">

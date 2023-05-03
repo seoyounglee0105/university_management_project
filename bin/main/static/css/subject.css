@@ -37,6 +37,11 @@
 	width: 173px;
 }
 
+.sub--filter select[name="period"] {
+	width: 135px;
+	margin-right: 15px;
+}
+
 .sub--filter label {
 	margin-right: 5px;
 }

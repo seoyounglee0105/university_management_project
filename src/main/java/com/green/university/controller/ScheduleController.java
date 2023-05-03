@@ -2,9 +2,11 @@ package com.green.university.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.green.university.dto.ScheduleDto;
 import com.green.university.dto.ScheduleFormDto;
 import com.green.university.dto.response.PrincipalDto;
+import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.model.Schedule;
 import com.green.university.service.ScheuleService;
 import com.green.university.utils.Define;
@@ -60,10 +64,25 @@ public class ScheduleController {
 		return "/schedule/scheduleList";
 	}
 
+	
+	//일정 추가
+	
 	@PostMapping("/write")
 	public String ScheduleProc(Model model, ScheduleFormDto scheduleFormDto) {
 		PrincipalDto principal = (PrincipalDto) session.getAttribute(Define.PRINCIPAL);
-		scheuleService.createSchedule(principal.getId(), scheduleFormDto);
+		System.out.println("write");
+		System.out.println(scheduleFormDto);
+		
+		if (scheduleFormDto.getStartDay().equals("")){
+			throw new CustomRestfullException("날짜를 입력해주세요", HttpStatus.BAD_REQUEST);
+		}else if(scheduleFormDto.getEndDay().equals("")){
+			throw new CustomRestfullException("날짜를 입력해주세요", HttpStatus.BAD_REQUEST);
+		}else if(scheduleFormDto.getInformation().equals("")){
+			throw new CustomRestfullException("내용을 입력해주세요", HttpStatus.BAD_REQUEST);
+		}else {
+			scheuleService.createSchedule(principal.getId(), scheduleFormDto);
+		}
+		
 
 		return "redirect:/schedule/list";
 	}
@@ -78,17 +97,16 @@ public class ScheduleController {
 
 	@GetMapping("/detail")
 	public String detailSchedule(Model model, Integer id, @RequestParam(defaultValue = "read") String crud) {
-		Schedule schedule = scheuleService.readScheduleById(id);
-		model.addAttribute("crud", crud);
+		ScheduleDto schedule = scheuleService.readScheduleById(id);
+		model.addAttribute("crud",crud);
 		model.addAttribute("schedule", schedule);
 		return "/schedule/detail";
 	}
 
 	@PostMapping("/update")
-	public String updateSchedule(Model model, Integer id, String title, String content) {
-
-		scheuleService.updateSchedule(id, title, content);
-
+	public String updateSchedule(ScheduleFormDto scheduleFormDto) {
+		 scheuleService.updateSchedule(scheduleFormDto);
+		
 		return "redirect:/schedule/list";
 	}
 

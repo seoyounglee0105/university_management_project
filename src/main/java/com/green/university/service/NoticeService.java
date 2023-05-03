@@ -107,4 +107,13 @@ public class NoticeService {
 		int resultRowCount = noticeRepository.deleteById(id);
 		return resultRowCount;
 	}
+	
+	/**
+	 * 최근 글 5개 조회
+	 */
+	public List<NoticeFormDto> readCurrentNotice() {
+		List<NoticeFormDto> noticeList = noticeRepository.selectLimit5();
+		return noticeList;
+	}
+	
 }

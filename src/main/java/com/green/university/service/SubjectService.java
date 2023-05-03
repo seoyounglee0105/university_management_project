@@ -12,6 +12,7 @@ import com.green.university.dto.CurrentSemesterSubjectSearchFormDto;
 import com.green.university.dto.response.SubjectDto;
 import com.green.university.handler.exception.CustomRestfullException;
 import com.green.university.repository.interfaces.SubjectRepository;
+import com.green.university.repository.model.Subject;
 import com.green.university.utils.Define;
 
 /**
@@ -113,6 +114,12 @@ public class SubjectService {
 		if (resultRowCount != 1) {
 			throw new CustomRestfullException("현재 인원 수정이 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@Transactional
+	public Subject readBySubjectId(Integer id) {
+		Subject subjectEntity = subjectRepository.selectSubjectById(id);
+		return subjectEntity;
 	}
 
 }

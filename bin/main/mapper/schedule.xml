@@ -6,24 +6,28 @@
 
 
 
-
+<!-- 일정 추가 -->
 <insert id="insertSchoeduleFormDto">
 INSERT INTO schedule_tb
-(staff_id, start_day, end_day, title, content)
+(staff_id, start_day, end_day, information)
 VALUES
-(#{staffId}, #{startDay}, #{endDay}, #{title}, #{content});
+(#{staffId}, #{startDay}, #{endDay}, #{information});
 </insert>
 
 <!-- 전체 조회 -->
 <select id="selectSchodule" resultType="com.green.university.repository.model.Schedule">
 SELECT id, staff_id, date_format(start_day,'%m-%d') AS start_day, date_format(end_day,'%m-%d') AS  end_day,
-title, content, YEAR(start_day) as year, MONTH(end_day) AS month
+information, YEAR(start_day) as year, MONTH(start_day) AS month
 FROM schedule_tb
 ORDER BY start_day;
 </select>
 
-<select id="selectScheduleById" resultType="com.green.university.repository.model.Schedule">
-SELECT * FROM schedule_tb WHERE id = #{id};
+<select id="selectScheduleById" resultType="com.green.university.dto.ScheduleDto">
+SELECT id, staff_id, date_format(start_day,'%m-%d') AS start_mday, 
+date_format(end_day,'%m-%d') AS  end_mday, staff_id,
+start_day, end_day, information, YEAR(start_day) as year
+FROM schedule_tb
+WHERE id = #{id};
 </select>
 
 <!-- 월마다 일정 몇개인지 조회 -->
@@ -37,7 +41,7 @@ HAVING COUNT(mouth) > 1;
 
 <update id="updateSchoeduleFormDtoBycontent">
 UPDATE schedule_tb 
-SET title = #{title}, content = #{content} 
+SET start_day = #{startDay}, end_day = #{endDay}, information = #{information} 
 WHERE id = #{id};
 </update>
 
@@ -45,6 +49,8 @@ WHERE id = #{id};
 DELETE FROM schedule_tb where id = #{id};
 </delete>
 
-
+<select id="selectListByMonth" resultType="com.green.university.repository.model.Schedule">
+SELECT * FROM schedule_tb WHERE MONTH(start_day) = #{month} OR MONTH(end_day) = #{month};
+</select>
 
 </mapper>

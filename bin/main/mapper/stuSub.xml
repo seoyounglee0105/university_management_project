@@ -5,7 +5,7 @@
 
 <mapper namespace="com.green.university.repository.interfaces.StuSubRepository">
 	<select id="selectBySubjectId" resultType="com.green.university.dto.response.StudentInfoForProfessorDto">
-		SELECT ss.id, ss.student_id, s.name AS student_name, d.name AS dept_name, ssd.absent, ssd.lateness, ssd.mid_exam, ssd.final_exam, ssd.converted_mark
+		SELECT ss.id, ss.student_id, s.name AS student_name, d.name AS dept_name, ssd.homework, ssd.absent, ssd.lateness, ssd.mid_exam, ssd.final_exam, ssd.converted_mark
 		FROM stu_sub_tb AS ss
 		LEFT JOIN student_tb AS s
 		ON ss.student_id = s.id
@@ -81,5 +81,12 @@
 		WHERE pss.student_id = #{studentId}
 			AND ss.subject_id IS NULL;
 	</select>
+
+	<update id="updateCompleteGradeByStudentIdAndSubjectId">
+		UPDATE stu_sub_tb
+		SET complete_grade = #{completeGrade}
+		WHERE student_id = #{studentId}
+		AND subject_id = #{subjectId}
+	</update>
 
 </mapper>

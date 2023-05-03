@@ -161,5 +161,10 @@ public class StuSubService {
 		List<StuSubAppDto> dtoList = stuSubRepository.selectJoinListByStudentId(studentId);
 		return dtoList;
 	}
-
+	
+	// 점수 입력 시 F면 취득학점 0, F가 아니면 강의의 이수학점
+	@Transactional
+	public void updateCompleteGrade(Integer studentId, Integer subjectId, Integer completeGrade) {
+		stuSubRepository.updateCompleteGradeByStudentIdAndSubjectId(studentId, subjectId, completeGrade);
+	}
 }

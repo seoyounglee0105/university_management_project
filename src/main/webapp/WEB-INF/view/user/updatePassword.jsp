@@ -3,9 +3,6 @@
 
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 <link rel="stylesheet" href="/css/admin.css">
-<style>
-
-</style>
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<!-- 세부 메뉴 div-->
@@ -75,9 +72,17 @@
 					<td><input type="password" name="passwordCheck" class="input--box" id="passwordCheck"></td>
 				</tr>
 			</table>
-			<div class="button--container">
-				<input type="submit" value="입력">
-			</div>
+				<c:choose>
+					<c:when test="${principal.getUserRole().equals(\"staff\")}">
+						<div class="button--container">
+							<input type="submit" value="입력">
+						</div>
+					</c:when>
+					<c:otherwise>
+						<br>
+						<button type="submit" class="btn btn-dark update--button">수정하기</button>
+					</c:otherwise>
+				</c:choose>
 		</form>
 	</main>
 </div>

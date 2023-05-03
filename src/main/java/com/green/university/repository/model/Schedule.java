@@ -9,8 +9,7 @@ public class Schedule {
 	private Integer staffId;
 	private String startDay;
 	private String endDay;
-	private String title;
-	private String content;
-	private String year;
-	private String month;
+	private String information;
+	private Integer year;
+	private Integer month;
 }

@@ -14,7 +14,7 @@ import com.green.university.repository.interfaces.ScheuleRepository;
 import com.green.university.repository.model.Schedule;
 
 @Service
-public class ScheuleService {
+public class ScheuleService { // todo ScheduleService로 변경
 
 	@Autowired
 	private ScheuleRepository scheuleRepository;
@@ -26,8 +26,8 @@ public class ScheuleService {
 	}
 
 	// 학사일정 조회 (디테일)
-	public Schedule readScheduleById(Integer id) {
-		Schedule schedule = scheuleRepository.selectScheduleById(id);
+	public ScheduleDto readScheduleById(Integer id) {
+		ScheduleDto schedule = scheuleRepository.selectScheduleById(id);
 		return schedule;
 	}
 
@@ -36,32 +36,28 @@ public class ScheuleService {
 	public void createSchedule(Integer staffId, ScheduleFormDto dto) {
 		Schedule schedule = new Schedule();
 		schedule.setStaffId(staffId);
-		schedule.setTitle(dto.getTitle());
 		schedule.setStartDay(dto.getStartDay());
 		schedule.setEndDay(dto.getEndDay());
-		schedule.setContent(dto.getContent());
+		schedule.setInformation(dto.getInformation());
 
 		int resultRowCount = scheuleRepository.insertSchoeduleFormDto(schedule);
 		if(resultRowCount != 1) {
 			throw new CustomRestfullException("요청을 처리하지 못했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		}		
 	}
 
 	// 학사일정 업데이트
 	@Transactional
-	public int updateSchedule(Integer staffId, String title, String content) {
-		ScheduleFormDto scheduleFormDto = new ScheduleFormDto();
-		scheduleFormDto.setId(staffId);
-		scheduleFormDto.setTitle(title);
-		scheduleFormDto.setContent(content);
+	public int updateSchedule(ScheduleFormDto scheduleFormDto) {
+		
 
 		int resultRowCount = scheuleRepository.updateSchoeduleFormDtoBycontent(scheduleFormDto);
-
+		
 		return resultRowCount;
+
 	}
 
 	// 학사일정 삭제
-
 	@Transactional
 	public int deleteSchedule(Integer id) {
 
@@ -71,11 +67,18 @@ public class ScheuleService {
 	}
 
 	// 학사일정 월에 있는 일정 조회
-
 	@Transactional
 	public List<ScheduleDto> readScheduleDto() {
 
 		List<ScheduleDto> scheduleDto = scheuleRepository.selectSchoduleMouth();
 		return scheduleDto;
+	}
+	
+	// 월별 학사일정 조회
+	@Transactional
+	public List<Schedule> readScheduleListByMonth(Integer month) {
+		
+		List<Schedule> scheduleList = scheuleRepository.selectListByMonth(month);
+		return scheduleList;
 	}
 }

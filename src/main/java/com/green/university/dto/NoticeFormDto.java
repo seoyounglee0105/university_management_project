@@ -31,10 +31,16 @@ public class NoticeFormDto {
 	private String originFilename;
 	private String uuidFilename;
 	
-	// 공지 시간 처리
+	// 공지 시간 처리 (날짜 시간)
 	public String timeFormat() {
 		TimestampUtil timestampUtil = new TimestampUtil();
 		return timestampUtil.dateTimeToString(createdTime);
+	}
+	
+	// 공지 시간 처리 (날짜)
+	public String dateFormat() {
+		TimestampUtil timestampUtil = new TimestampUtil();
+		return timestampUtil.dateToString(createdTime);
 	}
 	
 }

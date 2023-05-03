@@ -20,6 +20,29 @@
 </script>
 <link rel="stylesheet" href="/css/admin.css">
 <style>
+.room--table {
+	text-align: center;
+	margin-top: 20px;
+	margin: 10px;
+}
+.room--table td {
+	padding: 10px;
+	width: 300px;
+}
+.first--tr {
+	font-weight: bold;
+}
+.month{
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #666;
+}
+.line{
+  border-bottom: 1px solid #666;	
+}
+.container{
+margin-top: 100px;
+}
+
 </style>
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<div class="sub--menu">
@@ -44,21 +67,22 @@
 	</div>
 
 	<main>
-		<h1>학사일정</h1>
-		<div class="split--div"></div>
-
-			<table class="table--container">
-				<tbody>
-					<c:forEach var="schedule" items="${schedule}">
-						<tr>
-							<td class="month" width="100px;">${schedule.month}월</td>
-							<td>${schedule.startDay}~${schedule.endDay}</td>
-							<td onclick="location.href='/schedule/detail?id=${schedule.id}';">${schedule.title}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
+	<h1>학사일정</h1>
+	<div class="container">
+	<div></div>
+		
+	<table  class="room--table">
+	<tbody>
+	<c:forEach var ="schedule" items ="${schedule}">
+	<tr>
+	<td class ="month" width ="100px;">${schedule.month}월</td>
+	 <td class = "line">${schedule.startDay}~${schedule.endDay}</td>
+	 <td class = "line" >${schedule.information}</td>
+	</tr>
+	</c:forEach>
+	</tbody>
+	</table>
+	</div>
 	</main>
 
 	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>

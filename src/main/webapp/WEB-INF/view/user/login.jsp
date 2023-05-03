@@ -39,12 +39,12 @@ input[type=number] {
 						<c:choose>
 							<c:when test="${cookie.id == null}">
 								<div class="checkbox--id">
-									<input type="checkbox" name="rememberId"> ID 저장
+									<input type="checkbox" name="rememberId">&nbsp;ID 저장
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div class="checkbox--id">
-									<input type="checkbox" name="rememberId" checked="checked"> ID 저장
+									<input type="checkbox" name="rememberId" checked="checked">&nbsp;ID 저장
 								</div>
 							</c:otherwise>
 						</c:choose>
