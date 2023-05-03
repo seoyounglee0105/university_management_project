@@ -30,7 +30,6 @@ import com.green.university.dto.response.StudentInfoDto;
 import com.green.university.dto.response.StudentInfoStatListDto;
 import com.green.university.dto.response.UserInfoForUpdateDto;
 import com.green.university.handler.exception.CustomRestfullException;
-import com.green.university.handler.exception.UnAuthorizedException;
 import com.green.university.repository.model.BreakApp;
 import com.green.university.repository.model.Staff;
 import com.green.university.repository.model.StuStat;

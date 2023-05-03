@@ -145,6 +145,7 @@ public class UserService {
 		PrincipalDto userEntity = userRepository.selectById(loginDto.getId());
 
 		if (userEntity == null) {
+			System.out.println("564156456");
 			throw new CustomRestfullException(Define.NOT_FOUND_ID, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 

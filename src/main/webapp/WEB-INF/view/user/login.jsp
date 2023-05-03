@@ -13,6 +13,15 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style type="text/css">
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 </style>
 </head>
 <body>
@@ -26,7 +35,7 @@
 			<div class="login--container">
 				<div class="id--container">
 					<div class="login--id">
-						<label for="userId"><span class="material-symbols-outlined">person</span></label> <input type="text" name="id" id="userId" placeholder="아이디를 입력하세요" required value="${cookie.id.value}">
+						<label for="userId"><span class="material-symbols-outlined">person</span></label> <input type="number" max="2147483647" name="id" id="userId" placeholder="아이디를 입력하세요" required value="${cookie.id.value}">
 						<c:choose>
 							<c:when test="${cookie.id == null}">
 								<div class="checkbox--id">
