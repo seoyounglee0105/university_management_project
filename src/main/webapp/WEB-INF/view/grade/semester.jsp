@@ -49,7 +49,7 @@
 		<div class="split--div"></div>
 		<c:choose>
 			<%-- 수강연도 조회해서 검사 --%>
-			<c:when test="${yearList.size() != 0}">
+			<c:when test="${gradesList.size() != 0}">
 				<div class="sub--filter">
 					<%-- 타입 받아서 조회 --%>
 					<form action="/grade/read" method="post">

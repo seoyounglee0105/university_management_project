@@ -22,7 +22,7 @@ VALUES
 <select id="selectEvaluationFormDto" resultType="com.green.university.repository.model.Evaluation">
 SELECT *
 FROM evaluation_tb
-WHERE student_id = #{studentId};
+WHERE student_id = #{studentId}  AND subject_id = #{subjectId};
 </select>
 
 <!-- 강의평가 조회 (교수)-->

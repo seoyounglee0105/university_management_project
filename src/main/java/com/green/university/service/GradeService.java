@@ -76,6 +76,13 @@ public class GradeService {
 				semester);
 		return selectgradeList;
 	}
+	
+	// 성적을 받았는지 조회
+	public List<GradeDto> readGrade(Integer studentId){
+		List<GradeDto> selectgradeList = gradeRespository.gradeDtoByGrade(studentId);
+		
+		return selectgradeList;
+	}
 
 	/**
 	 * @author 서영 성적 평균 가져오기

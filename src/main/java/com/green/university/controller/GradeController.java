@@ -50,7 +50,14 @@ public class GradeController {
 		// 학생이 수강 신청한 연도 조회
 		List<GradeDto> yearList = gradeService.readGradeYearByStudentId(principal.getId());
 		model.addAttribute("yearList", yearList);
-
+		
+		// 수강한 과목 학점 조회
+		List<GradeDto> gradeList = gradeService.readGrade(principal.getId());
+		model.addAttribute("gradeList", gradeList);
+		
+		// 강의평가 했는지 검사
+		
+		
 		// 수강한 연도가 없으면 금학기 성적조회 x
 		if (yearList.size() != 0) {
 
@@ -84,7 +91,10 @@ public class GradeController {
 		List<GradeDto> gradeAllList = gradeService.readAllGradeByStudentId(principal.getId());
 		// 학생이 신청한 학기가 있는지 찾는 기능
 		List<GradeDto> semesterList = gradeService.readGradeSemesterByStudentId(principal.getId());
+		// 취득한 학점조회
+		List<GradeDto> gradesList = gradeService.readGrade(principal.getId());
 
+		model.addAttribute("gradesList", gradesList);
 		model.addAttribute("yearList", yearList);
 		model.addAttribute("gradeList", gradeAllList);
 		model.addAttribute("semesterList", semesterList);
@@ -109,6 +119,7 @@ public class GradeController {
 
 		// 학생이 수강 신청한 학기 조회
 		List<GradeDto> semesterList = gradeService.readGradeSemesterByStudentId(principal.getId());
+		
 
 		// 조회 할때 값을 들고옴
 		String type = httpServletRequest.getParameter("type");
@@ -143,7 +154,10 @@ public class GradeController {
 		// 학생이 수강 신청한 연도 조회
 		List<GradeDto> yearList = gradeService.readGradeYearByStudentId(principal.getId());
 		List<MyGradeDto> mygradeList = gradeService.readgradeinquiryList(principal.getId());
+		// 학점 취득했는지 조회
+		List<GradeDto> gradeList = gradeService.readGrade(principal.getId());
 
+		model.addAttribute("gradeList", gradeList);
 		model.addAttribute("yearList", yearList);
 		model.addAttribute("mygradeList", mygradeList);
 

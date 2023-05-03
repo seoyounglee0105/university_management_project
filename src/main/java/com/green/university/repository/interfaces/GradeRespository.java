@@ -44,7 +44,8 @@ public interface GradeRespository {
 	 */
 	public GradeForScholarshipDto findAvgGradeByStudentIdAndSemester(@Param("studentId") Integer studentId, @Param("subYear") Integer subYear, @Param("semester") Integer semester);
 
-	
+	//성적을 받았는지 조회
+	public List<GradeDto> gradeDtoByGrade(Integer studentId);
 	
 	// 전체 누계성적 조회
 	public List<MyGradeDto> selectMyGradeDtoByStudentId(Integer studentId);

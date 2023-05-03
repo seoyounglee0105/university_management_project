@@ -45,7 +45,7 @@
 
 		<c:choose>
 			<%-- 수강연도 조회해서 검사 --%>
-			<c:when test="${yearList.size() != 0}">
+			<c:when test="${gradeList.size() != 0}">
 				<div>
 					<h4 style="font-weight: 600">과목별 성적</h4>
 					<table border="1" class="sub--list--table">
@@ -70,20 +70,12 @@
 									<td class="sub--list--name">${grade.name}</td>
 									<td>${grade.type}</td>
 									<td>${grade.grades}</td>
-									<c:choose>
-										<c:when test="${grade.evaluationId != null}">
-											<td>${grade.grade}</td>
-										</c:when>
-										<c:otherwise>
-											<td></td>
-										</c:otherwise>
-									</c:choose>
+									<td>${grade.grade}</td>
 									<td><a href="/evaluation?subjectId=${grade.subjectId}" onclick="window.open(this.href, '_blank', 'width=720, height=1000'); return false;">Click</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-					<p style="color:#888; margin-bottom: 40px;">※ 강의 평가 후 성적 조회 가능</p>
 				</div>
 					<hr>
 					<br>

@@ -32,7 +32,7 @@ GROUP BY su.semester;
 
 <!-- 금학기 성적 조회 -->
 <select id="selectGradeDtoBySemester" resultType="com.green.university.dto.response.GradeDto">
-SELECT su.sub_year, su.semester, st.subject_id, su.name,pr.name, su.type,gr.grade, su.grades, RANK() OVER(ORDER BY gr.grade_value DESC) 석차, ev.evaluation_id
+SELECT su.sub_year, su.semester, st.subject_id, su.name,pr.name, su.type,gr.grade, su.grades
 FROM stu_sub_tb AS st
 INNER JOIN subject_tb AS su
 ON st.subject_id = su.id
@@ -136,5 +136,13 @@ WHERE st.student_id = #{studentId} AND su.sub_year = #{subYear} AND su.semester 
 	WHERE sub_year = #{subYear} AND semester = #{semester} AND ss.student_id = #{studentId}
 	GROUP BY student_id;
 </select>
+
+<!-- 성적 평가 했는지 조회 -->
+<select id="gradeDtoByGrade" resultType="com.green.university.dto.response.GradeDto">
+SELECT grade
+FROM stu_sub_tb
+WHERE student_id = #{studentId};
+</select>
+
 
 </mapper>
