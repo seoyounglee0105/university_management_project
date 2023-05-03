@@ -114,10 +114,10 @@
 							<td>
 								<c:choose>
 									<c:when test="${subject.startTime < 10}">
-										${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})								
+										${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00							
 									</c:when>
 									<c:otherwise>
-										${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})							
+										${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00							
 									</c:otherwise>
 								</c:choose>
 							</td>
@@ -194,10 +194,10 @@
 								<td>
 									<c:choose>
 										<c:when test="${subject.startTime < 10}">
-											${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})								
+											${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00								
 										</c:when>
 										<c:otherwise>
-											${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})							
+											${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00				
 										</c:otherwise>
 									</c:choose>
 								</td>
@@ -245,10 +245,10 @@
 							<td>
 								<c:choose>
 									<c:when test="${subject.startTime < 10}">
-										${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})								
+										${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00							
 									</c:when>
 									<c:otherwise>
-										${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})							
+										${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00							
 									</c:otherwise>
 								</c:choose>
 							</td>
@@ -292,10 +292,10 @@
 								<td>
 									<c:choose>
 										<c:when test="${subject.startTime < 10}">
-											${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})								
+											${subject.subDay} 0${subject.startTime}:00-${subject.endTime}:00					
 										</c:when>
 										<c:otherwise>
-											${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00&nbsp;(${subject.roomId})							
+											${subject.subDay} ${subject.startTime}:00-${subject.endTime}:00						
 										</c:otherwise>
 									</c:choose>
 								</td>
