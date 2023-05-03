@@ -5,6 +5,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.green.university.repository.model.College;
+import com.green.university.utils.NumberUtil;
 
 import lombok.Data;
 /**
@@ -19,4 +20,9 @@ public class CollTuitFormDto {
 	private String 	name;
 	@NotEmpty
 	private Integer amount;
+
+	public String amountFormat() {
+		return NumberUtil.numberFormat(amount);
+	}
+	
 }

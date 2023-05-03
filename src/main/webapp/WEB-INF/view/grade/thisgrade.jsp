@@ -70,15 +70,17 @@
 									<td class="sub--list--name">${grade.name}</td>
 									<td>${grade.type}</td>
 									<td>${grade.grades}</td>
-									<c:choose>
-										<c:when test="${grade.evaluationId != null}">
-											<td>${grade.grade}</td>
-										</c:when>
-										<c:otherwise>
-											<td></td>
-										</c:otherwise>
-									</c:choose>
-									<td><a href="/evaluation?subjectId=${grade.subjectId}" onclick="window.open(this.href, '_blank', 'width=720, height=1000'); return false;">Click</a></td>
+									<td>${grade.grade}</td>
+									<td>
+										<c:choose>
+											<c:when test="${grade.evaluationId == null}">
+												<a href="/evaluation?subjectId=${grade.subjectId}" onclick="window.open(this.href, '_blank', 'width=720, height=1000'); return false;">Click</a>											
+											</c:when>
+											<c:otherwise>
+												<span style="color:gray;">완료</span>
+											</c:otherwise>
+										</c:choose>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>

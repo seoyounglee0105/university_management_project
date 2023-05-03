@@ -53,7 +53,10 @@
 			<div class="form--container">
 				<form action="/admin/room" method="post" class="insert--form">
 					<div class="insert--form">
-						<span class="material-symbols-outlined symbol">school</span><span class="insert">등록하기</span><br>
+					<ul class="d-flex" style="margin: 0;">
+						<li style="height: 24px; margin-right: 2px;"><span class="material-symbols-outlined">school</span>
+						<li style="height: 24px;"><span class="insert">등록하기</span>
+					</ul>
 							<input type="text" name="id" class="input--box" placeholder="등록할 강의실을 입력하세요"> 
 							<input type="text" name="collegeId" class="input--box" placeholder="단과대 번호를 입력하세요"> 
 						<input type="submit" value="입력" class="button">
