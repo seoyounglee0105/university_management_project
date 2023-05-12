@@ -3,7 +3,7 @@ SELECT * FROM tuition_tb;
 -- 대학
 INSERT INTO college_tb VALUES (1, '공과대학');
 INSERT INTO college_tb VALUES (2, '인문대학');
-INSERT INTO college_tb VALUE (3, '사회과학대학');
+INSERT INTO college_tb VALUES (3, '사회과학대학');
 INSERT INTO college_tb VALUES (4, '상경대학');
 
 
@@ -1168,7 +1168,7 @@ UPDATE subject_tb
 SET capacity = 5, num_of_student = 5
 WHERE id = 10000;
 
-INSERT pre_stu_sub_tb (student_id, subject_id)
+INSERT INTO pre_stu_sub_tb (student_id, subject_id)
 VALUES 
 (2023000001, 10000),
 (2023000002, 10000),
