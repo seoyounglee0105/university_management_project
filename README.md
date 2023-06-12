@@ -1,6 +1,6 @@
 # 대학 학사정보시스템  university_management Project
 
-
+<img src="https://github.com/seoyounglee0105/university_management_project/assets/122020520/289ddbbb-08ae-4cd3-80e5-a5e3661819b6">
 ## 🖥️ 프로젝트 소개
 대학교에서 사용하는 학사정보시스템을 
 CRUD 중심으로 가볍게 구현한 프로젝트입니다
