@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class ScheduleDto {
 
-	private Integer mouth;
+	private Integer mouths;
 	private Integer sum;
 	private Integer id;
 	private Integer staffId;
-	private Integer year;
+	private Integer years;
 	private String startMday;
 	private String endMday;
 	private String startDay;

@@ -85,7 +85,7 @@ justify-content: flex-end;
 	<table class="table">
 	<thead>
 	<tr class="first--tr">
-	<th colspan="2">${schedule.year}년 학교 학사일정</th>
+	<th colspan="2">${schedule.years}년 학교 학사일정</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -119,7 +119,7 @@ justify-content: flex-end;
 	<table class="table">
 	<thead>
 	<tr class="first--tr">
-	<th colspan="2">${schedule.year}년 학교 학사일정</th>
+	<th colspan="2">${schedule.years}년 학교 학사일정</th>
 	</tr>
 	</thead>
 	<tbody>

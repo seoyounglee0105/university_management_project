@@ -16,16 +16,16 @@ VALUES
 
 <!-- 전체 조회 -->
 <select id="selectSchodule" resultType="com.green.university.repository.model.Schedule">
-SELECT id, staff_id, date_format(start_day,'%m-%d') AS start_day, date_format(end_day,'%m-%d') AS  end_day,
-information, YEAR(start_day) as year, MONTH(start_day) AS month
+SELECT id, staff_id, FORMATDATETIME(start_day,'MM-dd') AS start_day, FORMATDATETIME(end_day,'MM-dd') AS  end_day,
+information, YEAR(start_day) as years, MONTH(start_day) AS months
 FROM schedule_tb
 ORDER BY start_day;
 </select>
 
 <select id="selectScheduleById" resultType="com.green.university.dto.ScheduleDto">
-SELECT id, staff_id, date_format(start_day,'%m-%d') AS start_mday, 
-date_format(end_day,'%m-%d') AS  end_mday, staff_id,
-start_day, end_day, information, YEAR(start_day) as year
+SELECT id, staff_id, FORMATDATETIME(start_day,'MM-dd') AS start_mday, 
+FORMATDATETIME(end_day,'MM-dd') AS  end_mday, staff_id,
+start_day, end_day, information, YEAR(start_day) as years
 FROM schedule_tb
 WHERE id = #{id};
 </select>

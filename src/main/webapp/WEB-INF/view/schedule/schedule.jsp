@@ -75,7 +75,7 @@ margin-top: 100px;
 	<tbody>
 	<c:forEach var ="schedule" items ="${schedule}">
 	<tr>
-	<td class ="month" width ="100px;">${schedule.month}월</td>
+	<td class ="month" width ="100px;">${schedule.months}월</td>
 	 <td class = "line">${schedule.startDay}~${schedule.endDay}</td>
 	 <td class = "line" >${schedule.information}</td>
 	</tr>

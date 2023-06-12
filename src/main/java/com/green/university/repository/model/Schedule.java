@@ -10,6 +10,6 @@ public class Schedule {
 	private String startDay;
 	private String endDay;
 	private String information;
-	private Integer year;
-	private Integer month;
+	private Integer years;
+	private Integer months;
 }
