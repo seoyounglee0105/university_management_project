@@ -18,6 +18,8 @@ CRUD 중심으로 가볍게 구현한 프로젝트입니다
 - FrontEnd :  `HTML5`  `CSS`  `JavaScript`
 - Collaboration : `Git` `GitHub` `Collabee`
 
+## 📝테이블 명세서
+https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8UZVU/editgid=0
 
 ## 📌 주요 기능
 #### 공통 기능 (로그인)
