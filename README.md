@@ -8,18 +8,24 @@
 대학교에서 사용하는 학사정보시스템을 
 CRUD 중심으로 가볍게 구현한 프로젝트입니다
 
+<br>
 
 ## 🕰️ 개발 기간
 * 23.04.21일 - 23.05.02일 총 12일
 
+<br>
 
 ## ⚙️ 개발 환경
 - BackEnd :  `Java ee`  `JSP`  `SpringBoot`  `MySQL`
 - FrontEnd :  `HTML5`  `CSS`  `JavaScript`
 - Collaboration : `Git` `GitHub` `Collabee`
 
+<br>
+
 ## 📝 테이블 명세서
 https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8UZVU/editgid=0
+
+<br>
 
 ## 📌 주요 기능
 
