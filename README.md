@@ -1,4 +1,4 @@
-# 대학 학사정보시스템  university_management Project
+# 대학 학사정보시스템  University Management Project
 
 
 <img src="https://github.com/seoyounglee0105/university_management_project/assets/122020520/289ddbbb-08ae-4cd3-80e5-a5e3661819b6">
