@@ -30,13 +30,14 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 ## 📌 주요 기능
 
 <table>
+
 <tr>
-  <td></td>
-  <td></td>
+  <td>예비 수강 신청</td>
+  <td>수강 신청</td>
 </tr>
 <tr>
-  <td><img src=""></td>
-  <td><img src=""></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/5343ee54-d34e-461e-abaf-407f2b033599/img.gif"></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/edf7586b-1a7b-44f7-b014-0a49e92d40de/img.gif"></td>
 </tr>
 </table>
 
@@ -50,9 +51,9 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 - 비밀번호 찾기
 - 아이디 저장 (쿠키 활용)
 
-#### 회원 정보
-- 회원 정보 조회
-- 회원 정보 변경
+#### 개인 정보
+- 개인 정보 조회
+- 개인 정보 변경
 - 비밀번호 변경
 
 #### 공지사항 및 학사일정
@@ -63,12 +64,12 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 
 <table>
 <tr>
-  <td></td>
-  <td></td>
+  <td>아이디/비밀번호 찾기</td>
+  <td>개인 정보 변경</td>
 </tr>
 <tr>
-  <td><img src=""></td>
-  <td><img src=""></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/8faacd26-1acd-4834-b89f-3e5bd684555d/img.gif"></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/8148aa3c-53ad-4981-8b5d-f0cce1c05a0a/img.gif"></td>
 </tr>
 </table>
 
@@ -95,12 +96,44 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 
 <table>
 <tr>
-  <td></td>
-  <td></td>
+  <td>학생/교수/직원 등록</td>
+  <td>학생/교수 조회</td>
 </tr>
 <tr>
-  <td><img src=""></td>
-  <td><img src=""></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/191e54e6-c249-4508-a1f1-070c556c8612/img.gif"></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/c4663c40-f909-43a4-a890-b0c43d420c01/img.gif"></td>
+</tr>
+<tr>
+  <td>휴학 처리</td>
+  <td>공지사항 CRUD</td>
+</tr>
+<tr>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/855eb4be-d063-454e-8cde-2ee20cb89658/img.gif"></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/b10212db-facb-4740-8c18-77b66bb487a7/img.gif"></td>
+</tr>
+<tr>
+  <td>학사일정 CRUD</td>
+  <td>강의 CRUD</td>
+</tr>
+<tr>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/d7dfc5df-bbbe-4949-96e0-1276276ec9cb/img.gif"></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/07eadf9a-c7e5-4e94-95b6-da872672236c/img.gif"></td>
+</tr>
+<tr>
+  <td>단과대학 CRUD</td>
+  <td>학과 CRUD</td>
+</tr>
+<tr>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/369a91fa-5162-42b0-bd01-06c224cca2ce/img.gif"></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/12dd4364-804c-454f-bd8e-63b6b4f244ba/img.gif"></td>
+</tr>
+<tr>
+  <td>등록금 CRUD</td>
+  <td>강의실 CRUD</td>
+</tr>
+<tr>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/1211897d-02e8-4f28-a919-404e24a09bba/img.gif"></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/987112c1-ff90-4023-aa34-e6244f82407f/img.gif"></td>
 </tr>
 </table>
 
@@ -129,12 +162,36 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 
 <table>
 <tr>
-  <td></td>
+  <td>등록금 납부</td>
+  <td>휴학 신청</td>
+</tr>
+<tr>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/1f356815-7a91-479c-b3bd-34f7448e2374/img.gif"></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/e3f6c575-b6ec-4654-9a17-ac195c768db0/img.gif"></td>
+</tr>
+<tr>
+  <td>강의 시간표 조회</td>
+  <td>예비 수강 신청</td>
+</tr>
+<tr>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/9d7922f0-cfe1-452e-8975-7bc994dfa03f/img.gif"></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/4ed50753-be17-4028-aef1-0667b502562b/img.gif"></td>
+</tr>
+<tr>
+  <td>수강 신청</td>
+  <td>강의 평가</td>
+</tr>
+<tr>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/15cd8477-a49f-4f34-9f33-fe968821cec7/img.gif"></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/d2bf1f2d-1451-47b4-9a69-12bc6b3166e5/img.gif"></td>
+</tr>
+<tr>
+  <td>성적 조회</td>
   <td></td>
 </tr>
 <tr>
-  <td><img src=""></td>
-  <td><img src=""></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/7a0a8623-0910-4f6b-a3d6-5817534d917b/img.gif"></td>
+  <td></td>
 </tr>
 </table>
 
@@ -152,12 +209,12 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 
 <table>
 <tr>
-  <td></td>
-  <td></td>
+  <td>성적 입력</td>
+  <td>강의 평가 조회</td>
 </tr>
 <tr>
-  <td><img src=""></td>
-  <td><img src=""></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/b9d917ca-5f3d-4366-ac1e-c9e4d791ee02/img.gif"></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/3073e61f-cdea-403e-8582-aa1883cb4a0e/"></td>
 </tr>
 </table>
 
