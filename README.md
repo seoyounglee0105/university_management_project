@@ -20,7 +20,7 @@ CRUD 중심으로 가볍게 구현한 프로젝트입니다
 - FrontEnd :  `HTML5`  `CSS`  `JavaScript`
 - Collaboration : `Git` `GitHub` `Collabee`
 
-#### 의존성
+- 의존성
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' 
