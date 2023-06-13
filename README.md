@@ -18,29 +18,57 @@ CRUD 중심으로 가볍게 구현한 프로젝트입니다
 - FrontEnd :  `HTML5`  `CSS`  `JavaScript`
 - Collaboration : `Git` `GitHub` `Collabee`
 
-## 📝테이블 명세서
+## 📝 테이블 명세서
 https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8UZVU/editgid=0
 
 ## 📌 주요 기능
-#### 공통 기능 (로그인)
-- 세션처리
-- 쿠키저장
+
+<table>
+<tr>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td><img src=""></td>
+  <td><img src=""></td>
+</tr>
+</table>
+
+<br>
+
+## 📌 기능 - 공통
+
+#### 로그인
+- 세션 처리
 - 아이디 찾기
 - 비밀번호 찾기
+- 아이디 저장 (쿠키 활용)
 
+#### 회원 정보
+- 회원 정보 조회
+- 회원 정보 변경
+- 비밀번호 변경
 
-#### 공통 기능 (회원정보)
-- 내 정보 조회
-- 내 정보 수정
-- 비밀번호 수정
-
-
-#### 공통 기능 (공지 및 학사일정)
-- 공지 조회
+#### 공지사항 및 학사일정
+- 공지사항 조회
 - 학사일정 조회
 
+<table>
+<tr>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td><img src=""></td>
+  <td><img src=""></td>
+</tr>
+</table>
 
-#### 직원 기능 (학사관리)
+<br>
+
+## 📌 기능 - 교직원
+
+#### 학사관리
 - 학생, 교수, 직원 계정 생성
 - 학생, 교수 명단 조회
 - 등록금 고지서 발송
@@ -48,39 +76,81 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 - 수강 신청 기간 설정
 - 공지 등록, 수정, 삭제
 
-
-#### 직원 기능 (등록관리)
+#### 등록관리
 - 단과대학 CRUD
 - 학과 CRUD
 - 강의 CRUD
 - 강의실 CRUD
 - 등록금 CRUD
 
+<br>
 
-#### 학생 기능 (휴학)
+<table>
+<tr>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td><img src=""></td>
+  <td><img src=""></td>
+</tr>
+</table>
+
+<br>
+
+## 📌 기능 - 학생
+
+#### 등록 및 휴학
+- 등록금 납부
+- 등록금 납부 내역 조회
 - 휴학 신청
 - 휴학 신청 내역 조회
 
-
-#### 학생 기능 (등록금)
-- 등록금 납부 고지서
-
-
-#### 학생 기능 (수강신청)
+#### 수강 신청
 - 강의 시간표 조회
 - 예비 수강 신청
 - 수강 신청
 - 수강 신청 내역 조회
 
-
-#### 학생 기능 (성적)
+#### 성적
 - 금학기 성적 조회
 - 학기별 성적 조회
 - 누계 성적
 
+<br>
 
-#### 교수 기능 (강의)
+<table>
+<tr>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td><img src=""></td>
+  <td><img src=""></td>
+</tr>
+</table>
+
+<br>
+
+## 📌 기능 - 교수
+
+#### 강의
 - 내 강의 학기별 조회
 - 강의계획서 수정
 - 강의별 학생리스트 조회, 출결 및 성적 기입
 - 강의평가 확인
+
+<br>
+
+<table>
+<tr>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td><img src=""></td>
+  <td><img src=""></td>
+</tr>
+</table>
+
+<br>
