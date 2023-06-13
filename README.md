@@ -43,7 +43,7 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 
 <br>
 
-## 📌 기능 - 공통
+## 📖 기능 - 공통
 
 #### 로그인
 - 세션 처리
@@ -75,7 +75,7 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 
 <br>
 
-## 📌 기능 - 교직원
+## 👨🏻‍💼 기능 - 교직원
 
 #### 학사관리
 - 학생, 교수, 직원 계정 생성
@@ -139,7 +139,7 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 
 <br>
 
-## 📌 기능 - 학생
+## 👩🏻‍🎓 기능 - 학생
 
 #### 등록 및 휴학
 - 등록금 납부
@@ -197,7 +197,7 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 
 <br>
 
-## 📌 기능 - 교수
+## 👨🏻‍🏫 기능 - 교수
 
 #### 강의
 - 내 강의 학기별 조회
@@ -214,7 +214,7 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 </tr>
 <tr>
   <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/b9d917ca-5f3d-4366-ac1e-c9e4d791ee02/img.gif"></td>
-  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/3073e61f-cdea-403e-8582-aa1883cb4a0e/"></td>
+  <td><img src="https://github.com/seoyounglee0105/university_management_project/assets/106488607/3073e61f-cdea-403e-8582-aa1883cb4a0e/img.gif"></td>
 </tr>
 </table>
 
