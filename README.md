@@ -59,6 +59,8 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 - 공지사항 조회
 - 학사일정 조회
 
+<br>
+
 <table>
 <tr>
   <td></td>
