@@ -20,6 +20,20 @@ CRUD 중심으로 가볍게 구현한 프로젝트입니다
 - FrontEnd :  `HTML5`  `CSS`  `JavaScript`
 - Collaboration : `Git` `GitHub` `Collabee`
 
+#### 의존성
+  implementation 'org.springframework.boot:spring-boot-starter-validation'
+  implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' 
+  implementation 'javax.servlet:jstl' 
+  implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'  
+  runtimeOnly 'com.mysql:mysql-connector-j'
+  runtimeOnly 'com.h2database:h2'
+  implementation 'org.springframework.security:spring-security-crypto'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  compileOnly 'org.projectlombok:lombok'
+  developmentOnly 'org.springframework.boot:spring-boot-devtools'
+  annotationProcessor 'org.projectlombok:lombok'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 <br>
 
 ## 📝 테이블 명세서
