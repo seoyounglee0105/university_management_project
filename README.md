@@ -83,7 +83,8 @@ https://docs.google.com/spreadsheets/d/1V0dfMHmOkO4njbHW736hQsvbJKE78YOYO9BSMa8U
 - 등록금 고지서 발송
 - 휴학 처리(승인)
 - 수강 신청 기간 설정
-- 공지 등록, 수정, 삭제
+- 공지 CRUD
+- 학사일정 CRUD
 
 #### 등록관리
 - 단과대학 CRUD
