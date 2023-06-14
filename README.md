@@ -8,7 +8,7 @@
 대학교에서 사용하는 학사정보시스템을 
 CRUD 중심으로 가볍게 구현한 프로젝트입니다
 
-* 시연 영상 : https://youtu.be/5GB5ImXzgPw
+* 시연 영상 (유튜브) : https://youtu.be/5GB5ImXzgPw
 
 <br>
 
